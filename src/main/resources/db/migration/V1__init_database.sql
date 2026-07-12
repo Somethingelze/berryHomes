@@ -1,11 +1,68 @@
-CREATE TABLE IF NOT EXISTS public.products
+CREATE SCHEMA IF NOT EXISTS berryhomes;
+
+CREATE TABLE IF NOT EXISTS berryhomes.admins
 (
-    id               UUID PRIMARY KEY,
-    name             VARCHAR(255) NOT NULL,
-    price            DECIMAL(10, 2),
-    sale             DECIMAL(10, 2),
-    quantity         INTEGER,
-    reservedQuantity INTEGER
+    id            UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
+    login         VARCHAR(50)  NOT NULL UNIQUE,
+    password_hash VARCHAR(100) NOT NULL,
+    role          VARCHAR(20)  NOT NULL,
+    created_at    TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS berryhomes.projects
+(
+    id               UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
+    title_ru         VARCHAR(255) NOT NULL,
+    title_en         VARCHAR(255) NOT NULL,
+    short_desc_ru    TEXT,
+    short_desc_en    TEXT,
+    desc_ru          TEXT,
+    desc_en          TEXT,
+    location         VARCHAR(255),
+    report_file_path VARCHAR(550),
+    created_at       TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at       TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    deleted_at       TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP
 
+);
+
+CREATE TABLE IF NOT EXISTS berryhomes.project_images
+(
+    id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    project_id UUID         NOT NULL,
+    file_path  VARCHAR(550) NOT NULL,
+    sort_order INT              DEFAULT 0,
+    CONSTRAINT fk_project_images_project FOREIGN KEY (project_id) REFERENCES berryhomes.projects (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS berryhomes.project_documents
+(
+    id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    project_id UUID,
+    title_ru   VARCHAR(255) NOT NULL,
+    title_en   VARCHAR(255) NOT NULL,
+    category   VARCHAR(100),
+    file_path  VARCHAR(550) NOT NULL,
+    CONSTRAINT fk_documents_project FOREIGN KEY (project_id) REFERENCES berryhomes.projects (id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS berryhomes.requests
+(
+    id         UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
+    name       VARCHAR(100) NOT NULL,
+    email      VARCHAR(100) NOT NULL,
+    phone      VARCHAR(30),
+    message    TEXT,
+    created_at TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS berryhomes.settings
+(
+    id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    setting_key   VARCHAR(100) NOT NULL UNIQUE,
+    setting_value TEXT
+);
+
+CREATE INDEX IF NOT EXISTS idx_contact_email ON berryhomes.requests (email);
+CREATE INDEX IF NOT EXISTS idx_images_project_id ON berryhomes.project_images (project_id);
+CREATE INDEX IF NOT EXISTS idx_documents_project_id ON berryhomes.project_documents (project_id);
