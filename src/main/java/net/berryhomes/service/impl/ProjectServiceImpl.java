@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.model.dto.ProjectDto;
 import net.berryhomes.model.entity.Project;
-import net.berryhomes.exception.ProjectNotFoundException;
+import net.berryhomes.exception.business.ProjectNotFoundException;
 import net.berryhomes.mapper.ProjectMapper;
 import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.FileStorageService;
@@ -47,7 +47,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     @Override
-    public Page<ProjectDto> getProjects(Pageable pageable) {
+    public Page<ProjectDto> getAllProjects(Pageable pageable) {
         log.info("Getting all projects");
         return projectRepository.findAll(pageable)
                 .map(projectMapper::toProjectDto);

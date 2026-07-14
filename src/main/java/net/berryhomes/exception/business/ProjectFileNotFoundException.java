@@ -1,4 +1,4 @@
-package net.berryhomes.exception;
+package net.berryhomes.exception.business;
 
 public class ProjectFileNotFoundException extends RuntimeException {
     public ProjectFileNotFoundException(String message) {

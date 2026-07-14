@@ -14,13 +14,16 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) {
-        http.authorizeHttpRequests(req -> {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .headers(headers -> headers.disable())
+                .authorizeHttpRequests(req -> {
                     req.requestMatchers("/admin/**").authenticated();
                     req.requestMatchers("/css/**", "/js/**", "/uploads/**", "/").permitAll();
                     req.anyRequest().permitAll();
                 })
                 .formLogin(Customizer.withDefaults());
+
         return http.build();
     }
 

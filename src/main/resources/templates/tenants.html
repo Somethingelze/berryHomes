@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Center - Berry Homes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cloudflare.com">
+</head>
+<body class="bg-slate-50 font-sans text-gray-800">
+
+<!-- НАВИГАЦИЯ (КОПИЯ С ГЛАВНОЙ ДЛЯ ЕДИНООБРАЗИЯ) -->
+<header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-3 group">
+            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                <i class="fa-solid fa-home"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-black text-slate-900 tracking-wider">BERRY HOMES</h1>
+                <p class="text-xs text-emerald-600 uppercase tracking-widest font-semibold">Property Management</p>
+            </div>
+        </a>
+        <nav class="flex items-center gap-6 text-sm font-medium text-gray-600">
+            <a href="/" class="hover:text-emerald-600 transition">Home</a>
+            <a href="#" class="hover:text-emerald-600 transition">About Us</a>
+            <a href="#" class="hover:text-emerald-600 transition">Contact</a>
+            <span class="text-gray-300">|</span>
+            <a href="/login" class="flex items-center gap-2 hover:text-emerald-600 transition"><i class="fa-regular fa-user"></i> Go Portal</a>
+        </nav>
+    </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-10">
+    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
+    <div class="mb-10">
+        <h2 class="text-3xl font-serif font-bold text-slate-900 mb-2">Tenant Center</h2>
+        <p class="text-sm text-gray-500">Everything you need to manage your stay in one place.</p>
+    </div>
+
+    <!-- КРИТИЧЕСКИЙ БЛОК: КРУГЛОСУТОЧНАЯ ПОДДЕРЖКА -->
+    <div class="bg-red-50 border-l-4 border-red-600 p-6 rounded-r-lg shadow-sm mb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-start gap-4">
+            <div class="text-3xl text-red-600 mt-1"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+                <h3 class="text-lg font-bold text-red-950 mb-1">Emergency Maintenance 24/7</h3>
+                <p class="text-sm text-red-900 leading-relaxed max-w-xl">
+                    If you have an immediate maintenance emergency that threatens your safety or property condition (fire, major flooding, gas leak), please contact our hotline instantly.
+                </p>
+            </div>
+        </div>
+        <a href="tel:4125550199" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded hover:bg-red-700 transition whitespace-nowrap">
+            <i class="fa-solid fa-phone"></i> (412) 555-0199
+        </a>
+    </div>
+    <!-- БЛОК ДОКУМЕНТОВ И ИНСТРУКЦИЙ -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Карточка: Заселение -->
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col justify-between">
+            <div>
+                <div class="text-xl text-emerald-600 mb-3"><i class="fa-solid fa-key"></i></div>
+                <h4 class="font-bold text-gray-900 text-lg mb-2">Move-In Resources</h4>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">
+                    Read our comprehensive guide to ensure a smooth transition into your new home, including utility setup and key collection.
+                </p>
+            </div>
+            <a href="#" class="inline-flex items-center justify-center gap-2 bg-emerald-50 text-emerald-700 font-semibold px-4 py-2.5 rounded hover:bg-emerald-100 transition text-sm">
+                <i class="fa-solid fa-file-pdf"></i> Download Move-In Guide
+            </a>
+        </div>
+
+        <!-- Карточка: Выселение -->
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col justify-between">
+            <div>
+                <div class="text-xl text-blue-600 mb-3"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h4 class="font-bold text-gray-900 text-lg mb-2">Move-Out Checklists</h4>
+                <p class="text-sm text-gray-500 mb-6 leading-relaxed">
+                    Ready to move out? Review our cleaning guidelines and inspection requirements to guarantee your security deposit return.
+                </p>
+            </div>
+            <a href="#" class="inline-flex items-center justify-center gap-2 bg-blue-50 text-blue-700 font-semibold px-4 py-2.5 rounded hover:bg-blue-100 transition text-sm">
+                <i class="fa-solid fa-file-pdf"></i> Move-Out Checklist
+            </a>
+        </div>
+    </div>
+
+    <!-- СЕКЦИЯ: ОПЛАТА И СЕРВИСЫ -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-8">
+        <h4 class="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-credit-card text-gray-400"></i> Rent & Payments
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="p-4 bg-slate-50 rounded-lg flex items-center justify-between">
+                <div>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Online Portal</span>
+                    <p class="text-sm font-bold text-gray-800">AppFolio Tenant Portal</p>
+                </div>
+                <a href="https://appfolio.com" target="_blank" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium flex items-center gap-1">
+                    Pay Rent <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg flex items-center justify-between">
+                <div>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Alternative Option</span>
+                    <p class="text-sm font-bold text-gray-800">PayNearMe Cash Code</p>
+                </div>
+                <a href="#" class="text-gray-500 hover:text-gray-700 text-sm font-medium flex items-center gap-1">
+                    Get Code <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ИНТЕРАКТИВНАЯ ФОРМА ОБРАТНОЙ СВЯЗИ (ПЛАШКА С КОРЗИНОЙ И ПОДАРКАМИ) -->
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-8 rounded-lg shadow-md text-white">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div class="md:col-span-2">
+                <span class="text-xs uppercase bg-emerald-500/40 text-emerald-100 font-bold px-2.5 py-1 rounded-full tracking-wider">Share Your Feedback</span>
+                <h3 class="text-2xl font-bold mt-3 mb-2">Help Us Improve Your Experience!</h3>
+                <p class="text-sm text-emerald-100/90 leading-relaxed">
+                    We are on a mission to build the best property management ecosystem. Drop us a note about what we can improve, or rate your stay. As a thank you, get a chance to win a curated gift basket!
+                </p>
+            </div>
+            <!-- Компактная форма обратной связи -->
+            <form action="#" class="bg-white p-4 rounded-lg text-gray-800 shadow-inner flex flex-col gap-3">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-500 mb-1">Your Message</label>
+                    <textarea class="w-full text-sm p-2 border border-gray-200 rounded focus:outline-none focus:border-emerald-600 resize-none h-16" placeholder="Tell us how to improve..."></textarea>
+                </div>
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex gap-1 text-amber-400 text-sm">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <button type="button" class="bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded hover:bg-emerald-700 transition">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<!-- ПОДВАЛ -->
+<footer class="text-center py-6 text-xs text-gray-400 border-t border-gray-200 mt-10">
+    &copy; 2026 BERRY HOMES Property Management. All rights reserved.
+</footer>
+
+</body>
+</html>

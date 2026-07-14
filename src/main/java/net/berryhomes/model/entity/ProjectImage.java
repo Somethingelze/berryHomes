@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import java.util.UUID;
 
 @Entity
-@Table(name = "project_images")
+@Table(name = "project_images", schema = "berryhomes")
 @Getter
 @Setter
 @Builder
