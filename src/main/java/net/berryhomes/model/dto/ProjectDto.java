@@ -2,53 +2,48 @@ package net.berryhomes.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProjectDto {
+public record ProjectDto(
 
-    private UUID id;
+        UUID id,
 
-    @NotBlank(message = "Title in Russian is required")
-    @Size(max = 255, message = "Title cannot exceed 255 characters")
-    private String titleRu;
+        @NotBlank(message = "Title in Russian is required")
+        @Size(max = 255, message = "Title cannot exceed 255 characters")
+        String titleRu,
 
-    @NotBlank(message = "Title in English is required")
-    @Size(max = 255, message = "Title cannot exceed 255 characters")
-    private String titleEn;
+        @NotBlank(message = "Title in English is required")
+        @Size(max = 255, message = "Title cannot exceed 255 characters")
+        String titleEn,
 
-    @NotBlank(message = "Short in russian is required")
-    private String shortDescRu;
+        @NotBlank(message = "Short in russian is required")
+        String shortDescRu,
 
-    @NotBlank(message = "Short description in English is required")
-    private String shortDescEn;
+        @NotBlank(message = "Short description in English is required")
+        String shortDescEn,
 
-    private String descRu;
+        String descRu,
 
-    private String descEn;
+        String descEn,
 
-    @NotBlank
-    private String location;
+        @NotBlank
+        String location,
 
-    private String reportFilePath;
+        String reportFilePath,
 
-    private ZonedDateTime createdAt;
+        ZonedDateTime createdAt,
 
-    private ZonedDateTime updatedAt;
+        ZonedDateTime updatedAt,
 
-    private ZonedDateTime deletedAt;
+        ZonedDateTime deletedAt,
 
-    private List<ProjectImageDto> images;
+        List<ProjectImageDto> images,
 
-    private List<ProjectDocumentDto> projectDocuments;
+        List<ProjectDocumentDto> projectDocuments
+) {
 }

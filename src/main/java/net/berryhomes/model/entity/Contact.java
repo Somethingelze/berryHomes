@@ -2,20 +2,24 @@ package net.berryhomes.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import net.berryhomes.model.ContactStatus;
+import net.berryhomes.model.ContactType;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.OffsetDateTime;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "requests", schema = "berryhomes")
-public class Request {
+@Table(name = "contacts", schema = "berryhomes")
+public class Contact {
     @Id
     @ColumnDefault("gen_random_uuid()")
     @Column(name = "id", nullable = false)
@@ -27,14 +31,21 @@ public class Request {
     @Column(name = "email", nullable = false, length = 100)
     private String email;
 
-    @Column(name = "phone", length = 30)
+    @Column(name = "phone", nullable = false, length = 30)
     private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, length = 20)
+    ContactType contactType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 20)
+    ContactStatus contactStatus;
 
     @Column(name = "message", length = Integer.MAX_VALUE)
     private String message;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at", nullable = false)
-    private OffsetDateTime createdAt;
-
+    private ZonedDateTime createdAt;
 }

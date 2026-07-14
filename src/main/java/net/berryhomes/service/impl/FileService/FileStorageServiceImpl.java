@@ -1,5 +1,6 @@
-package net.berryhomes.service.impl;
+package net.berryhomes.service.impl.FileService;
 
+import net.berryhomes.aop.Loggable;
 import net.berryhomes.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
+@Loggable
 public class FileStorageServiceImpl implements FileStorageService {
 
     private final Path rootLocation;

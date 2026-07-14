@@ -2,6 +2,7 @@ package net.berryhomes.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.berryhomes.aop.Loggable;
 import net.berryhomes.model.dto.ProjectDto;
 import net.berryhomes.model.entity.Project;
 import net.berryhomes.exception.business.ProjectNotFoundException;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 @Service
 @Slf4j
+@Loggable
 @RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
@@ -49,9 +51,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Page<ProjectDto> getAllProjects(Pageable pageable) {
         log.info("Getting all projects");
-        return projectRepository.findAll(pageable)
+        return projectRepository.findAllByDeletedAtIsNull(pageable)
                 .map(projectMapper::toProjectDto);
+    }
 
+    @Override
+    public Page<ProjectDto> getAllArchivesProjects(Pageable pageable)   {
+        log.info("Getting all archived projects");
+        return projectRepository.findAllByDeletedAtIsNotNull(pageable)
+                .map(projectMapper::toProjectDto);
     }
 
     @Override
@@ -63,7 +71,7 @@ public class ProjectServiceImpl implements ProjectService {
         });
 
         projectMapper.updateProjectFromDto(projectDto, existingProject);
-        log.info("Updating project with id {}", projectDto.getId());
+        log.info("Updating project with id {}", projectDto.id());
 
         return projectMapper.toProjectDto(projectRepository.save(existingProject));
     }

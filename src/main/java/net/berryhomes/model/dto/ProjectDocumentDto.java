@@ -7,16 +7,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProjectDocumentDto {
+public record ProjectDocumentDto (
 
-    private UUID id;
-    private UUID projectId;
-    private String titleRu;
-    private String titleEn;
-    private String category;
-    private String filePath;
+        UUID id,
+        UUID projectId,
+        String titleRu,
+        String titleEn,
+        String category,
+        String filePath
+){
 }

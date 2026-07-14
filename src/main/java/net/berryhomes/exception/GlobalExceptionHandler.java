@@ -1,6 +1,8 @@
 package net.berryhomes.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import net.berryhomes.aop.Loggable;
+import net.berryhomes.exception.business.ContactAlreadyExistException;
 import net.berryhomes.exception.business.ProjectFileNotFoundException;
 import net.berryhomes.exception.business.ProjectNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import java.io.IOException;
 
 @Slf4j
+@Loggable
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -25,6 +28,15 @@ public class GlobalExceptionHandler {
     public ModelAndView handleProjectNotFoundException(RuntimeException ex) {
         log.warn("Resource not found: {}", ex.getMessage());
         ModelAndView mav = new ModelAndView("error/404");
+        mav.addObject("message", ex.getMessage());
+        return mav;
+    }
+
+    @ExceptionHandler(ContactAlreadyExistException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ModelAndView handleContactAlreadyExistException(RuntimeException ex) {
+        log.warn("Contact already exist: {}", ex.getMessage());
+        ModelAndView mav = new ModelAndView("error/400");
         mav.addObject("message", ex.getMessage());
         return mav;
     }

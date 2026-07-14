@@ -25,21 +25,25 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-aspectj'
+    implementation 'org.springframework.retry:spring-retry:2.0.12'
     implementation 'io.github.cdimascio:dotenv-java:3.2.0'
 
 
     // СУБД драйверы и утилиты
     implementation 'org.flywaydb:flyway-database-postgresql'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-    runtimeOnly 'org.postgresql:postgresql'
-
-    //TODO разобраться с версиями
     implementation 'org.mapstruct:mapstruct:1.6.3'
+    implementation 'com.bucket4j:bucket4j-core:8.10.1'
+
+
+    runtimeOnly 'org.postgresql:postgresql'
     compileOnly 'org.projectlombok:lombok'
 
     annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 
 
     // Тестирование

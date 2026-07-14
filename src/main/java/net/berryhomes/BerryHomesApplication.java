@@ -2,8 +2,15 @@ package net.berryhomes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @SpringBootApplication
+@EnableAsync
+@EnableRetry
+@EnableScheduling
 public class BerryHomesApplication {
 
     public static void main(String[] args) {

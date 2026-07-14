@@ -2,6 +2,7 @@ spring:
   application:
     name: berryHomes
 
+
   servlet:
     multipart:
       max-file-size: 15MB
@@ -16,19 +17,51 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      # TODO убрать перед продакшеном!!!
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        default_schema: berryhomes
 
   flyway:
     baseline-on-migrate: true
     locations: classpath:db/migration
+    schemas: berryhomes
 
   thymeleaf:
     cache: false
 
+  mail:
+    host: ://gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:email@yandex.ru}
+    password: ${MAIL_PASSWORD:app-password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  file:
+    name: logs/berryhomes.log
+
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr([%X{requestId}]){yellow} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{requestId}] %logger{36} - %msg%n"
+
+  logback:
+    rollingpolicy:
+      file-name-pattern: "logs/archived/berryhomes-%d{yyyy-MM-dd}-%i.log.gz"
+      max-file-size: 10MB
+      max-history: 30
+      total-size-cap: 2GB
+
 app:
   upload:
     dir: uploads
+  management:
+    email: ${MAIL_MANAGER:manager@berryhomes.com}

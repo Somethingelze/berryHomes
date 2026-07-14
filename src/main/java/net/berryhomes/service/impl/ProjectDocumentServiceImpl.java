@@ -2,6 +2,7 @@ package net.berryhomes.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.berryhomes.aop.Loggable;
 import net.berryhomes.model.dto.ProjectDocumentDto;
 import net.berryhomes.model.entity.Project;
 import net.berryhomes.model.entity.ProjectDocument;
@@ -11,6 +12,7 @@ import net.berryhomes.mapper.ProjectMapper;
 import net.berryhomes.repository.ProjectDocumentRepository;
 import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.ProjectDocumentService;
+import net.berryhomes.service.impl.FileService.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +21,7 @@ import java.util.UUID;
 
 @Service
 @Slf4j
+@Loggable
 @RequiredArgsConstructor
 public class ProjectDocumentServiceImpl implements ProjectDocumentService {
 

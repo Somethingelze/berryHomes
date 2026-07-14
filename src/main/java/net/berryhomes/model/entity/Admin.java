@@ -51,6 +51,16 @@ public class Admin implements UserDetails {
     @Column(name = "created_at", nullable = false)
     private ZonedDateTime createdAt;
 
+    @Column(name = "failed_attempts", nullable = false)
+    private int failedAttempts = 0;
+
+    @Column(name = "account_non_locked", nullable = false)
+    private boolean accountNonLocked = true;
+
+    @Column(name = "lock_time")
+    private ZonedDateTime lockTime;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role));
@@ -73,7 +83,7 @@ public class Admin implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.accountNonLocked;
     }
 
     @Override

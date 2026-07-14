@@ -26,11 +26,26 @@ public class AdminController {
 
     private final ProjectService projectService;
 
+    @PostMapping("/create")
+    public ResponseEntity<ProjectDto> createProject(@Valid @RequestBody ProjectDto projectDto) {
+
+        ProjectDto createdProject = projectService.createProject(projectDto);
+        return ResponseEntity.ok(createdProject);
+    }
+
     @GetMapping("/projects/all")
     public ResponseEntity<Page<ProjectDto>> getProjects(@PageableDefault(size = 20, sort = "createdAt",
             direction = Sort.Direction.DESC) Pageable pageable) {
 
         Page<ProjectDto> projects = projectService.getAllProjects(pageable);
+        return ResponseEntity.ok(projects);
+    }
+
+    @GetMapping("/projects/archived/all")
+    public ResponseEntity<Page<ProjectDto>> getArchivedProjects(@PageableDefault(size = 20, sort = "createdAt",
+            direction = Sort.Direction.DESC) Pageable pageable) {
+
+        Page<ProjectDto> projects = projectService.getAllArchivesProjects(pageable);
         return ResponseEntity.ok(projects);
     }
 
@@ -41,16 +56,9 @@ public class AdminController {
         return ResponseEntity.ok(projectDto);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<ProjectDto> createProject(@Valid @RequestBody ProjectDto projectDto) {
-
-        ProjectDto createdProject = projectService.createProject(projectDto);
-        return ResponseEntity.ok(createdProject);
-    }
-
     @PostMapping("/update")
     public ResponseEntity<ProjectDto> updateProject(@Valid @RequestBody ProjectDto projectDto) {
-        ProjectDto updatedProject = projectService.updateProject(projectDto.getId(), projectDto);
+        ProjectDto updatedProject = projectService.updateProject(projectDto.id(), projectDto);
         return ResponseEntity.ok(updatedProject);
     }
 

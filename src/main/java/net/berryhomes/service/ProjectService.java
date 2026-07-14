@@ -12,6 +12,9 @@ public interface ProjectService {
     ProjectDto createProject(ProjectDto projectDto);
     ProjectDto getProject(UUID id);
     Page<ProjectDto> getAllProjects(Pageable pageable);
+
+    Page<ProjectDto> getAllArchivesProjects(Pageable pageable);
+
     ProjectDto updateProject(UUID projectId, ProjectDto projectDto);
 
     @Transactional
