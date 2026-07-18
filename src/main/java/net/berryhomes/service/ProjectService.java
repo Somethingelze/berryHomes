@@ -21,7 +21,9 @@ public interface ProjectService {
 
     Page<ProjectDto> getAllArchivedProjects(Pageable pageable);
 
-    ProjectDto updateProject(UUID projectId, ProjectDto projectDto);
+    ProjectDto updateProjectWithFiles(UUID id, ProjectDto projectDto, List<MultipartFile> projectImages, MultipartFile projectDocument);
+
+    long countActiveProjects();
 
     void archiveProject(UUID id);
 

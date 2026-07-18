@@ -22,15 +22,9 @@ public class ProjectDocument {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", unique = true)
     private Project project;
-
-    @Column(name = "title_ru", nullable = false)
-    private String titleRu;
-
-    @Column(name = "title_en", nullable = false)
-    private String titleEn;
 
     @Column(name = "file_path", nullable = false, length = 550)
     private String filePath;

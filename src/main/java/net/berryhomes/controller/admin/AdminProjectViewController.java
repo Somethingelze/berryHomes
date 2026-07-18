@@ -63,18 +63,7 @@ public class AdminProjectViewController {
     @GetMapping("/create")
     public ModelAndView createProjectView() {
         ModelAndView mav = new ModelAndView("admin/project-form");
-
-        ProjectDto emptyProject = ProjectDto.builder()
-                .address("")
-                .cityZip("")
-                .purchasePrice("")
-                .monthlyRent("")
-                .renovationBudget("")
-                .estNoiAnnual("")
-                .totalInvestment("")
-                .cashOnCashReturn("")
-                .estPayback("")
-                .build();
+        ProjectDto emptyProject = ProjectDto.builder().build();
 
         mav.addObject("projectDto", emptyProject);
         return mav;
@@ -100,20 +89,26 @@ public class AdminProjectViewController {
             RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-
             bindingResult.getFieldErrors().forEach(error ->
                     log.error("Field: {}, value: {}, message: {}",
-                            error.getField(),
                             error.getRejectedValue(),
                             error.getDefaultMessage()));
 
             bindingResult.getGlobalErrors().forEach(error ->
                     log.error("Global error: {}", error));
 
-            return new ModelAndView("admin/project-form");
+            ModelAndView errorMav = new ModelAndView("admin/project-form");
+            errorMav.addObject("projectDto", projectDto);
+            return errorMav;
         }
 
-        projectService.createProjectWithFiles(projectDto, imageFiles, documentFile);
+        if (projectDto.id() != null) {
+            projectService.updateProjectWithFiles(projectDto.id(), projectDto, imageFiles, documentFile);
+            log.info("Project with ID {} updated successfully", projectDto.id());
+        } else {
+            projectService.createProjectWithFiles(projectDto, imageFiles, documentFile);
+            log.info("New project created successfully");
+        }
 
         redirectAttributes.addFlashAttribute("successMessage", "Investment project saved successfully!");
         return new ModelAndView("redirect:/admin/projects");
@@ -164,5 +159,10 @@ public class AdminProjectViewController {
         projectImageService.updateSortOrder(imageId, sortOrder);
         redirectAttributes.addFlashAttribute("successMessage", "Display order updated!");
         return new ModelAndView("redirect:/admin/projects/" + projectId + "/edit");
+    }
+
+    @InitBinder
+    public void initBinder(org.springframework.web.bind.WebDataBinder binder) {
+        binder.setDisallowedFields("createdAt", "updatedAt", "deletedAt");
     }
 }

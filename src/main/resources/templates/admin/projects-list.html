@@ -73,8 +73,14 @@
 
                     <!-- 1. Превью обложки (Вызов метода getFirstImageUrl() из рекорда) -->
                     <td>
-                        <img th:if="${project.getFirstImageUrl() != ''}" th:src="${project.getFirstImageUrl()}" class="table-project-preview" alt="Preview" />
-                        <div th:if="${project.getFirstImageUrl() == ''}" class="table-project-preview" style="display:flex; align-items:center; justify-content:center; font-size:1.1rem;">🏠</div>
+                        <img th:if="${project.getFirstImageUrl() != ''}"
+                             th:src="@{'/' + ${project.getFirstImageUrl()}}"
+                             class="table-project-preview"
+                             alt="Preview" />
+
+                        <div th:if="${project.getFirstImageUrl() == ''}"
+                             class="table-project-preview"
+                             style="display:flex; align-items:center; justify-content:center; font-size:1.1rem;">🏠</div>
                     </td>
 
                     <!-- 2. Адрес и локация (Город / Индекс) -->

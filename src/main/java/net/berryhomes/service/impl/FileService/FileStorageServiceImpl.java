@@ -1,5 +1,6 @@
 package net.berryhomes.service.impl.FileService;
 
+import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;
 import net.berryhomes.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
+@Slf4j
 @Loggable
 public class FileStorageServiceImpl implements FileStorageService {
 
@@ -33,6 +35,7 @@ public class FileStorageServiceImpl implements FileStorageService {
     @Override
     public String saveFile(MultipartFile file, String subDirectory) {
         if (file.isEmpty()) {
+            log.info("Файл пуст и не может быть сохранен");
             throw new IllegalArgumentException("Файл пуст и не может быть сохранен");
         }
 

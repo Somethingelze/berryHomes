@@ -20,7 +20,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.disable())
                 .authorizeHttpRequests(req -> {
-                    req.requestMatchers("/admin/**").authenticated();
+                    //TODO поменять доступ к админу
+                    req.requestMatchers("/admin/**").permitAll();
+                    req.requestMatchers("/images/**", "/documents/**").permitAll();
                     req.requestMatchers("/css/**", "/js/**", "/images/**", "/uploads/**").permitAll();
                     req.anyRequest().permitAll();
                 })

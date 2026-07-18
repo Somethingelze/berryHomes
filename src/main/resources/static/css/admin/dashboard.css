@@ -1,0 +1,162 @@
+/* Сетка виджетов (Карточки сверху) */
+.widgets-grid {
+    display: grid;
+    grid-template-cols: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.widget-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.widget-info-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.widget-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #718096;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.widget-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1A202C;
+    margin: 0;
+}
+
+.widget-icon-right {
+    width: 48px;
+    height: 48px;
+    background-color: #F7FAFC;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.icon-green-bg { background-color: #F0FDF4; color: #16A34A; }
+.icon-blue-bg { background-color: #EFF6FF; color: #3B82F6; }
+
+/* Двухколоночный контент аналитики */
+.dashboard-details-layout {
+    display: flex;
+    gap: 30px;
+}
+
+.layout-column-main {
+    flex: 1.5;
+}
+
+.layout-column-side {
+    flex: 1;
+}
+
+/* Панели блоков */
+.dashboard-block-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+    margin-bottom: 30px;
+}
+
+.block-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    color: #2D3748;
+    border-bottom: 1px solid #EDF2F7;
+    padding-bottom: 12px;
+}
+
+/* Стили распределения по типам (Прогресс-бары на чистом CSS) */
+.type-distribution-row {
+    margin-bottom: 18px;
+}
+
+.type-dist-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4A5568;
+    margin-bottom: 6px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background-color: #EDF2F7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+/* Компактная лента активности */
+.recent-leads-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recent-lead-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.recent-lead-item:last-child {
+    border-bottom: none;
+}
+
+.lead-item-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #2D3748;
+}
+
+.lead-item-time {
+    font-size: 0.75rem;
+    color: #A0AEC0;
+    margin-top: 2px;
+}
+
+@media (max-width: 992px) {
+    .dashboard-details-layout {
+        flex-direction: column;
+    }
+}
+
+/* Эффект наведения для кликабельных карточек дашборда */
+.widget-card-link:hover .widget-card {
+    border-color: #16A34A;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+}
+
+.widget-card {
+    transition: all 0.2s ease-in-out;
+}

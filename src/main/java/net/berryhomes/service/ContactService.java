@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface ContactService {
@@ -31,6 +32,12 @@ public interface ContactService {
 
     @Transactional
     ContactDto updateContactStatus(UUID id, ContactStatus contactStatus);
+
+    long countByStatus(ContactStatus status);
+
+    long countByType(ContactType  type);
+
+     List<ContactDto> getRecentLeads(Pageable pageable);
 
     void deleteContact(UUID id);
 }

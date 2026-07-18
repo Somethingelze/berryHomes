@@ -13,8 +13,6 @@ public record ProjectDocumentDto (
 
         UUID id,
         UUID projectId,
-        String titleRu,
-        String titleEn,
         String filePath
 ) implements java.io.Serializable {
     @Serial

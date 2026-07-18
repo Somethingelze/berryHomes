@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Berry Homes</title>
+    <!-- Подключаем вынесенные стили дашборда из вашей подпапки -->
+    <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}" />
+    <!-- Подключаем базовые стили админки для общего каркаса и Sidebar -->
+    <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}" />
+</head>
+<body>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            BERRY HOMES
+        </div>
+        <ul class="sidebar-menu">
+            <li><a th:href="@{/admin/dashboard}" class="active">Dashboard</a></li>
+            <li><a th:href="@{/admin/contacts}">Contacts / Leads</a></li>
+            <li><a th:href="@{/admin/projects}">Investment Projects</a></li>
+            <li><a th:href="@{/admin/settings}">System Settings</a></li>
+            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a></li>
+        </ul>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ ДАШБОРДА -->
+    <div class="admin-content">
+
+        <div class="page-header">
+            <h1 class="page-title">Dashboard Overview</h1>
+            <div style="color: #718096; font-size: 0.9rem;">Real-time system state</div>
+        </div>
+
+        <!-- СЕТКА ИНФОРМАЦИОННЫХ КАРТОЧЕК (WIDGETS) -->
+        <div class="widgets-grid">
+
+            <!-- Карточка 1: Новые обращения (Ведет на список контактов) -->
+            <a th:href="@{/admin/contacts}" class="widget-card-link" style="text-decoration: none; color: inherit; display: block;">
+                <div class="widget-card">
+                    <div class="widget-info-left">
+                        <span class="widget-title">New Leads</span>
+                        <h3 class="widget-value" th:text="${stats.totalNewLeads()}">0</h3>
+                    </div>
+                    <div class="widget-icon-right icon-blue-bg">✉️</div>
+                </div>
+            </a>
+
+            <!-- Карточка 2: Всего активных проектов (Ведет на список проектов) -->
+            <a th:href="@{/admin/projects}" class="widget-card-link" style="text-decoration: none; color: inherit; display: block;">
+                <div class="widget-card">
+                    <div class="widget-info-left">
+                        <span class="widget-title">Active Projects</span>
+                        <h3 class="widget-value" th:text="${stats.totalProjects()}">0</h3>
+                    </div>
+                    <div class="widget-icon-right icon-green-bg">🏠</div>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- ДВУХКОЛОНОЧНЫЙ КОНТЕНТ АНАЛИТИКИ -->
+        <div class="dashboard-details-layout">
+
+            <!-- Левая колонка: Лента последних событий -->
+            <div class="layout-column-main">
+                <div class="dashboard-block-card">
+                    <h3 class="block-card-title">Recent Activity</h3>
+
+                    <!-- Если новых заявок вообще нет -->
+                    <p th:if="${#lists.isEmpty(stats.recentLeads())}" style="color: #A0AEC0; font-size: 0.9rem; text-align: center; padding: 20px 0;">
+                        No recent incoming requests found.
+                    </p>
+
+                    <!-- Список последних 5 лидов -->
+                    <ul th:unless="${#lists.isEmpty(stats.recentLeads())}" class="recent-leads-list">
+                        <li th:each="lead : ${stats.recentLeads()}" class="recent-lead-item">
+                            <div>
+                                <div class="lead-item-name">
+                                    <!-- Ссылка ведет на общий список контактов, сохраняя фокус -->
+                                    <a th:href="@{/admin/contacts(search=${lead.email()})}" style="color: inherit; text-decoration: none;" th:text="${lead.name()}">John Doe</a>
+                                </div>
+                                <div class="lead-item-time" th:text="${lead.email()}">john@example.com</div>
+                            </div>
+                            <div>
+                                <!-- Вывод источника в виде компактного текстового маркера -->
+                                <span th:if="${lead.contactType().name() == 'TENANT'}" style="color: #B8255F; font-size: 0.8rem; font-weight: 600;">[Tenant]</span>
+                                <span th:if="${lead.contactType().name() == 'HOMEOWNER' or lead.contactType().name() == 'OWNER'}" style="color: #16A34A; font-size: 0.8rem; font-weight: 600;">[Owner]</span>
+                                <span th:if="${lead.contactType().name() == 'INVESTOR'}" style="color: #4F46E5; font-size: 0.8rem; font-weight: 600;">[Investor]</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Правая колонка: Распределение заявок по типам -->
+            <div class="layout-column-side">
+                <div class="dashboard-block-card">
+                    <h3 class="block-card-title">Lead Distribution</h3>
+
+                    <!-- Строка: Арендаторы -->
+                    <div class="type-distribution-row">
+                        <div class="type-dist-labels">
+                            <span>For Tenants</span>
+                            <span th:text="${stats.tenantLeadsCount()}">0</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 100%; background-color: #B8255F;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Строка: Собственники -->
+                    <div class="type-distribution-row">
+                        <div class="type-dist-labels">
+                            <span>For Homeowners</span>
+                            <span th:text="${stats.homeownerLeadsCount()}">0</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 100%; background-color: #16A34A;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Строка: Инвесторы -->
+                    <div class="type-distribution-row">
+                        <div class="type-dist-labels">
+                            <span>For Investors</span>
+                            <span th:text="${stats.investorLeadsCount()}">0</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 100%; background-color: #4F46E5;"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

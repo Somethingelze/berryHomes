@@ -1,5 +1,7 @@
 package net.berryhomes.repository;
 
+import net.berryhomes.model.ContactStatus;
+import net.berryhomes.model.ContactType;
 import net.berryhomes.model.entity.Contact;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +19,8 @@ public interface ContactRepository extends JpaRepository<Contact, UUID> {
     Optional<Page<Contact>> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
     Optional<Page<Contact>> findAllByPhoneContainingIgnoreCase(String phone, Pageable pageable);
+
+    long countByContactStatus(ContactStatus contactStatus);
+
+    long countByContactType(ContactType contactType);
 }

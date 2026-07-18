@@ -89,6 +89,6 @@ server:
 
 app:
   upload:
-    dir: uploads
+    dir: uploads/
   management:
     email: ${MAIL_MANAGER:manager@berryhomes.com}

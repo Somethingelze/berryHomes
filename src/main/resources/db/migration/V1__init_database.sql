@@ -49,8 +49,6 @@ CREATE TABLE IF NOT EXISTS berryhomes.project_documents
 (
     id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     project_id UUID,
-    title_ru   VARCHAR(255) NOT NULL,
-    title_en   VARCHAR(255) NOT NULL,
     file_path  VARCHAR(550) NOT NULL,
     CONSTRAINT fk_project_documents_project FOREIGN KEY (project_id)
         REFERENCES berryhomes.projects (id) ON DELETE CASCADE

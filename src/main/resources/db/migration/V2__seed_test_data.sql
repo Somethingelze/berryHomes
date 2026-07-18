@@ -35,13 +35,11 @@ FROM berryhomes.projects p
          CROSS JOIN generate_series(1, 3) AS img_index;
 
 
--- 3. ГЕНЕРАЦИЯ ДОКУМЕНТОВ (Исправлено: p.title_ru/en заменены на p.address)
-INSERT INTO berryhomes.project_documents (id, project_id, title_ru, title_en, file_path)
+-- 3. ГЕНЕРАЦИЯ ДОКУМЕНТОВ
+INSERT INTO berryhomes.project_documents (id, project_id, file_path)
 SELECT
     gen_random_uuid(),
     p.id AS project_id,
-    'Презентация - ' || p.address AS title_ru,
-    'Presentation - ' || p.address AS title_en,
     '/uploads/documents/' || p.id || '_presentation.pdf' AS file_path
 FROM berryhomes.projects p;
 

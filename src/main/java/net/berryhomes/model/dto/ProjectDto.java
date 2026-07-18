@@ -3,6 +3,7 @@ package net.berryhomes.model.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
 import java.time.ZonedDateTime;
@@ -10,13 +11,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Builder
-
 public record ProjectDto(
         UUID id,
 
-        @NotBlank @Size(max = 255)
+        @NotBlank
+        @Size(max = 255)
         String address,
-        @NotBlank @Size(max = 100)
+        @NotBlank
+        @Size(max = 100)
         String cityZip,
 
         String purchasePrice,
@@ -26,11 +28,19 @@ public record ProjectDto(
         String totalInvestment,
         String cashOnCashReturn,
         String estPayback,
+
+        @DateTimeFormat(pattern = "dd.MM.yyyy, HH:mm")
         ZonedDateTime createdAt,
+
+        @DateTimeFormat(pattern = "dd.MM.yyyy, HH:mm")
         ZonedDateTime updatedAt,
+
+        @DateTimeFormat(pattern = "dd.MM.yyyy, HH:mm")
         ZonedDateTime deletedAt,
+
         List<ProjectImageDto> projectImages,
-        List<ProjectDocumentDto> projectDocuments
+        ProjectDocumentDto projectDocument
+
 ) implements java.io.Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -40,16 +50,5 @@ public record ProjectDto(
             return projectImages.getFirst().filePath();
         }
         return "";
-    }
-
-    public String getReportPdfUrl() {
-        if (projectDocuments != null) {
-            return projectDocuments.stream()
-                    .map(ProjectDocumentDto::filePath)
-                    .filter(s -> s.endsWith(".pdf"))
-                    .findFirst()
-                    .orElse("#");
-        }
-        return "#";
     }
 }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings - Berry Homes</title>
+    <!-- Подключаем базовый каркас админки и изолированные стили настроек -->
+    <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/settings-admin.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/project-form.css}" />
+</head>
+<body>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            BERRY HOMES
+        </div>
+        <ul class="sidebar-menu">
+            <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/admin/contacts}">Contacts / Leads</a></li>
+            <li><a th:href="@{/admin/projects}">Investment Projects</a></li>
+            <li><a th:href="@{/admin/settings}" class="active">System Settings</a></li>
+            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a></li>
+        </ul>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ НАСТРОЕК -->
+    <div class="admin-content">
+
+        <div class="page-header">
+            <h1 class="page-title">System Settings</h1>
+            <div style="color: #718096; font-size: 0.9rem;">Global site configurations</div>
+        </div>
+
+        <!-- УВЕДОМЛЕНИЕ ОБ УСПЕШНОМ СОХРАНЕНИИ -->
+        <div th:if="${successMessage}" class="alert-success" th:text="${successMessage}">
+            Settings updated successfully!
+        </div>
+
+        <!-- ГЛАВНАЯ ФОРМА НАСТРОЕК -->
+        <form th:action="@{/admin/settings/save}" method="post">
+
+            <!-- БЛОК 1: КОНТАКТНЫЕ ДАННЫЕ КОМПАНИИ -->
+            <div class="settings-section-card">
+                <h3 class="settings-card-title">📞 Company Contacts</h3>
+                <p class="settings-card-desc">These values are automatically updated in the header and footer across all public pages.</p>
+
+                <!-- Поле: Официальный телефон -->
+                <div class="settings-form-group">
+                    <label class="input-label-text">Official Phone Number</label>
+                    <input type="text" name="company_phone" th:value="${settings['company_phone']}" class="admin-input-field" placeholder="(412) 555-0123" required="required" />
+                    <small class="settings-help-text">Used for click-to-call direct links on mobile layouts.</small>
+                </div>
+
+                <!-- Поле: Официальный Email -->
+                <div class="settings-form-group" style="margin-top: 20px;">
+                    <label class="input-label-text">Official Email Address</label>
+                    <input type="email" name="company_email" th:value="${settings['company_email']}" class="admin-input-field" placeholder="info@berryhomespm.com" required="required" />
+                    <small class="settings-help-text">All public general inquiry mailto links will route here.</small>
+                </div>
+            </div>
+
+            <!-- БЛОК 2: ССЫЛКИ НА ВНЕШНИЕ ПОРТАЛЫ (TENANTCLOUD И АНАЛОГИ) -->
+            <div class="settings-section-card" style="margin-top: 25px;">
+                <h3 class="settings-card-title">🌐 External Portals Redirects</h3>
+                <p class="settings-card-desc">Configure target links for the "Open Portal" buttons in Tenant and Owner Centers.</p>
+
+                <!-- Поле: Ссылка на портал арендаторов -->
+                <div class="settings-form-group">
+                    <label class="input-label-text">Tenant Portal URL</label>
+                    <input type="url" name="tenant_portal_url" th:value="${settings['tenant_portal_url']}" class="admin-input-field" placeholder="https://tenantcloud.com" required="required" />
+                    <small class="settings-help-text">The URL where residents pay rent and log non-emergency issues.</small>
+                </div>
+
+                <!-- Поле: Ссылка на портал собственников -->
+                <div class="settings-form-group" style="margin-top: 20px;">
+                    <label class="input-label-text">Owner Portal URL</label>
+                    <input type="url" name="owner_portal_url" th:value="${settings['owner_portal_url']}" class="admin-input-field" placeholder="https://tenantcloud.comowner-portal" required="required" />
+                    <small class="settings-help-text">The URL where landlords monitor metrics and financial performance.</small>
+                </div>
+            </div>
+
+            <!-- ФУТЕР ФОРМЫ С КНОПКАМИ ДЕЙСТВИЙ -->
+            <div class="form-footer-actions">
+                <a th:href="@{/admin/dashboard}" class="btn-form-cancel">Cancel</a>
+                <button type="submit" class="btn-form-save">Save Configuration</button>
+            </div>
+
+        </form> <!-- ЗДЕСЬ ЗАКАНЧИВАЕТСЯ ГЛАВНАЯ ФОРМА НАСТРОЕК -->
+    </div>
+
+</body>
+</html>

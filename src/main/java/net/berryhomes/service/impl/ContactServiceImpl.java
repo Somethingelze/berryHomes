@@ -6,6 +6,7 @@ import net.berryhomes.aop.Loggable;
 import net.berryhomes.exception.business.ContactNotFoundException;
 import net.berryhomes.mapper.ContactMapper;
 import net.berryhomes.model.ContactStatus;
+import net.berryhomes.model.ContactType;
 import net.berryhomes.model.dto.ContactDto;
 import net.berryhomes.model.entity.Contact;
 import net.berryhomes.repository.ContactRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -102,6 +104,23 @@ public class ContactServiceImpl implements ContactService {
         });
         contact.setContactStatus(contactStatus);
         return contactMapper.toDto(contactRepository.save(contact));
+    }
+
+    @Override
+    public long countByStatus(ContactStatus status) {
+        return contactRepository.countByContactStatus(status);
+    }
+
+    @Override
+    public long countByType(ContactType type) {
+        return contactRepository.countByContactType(type);
+    }
+
+    @Override
+    public List<ContactDto> getRecentLeads(Pageable pageable) {
+        return contactRepository.findAll(pageable).getContent().stream()
+                .map(contactMapper::toDto)
+                .toList();
     }
 
     @Override

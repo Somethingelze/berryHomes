@@ -21,4 +21,7 @@ public interface ProjectRepository extends JpaRepository<Project, UUID> {
     Page<Project> findAllByDeletedAtIsNotNull(Pageable pageable);
 
     Page<Project> findAllByDeletedAtIsNull(Pageable pageable);
+
+    long countByDeletedAtIsNull();
+
 }

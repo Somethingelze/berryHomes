@@ -1,5 +1,6 @@
 package net.berryhomes.service.impl.project;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,8 +39,6 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
     private final FileStorageService fileStorageService;
-    private final ProjectImageService projectImageService;
-    private final ProjectDocumentService projectDocumentService;
 
 
     @Override
@@ -55,21 +55,31 @@ public class ProjectServiceImpl implements ProjectService {
     @CacheEvict(value = "projects", allEntries = true)
     public ProjectDto createProjectWithFiles(ProjectDto projectDto, List<MultipartFile> projectImages, MultipartFile projectDocument) {
         Project project = projectRepository.save(projectMapper.toProjectEntity(projectDto));
-        log.info("Creating project with id {}", project.getId());
+        log.info("Creating project via form submission");
 
-        ProjectDocumentDto savedProjectDocumentDto = projectDocumentService.uploadDocument(project.getId(), projectDocument);
-        ProjectDocument savedProjectDocument = projectMapper.toProjectDocumentEntity(savedProjectDocumentDto);
-        log.info("Saving project document with id {}", savedProjectDocument.getId());
+        if (projectImages != null && !projectImages.isEmpty()) {
+            projectImages.stream()
+                    .filter(image -> image != null && !image.isEmpty())
+                    .forEach(image -> {
+                        String relativePath = fileStorageService.saveFile(image, "images/" + project.getId());
+                        project.getProjectImages().add(ProjectImage.builder()
+                                .project(project)
+                                .filePath(relativePath)
+                                .build());
+                    });
+            log.info("Attached {} images for project", project.getProjectImages().size());
+        }
 
-        List<ProjectImage> savedProjectImages = projectImages.stream()
-                .map(image -> projectImageService.uploadImage(project.getId(), image))
-                .map(projectMapper::toProjectImageEntity)
-                .toList();
-        log.info("Saving project image document with id {}", savedProjectImages.get(0).getId());
+        if (projectDocument != null && !projectDocument.isEmpty()) {
+            String relativePath = fileStorageService.saveFile(projectDocument, "documents/" + project.getId());
+            project.setProjectDocument(ProjectDocument.builder()
+                    .project(project)
+                    .filePath(relativePath)
+                    .build());
+            log.info("Attached project document");
+        }
 
-        project.setProjectImages(savedProjectImages);
-        project.setProjectDocuments(List.of(savedProjectDocument));
-        return projectMapper.toProjectDto(projectRepository.save(project));
+        return projectMapper.toProjectDto(project);
     }
 
     @Override
@@ -104,16 +114,51 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     @CacheEvict(value = "projects", allEntries = true)
-    public ProjectDto updateProject(UUID projectId, ProjectDto projectDto) {
-        Project existingProject = projectRepository.findById(projectId).orElseThrow(() -> {
-            log.info("Project with id {} not found", projectId);
-            return new ProjectNotFoundException(String.format("Project with id %s not found", projectId));
-        });
+    public ProjectDto updateProjectWithFiles(UUID id, ProjectDto projectDto, List<MultipartFile> projectImages, MultipartFile projectDocument) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Project not found with id: " + id));
+        log.info("Updating project with id {}", id);
 
-        projectMapper.updateProjectFromDto(projectDto, existingProject);
-        log.info("Updating project with id {}", projectDto.id());
+        projectMapper.updateProjectFromDto(projectDto, project);
 
-        return projectMapper.toProjectDto(projectRepository.save(existingProject));
+        if (projectImages != null && !projectImages.isEmpty()) {
+            projectImages.stream()
+                    .filter(image -> image != null && !image.isEmpty())
+                    .forEach(image -> {
+                        String relativePath = fileStorageService.saveFile(image, "images/" + project.getId());
+
+                        project.getProjectImages().add(ProjectImage.builder()
+                                .project(project)
+                                .filePath(relativePath)
+                                .build());
+                    });
+            log.info("Added new images. Total images now: {}", project.getProjectImages().size());
+        }
+
+        if (projectDocument != null && !projectDocument.isEmpty()) {
+            if (project.getProjectDocument() != null) {
+                fileStorageService.deleteFile(project.getProjectDocument().getFilePath());
+            }
+
+            String relativePath = fileStorageService.saveFile(projectDocument, "documents/" + project.getId());
+
+            ProjectDocument doc = ProjectDocument.builder()
+                    .project(project)
+                    .filePath(relativePath)
+                    .build();
+
+            project.setProjectDocument(doc);
+            log.info("Updated project document");
+        }
+
+        Project updatedProject = projectRepository.save(project);
+        return projectMapper.toProjectDto(updatedProject);
+    }
+
+
+    @Override
+    public long countActiveProjects() {
+        return projectRepository.countByDeletedAtIsNull();
     }
 
     @Override
@@ -150,7 +195,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found: " + id));
 
         project.getProjectImages().forEach(img -> fileStorageService.deleteFile(img.getFilePath()));
-        project.getProjectDocuments().forEach(doc -> fileStorageService.deleteFile(doc.getFilePath()));
+        fileStorageService.deleteFile(project.getProjectDocument().getFilePath());
         projectRepository.delete(project);
 
         log.info("Project and all its physical files successfully deleted: {}", id);
