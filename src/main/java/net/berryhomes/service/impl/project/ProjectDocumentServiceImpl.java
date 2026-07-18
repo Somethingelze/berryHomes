@@ -1,4 +1,4 @@
-package net.berryhomes.service.impl;
+package net.berryhomes.service.impl.project;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class ProjectDocumentServiceImpl implements ProjectDocumentService {
 
     @Override
     @Transactional
-    public ProjectDocumentDto uploadDocument(UUID projectId, String titleRu, String titleEng, MultipartFile file) {
+    public ProjectDocumentDto uploadDocument(UUID projectId, MultipartFile file) {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> {
             log.info("Try to find project with id {} not found", projectId);
             return new ProjectNotFoundException(String.format("Project with id %s not found", projectId));
@@ -43,8 +43,6 @@ public class ProjectDocumentServiceImpl implements ProjectDocumentService {
         String relativePath = fileStorageService.saveFile(file, UPLOAD_SUB_DIR + project.getId());
         ProjectDocument projectDocument = ProjectDocument.builder()
                 .project(project)
-                .titleRu(titleRu)
-                .titleEn(titleEng)
                 .filePath(relativePath)
                 .build();
 

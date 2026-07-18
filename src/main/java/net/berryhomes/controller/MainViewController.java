@@ -15,29 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/")
 @RequiredArgsConstructor
-public class MainController {
+public class MainViewController {
 
     private final ProjectService projectService;
 
     @GetMapping
     public ModelAndView index() {
-
         return new ModelAndView("index");
-    }
-
-    @GetMapping("/tenants")
-    public ModelAndView tenants() {
-        return new ModelAndView("tenants");
-    }
-
-    @GetMapping("/investors")
-    public ModelAndView investors(@PageableDefault(size = 6, sort = "createdAt",
-            direction = Sort.Direction.DESC) Pageable pageable) {
-
-        ModelAndView modelAndView = new ModelAndView("investors");
-        Page<ProjectDto> projectsPage = projectService.getAllProjects(pageable);
-        modelAndView.addObject("projectsPage", projectsPage);
-
-        return modelAndView;
     }
 }

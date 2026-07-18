@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Center - Berry Homes</title>
+    <!-- Подключение внешнего вынесенного файла стилей через Thymeleaf -->
+    <link rel="stylesheet" th:href="@{/css/owner-center.css}" />
+</head>
+<body>
+
+    <!-- НАВИГАЦИЯ И ШАПКА -->
+    <div class="navbar">
+        <div class="container navbar-flex">
+            <div class="brand-block">
+                <a href="/" class="brand-logo-text">BERRY HOMES</a>
+                <div class="partner-logo-line">
+                    <span class="partner-title">MAX BUSINESS GROUP</span>
+                    <small class="partner-subtitle">REAL ESTATE BROKERAGE</small>
+                </div>
+            </div>
+            <div class="top-contacts">
+                <span>📞 (412) 555-0123</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ТАБЫ ПЕРЕКЛЮЧЕНИЯ АУДИТОРИЙ -->
+    <div class="audience-tabs">
+        <a href="/tenants">For Tenants</a>
+        <a href="/homeowners" class="active-owner">For Homeowners</a>
+        <a href="/investors">For Investors</a>
+    </div>
+
+    <!-- ГЕРОЙ БЛОК СТРАНИЦЫ -->
+    <div class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <h1 class="display-4">Owner Center</h1>
+                <p class="text-muted">Everything you need as a Berry Homes owner, all in one place.</p>
+                <div class="hero-hr"></div>
+            </div>
+            <div class="hero-right">
+                <!-- Заглушка под картинку. При появлении файла в папке static/images/
+                     замените тег на: <img th:src="@{/images/homeowners-bg.png}" alt="Owner Center" style="width:100%; border-radius:8px;"/> -->
+                <div class="placeholder-box">
+                    <span>🖼️ [Изображение: homeowners-bg.png]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- КАРТОЧКИ ДЕЙСТВИЙ -->
+    <div class="cards-section">
+        <div class="container cards-grid">
+
+            <!-- Левая карточка: Портал (TenantCloud) -->
+            <div class="card-col">
+                <div class="portal-action-card">
+                    <div>
+                        <div class="icon-circle bg-green-light">
+                            <!-- Чистый SVG-вектор дома -->
+                            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        </div>
+                        <h3 class="card-title">Owner Portal</h3>
+                        <p class="card-text">Secure access to your property information, financials, and important documents.</p>
+                    </div>
+                    <!-- Ссылка рендерится динамически из переменной portalUrl, полученной через ModelAndView -->
+                    <a th:href="${portalUrl}" target="_blank" class="btn-green-portal">
+                        <span>Access Owner Portal</span>
+                        <svg style="width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Правая карточка: Связь с менеджером -->
+            <div class="card-col">
+                <div class="portal-action-card">
+                    <div>
+                        <div class="icon-circle bg-purple-light">
+                            <!-- Чистый SVG-вектор диалога -->
+                            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                        </div>
+                        <h3 class="card-title">Contact Your Manager</h3>
+                        <p class="card-text">Have questions or need assistance? We're here to help.</p>
+                        <div class="manager-info">
+                            <strong>Email:</strong> info@berryhomespm.com<br>
+                            <strong>Hours:</strong> Mon - Fri: 9:00 AM - 5:00 PM<br>
+                            <strong>Office:</strong> Pittsburgh, PA 15222
+                        </div>
+                    </div>
+                    <!-- Кнопка активирует класс кастомного модального окна -->
+                    <button class="btn-outline-msg" onclick="document.getElementById('ownerMessageModal').classList.add('active')">
+                        <svg style="width:16px; height:16px;" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span>Send a Message</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- КАК ЭТО РАБОТАЕТ -->
+    <div class="how-it-works">
+        <div class="container">
+            <h3 class="section-title">How It Works</h3>
+            <div class="steps-grid">
+                <div class="step-col">
+                    <div class="step-badge">1</div>
+                    <h6 class="step-title">Access Your Owner Portal</h6>
+                    <p class="step-text">View statements, documents, and updates related to your property.</p>
+                </div>
+                <div class="col-md-1 d-none d-md-flex align-items-center justify-content-center text-muted opacity-50"></div>
+                <div class="step-col">
+                    <div class="step-badge">2</div>
+                    <h6 class="step-title">Track Your Investment</h6>
+                    <p class="step-text">Monitor your property's performance with real-time updates.</p>
+                </div>
+                <div class="col-md-1 d-none d-md-flex align-items-center justify-content-center text-muted opacity-50"></div>
+                <div class="step-col">
+                    <div class="step-badge">3</div>
+                    <h6 class="step-title">Need Assistance?</h6>
+                    <p class="step-text">Your property manager is just a message or phone call away.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО С ФОРМОЙ ОБРАТНОЙ СВЯЗЬЮ (Связано с ContactDto) -->
+    <div class="custom-modal" id="ownerMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Send Message to Manager</h5>
+                <button class="close-btn" onclick="document.getElementById('ownerMessageModal').classList.remove('active')">&times;</button>
+            </div>
+            <!-- Форма отправляет POST-запрос на ваш эндпоинт и мапится на переданный рекордовый ContactDto -->
+            <form th:action="@{/homeowners/message}" th:object="${contactDto}" method="POST">
+
+                <!-- Скрытые поля для передачи системных Enum-параметров, которые вы заложили в ModelAndView -->
+                <input type="hidden" th:field="*{contactType}" />
+                <input type="hidden" th:field="*{contactStatus}" />
+
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="John Doe" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" th:field="*{email}" class="form-control" placeholder="johndoe@example.com" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" th:field="*{phone}" class="form-control" placeholder="(412) 555-0199" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea th:field="*{message}" class="form-control" rows="4" placeholder="How can we help you?" required="required"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-light" onclick="document.getElementById('ownerMessageModal').classList.remove('active')">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- БЛОК УВЕДОМЛЕНИЯ ОБ УСПЕШНОЙ ОТПРАВКЕ -->
+    <div th:if="${successMessage}" id="successToast"
+         style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                background-color: #0F3D23; color: #FFFFFF; padding: 16px 30px;
+                border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                z-index: 2000; font-weight: 600; font-size: 0.95rem;
+                display: flex; align-items: center; gap: 10px;
+                animation: fadeInDown 0.4s ease, fadeOutUp 0.4s ease 3.6s forwards;">
+        <svg style="width:20px; height:20px; fill:currentColor;" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <span th:text="${successMessage}">Thank you for your message!</span>
+    </div>
+
+    <!-- ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ АНИМАЦИИ ВСПЛЫТИЯ (Добавьте к вашим стилям) -->
+    <style>
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -40px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        @keyframes fadeOutUp {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, -40px); display: none; }
+        }
+    </style>
+
+
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Berry Homes Property Management, LLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

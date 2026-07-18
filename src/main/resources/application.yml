@@ -2,23 +2,34 @@ spring:
   application:
     name: berryHomes
 
-
   servlet:
     multipart:
-      max-file-size: 15MB
-      max-request-size: 50MB
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 100MB
+      resolve-lazily: true
 
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:berryhomes}
+#    url: jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:berryhomes}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:berryhomes}
     username: ${DB_USERNAME:some}
     password: ${DB_PASSWORD:some}
     driver-class-name: org.postgresql.Driver
 
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  cache:
+    redis:
+      time-to-live: 60m
+      cache-null-values: false
+
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      # TODO убрать перед продакшеном!!!
-      ddl-auto: create-drop
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:
@@ -34,16 +45,28 @@ spring:
     cache: false
 
   mail:
-    host: ://gmail.com
-    port: 587
-    username: ${MAIL_USERNAME:email@yandex.ru}
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:email@gmail.ru}
     password: ${MAIL_PASSWORD:app-password}
     properties:
       mail:
         smtp:
           auth: true
           starttls:
-            enable: true
+            enable: ${MAIL_STARTTLS:false}
+
+#    host: smtp.gmail.com
+ #   port: 587
+    # TODO ввести актуальные данные!!!
+  #  username: ${MAIL_USERNAME:email@gmail.ru}
+   # password: ${MAIL_PASSWORD:app-password}
+    #properties:
+     # mail:
+      #  smtp:
+       #   auth: true
+        #  starttls:
+         #   enable: true
 
 logging:
   file:
@@ -59,6 +82,10 @@ logging:
       max-file-size: 10MB
       max-history: 30
       total-size-cap: 2GB
+
+server:
+  tomcat:
+    max-part-count: 50
 
 app:
   upload:

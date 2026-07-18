@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель | Проекты</title>
+    <link href="https://cloudflare.com" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 bg-dark min-vh-100 p-3 text-white">
+            <h4 class="mb-4">BerryHomes</h4>
+            <ul class="nav flex-column gap-2">
+                <li class="nav-item"><a class="nav-link text-white-50 px-3 py-2" href="/admin/contacts">📋 Контакты</a></li>
+                <li class="nav-item"><a class="nav-link text-white bg-primary rounded px-3 py-2" href="/admin/projects">🏗️ Проекты</a></li>
+            </ul>
+        </nav>
+
+        <main class="col-md-10 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Управление проектами</h2>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createProjectModal">+ Создать проект</button>
+            </div>
+
+            <div class="nav nav-tabs mb-4">
+                <a class="nav-link" th:classappend="${!isArchived} ? 'active fw-bold'" href="/admin/projects?archived=false">Активные</a>
+                <a class="nav-link" th:classappend="${isArchived} ? 'active fw-bold'" href="/admin/projects?archived=true">Архив</a>
+            </div>
+
+            <div class="card shadow-sm">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                    <tr>
+                        <th>UUID</th>
+                        <th>Название (RU / EN)</th>
+                        <th>Локация</th>
+                        <th class="text-end">Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="p : ${projectsPage.content}">
+                        <td class="font-monospace text-muted small" th:text="${p.id}"></td>
+                        <td>
+                            <strong th:text="${p.titleRu}"></strong><br>
+                            <span class="text-muted small" th:text="${p.titleEn}"></span>
+                        </td>
+                        <td th:text="${p.location}"></td>
+                        <td class="text-end">
+                            <form th:if="${!isArchived}" th:action="@{/admin/projects/archive}" method="post" class="d-inline">
+                                <input type="hidden" name="id" th:value="${p.id}">
+                                <button type="submit" class="btn btn-sm btn-outline-warning me-1">В архив</button>
+                            </form>
+                            <form th:action="@{/admin/projects/delete}" method="post" class="d-inline" onsubmit="return confirm('Удалить?')">
+                                <input type="hidden" name="id" th:value="${p.id}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Модал создания проекта с загрузкой файлов -->
+<div class="modal fade" id="createProjectModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <form th:action="@{/admin/projects/create}" method="post" enctype="multipart/form-data" class="modal-content">
+            <div class="modal-header"><h5>Новый проект</h5></div>
+            <div class="modal-bodyrow g-3">
+                <div class="col-md-6 mb-2"><label class="form-label">Название (RU)</label><input type="text" name="titleRu" class="form-control" required></div>
+                <div class="col-md-6 mb-2"><label class="form-label">Название (EN)</label><input type="text" name="titleEn" class="form-control" required></div>
+                <div class="col-md-6 mb-2"><label class="form-label">Краткое описание (RU)</label><input type="text" name="shortDescRu" class="form-control" required></div>
+                <div class="col-md-6 mb-2"><label class="form-label">Краткое описание (EN)</label><input type="text" name="shortDescEn" class="form-control" required></div>
+                <div class="col-12 mb-2"><label class="form-label">Локация</label><input type="text" name="location" class="form-control" required></div>
+
+                <!-- Файлы -->
+                <div class="col-12 mb-2"><label class="form-label">Файл отчета (PDF/Doc)</label><input type="file" name="reportFile" class="form-control"></div>
+                <div class="col-12 mb-2"><label class="form-label">Изображения проекта (можно несколько)</label><input type="file" name="images" class="form-control" multiple></div>
+
+                <hr>
+                <h6>Документы проекта</h6>
+                <div class="col-md-4"><input type="text" name="docTitlesRu" class="form-control" placeholder="Название дока (RU)"></div>
+                <div class="col-md-4"><input type="text" name="docTitlesEn" class="form-control" placeholder="Название дока (EN)"></div>
+                <div class="col-md-4"><input type="file" name="docs" class="form-control"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="submit" class="btn btn-success">Создать проект</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="https://jsdelivr.net"></script>
+</body>
+</html>

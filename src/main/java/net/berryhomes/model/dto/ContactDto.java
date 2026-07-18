@@ -3,12 +3,14 @@ package net.berryhomes.model.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 import net.berryhomes.model.ContactStatus;
 import net.berryhomes.model.ContactType;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+@Builder
 public record ContactDto(
 
         UUID id,
@@ -26,17 +28,14 @@ public record ContactDto(
         @Size(min = 3, max = 30)
         String phone,
 
-        @NotBlank
-        @Size(max = 20)
         ContactType contactType,
 
-        @NotBlank
-        @Size(max = 20)
         ContactStatus contactStatus,
 
         @NotBlank
         @Size(min = 5)
         String message,
+
         ZonedDateTime createdAt
 ) {
 }

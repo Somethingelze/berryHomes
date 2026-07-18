@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({ProjectNotFoundException.class, ProjectFileNotFoundException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ModelAndView handleProjectNotFoundException(RuntimeException ex) {
-        log.warn("Resource not found: {}", ex.getMessage());
+        log.warn("Resource not found: ", ex);
         ModelAndView mav = new ModelAndView("error/404");
         mav.addObject("message", ex.getMessage());
         return mav;
@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ContactAlreadyExistException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ModelAndView handleContactAlreadyExistException(RuntimeException ex) {
-        log.warn("Contact already exist: {}", ex.getMessage());
+        log.warn("Contact already exist: ", ex);
         ModelAndView mav = new ModelAndView("error/400");
         mav.addObject("message", ex.getMessage());
         return mav;
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ModelAndView handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        log.warn("Invalid arguments: {}", ex.getMessage());
+        log.warn("Invalid arguments: ", ex);
         ModelAndView mav = new ModelAndView("error/400");
         mav.addObject("message", ex.getMessage());
         return mav;
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ModelAndView handleDataIntegrityViolationExceptionException(DataIntegrityViolationException ex) {
-        log.warn("Integrity violation: {}", ex.getMessage());
+        log.warn("Integrity violation: ", ex);
         ModelAndView mav = new ModelAndView("error/400");
         mav.addObject("message", ex.getMessage());
         return mav;
@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({NoHandlerFoundException.class, HttpRequestMethodNotSupportedException.class})
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ModelAndView handleNoHandlerFoundExceptionException(Exception ex) {
-        log.warn("Page not found: {}", ex.getMessage());
+        log.warn("Page not found: ", ex);
         ModelAndView mav = new ModelAndView("error/404");
         mav.addObject("message", ex.getMessage());
         return mav;
@@ -71,7 +71,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     @ResponseStatus(HttpStatus.PAYLOAD_TOO_LARGE)
     public ModelAndView handleMaxSizeException(org.springframework.web.multipart.MaxUploadSizeExceededException ex) {
-        log.warn("Size limit exceeded: {}", ex.getMessage());
+        log.warn("Size limit exceeded: ", ex);
         ModelAndView mav = new ModelAndView("error/400");
         mav.addObject("message", "The uploaded file is too large. Maximum size allowed is 15MB.");
         return mav;
@@ -79,13 +79,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = IOException.class)
     public ModelAndView handleIOException(IOException ex) {
-        log.error("IO Exception: {}", ex.getMessage());
+        log.error("IO Exception: ", ex);
         return new ModelAndView("error/500");
     }
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView handleException(Exception ex) {
-        log.error("Exception: {}", ex.getMessage());
+        log.error("Exception: ", ex);
         return new ModelAndView("error/500");
     }
 }

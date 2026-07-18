@@ -1,0 +1,227 @@
+/* Базовые стили админки */
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1A202C;
+    background-color: #F7FAFC;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Макет: Боковая панель и Основной контент */
+.admin-sidebar {
+    width: 260px;
+    background-color: #0F291B;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    box-sizing: border-box;
+}
+
+.sidebar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0 25px 30px 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: 0.5px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 12px 25px;
+    color: #A0AEC0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.sidebar-menu a:hover, .sidebar-menu a.active {
+    color: #FFFFFF;
+    background-color: rgba(255,255,255,0.05);
+    border-left: 4px solid #16A34A;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* Компоненты контента */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Панель поиска */
+.search-bar-box {
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 25px;
+}
+
+.search-form {
+    display: flex;
+    gap: 15px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.btn-admin {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-admin-danger {
+    background-color: #E53E3E;
+    color: #FFFFFF;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Таблица данных */
+.table-responsive {
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.admin-table th {
+    background-color: #F8F9FA;
+    color: #718096;
+    font-weight: 600;
+    padding: 15px 20px;
+    border-bottom: 1px solid #E2E8F0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.admin-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid #E2E8F0;
+    vertical-align: top;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.contact-meta-info {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-top: 4px;
+}
+
+.message-text-cell {
+    max-width: 300px;
+    white-space: pre-line;
+    color: #4A5568;
+    line-height: 1.5;
+}
+
+/* Бейджи статусов и типов */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.badge-tenant { background-color: #FDF2F5; color: #B8255F; }
+.badge-owner { background-color: #F0FDF4; color: #16A34A; }
+.badge-investor { background-color: #F0F5FF; color: #4F46E5; }
+
+.status-select {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid #CBD5E1;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: #FFFFFF;
+}
+
+/* Управление пагинацией */
+.pagination-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+}
+
+.pagination-links {
+    display: flex;
+    gap: 8px;
+}
+
+.pagination-links a {
+    display: block;
+    padding: 8px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 4px;
+    color: #4A5568;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pagination-links a.active {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    border-color: #16A34A;
+}
+
+.pagination-links a.disabled {
+    color: #A0AEC0;
+    pointer-events: none;
+    background-color: #EDF2F7;
+}

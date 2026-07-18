@@ -17,7 +17,7 @@ public class LoggingAspect {
     public Object logEverything(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
-        log.debug(">>> Entering [{}]. Arguments: {}", methodName, Arrays.toString(args));
+        log.info(">>> Entering [{}]. Arguments: {}", methodName, Arrays.toString(args));
 
         Object result;
         try {
@@ -27,7 +27,7 @@ public class LoggingAspect {
             throw e;
         }
 
-        log.debug("<<< Exiting [{}]. Result: {}", methodName, result);
+        log.info("<<< Exiting [{}]. Result: {}", methodName, result);
         return result;
     }
 }

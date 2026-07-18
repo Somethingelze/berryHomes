@@ -1,0 +1,278 @@
+/* Базовые сбросы и общая структура */
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1A202C;
+    background-color: #F7FAFC;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+.admin-sidebar {
+    width: 260px;
+    background-color: #0F291B;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    box-sizing: border-box;
+}
+
+.sidebar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0 25px 30px 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: 0.5px;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 12px 25px;
+    color: #A0AEC0;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+.sidebar-menu a:hover, .sidebar-menu a.active {
+    color: #FFFFFF;
+    background-color: rgba(255,255,255,0.05);
+    border-left: 4px solid #16A34A;
+}
+
+.admin-content {
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* Заголовок страницы и кнопки действий */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Кнопки */
+.btn-create-project {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-create-project:hover {
+    background-color: #15803D;
+}
+
+.btn-table-action {
+    background: #EDF2F7;
+    border: 1px solid #E2E8F0;
+    color: #4A5568;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+.btn-table-action:hover {
+    background: #E2E8F0;
+    color: #1A202C;
+}
+
+.btn-table-danger {
+    background-color: #FFF5F5;
+    border: 1px solid #FED7D7;
+    color: #C53030;
+}
+
+.btn-table-danger:hover {
+    background-color: #FED7D7;
+    color: #9B2C2C;
+}
+
+/* Вкладки состояния (Active / Archived) */
+.archive-tabs-container {
+    display: flex;
+    gap: 5px;
+    border-bottom: 2px solid #E2E8F0;
+    margin-bottom: 25px;
+}
+
+.archive-tab-link {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #718096;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.archive-tab-link.active {
+    color: #0F291B;
+    border-bottom-color: #16A34A;
+}
+
+/* Табличная сетка проектов */
+.table-card-wrapper {
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.projects-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.projects-admin-table th {
+    background-color: #F8F9FA;
+    color: #718096;
+    font-weight: 600;
+    padding: 15px 20px;
+    border-bottom: 1px solid #E2E8F0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.projects-admin-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #E2E8F0;
+    vertical-align: middle;
+}
+
+.projects-admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Элементы внутри ячеек */
+.table-project-preview {
+    width: 60px;
+    height: 45px;
+    background-color: #EDF2F7;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #E2E8F0;
+}
+
+.p-title-text {
+    font-weight: 700;
+    color: #2D3748;
+}
+
+.p-sub-text {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-top: 2px;
+}
+
+.status-badge-inline {
+    display: inline-block;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 4px;
+    text-transform: uppercase;
+    background-color: #E2E8F0;
+    color: #4A5568;
+}
+
+.status-badge-inline.soon { background-color: #FEFCBF; color: #B7791F; }
+.status-badge-inline.rented { background-color: #C6F6D5; color: #22543D; }
+.status-badge-inline.renovation { background-color: #EBF8FF; color: #2B6CB0; }
+
+.finance-mini-grid {
+    display: grid;
+    grid-template-cols: repeat(2, 1fr);
+    gap: 4px 15px;
+    font-size: 0.8rem;
+    color: #4A5568;
+    max-width: 240px;
+}
+
+.finance-mini-grid span strong {
+    color: #1A202C;
+}
+
+/* Пагинация */
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #FFFFFF;
+    border-top: 1px solid #E2E8F0;
+}
+
+.pagination-nav {
+    display: flex;
+    gap: 6px;
+}
+
+.pagination-nav a {
+    display: block;
+    padding: 8px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 4px;
+    color: #4A5568;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pagination-nav a.active {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    border-color: #16A34A;
+}
+
+.pagination-nav a.disabled {
+    color: #A0AEC0;
+    pointer-events: none;
+    background-color: #EDF2F7;
+}
+
+/* Уведомления */
+.alert-success {
+    background-color: #C6F6D5;
+    color: #22543D;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}

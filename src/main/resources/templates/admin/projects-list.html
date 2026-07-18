@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: Investment Projects - Berry Homes</title>
+    <!-- Подключаем стили по вашему точному новому пути -->
+    <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}" />
+</head>
+<body>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            BERRY HOMES
+        </div>
+        <ul class="sidebar-menu">
+            <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/admin/contacts}">Contacts / Leads</a></li>
+            <li><a th:href="@{/admin/projects}" class="active">Investment Projects</a></li>
+            <li><a th:href="@{/admin/settings}">System Settings</a></li>
+            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a></li>
+        </ul>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ АДМИНКИ -->
+    <div class="admin-content">
+
+        <div class="page-header">
+            <h1 class="page-title" th:text="${isArchiveView} ? 'Archived Investment Projects' : 'Active Investment Projects'">Investment Projects</h1>
+            <a th:href="@{/admin/projects/create}" class="btn-create-project" th:if="${!isArchiveView}">
+                <span>+ Create New Project</span>
+            </a>
+        </div>
+
+        <!-- УВЕДОМЛЕНИЕ ОБ УСПЕШНОМ ДЕЙСТВИИ -->
+        <div th:if="${successMessage}" class="alert-success" th:text="${successMessage}">
+            Action completed successfully!
+        </div>
+
+        <!-- ВКЛАДКИ СОСТОЯНИЯ ПРОЕКТОВ (Active / Archived) -->
+        <div class="archive-tabs-container">
+            <a th:href="@{/admin/projects}" class="archive-tab-link" th:classappend="${!isArchiveView} ? 'active' : ''">
+                Active Projects
+            </a>
+            <a th:href="@{/admin/projects/archived}" class="archive-tab-link" th:classappend="${isArchiveView} ? 'active' : ''">
+                Archived Projects
+            </a>
+        </div>
+
+        <!-- НАЧАЛО ТАБЛИЦЫ УПРАВЛЕНИЯ -->
+        <div class="table-card-wrapper">
+            <table class="projects-admin-table">
+                <thead>
+                <tr>
+                    <th>Preview</th>
+                    <th>Property Details</th>
+                    <th>Key Financials</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <!-- Если список проектов пуст -->
+                <tr th:if="${#lists.isEmpty(projectPage.content)}">
+                    <td colspan="4" style="text-align: center; color: #718096; padding: 40px;">
+                        No investment projects found in this view.
+                    </td>
+                </tr>
+
+                <!-- Цикл итерации по списку ProjectDto из Postgres -->
+                <tr th:unless="${#lists.isEmpty(projectPage.content)}" th:each="project : ${projectPage.content}">
+
+                    <!-- 1. Превью обложки (Вызов метода getFirstImageUrl() из рекорда) -->
+                    <td>
+                        <img th:if="${project.getFirstImageUrl() != ''}" th:src="${project.getFirstImageUrl()}" class="table-project-preview" alt="Preview" />
+                        <div th:if="${project.getFirstImageUrl() == ''}" class="table-project-preview" style="display:flex; align-items:center; justify-content:center; font-size:1.1rem;">🏠</div>
+                    </td>
+
+                    <!-- 2. Адрес и локация (Город / Индекс) -->
+                    <td>
+                        <div class="p-title-text" th:text="${project.address()}">123 Main St</div>
+                        <div class="p-sub-text" th:text="${project.cityZip()}">Pittsburgh, PA 15210</div>
+                        <div class="p-sub-text" style="font-size: 0.75rem;" th:text="'ID: ' + ${project.id()}">UUID</div>
+                    </td>
+
+                    <!-- 3. Сетка ключевых финансовых показателей из базы данных -->
+                    <td>
+                        <div class="finance-mini-grid">
+                            <span>Price: <strong th:text="${project.purchasePrice()}">$0</strong></span>
+                            <span>Rent: <strong th:text="${project.monthlyRent()}">$0</strong></span>
+                            <span>CoC: <strong style="color:#16A34A;" th:text="${project.cashOnCashReturn()}">0%</strong></span>
+                            <span>Payback: <strong th:text="${project.estPayback()}">0 yrs</strong></span>
+                        </div>
+                    </td>
+
+                    <!-- 4. Кнопки действий CRUD с отправкой UUID на бэкенд -->
+                    <td>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <!-- Кнопка Редактирования (Активна только для неархивных проектов) -->
+                            <a th:href="@{/admin/projects/{id}/edit(id=${project.id()})}" class="btn-table-action" th:if="${!isArchiveView}">
+                                Edit / Media
+                            </a>
+
+                            <!-- Форма Архивации (Мягкое удаление POST) -->
+                            <form th:action="@{/admin/projects/{id}/archive(id=${project.id()})}" method="post" style="margin:0;" th:if="${!isArchiveView}"
+                                  onsubmit="return confirm('Are you sure you want to archive this project? It will be hidden from the public website.');">
+                                <button type="submit" class="btn-table-action btn-table-danger">Archive</button>
+                            </form>
+
+                            <!-- Форма Восстановления из архива (POST) -->
+                            <form th:action="@{/admin/projects/{id}/restore(id=${project.id()})}" method="post" style="margin:0;" th:if="${isArchiveView}">
+                                <button type="submit" class="btn-table-action" style="background-color:#E6FFFA; color:#047481; border-color:#B2F5EA;">Restore</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- БЛОК ПАГИНАЦИИ (SPRING DATA PAGE) -->
+            <div class="pagination-container" th:if="${projectPage.totalPages > 1}">
+                <div style="color: #718096; font-size: 0.85rem;"
+                     th:text="'Page ' + (${projectPage.number} + 1) + ' of ' + ${projectPage.totalPages}">
+                    Page 1 of 1
+                </div>
+                <div class="pagination-nav">
+                    <!-- Ссылка "Назад" -->
+                    <a th:href="@{/admin/projects(page=${projectPage.number - 1})}"
+                       th:if="${!isArchiveView}" th:classappend="${projectPage.hasPrevious() ? '' : 'disabled'}">&larr; Previous</a>
+                    <a th:href="@{/admin/projects/archived(page=${projectPage.number - 1})}"
+                       th:if="${isArchiveView}" th:classappend="${projectPage.hasPrevious() ? '' : 'disabled'}">&larr; Previous</a>
+
+                    <!-- Цифровые страницы -->
+                    <a th:each="i : ${#numbers.sequence(0, projectPage.totalPages - 1)}"
+                       th:href="${isArchiveView} ? @{/admin/projects/archived(page=${i})} : @{/admin/projects(page=${i})}"
+                       th:text="${i + 1}" th:classappend="${i == projectPage.number ? 'active' : ''}">1</a>
+
+                    <!-- Ссылка "Вперед" -->
+                    <a th:href="@{/admin/projects(page=${projectPage.number + 1})}"
+                       th:if="${!isArchiveView}" th:classappend="${projectPage.hasNext() ? '' : 'disabled'}">Next &rarr;</a>
+                    <a th:href="@{/admin/projects/archived(page=${projectPage.number + 1})}"
+                       th:if="${isArchiveView}" th:classappend="${projectPage.hasNext() ? '' : 'disabled'}">Next &rarr;</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

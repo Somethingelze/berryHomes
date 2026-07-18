@@ -3,6 +3,7 @@ package net.berryhomes.model.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,49 +14,55 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
-@Table(name = "projects", schema = "berryhomes")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "projects", schema = "berryhomes")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "title_ru", nullable = false)
-    private String titleRu;
+    @Column(name = "address", nullable = false, length = 255)
+    private String address;
 
-    @Column(name = "title_en", nullable = false)
-    private String titleEn;
+    @Column(name = "city_zip", nullable = false, length = 100)
+    private String cityZip;
 
-    @Column(name = "short_desc_ru", columnDefinition = "TEXT")
-    private String shortDescRu;
+    @Column(name = "purchase_price", length = 50)
+    private String purchasePrice;
 
-    @Column(name = "short_desc_en", columnDefinition = "TEXT")
-    private String shortDescEn;
+    @Column(name = "monthly_rent", length = 50)
+    private String monthlyRent;
 
-    @Column(name = "desc_ru", columnDefinition = "TEXT")
-    private String descRu;
+    @Column(name = "renovation_budget", length = 50)
+    private String renovationBudget;
 
-    @Column(name = "desc_en", columnDefinition = "TEXT")
-    private String descEn;
+    @Column(name = "est_noi_annual", length = 50)
+    private String estNoiAnnual;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "total_investment", length = 50)
+    private String totalInvestment;
 
-    @Column(name = "report_file_path", length = 550)
-    private String reportFilePath;
+    @Column(name = "cash_on_cash_return", length = 50)
+    private String cashOnCashReturn;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "est_payback", length = 50)
+    private String estPayback;
+
+    @ColumnDefault("CURRENT_TIMESTAMP")
+    @Column(name = "created_at", nullable = false)
     private ZonedDateTime createdAt;
 
     @Column(name = "updated_at")
@@ -64,14 +71,9 @@ public class Project {
     @Column(name = "deleted_at")
     private ZonedDateTime deletedAt;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ProjectImage> projectImages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ProjectDocument> projectDocuments = new ArrayList<>();
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = ZonedDateTime.now();
-    }
 }

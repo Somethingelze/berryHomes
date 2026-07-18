@@ -1,0 +1,114 @@
+name: berryhomes
+
+volumes:
+  pg_berryhomes_data:
+  red_berryhomes_data:
+  grafana_data:
+  berryhomes_uploads:
+
+networks:
+  berryhomes_net:
+    driver: bridge
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    networks: [ berryhomes_net ]
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+    restart: always
+    volumes:
+      - red_berryhomes_data:/data
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: pg
+    networks: [ berryhomes_net ]
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - pg_berryhomes_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U some -d berryhomes" ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  berryhomes-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: berryhomes
+    networks: [ berryhomes_net ]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    volumes:
+      - berryhomes_uploads:/app/uploads
+
+  # TODO заменить перед настройкой реальной почты
+  mailpit:
+    image: axllent/mailpit:v1.23.0
+    container_name: berryhomes-mailpit
+    networks: [ berryhomes_net ]
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    restart: always
+
+  #------------------
+  #  GLK
+  #__________________
+  grafana:
+    image: grafana/grafana:11.6.16
+    container_name: berryhomes-grafana
+    networks: [ berryhomes_net ]
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+    env_file:
+      - .env
+    depends_on:
+      - loki
+
+  loki:
+    image: grafana/loki:3.3.2
+    container_name: berryhomes-loki
+    networks: [ berryhomes_net ]
+    volumes:
+      - ./infra/loki/local-config.yaml:/etc/loki/local-config.yaml:ro
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:3.3.2
+    container_name: berryhomes-promtail
+    networks: [ berryhomes_net ]
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./infra/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: -config.file=/etc/promtail/config.yml
+    depends_on:
+      - loki

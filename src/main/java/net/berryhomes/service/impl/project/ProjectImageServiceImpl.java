@@ -1,4 +1,4 @@
-package net.berryhomes.service.impl;
+package net.berryhomes.service.impl.project;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

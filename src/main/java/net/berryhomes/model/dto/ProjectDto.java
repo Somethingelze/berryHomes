@@ -4,46 +4,52 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
+import java.io.Serial;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Builder
-public record ProjectDto(
 
+public record ProjectDto(
         UUID id,
 
-        @NotBlank(message = "Title in Russian is required")
-        @Size(max = 255, message = "Title cannot exceed 255 characters")
-        String titleRu,
+        @NotBlank @Size(max = 255)
+        String address,
+        @NotBlank @Size(max = 100)
+        String cityZip,
 
-        @NotBlank(message = "Title in English is required")
-        @Size(max = 255, message = "Title cannot exceed 255 characters")
-        String titleEn,
-
-        @NotBlank(message = "Short in russian is required")
-        String shortDescRu,
-
-        @NotBlank(message = "Short description in English is required")
-        String shortDescEn,
-
-        String descRu,
-
-        String descEn,
-
-        @NotBlank
-        String location,
-
-        String reportFilePath,
-
+        String purchasePrice,
+        String monthlyRent,
+        String renovationBudget,
+        String estNoiAnnual,
+        String totalInvestment,
+        String cashOnCashReturn,
+        String estPayback,
         ZonedDateTime createdAt,
-
         ZonedDateTime updatedAt,
-
         ZonedDateTime deletedAt,
-
-        List<ProjectImageDto> images,
-
+        List<ProjectImageDto> projectImages,
         List<ProjectDocumentDto> projectDocuments
-) {
+) implements java.io.Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+    public String getFirstImageUrl() {
+        if (projectImages != null && !projectImages.isEmpty()) {
+            return projectImages.getFirst().filePath();
+        }
+        return "";
+    }
+
+    public String getReportPdfUrl() {
+        if (projectDocuments != null) {
+            return projectDocuments.stream()
+                    .map(ProjectDocumentDto::filePath)
+                    .filter(s -> s.endsWith(".pdf"))
+                    .findFirst()
+                    .orElse("#");
+        }
+        return "#";
+    }
 }

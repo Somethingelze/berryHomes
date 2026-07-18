@@ -3,7 +3,7 @@ package net.berryhomes.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;
-import net.berryhomes.config.EmailConfig;
+import net.berryhomes.exception.business.ContactNotFoundException;
 import net.berryhomes.mapper.ContactMapper;
 import net.berryhomes.model.ContactStatus;
 import net.berryhomes.model.dto.ContactDto;
@@ -12,10 +12,10 @@ import net.berryhomes.repository.ContactRepository;
 import net.berryhomes.service.ContactService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Service
@@ -26,8 +26,6 @@ public class ContactServiceImpl implements ContactService {
 
     private final ContactRepository contactRepository;
     private final ContactMapper contactMapper;
-    private final JavaMailSender javaMailSender;
-    private final EmailConfig emailConfig;
     private final MailService mailService;
 
     @Override
@@ -36,20 +34,31 @@ public class ContactServiceImpl implements ContactService {
         log.info("Processing new contact request from email: {}", contactDto.email());
 
         Contact contact = contactMapper.toEntity(contactDto);
-
+        contact.setCreatedAt(ZonedDateTime.now());
         contact.setContactStatus(ContactStatus.NEW);
-
         Contact savedContact = contactRepository.save(contact);
+        mailService.sendContactEmail(contactMapper.toDto(savedContact));
+
         log.info("Successfully saved contact with generated ID: {}", savedContact.getId());
 
         return contactMapper.toDto(savedContact);
     }
 
     @Override
+    public ContactDto getById(UUID id, Pageable pageable) {
+        Contact contact = contactRepository.findById(id)
+                .orElseThrow(() -> new ContactNotFoundException("Contact with id " + id + "was not found"));
+        return contactMapper.toDto(contact);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Page<ContactDto> getByName(String name, Pageable pageable) {
         log.info("Fetching page of contacts by name: {}", name);
-        return contactRepository.findAllByName(name, pageable)
+        return contactRepository.findAllByNameContainingIgnoreCase(name, pageable).orElseThrow(() ->    {
+            log.info("No contact with name {} was found", name);
+            return new ContactNotFoundException("No contact with name " + name);
+        })
                 .map(contactMapper::toDto);
     }
 
@@ -57,7 +66,10 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Page<ContactDto> getByEmail(String email, Pageable pageable) {
         log.info("Fetching page of contacts by email: {}", email);
-        return contactRepository.findAllByEmail(email, pageable)
+        return contactRepository.findAllByEmailContainingIgnoreCase(email, pageable).orElseThrow(() -> {
+            log.info("No contact found with email: {}", email);
+            throw new ContactNotFoundException("Contact with email " + email + " was not found");
+        })
                 .map(contactMapper::toDto);
     }
 
@@ -65,7 +77,10 @@ public class ContactServiceImpl implements ContactService {
     @Transactional(readOnly = true)
     public Page<ContactDto> getByPhone(String phone, Pageable pageable) {
         log.info("Fetching page of contacts by phone: {}", phone);
-        return contactRepository.findAllByPhone(phone, pageable)
+        return contactRepository.findAllByPhoneContainingIgnoreCase(phone, pageable).orElseThrow(() -> {
+            log.info("No contact found with phone: {}", phone);
+            throw new ContactNotFoundException("Contact with phone " + phone + " was not found");
+        })
                 .map(contactMapper::toDto);
     }
 
@@ -76,16 +91,23 @@ public class ContactServiceImpl implements ContactService {
                 .map(contactMapper::toDto);
     }
 
+    @Transactional
+    @Override
+    public ContactDto updateContactStatus(UUID id, ContactStatus contactStatus)   {
+        log.info("Start updating contact by id: {} to status: {}", id, contactStatus);
+
+        Contact contact = contactRepository.findById(id).orElseThrow(() -> {
+            new ContactNotFoundException("Contact with id " + id + " was not found");
+            return new ContactNotFoundException("Contact with id " + id + " was not found");
+        });
+        contact.setContactStatus(contactStatus);
+        return contactMapper.toDto(contactRepository.save(contact));
+    }
+
     @Override
     @Transactional
     public void deleteContact(UUID id) {
         contactRepository.deleteById(id);
         log.info("Deleted contact with id: {}", id);
-    }
-
-    @Override
-    public ContactDto sendContactByEmail(ContactDto contactDto) {
-        mailService.sendContactEmail(contactDto);
-        return contactDto;
     }
 }

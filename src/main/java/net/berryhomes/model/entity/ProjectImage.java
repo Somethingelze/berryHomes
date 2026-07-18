@@ -29,6 +29,7 @@ public class ProjectImage {
     @Column(name = "file_path", nullable = false, length = 550)
     private String filePath;
 
+    @Builder.Default
     @Column(name = "sort_order")
     private Integer sortOrder = 0;
 }

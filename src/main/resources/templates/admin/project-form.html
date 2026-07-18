@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Admin: Project Editor - Berry Homes
+    </title>
+
+    <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/project-form.css}">
+</head>
+
+<body>
+
+<div class="admin-sidebar">
+
+    <div class="sidebar-brand">
+        BERRY HOMES
+    </div>
+
+    <ul class="sidebar-menu">
+
+        <li>
+            <a th:href="@{/admin/dashboard}">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/contacts}">
+                Contacts / Leads
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/projects}" class="active">
+                Investment Projects
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/admin/settings}">
+                System Settings
+            </a>
+        </li>
+
+        <li style="margin-top:auto;">
+            <a th:href="@{/logout}"
+               style="color:#FC8181;">
+                Logout ↩
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+<div class="admin-content">
+
+
+    <div class="page-header">
+
+        <h1 class="page-title"
+            th:text="${projectDto.id() == null}
+            ? 'Create Investment Project'
+            : 'Edit Project Details'">
+
+            Project Editor
+
+        </h1>
+
+    </div>
+
+
+
+    <!-- MAIN PROJECT FORM -->
+
+    <div class="form-card-box">
+
+
+        <form id="projectForm"
+              th:action="@{/admin/projects/save}"
+              th:object="${projectDto}"
+              method="post"
+              enctype="multipart/form-data">
+
+            <input type="hidden"
+                   th:field="*{id}"/>
+
+            <input type="hidden"
+                   th:field="*{createdAt}"/>
+
+            <input type="hidden"
+                   th:field="*{updatedAt}"/>
+
+            <input type="hidden"
+                   th:field="*{deletedAt}"/>
+
+
+
+            <div class="form-grid-row">
+
+
+                <div class="form-group-full">
+
+                    <label class="input-label-text">
+                        Property Address
+                    </label>
+
+                    <input type="text"
+                           th:field="*{address}"
+                           class="admin-input-field"
+                           required>
+
+                </div>
+
+
+
+                <div class="form-group-full">
+
+                    <label class="input-label-text">
+                        City & Zip Code
+                    </label>
+
+                    <input type="text"
+                           th:field="*{cityZip}"
+                           class="admin-input-field"
+                           required>
+
+                </div>
+
+
+
+                <div>
+
+                    <label class="input-label-text">
+                        Purchase Price
+                    </label>
+
+                    <input type="text"
+                           th:field="*{purchasePrice}"
+                           class="admin-input-field">
+
+                </div>
+
+
+
+                <div>
+
+                    <label class="input-label-text">
+                        Monthly Rent
+                    </label>
+
+                    <input type="text"
+                           th:field="*{monthlyRent}"
+                           class="admin-input-field">
+
+                </div>
+
+
+
+                <div>
+
+                    <label class="input-label-text">
+                        Renovation Budget
+                    </label>
+
+                    <input type="text"
+                           th:field="*{renovationBudget}"
+                           class="admin-input-field">
+
+                </div>
+
+
+
+                <div>
+
+                    <label class="input-label-text">
+                        Est. NOI Annual
+                    </label>
+
+                    <input type="text"
+                           th:field="*{estNoiAnnual}"
+                           class="admin-input-field">
+
+                </div>
+
+
+
+                <div>
+
+                    <label class="input-label-text">
+                        Total Investment
+                    </label>
+
+                    <input type="text"
+                           th:field="*{totalInvestment}"
+                           class="admin-input-field">
+
+                </div>
+
+
+
+                <div>
+
+                    <label class="input-label-text">
+                        Cash-on-Cash Return
+                    </label>
+
+                    <input type="text"
+                           th:field="*{cashOnCashReturn}"
+                           class="admin-input-field">
+
+                </div>
+
+
+
+                <div class="form-group-full">
+
+                    <label class="input-label-text">
+                        Est. Payback Period
+                    </label>
+
+                    <input type="text"
+                           th:field="*{estPayback}"
+                           class="admin-input-field">
+
+                </div>
+
+
+            </div>
+
+            <!-- MEDIA UPLOAD SECTION -->
+
+            <div class="media-management-section">
+
+                <h3 class="media-section-title">
+                    Upload Media & Attachments
+                </h3>
+
+
+                <div class="form-grid-row"
+                     style="
+                     background:#F8F9FA;
+                     padding:20px;
+                     border-radius:6px;
+                     border:1px solid #E2E8F0;">
+
+
+                    <div>
+
+                        <label class="input-label-text">
+                            Upload Gallery Images
+                        </label>
+
+
+                        <input type="file"
+                               name="images"
+                               accept="image/*"
+                               multiple
+                               class="admin-input-field"
+                               style="background:#fff;">
+
+
+                    </div>
+
+
+
+                    <div>
+
+                        <label class="input-label-text">
+                            Upload Financial Report (PDF)
+                        </label>
+
+
+                        <input type="file"
+                               name="document"
+                               accept="application/pdf"
+                               class="admin-input-field"
+                               style="background:#fff;">
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <!-- EXISTING IMAGES -->
+
+            <div th:if="${projectDto.id() != null}"
+                 style="margin-top:30px;">
+
+
+                <h4 class="input-label-text">
+                    Current Photo Gallery
+                </h4>
+
+
+
+                <p th:if="${projectDto.projectImages == null
+                         or #lists.isEmpty(projectDto.projectImages)}"
+                   style="color:#A0AEC0;">
+
+                    No images uploaded yet.
+
+                </p>
+
+
+
+                <div class="images-gallery-flex"
+                     th:if="${projectDto.projectImages != null}">
+
+
+                    <div class="uploaded-image-card"
+                         th:each="img : ${projectDto.projectImages}">
+
+
+                        <img th:src="${img.filePath()}"
+                             class="gallery-card-img"
+                             alt="Project image">
+
+
+
+                        <div class="gallery-card-actions">
+
+
+                            <span style="
+                            font-size:0.8rem;
+                            color:#718096;">
+
+                                Order:
+                                <span th:text="${img.sortOrder()}">
+                                    1
+                                </span>
+
+                            </span>
+
+
+
+                            <!-- DELETE IMAGE -->
+
+                            <form th:action="@{/admin/projects/media/image/{id}/delete(id=${img.id()})}"
+                                  method="post">
+
+
+                                <input type="hidden"
+                                       th:name="${_csrf.parameterName}"
+                                       th:value="${_csrf.token}">
+
+
+                                <input type="hidden"
+                                       name="projectId"
+                                       th:value="${projectDto.id()}">
+
+
+
+                                <button type="submit"
+                                        class="btn-media-delete"
+                                        onclick="return confirm('Delete this image?');">
+
+                                    Delete Photo
+
+                                </button>
+
+
+                            </form>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- EXISTING DOCUMENTS -->
+
+
+            <div th:if="${projectDto.id() != null}"
+                 style="margin-top:35px;">
+
+
+                <h4 class="input-label-text">
+
+                    Attached Reports & Documents
+
+                </h4>
+
+
+
+                <p th:if="${projectDto.projectDocuments == null
+                         or #lists.isEmpty(projectDto.projectDocuments)}"
+                   style="color:#A0AEC0;">
+
+                    No documents attached yet.
+
+                </p>
+
+
+
+
+
+                <ul class="attached-docs-list"
+                    th:if="${projectDto.projectDocuments != null}">
+
+
+                    <li class="doc-item-row"
+                        th:each="doc : ${projectDto.projectDocuments}">
+
+
+
+                        <div>
+
+                            <span style="
+                            margin-right:8px;
+                            color:#16A34A;">
+
+                                📋
+
+                            </span>
+
+
+
+                            <strong th:text="${doc.titleEn()}">
+
+                                Report Name
+
+                            </strong>
+
+
+                        </div>
+
+
+
+
+
+                        <!-- DELETE DOCUMENT -->
+
+
+                        <form th:action="@{/admin/projects/media/document/{id}/delete(id=${doc.id()})}"
+                              method="post">
+
+
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}">
+
+
+
+                            <input type="hidden"
+                                   name="projectId"
+                                   th:value="${projectDto.id()}">
+
+
+
+                            <button type="submit"
+                                    class="btn-media-delete"
+                                    onclick="return confirm('Remove this document?');">
+
+
+                                Remove Doc
+
+
+                            </button>
+
+
+                        </form>
+
+
+
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+
+            <!-- FORM ACTIONS -->
+
+            <div class="form-footer-actions">
+
+
+                <a th:href="@{/admin/projects}"
+                   class="btn-form-cancel">
+
+                    Cancel
+
+                </a>
+
+
+
+                <button type="submit"
+                        class="btn-form-save">
+
+                    Save Project
+
+                </button>
+
+
+            </div>
+
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+
+</body>
+
+</html>

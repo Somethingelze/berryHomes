@@ -1,0 +1,281 @@
+/* Базовые стили */
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #2D3748;
+    background-color: #FAFAFA;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Навигация */
+.navbar {
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 20px 0;
+}
+
+.navbar-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-text {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #198754;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.audience-tabs {
+    display: flex;
+    justify-content: center;
+    background: #FFFFFF;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.audience-tabs a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 18px 25px;
+    color: #718096;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.audience-tabs a.active-investor {
+    color: #0F291B;
+    border-bottom: 3px solid #0F291B;
+    background-color: #F8F9FA;
+}
+
+/* Герой-блок в глубоких темно-зеленых тонах */
+.hero-investor {
+    background-color: #0F291B;
+    color: #FFFFFF;
+    padding: 70px 0;
+    position: relative;
+}
+
+.hero-grid {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-left, .hero-right {
+    flex: 1;
+}
+
+.display-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.lead-text {
+    color: #CBD5E1;
+    font-size: 1.15rem;
+    margin: 0 0 30px 0;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary-gold {
+    background-color: #16A34A;
+    color: #FFFFFF;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.btn-outline-white {
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #FFFFFF;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.placeholder-hero-img {
+    width: 100%;
+    height: 260px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #CBD5E1;
+}
+
+/* Секция проектов из БД */
+.projects-section {
+    padding: 60px 0;
+    background: #F7FAFC;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    color: #1A202C;
+}
+
+.projects-grid {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.project-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    flex: 0 1 calc(33.333% - 20px);
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+}
+
+.project-img-box {
+    height: 200px;
+    background-color: #EDF2F7;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #A0AEC0;
+}
+
+.project-status-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #0F291B;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.project-body {
+    padding: 25px;
+}
+
+.project-address {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+    color: #1A202C;
+}
+
+.project-location {
+    font-size: 0.8rem;
+    color: #A0AEC0;
+    margin: 0 0 20px 0;
+}
+
+/* Таблица финансовых показателей в карточке */
+.finance-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.finance-table tr {
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.finance-table td {
+    padding: 8px 0;
+}
+
+.finance-label {
+    color: #718096;
+}
+
+.finance-value {
+    text-align: right;
+    font-weight: 700;
+    color: #2D3748;
+}
+
+.text-emerald {
+    color: #16A34A;
+}
+
+.project-footer-btns {
+    display: flex;
+    border-top: 1px solid #E2E8F0;
+    background: #F8F9FA;
+}
+
+.project-footer-btns a {
+    flex: 1;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #4A5568;
+}
+
+.project-footer-btns a:first-child {
+    border-end: 1px solid #E2E8F0;
+}
+
+.project-footer-btns a.btn-download {
+    color: #16A34A;
+}
+
+/* Модальное окно */
+.custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
+.custom-modal.active { display: flex; }
+.modal-content { background: #FFFFFF; border-radius: 12px; width: 100%; max-width: 480px; padding: 30px; box-sizing: border-box; position: relative; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #A0AEC0; }
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #4A5568; margin-bottom: 5px; }
+.form-control { width: 100%; padding: 10px; border: 1px solid #CBD5E1; border-radius: 6px; box-sizing: border-box; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+.btn-light { background: #EDF2F7; color: #4A5568; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+.btn-primary { background: #16A34A; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+
+footer { background: #0F291B; color: #94A3B8; padding: 30px 0; text-align: center; font-size: 0.85rem; }
+
+@media (max-width: 992px) {
+    .hero-grid, .section-header { flex-direction: column; text-align: center; gap: 30px; }
+    .hero-buttons { justify-content: center; }
+    .project-card { flex: 0 1 100%; width: 100%; }
+}

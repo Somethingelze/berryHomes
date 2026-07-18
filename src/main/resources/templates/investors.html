@@ -1,125 +1,186 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Portal - Berry Homes</title>
-    <!-- Проверенный рабочий стек стилей -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>For Investors - Berry Homes</title>
+    <!-- Подключаем вынесенные стили из статики -->
+    <link rel="stylesheet" th:href="@{/css/investors.css}" />
+    <style>
+        /* Стили анимации всплывающего Toast-уведомления "Thank you" */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translate(-50%, -40px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+        @keyframes fadeOutUp {
+            from { opacity: 1; transform: translate(-50%, 0); }
+            to { opacity: 0; transform: translate(-50%, -40px); display: none; }
+        }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans text-gray-800">
+<body>
 
-<!-- НАВИГАЦИЯ (ЕДИНООБРАЗНЫЙ СТИЛЬ) -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-        <a href="/" class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                <i class="bi bi-house-door-fill"></i>
-            </div>
-            <div>
-                <h1 class="text-xl font-black text-slate-900 tracking-wider">BERRY HOMES</h1>
-                <p class="text-xs text-emerald-600 uppercase tracking-widest font-semibold">Property Management</p>
-            </div>
-        </a>
-        <nav class="flex items-center gap-6 text-sm font-medium text-gray-600">
-            <a href="/" class="hover:text-emerald-600 transition">Home</a>
-            <a href="/tenants" class="hover:text-emerald-600 transition">Tenants</a>
-            <span class="text-gray-300">|</span>
-            <span class="text-emerald-600 font-bold flex items-center gap-1.5"><i class="bi bi-person-circle"></i> Investor Mode</span>
-        </nav>
-    </div>
-</header>
-
-<main class="max-w-7xl mx-auto px-4 py-10">
-    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
-    <div class="mb-10">
-        <h2 class="text-3xl font-serif font-bold text-slate-900 mb-2">Investment Opportunities</h2>
-        <p class="text-sm text-gray-500">Explore active real estate projects and access transparent financial performance metrics.</p>
+    <!-- УВЕДОМЛЕНИЕ "THANK YOU" ПОСЛЕ УСПЕШНОЙ ОТПРАВКИ -->
+    <div th:if="${successMessage}" id="successToast"
+         style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    background-color: #16A34A; color: #FFFFFF; padding: 16px 30px;
+                    border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                    z-index: 2000; font-weight: 600; font-size: 0.95rem;
+                    display: flex; align-items: center; gap: 10px;
+                    animation: fadeInDown 0.4s ease, fadeOutUp 0.4s ease 3.6s forwards;">
+        <svg style="width:20px; height:20px; fill:currentColor;" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <span th:text="${successMessage}">Thank you for your message!</span>
     </div>
 
-    <!-- КАТАЛОГ КАРТОЧЕК ИЗ БД (ЦИКЛ THYMELEAF) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
+    <!-- НАВИГАЦИЯ -->
+    <div class="navbar">
+        <div class="container navbar-flex">
+            <div class="brand-block">
+                <a href="/" class="brand-text">BERRY HOMES</a>
+            </div>
+            <div class="top-nav-meta">
+                <span>📞 <a href="tel:4125550123" class="clickable-phone" style="color:#2D3748; text-decoration:none; font-weight:600;">(412) 555-0123</a></span>
+                <span>📍 Pittsburgh, PA</span>
+            </div>
+        </div>
+    </div>
 
-        <!-- Инструкция th:each запускает цикл по контенту страницы Page.
-             Она создаст столько карточек, сколько проектов сейчас лежит в базе. -->
-        <div th:each="project : ${projectsPage.content}" class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex flex-col justify-between hover:shadow-md transition">
-            <div>
-                <!-- Заглушка изображения проекта (если у проекта есть картинки, берем первую) -->
-                <div class="h-48 bg-slate-200 relative">
-                    <img th:if="${!project.images.isEmpty()}" th:src="@{'/uploads/' + ${project.images[0].filePath}}" class="w-full h-full object-cover" />
-                    <div th:if="${project.images.isEmpty()}" class="w-full h-full flex flex-col items-center justify-center text-slate-400 gap-2">
-                        <i class="bi bi-image text-3xl"></i>
-                        <span class="text-xs">No images available</span>
+    <!-- ПЕРЕКЛЮЧАТЕЛИ АУДИТОРИЙ -->
+    <div class="audience-tabs">
+        <a href="/tenants">For Tenants</a>
+        <a href="/homeowners">For Homeowners</a>
+        <a href="/investors" class="active-investor">For Investors</a>
+    </div>
+
+    <!-- ГЕРОЙ БЛОК -->
+    <div class="hero-investor">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <span style="color: #16A34A; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 10px;">FOR INVESTORS</span>
+                <h1 class="display-title">Know Before<br/>You Buy.</h1>
+                <p class="lead-text">Make informed decisions. Protect your investment.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn-primary-gold">View Investment Projects</a>
+                    <button class="btn-outline-white" style="background:transparent; cursor:pointer;" onclick="document.getElementById('investorMessageModal').classList.add('active')">Schedule Consultation</button>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="placeholder-hero-img">
+                    <span>🖼️ [Изображение фасада: investors-bg.png]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СЕКЦИЯ ДИНАМИЧЕСКИХ ПРОЕКТОВ ИЗ БД -->
+    <div class="projects-section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Recent Investment Projects</h2>
+            </div>
+
+            <div th:if="${#lists.isEmpty(projects)}" style="text-align: center; padding: 40px; color: #718096; background: #FFFFFF; border-radius: 8px; border: 1px solid #E2E8F0;">
+                No recent investment projects found.
+            </div>
+
+            <div th:unless="${#lists.isEmpty(projects)}" class="projects-grid">
+                <div th:each="project : ${projects}" class="project-card">
+                    <div>
+                        <div class="project-img-box">
+                            <span th:if="${project.getFirstImageUrl() == ''}">🏠 Property Image</span>
+                            <img th:if="${project.getFirstImageUrl() != ''}" th:src="${project.getFirstImageUrl()}" alt="Project Image" style="width:100%; height:100%; object-fit:cover;" />
+                        </div>
+
+                        <div class="project-body">
+                            <!-- Вывод полей строго по вашей сущности -->
+                            <h3 class="project-address" th:text="${project.address}">123 Main St</h3>
+                            <p class="project-location" th:text="${project.cityZip}">Pittsburgh, PA 15210</p>
+
+                            <table class="finance-table">
+                                <tr>
+                                    <td class="finance-label">Purchase Price</td>
+                                    <td class="finance-value" th:text="${project.purchasePrice}">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="finance-label">Monthly Rent</td>
+                                    <td class="finance-value" th:text="${project.monthlyRent}">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="finance-label">Renovation Budget</td>
+                                    <td class="finance-value" th:text="${project.renovationBudget}">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="finance-label">Est. NOI (Annual)</td>
+                                    <td class="finance-value" th:text="${project.estNoiAnnual}">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="finance-label">Total Investment</td>
+                                    <td class="finance-value" th:text="${project.totalInvestment}">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="finance-label">Cash-on-Cash Return</td>
+                                    <td class="finance-value text-emerald" th:text="${project.cashOnCashReturn}">0%</td>
+                                </tr>
+                                <tr>
+                                    <td class="finance-label">Est. Payback</td>
+                                    <td class="finance-value" th:text="${project.estPayback}">0 yrs</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <span class="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1 shadow">
-                            <i class="bi bi-geo-alt-fill"></i> <span th:text="${project.location}">Pittsburgh, PA</span>
-                        </span>
-                </div>
 
-                <!-- Текстовый контент карточки -->
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-slate-900 mb-2" th:text="${project.titleEn}">Project Title</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-4" th:text="${project.shortDescEn}">
-                        Short description of the property development or acquisition strategy.
-                    </p>
+                    <div class="project-footer-btns">
+                        <a th:href="@{/investors/projects/{id}(id=${project.id})}">View Project</a>
+                        <a th:href="${project.getReportPdfUrl()}" target="_blank" class="btn-download">Download Report ⬇️</a>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <!-- Кнопка скачивания PDF отчета, завязанная на наш FileStorageService -->
-            <div class="px-6 pb-6 pt-2 border-t border-slate-50">
-                <a th:href="@{'/uploads/' + ${project.reportFilePath}}" target="_blank"
-                   th:classappend="${project.reportFilePath == null} ? 'pointer-events-none bg-slate-100 text-slate-400' : 'bg-blue-50 text-blue-700 hover:bg-blue-100'"
-                   class="w-full inline-flex items-center justify-center gap-2 font-semibold px-4 py-2.5 rounded-lg transition text-sm">
-                    <i class="bi bi-file-earmark-pdf-fill"></i> Download Report (PDF)
-                </a>
+    <!-- МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ ДЛЯ ИНВЕСТОРОВ -->
+    <div class="custom-modal" id="investorMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="section-title" style="font-size:1.25rem; margin:0;">Schedule a Consultation</h5>
+                <button class="close-btn" onclick="document.getElementById('investorMessageModal').classList.remove('active')">&times;</button>
             </div>
+            <form th:action="@{/investors/message}" th:object="${contactDto}" method="POST">
+
+                <input type="hidden" th:field="*{contactType}" />
+
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="John Doe" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" th:field="*{email}" class="form-control" placeholder="johndoe@example.com" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" th:field="*{phone}" class="form-control" placeholder="(412) 555-0199" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message / Investment Goals</label>
+                    <textarea th:field="*{message}" class="form-control" rows="4" placeholder="Tell us about your portfolio goals..." required="required"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-light" onclick="document.getElementById('investorMessageModal').classList.remove('active')">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Request</button>
+                </div>
+            </form>
         </div>
-
     </div>
-    <!-- БЛОК ДИНАМИЧЕСКОЙ ПАГИНАЦИИ (THYMELEAF) -->
-    <!-- Отображается только в том случае, если страниц в базе больше, чем одна -->
-    <div th:if="${projectsPage.totalPages > 1}" class="flex items-center justify-center gap-2 mt-12">
 
-        <!-- Кнопка "Назад" (Предыдущая страница) -->
-        <a th:href="@{/investors(page=${projectsPage.number - 1}, size=${projectsPage.size})}"
-           th:classappend="${projectsPage.first} ? 'pointer-events-none opacity-40 bg-gray-100 text-gray-400' : 'bg-white text-gray-700 hover:bg-gray-50'"
-           class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 font-medium transition">
-            <i class="bi bi-chevron-left"></i>
-        </a>
-
-        <!-- Цикл по номерам страниц (от 0 до totalPages - 1) -->
-        <div th:each="pageNumber : ${#numbers.sequence(0, projectsPage.totalPages - 1)}">
-            <a th:href="@{/investors(page=${pageNumber}, size=${projectsPage.size})}"
-               th:text="${pageNumber + 1}"
-               th:classappend="${pageNumber == projectsPage.number} ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-white text-gray-700 hover:bg-gray-50 border-slate-200'"
-               class="inline-flex items-center justify-center w-10 h-10 rounded-lg border font-semibold transition">
-                1
-            </a>
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="container">
+            <p>© 2026 Berry Homes Property Management, LLC. All rights reserved.</p>
         </div>
-
-        <!-- Кнопка "Вперед" (Следующая страница) -->
-        <a th:href="@{/investors(page=${projectsPage.number + 1}, size=${projectsPage.size})}"
-           th:classappend="${projectsPage.last} ? 'pointer-events-none opacity-40 bg-gray-100 text-gray-400' : 'bg-white text-gray-700 hover:bg-gray-50'"
-           class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 font-medium transition">
-            <i class="bi bi-chevron-right"></i>
-        </a>
-
-    </div>
-
-    <!-- КРАЙНИЙ СЛУЧАЙ: ЕСЛИ В БАЗЕ ВООБЩЕ НЕТ ПРОЕКТОВ -->
-    <div th:if="${projectsPage.isEmpty()}" class="text-center py-16 bg-white rounded-xl shadow-sm border border-slate-100 max-w-md mx-auto mt-10">
-        <div class="text-5xl text-slate-300 mb-4"><i class="bi bi-folder-x"></i></div>
-        <h4 class="text-lg font-bold text-slate-800 mb-1">No Projects Found</h4>
-        <p class="text-sm text-gray-400 px-6">Active investment opportunities are not available at the moment. Please check back later or contact admin.</p>
-    </div>
-
-</main>
-
-<!-- ПОДВАЛ -->
-<footer class="text-center py-8 text-xs text-gray-400 border-t border-slate-200 mt-20 bg-white">
-    &copy; 2026 BERRY HOMES Property Management. All rights reserved.
-</footer>
+    </footer>
 
 </body>
 </html>

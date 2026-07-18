@@ -1,150 +1,215 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tenant Center - Berry Homes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Вынесенные стили страницы -->
+    <link rel="stylesheet" th:href="@{/css/tenants.css}" />
 </head>
-<body class="bg-slate-50 font-sans text-gray-800">
+<body>
 
-<!-- НАВИГАЦИЯ (КОПИЯ С ГЛАВНОЙ ДЛЯ ЕДИНООБРАЗИЯ) -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-        <a href="/" class="flex items-center gap-3 group">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                <i class="fa-solid fa-home"></i>
-            </div>
-            <div>
-                <h1 class="text-xl font-black text-slate-900 tracking-wider">BERRY HOMES</h1>
-                <p class="text-xs text-emerald-600 uppercase tracking-widest font-semibold">Property Management</p>
-            </div>
-        </a>
-        <nav class="flex items-center gap-6 text-sm font-medium text-gray-600">
-            <a href="/" class="hover:text-emerald-600 transition">Home</a>
-            <a href="#" class="hover:text-emerald-600 transition">About Us</a>
-            <a href="#" class="hover:text-emerald-600 transition">Contact</a>
-            <span class="text-gray-300">|</span>
-            <a href="/login" class="flex items-center gap-2 hover:text-emerald-600 transition"><i class="fa-regular fa-user"></i> Go Portal</a>
-        </nav>
-    </div>
-</header>
-
-<main class="max-w-4xl mx-auto px-4 py-10">
-    <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
-    <div class="mb-10">
-        <h2 class="text-3xl font-serif font-bold text-slate-900 mb-2">Tenant Center</h2>
-        <p class="text-sm text-gray-500">Everything you need to manage your stay in one place.</p>
+    <!-- УВЕДОМЛЕНИЕ "THANK YOU" ПОСЛЕ УСПЕШНОЙ ОТПРАВКИ -->
+    <div th:if="${successMessage}" id="successToast"
+         style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+                    background-color: #B8255F; color: #FFFFFF; padding: 16px 30px;
+                    border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+                    z-index: 2000; font-weight: 600; font-size: 0.95rem;
+                    display: flex; align-items: center; gap: 10px;
+                    animation: fadeInDown 0.4s ease, fadeOutUp 0.4s ease 3.6s forwards;">
+        <svg style="width:20px; height:20px; fill:currentColor;" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+        <span th:text="${successMessage}">Thank you for your message!</span>
     </div>
 
-    <!-- КРИТИЧЕСКИЙ БЛОК: КРУГЛОСУТОЧНАЯ ПОДДЕРЖКА -->
-    <div class="bg-red-50 border-l-4 border-red-600 p-6 rounded-r-lg shadow-sm mb-8 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-start gap-4">
-            <div class="text-3xl text-red-600 mt-1"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <div>
-                <h3 class="text-lg font-bold text-red-950 mb-1">Emergency Maintenance 24/7</h3>
-                <p class="text-sm text-red-900 leading-relaxed max-w-xl">
-                    If you have an immediate maintenance emergency that threatens your safety or property condition (fire, major flooding, gas leak), please contact our hotline instantly.
-                </p>
+    <!-- НАВИГАЦИОННАЯ ПАНЕЛЬ -->
+    <div class="navbar">
+        <div class="container navbar-flex">
+            <div class="brand-block">
+                <a href="/" class="brand-text">BERRY <span style="color: #DC3545;">HOMES</span></a>
             </div>
-        </div>
-        <a href="tel:4125550199" class="inline-flex items-center gap-2 bg-red-600 text-white font-bold px-5 py-3 rounded hover:bg-red-700 transition whitespace-nowrap">
-            <i class="fa-solid fa-phone"></i> (412) 555-0199
-        </a>
-    </div>
-    <!-- БЛОК ДОКУМЕНТОВ И ИНСТРУКЦИЙ -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <!-- Карточка: Заселение -->
-        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col justify-between">
-            <div>
-                <div class="text-xl text-emerald-600 mb-3"><i class="fa-solid fa-key"></i></div>
-                <h4 class="font-bold text-gray-900 text-lg mb-2">Move-In Resources</h4>
-                <p class="text-sm text-gray-500 mb-6 leading-relaxed">
-                    Read our comprehensive guide to ensure a smooth transition into your new home, including utility setup and key collection.
-                </p>
+            <div class="top-nav-meta">
+                <span>📞 <a href="tel:4125550123" class="clickable-phone">(412) 555-0123</a></span>
+                <span>📍 Pittsburgh, PA</span>
             </div>
-            <a href="#" class="inline-flex items-center justify-center gap-2 bg-emerald-50 text-emerald-700 font-semibold px-4 py-2.5 rounded hover:bg-emerald-100 transition text-sm">
-                <i class="fa-solid fa-file-pdf"></i> Download Move-In Guide
-            </a>
-        </div>
-
-        <!-- Карточка: Выселение -->
-        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex flex-col justify-between">
-            <div>
-                <div class="text-xl text-blue-600 mb-3"><i class="fa-solid fa-clipboard-list"></i></div>
-                <h4 class="font-bold text-gray-900 text-lg mb-2">Move-Out Checklists</h4>
-                <p class="text-sm text-gray-500 mb-6 leading-relaxed">
-                    Ready to move out? Review our cleaning guidelines and inspection requirements to guarantee your security deposit return.
-                </p>
-            </div>
-            <a href="#" class="inline-flex items-center justify-center gap-2 bg-blue-50 text-blue-700 font-semibold px-4 py-2.5 rounded hover:bg-blue-100 transition text-sm">
-                <i class="fa-solid fa-file-pdf"></i> Move-Out Checklist
-            </a>
         </div>
     </div>
 
-    <!-- СЕКЦИЯ: ОПЛАТА И СЕРВИСЫ -->
-    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 mb-8">
-        <h4 class="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-credit-card text-gray-400"></i> Rent & Payments
-        </h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-4 bg-slate-50 rounded-lg flex items-center justify-between">
-                <div>
-                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Online Portal</span>
-                    <p class="text-sm font-bold text-gray-800">AppFolio Tenant Portal</p>
+    <!-- СЕКЦИЯ ТАБОВ -->
+    <div class="audience-tabs">
+        <a href="/tenants" class="active-tenant">For Tenants</a>
+        <a href="/homeowners">For Homeowners</a>
+        <a href="/investors">For Investors</a>
+    </div>
+
+    <!-- ГЕРОЙ БЛОК -->
+    <div class="hero-tenant">
+        <div class="container hero-grid">
+            <div class="hero-left">
+                <h1 class="display-title">Tenant Center</h1>
+                <p class="lead-text">Everything you need as a Berry Homes tenant, all in one place.</p>
+            </div>
+            <div class="hero-right">
+                <div class="placeholder-box-img" style="width:100%; height:200px; background:#EDF2F7; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#718096; border: 1px dashed #CBD5E1;">
+                    <span>🖼️ [Изображение интерьера: tenants-bg.png]</span>
                 </div>
-                <a href="https://appfolio.com" target="_blank" class="text-emerald-600 hover:text-emerald-700 text-sm font-medium flex items-center gap-1">
-                    Pay Rent <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
-                </a>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-lg flex items-center justify-between">
-                <div>
-                    <span class="text-xs text-gray-400 uppercase tracking-wider font-semibold">Alternative Option</span>
-                    <p class="text-sm font-bold text-gray-800">PayNearMe Cash Code</p>
-                </div>
-                <a href="#" class="text-gray-500 hover:text-gray-700 text-sm font-medium flex items-center gap-1">
-                    Get Code <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                </a>
             </div>
         </div>
     </div>
 
-    <!-- ИНТЕРАКТИВНАЯ ФОРМА ОБРАТНОЙ СВЯЗИ (ПЛАШКА С КОРЗИНОЙ И ПОДАРКАМИ) -->
-    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 p-8 rounded-lg shadow-md text-white">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            <div class="md:col-span-2">
-                <span class="text-xs uppercase bg-emerald-500/40 text-emerald-100 font-bold px-2.5 py-1 rounded-full tracking-wider">Share Your Feedback</span>
-                <h3 class="text-2xl font-bold mt-3 mb-2">Help Us Improve Your Experience!</h3>
-                <p class="text-sm text-emerald-100/90 leading-relaxed">
-                    We are on a mission to build the best property management ecosystem. Drop us a note about what we can improve, or rate your stay. As a thank you, get a chance to win a curated gift basket!
-                </p>
-            </div>
-            <!-- Компактная форма обратной связи -->
-            <form action="#" class="bg-white p-4 rounded-lg text-gray-800 shadow-inner flex flex-col gap-3">
-                <div>
-                    <label class="block text-xs font-semibold text-gray-500 mb-1">Your Message</label>
-                    <textarea class="w-full text-sm p-2 border border-gray-200 rounded focus:outline-none focus:border-emerald-600 resize-none h-16" placeholder="Tell us how to improve..."></textarea>
-                </div>
-                <div class="flex items-center justify-between gap-2">
-                    <div class="flex gap-1 text-amber-400 text-sm">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+    <!-- ГЛАВНЫЕ СЕРВИСНЫЕ КАРТОЧКИ -->
+    <div class="services-section">
+        <div class="container services-grid">
+
+            <!-- Карточка 1: Tenant Portal -->
+            <div class="card-column">
+                <div class="tenant-card">
+                    <div>
+                        <div class="card-icon-wrap pink-light">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        </div>
+                        <h3 class="card-title">Tenant Portal</h3>
+                        <p class="card-desc">Pay rent, submit maintenance requests, view your lease and documents, and message your property manager.</p>
                     </div>
-                    <button type="button" class="bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded hover:bg-emerald-700 transition">
-                        Submit
+                    <a th:href="${portalUrl}" target="_blank" class="btn-pink-portal">
+                        <span>Open Tenant Portal</span>
+                        <svg style="width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Карточка 2: Emergency Maintenance -->
+            <div class="card-column">
+                <div class="tenant-card">
+                    <div>
+                        <div class="card-icon-wrap red-light">
+                            <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                        </div>
+                        <h3 class="card-title">Emergency Maintenance</h3>
+                        <p class="card-desc">For urgent issues that require immediate attention.</p>
+                        <ul class="bullet-emergency-list">
+                            <li>💧 Water Leak</li>
+                            <li>🔥 Gas Leak / Smell</li>
+                            <li>❄️ No Heat (in winter)</li>
+                            <li>⚡ Electrical Hazard</li>
+                        </ul>
+                    </div>
+                    <a href="tel:4125550199" class="btn-action-red">
+                        <span>Call (412) 555-0199</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Карточка 3: Contact Us -->
+            <div class="card-column">
+                <div class="tenant-card">
+                    <div>
+                        <div class="card-icon-wrap green-light">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </div>
+                        <h3 class="card-title">Contact Us</h3>
+                        <p class="card-desc">We're here to help during business hours.</p>
+                        <div class="manager-details-box">
+                            <strong>Phone:</strong> <a href="tel:4125550123" style="color: inherit; text-decoration: none;">(412) 555-0123</a><br>
+                            <strong>Email:</strong> info@berryhomespm.com<br>
+                            <strong>Hours:</strong> Mon - Fri: 9:00 AM - 5:00 PM<br>
+                            <strong>Office:</strong> Pittsburgh, PA 15222
+                        </div>
+                    </div>
+                    <button class="btn-action-outline" onclick="document.getElementById('tenantMessageModal').classList.add('active')">
+                        <span>Send a Message</span>
                     </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ДОКУМЕНТЫ АРЕНДАТОРОВ -->
+    <div class="documents-section">
+        <div class="container">
+            <h3 class="card-title" style="font-size: 1.6rem;"><span style="color:#B8255F;">📄</span> Tenant Documents</h3>
+            <p style="color: #718096; font-size: 0.9rem; margin: 5px 0 0 0;">Helpful guides and important information for our tenants.</p>
+
+            <div class="docs-grid">
+                <div class="doc-card">
+                    <div>
+                        <div class="doc-icon-top">🏠</div>
+                        <h5 class="doc-title">Move-In Guide</h5>
+                        <p class="doc-desc">Everything you need to know before moving into your new home.</p>
+                    </div>
+                    <a href="/docs/move-in-guide.pdf" target="_blank" class="btn-download-link">
+                        <span>Download PDF</span>
+                    </a>
+                </div>
+                <div class="doc-card">
+                    <div>
+                        <div class="doc-icon-top">📋</div>
+                        <h5 class="doc-title">Move-Out Checklist</h5>
+                        <p class="doc-desc">A step-by-step checklist to help you prepare for a smooth move-out.</p>
+                    </div>
+                    <a href="/docs/move-out-checklist.pdf" target="_blank" class="btn-download-link">
+                        <span>Download PDF</span>
+                    </a>
+                </div>
+                <div class="doc-card">
+                    <div>
+                        <div class="doc-icon-top">📖</div>
+                        <h5 class="doc-title">Resident Handbook</h5>
+                        <p class="doc-desc">Your complete guide to policies, procedures, and important resident information.</p>
+                    </div>
+                    <a href="/docs/resident-handbook.pdf" target="_blank" class="btn-download-link">
+                        <span>Download PDF</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ -->
+    <div class="custom-modal" id="tenantMessageModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="card-title" style="margin:0;">Send Message to Manager</h5>
+                <button class="close-btn" onclick="document.getElementById('tenantMessageModal').classList.remove('active')">&times;</button>
+            </div>
+            <!-- Форма отправляет POST-запрос на эндпоинт /tenants/message -->
+            <form th:action="@{/tenants/message}" th:object="${contactDto}" method="POST">
+
+                <!-- Скрытые поля для системных Enum-параметров (TENANT, NEW) -->
+                <input type="hidden" th:field="*{contactType}" />
+                <input type="hidden" th:field="*{contactStatus}" />
+
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Jane Doe" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" th:field="*{email}" class="form-control" placeholder="janedoe@example.com" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="text" th:field="*{phone}" class="form-control" placeholder="(412) 555-0199" required="required" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea th:field="*{message}" class="form-control" rows="4" placeholder="How can we help you?" required="required"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-light" onclick="document.getElementById('tenantMessageModal').classList.remove('active')">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Message</button>
                 </div>
             </form>
         </div>
     </div>
 
-</main>
-
-<!-- ПОДВАЛ -->
-<footer class="text-center py-6 text-xs text-gray-400 border-t border-gray-200 mt-10">
-    &copy; 2026 BERRY HOMES Property Management. All rights reserved.
-</footer>
+    <footer>
+        <div class="container">
+            <p>© 2026 Berry Homes Property Management, LLC. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>

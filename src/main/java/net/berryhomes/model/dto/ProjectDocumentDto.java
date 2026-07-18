@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.util.UUID;
 
 @Builder
@@ -14,7 +15,8 @@ public record ProjectDocumentDto (
         UUID projectId,
         String titleRu,
         String titleEn,
-        String category,
         String filePath
-){
+) implements java.io.Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 }

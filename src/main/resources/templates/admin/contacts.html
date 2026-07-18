@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: Contacts Management - Berry Homes</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}" />
+</head>
+<body>
+
+    <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <div class="admin-sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-basket-shopping text-success me-2"></i> BERRY HOMES
+        </div>
+        <ul class="sidebar-menu">
+            <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+            <li><a th:href="@{/admin/contacts}" class="active">Contacts / Leads</a></li>
+            <li><a th:href="@{/admin/projects}">Investment Projects</a></li>
+            <li><a th:href="@{/admin/settings}">System Settings</a></li>
+            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181;">Logout ↩</a></li>
+        </ul>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ АДМИНКИ -->
+    <div class="admin-content">
+
+        <div class="page-header">
+            <h1 class="page-title">Contacts &amp; Leads Management</h1>
+            <div style="color: #718096; font-size: 0.9rem;" th:text="'Total leads: ' + ${contactPage.totalElements}">Total leads: 0</div>
+        </div>
+
+        <!-- ПАНЕЛЬ УМНОГО ПОИСКА -->
+        <div class="search-bar-box">
+            <form th:action="@{/admin/contacts}" method="get" class="search-form">
+                <input type="text" name="search" th:value="${currentSearch}" class="search-input" placeholder="Smart search: type name, email or phone number..." />
+                <button type="submit" class="btn-admin">Search</button>
+                <a th:href="@{/admin/contacts}" th:if="${currentSearch != null and currentSearch != ''}" style="color: #718096; text-decoration: none; padding-top: 10px; font-size: 0.9rem; margin-left: 10px;">Clear filter</a>
+            </form>
+        </div>
+
+        <!-- ТАБЛИЦА С ЛИДАМИ ИЗ БАЗЫ ДАННЫХ -->
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                <tr>
+                    <th>Date &amp; Source</th>
+                    <th>User Info</th>
+                    <th>Message</th>
+                    <th>Status Action</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Если база данных пуста -->
+                <tr th:if="${#lists.isEmpty(contactPage.content)}">
+                    <td colspan="5" style="text-align: center; color: #718096; padding: 30px;">
+                        No contact requests found matching the criteria.
+                    </td>
+                </tr>
+
+                <!-- Цикл итерации по списку ContactDto -->
+                <tr th:unless="${#lists.isEmpty(contactPage.content)}" th:each="contact : ${contactPage.content}">
+                    <!-- Колонка: Дата и Источник -->
+                    <td>
+                        <div style="font-weight: 600;" th:text="${contact.createdAt() != null ? #strings.substring(contact.createdAt().toString(), 0, 16).replace('T', ' ') : ''}">2026-07-16 12:00</div>
+                        <!-- Бейджи типов на основе Enum ContactType -->
+                        <div class="contact-meta-info">
+                            <span th:if="${contact.contactType().name() == 'TENANT'}" class="badge badge-tenant">Tenant</span>
+                            <span th:if="${contact.contactType().name() == 'HOMEOWNER'}" class="badge badge-owner">Homeowner</span>
+                            <span th:if="${contact.contactType().name() == 'INVESTOR'}" class="badge badge-investor">Investor</span>
+                        </div>
+                    </td>
+
+                    <!-- Колонка: Контакты пользователя -->
+                    <td>
+                        <div style="font-weight: 700; color: #2D3748;" th:text="${contact.name()}">John Doe</div>
+                        <div class="contact-meta-info" th:text="'✉️ ' + ${contact.email()}">john@example.com</div>
+                        <div class="contact-meta-info" th:text="'📞 ' + ${contact.phone()}">(412) 555-0199</div>
+                    </td>
+
+                    <!-- Колонка: Текст обращения -->
+                    <td>
+                        <div class="message-text-cell" th:text="${contact.message()}">
+                            Text of the request...
+                        </div>
+                    </td>
+
+                    <!-- Колонка: Управление статусом -->
+                    <td>
+                        <form th:action="@{/admin/contacts/{id}/status(id=${contact.id()})}" method="post" style="margin:0;">
+                            <select name="status" class="status-select" onchange="this.form.submit()">
+                                <!-- Итерируем все статусы из Enum ContactStatus -->
+                                <option th:each="status : ${statuses}"
+                                        th:value="${status}"
+                                        th:text="${status}"
+                                        th:selected="${status == contact.contactStatus()}">
+                                    NEW
+                                </option>
+                            </select>
+                        </form>
+                    </td>
+
+                    <!-- Колонка: Кнопка удаления с привязкой конкретного UUID -->
+                    <td>
+                        <form th:action="@{/admin/contacts/{id}/delete(id=${contact.id()})}" method="POST"
+                              onsubmit="return confirm('Are you sure you want to delete this lead? This action cannot be undone.');" style="margin:0;">
+                            <button type="submit" class="btn-admin-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- БЛОК ПАГИНАЦИИ (SPRING DATA PAGE) -->
+            <div class="pagination-box" th:if="${contactPage.totalPages > 1}">
+                <div style="color: #718096; font-size: 0.85rem;"
+                     th:text="'Page ' + (${contactPage.number} + 1) + ' of ' + ${contactPage.totalPages}">
+                    Page 1 of 1
+                </div>
+                <div class="pagination-links">
+                    <!-- Ссылка "Назад" -->
+                    <a th:href="@{/admin/contacts(page=${contactPage.number - 1}, search=${currentSearch})}"
+                       th:classappend="${contactPage.hasPrevious() ? '' : 'disabled'}">
+                        &larr; Previous
+                    </a>
+
+                    <!-- Цифровые страницы -->
+                    <a th:each="i : ${#numbers.sequence(0, contactPage.totalPages - 1)}"
+                       th:href="@{/admin/contacts(page=${i}, search=${currentSearch})}"
+                       th:text="${i + 1}"
+                       th:classappend="${i == contactPage.number ? 'active' : ''}">
+                        1
+                    </a>
+
+                    <!-- Ссылка "Вперед" -->
+                    <a th:href="@{/admin/contacts(page=${contactPage.number + 1}, search=${currentSearch})}"
+                       th:classappend="${contactPage.hasNext() ? '' : 'disabled'}">
+                        Next &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+/* Базовые стили и шрифты */
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #2D3748;
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Верхняя панель навигации */
+.navbar {
+    background: #FFFFFF;
+    padding: 15px 0;
+    border-bottom: 1px solid #F0F4F8;
+}
+
+.navbar-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-text {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #0F3D23;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.top-nav-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.85rem;
+    color: #718096;
+}
+
+.clickable-phone {
+    color: #2D3748;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.clickable-phone:hover {
+    color: #B8255F;
+}
+
+/* Переключатели аудиторий (Табы) */
+.audience-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #E2E8F0;
+    background: #FFFFFF;
+}
+
+.audience-tabs a {
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 18px 25px;
+    color: #718096;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.audience-tabs a.active-tenant {
+    color: #B8255F;
+    border-bottom: 3px solid #B8255F;
+    background-color: #FDF2F5;
+}
+
+/* ГлавныйHero баннер */
+.hero-tenant {
+    background-color: #FCFBF7;
+    padding: 50px 0;
+}
+
+.hero-grid {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-left, .hero-right {
+    flex: 1;
+}
+
+.display-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #1A202C;
+}
+
+.lead-text {
+    color: #718096;
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.placeholder-img-box {
+    width: 100%;
+    height: 240px;
+    background: #EDF2F7;
+    border: 1px dashed #CBD5E1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #718096;
+}
+
+/* Главная секция карточек услуг */
+.services-section {
+    padding: 60px 0;
+}
+
+.services-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.card-column {
+    flex: 1;
+    max-width: 360px;
+}
+
+.tenant-card {
+    background: #FFFFFF;
+    border: 1px solid #EEF0F2;
+    border-radius: 12px;
+    padding: 35px 25px;
+    text-align: center;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px auto;
+}
+
+.pink-light { background-color: #FDF2F5; color: #B8255F; }
+.red-light { background-color: #FFF5F5; color: #D32F2F; }
+.green-light { background-color: #F0FDF4; color: #16A34A; }
+
+.card-icon-wrap svg {
+    width: 26px;
+    height: 26px;
+    fill: currentColor;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: #1A202C;
+}
+
+.card-desc {
+    color: #718096;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+}
+
+/* Списки */
+.bullet-emergency-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 20px auto;
+    max-width: 180px;
+    text-align: left;
+    font-size: 0.88rem;
+    color: #C62828;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+.manager-details-box {
+    text-align: left;
+    background: #F8F9FA;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.82rem;
+    color: #4A5568;
+    line-height: 1.6;
+    border: 1px solid #E2E8F0;
+}
+
+/* Кнопки действий */
+.btn-action-pink { background-color: #B8255F; color: #FFFFFF; border: none; font-weight: 600; padding: 13px; text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; cursor: pointer; }
+.btn-action-pink:hover { background-color: #961e4e; }
+
+.btn-action-red { background-color: #D32F2F; color: #FFFFFF; border: none; font-weight: 600; padding: 13px; text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; cursor: pointer; }
+.btn-action-red:hover { background-color: #B71C1C; }
+
+.btn-action-outline { border: 2px solid #2D3748; color: #2D3748; font-weight: 600; padding: 11px; background: transparent; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.btn-action-outline:hover { background-color: #2D3748; color: #FFFFFF; }
+
+/* Секция документов (Нижняя часть макета) */
+.documents-section {
+    background-color: #FAFAFA;
+    border-top: 1px solid #E2E8F0;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.docs-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.doc-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 30px 20px;
+    flex: 1;
+    max-width: 340px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.doc-icon-top {
+    color: #B8255F;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+}
+
+.doc-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.doc-desc {
+    color: #718096;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    margin: 0 0 20px 0;
+}
+
+.btn-download-link {
+    color: #2D3748;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+.btn-download-link:hover {
+    text-decoration: underline;
+    color: #B8255F;
+}
+
+/* Отзывы и Футер */
+.review-banner-box {
+    padding: 40px 0;
+}
+.review-bg-card {
+    background-color: #FDFBF7;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+.review-left-side { display: flex; align-items: center; gap: 20px; }
+.review-btn-dark { background: #1A202C; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; text-decoration: none; cursor: pointer; }
+.review-btn-dark:hover { background: #2D3748; }
+
+footer {
+    background: #0B1C10;
+    color: #718096;
+    padding: 25px 0;
+    font-size: 0.82rem;
+    text-align: center;
+}
+
+/* Модальное окно */
+.custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
+.custom-modal.active { display: flex; }
+.modal-content { background: #FFFFFF; border-radius: 12px; width: 100%; max-width: 480px; padding: 30px; box-sizing: border-box; position: relative; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #A0AEC0; }
+.form-group { margin-bottom: 15px; text-align: left; }
+.form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #4A5568; margin-bottom: 5px; }
+.form-control { width: 100%; padding: 10px; border: 1px solid #CBD5E1; border-radius: 6px; box-sizing: border-box; }
+.modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+.btn-light { background: #EDF2F7; color: #4A5568; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+.btn-primary { background: #B8255F; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+
+/* Анимации Toast */
+@keyframes fadeInDown { from { opacity: 0; transform: translate(-50%, -40px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes fadeOutUp { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, -40px); display: none; } }
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .hero-grid, .services-grid, .docs-grid, .review-bg-card { flex-direction: column; text-align: center; }
+    .card-column, .doc-card { max-width: 100%; width: 100%; }
+    .manager-details-box { text-align: center; }
+    .review-left-side { flex-direction: column; }
+}

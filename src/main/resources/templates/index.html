@@ -1,173 +1,95 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berry Homes - Property Management</title>
-    <!-- Подключаем Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <style>
-        .hero-col { transition: all 0.5s ease; }
-        .hero-col:hover .bg-overlay { background-color: rgba(0, 0, 0, 0.45); }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/main-style.css}">
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body>
 
-<!-- 1. ВЕРХНЯЯ ШАПКА (HEADER) -->
-<header class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
-        <!-- Логотип компании -->
-        <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                <i class="fa-solid fa-house-chimney"></i>
-            </div>
-            <div>
-                <h1 class="text-xl font-black text-slate-900 tracking-wider">BERRY HOMES</h1>
-                <p class="text-xs text-emerald-600 uppercase tracking-widest font-semibold">Property Management</p>
-            </div>
+<!-- 1. ШАПКА САЙТА (HEADER) -->
+<header class="header">
+    <div class="logo-area">
+        <img th:src="@{/images/main/logo.png}" alt="Berry Homes Logo" class="logo-img">
+        <div class="logo-text">
+            <span class="brand-name">BERRY HOMES</span>
+            <span class="brand-sub">PROPERTY MANAGEMENT</span>
         </div>
-
-        <!-- Главное навигационное меню -->
-        <nav class="flex items-center gap-6 text-sm font-medium text-gray-600">
-            <a href="#" class="hover:text-emerald-600 transition">Blog</a>
-            <a href="#" class="hover:text-emerald-600 transition">About Us</a>
-            <a href="#" class="hover:text-emerald-600 transition">Contact</a>
-            <span class="text-gray-300">|</span>
-            <a href="/login" class="flex items-center gap-2 hover:text-emerald-600 transition">
-                <i class="fa-regular fa-user"></i> Go Portal
-            </a>
-            <button class="flex items-center gap-1 hover:text-emerald-600 transition">
-                <i class="fa-solid fa-globe"></i> Language <i class="fa-solid fa-chevron-down text-[10px]"></i>
-            </button>
-            <div class="text-xs bg-gray-100 px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500">
-                <i class="fa-solid fa-location-dot text-emerald-600"></i> Pittsburgh, PA
-            </div>
-        </nav>
+<!--        <div class="logo-divider"></div>-->
+<!--        <img th:src="@{/images/main/Max business group logo.jpg}" alt="Max Business Group Logo" class="logo-img second-logo">-->
     </div>
+
+    <nav class="nav-menu">
+        <a href="#">Blog</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#" class="nav-link-with-icon"><i class="icon icon-user"></i> Go Portal</a>
+        <a href="#" class="nav-link-with-icon"><i class="icon icon-globe"></i> Language ▾</a>
+        <a href="#" class="nav-link-with-icon"><i class="icon icon-pin"></i> Pittsburgh, PA</a>
+    </nav>
 </header>
 
-<!-- 2. СЕКЦИЯ С ТРЕМЯ КНОПКАМИ (КРАТКИЙ НАВИГАТОР) -->
-<section class="bg-gray-100 border-b border-gray-200">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3">
-        <a href="/tenants" class="flex items-center justify-between p-6 bg-white hover:bg-gray-50 border-r border-gray-100 transition group">
-            <div class="flex items-center gap-4">
-                <div class="text-2xl text-purple-600 bg-purple-50 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-user-tie"></i></div>
-                <div>
-                    <h4 class="font-bold text-gray-900">For Tenants</h4>
-                    <p class="text-xs text-gray-500">Find your next home.</p>
-                </div>
+<!-- 2. ТРИ ЦВЕТНЫХ БАННЕРА -->
+<main class="main-cards">
+    <!-- Блок Арендаторов (Красный) -->
+    <div class="card card-tenants" th:style="'background-image: url(' + @{/images/main/tenants-bg.png} + ');'">
+        <div class="card-overlay">
+            <div class="circle-icon-wrapper">
+                <i class="card-icon icon-tenant-white"></i>
             </div>
-            <i class="fa-solid fa-arrow-right text-gray-400 group-hover:translate-x-1 transition"></i>
-        </a>
-        <a href="#" class="flex items-center justify-between p-6 bg-white hover:bg-gray-50 border-r border-gray-100 transition group">
-            <div class="flex items-center gap-4">
-                <div class="text-2xl text-emerald-600 bg-emerald-50 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-house-laptop"></i></div>
-                <div>
-                    <h4 class="font-bold text-gray-900">For Homeowners</h4>
-                    <p class="text-xs text-gray-500">Manage your property.</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-arrow-right text-gray-400 group-hover:translate-x-1 transition"></i>
-        </a>
-        <a href="/investors" class="flex items-center justify-between p-6 bg-white hover:bg-gray-50 transition group">
-            <div class="flex items-center gap-4">
-                <div class="text-2xl text-blue-600 bg-blue-50 w-12 h-12 rounded-full flex items-center justify-center"><i class="fa-solid fa-chart-line"></i></div>
-                <div>
-                    <h4 class="font-bold text-gray-900">For Investors</h4>
-                    <p class="text-xs text-gray-500">Grow your portfolio.</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-arrow-right text-gray-400 group-hover:translate-x-1 transition"></i>
-        </a>
-    </div>
-</section>
-<!-- 3. ГЛАВНЫЕ ТРИ ВЕРТИКАЛЬНЫЕ КОЛОНКИ (ГЕРОЙ-СЕКЦИЯ) -->
-<main class="grid grid-cols-1 lg:grid-cols-3 min-h-[calc(100vh-140px)]">
-
-    <!-- Колонка Арендаторов (Бордовый/Красный оттенок) -->
-    <div class="hero-col relative bg-cover bg-center flex flex-col justify-center items-center text-center p-8 text-white group"
-         style="background-image: url('https://unsplash.com');">
-        <!-- Затемняющий оверлей -->
-        <div class="bg-overlay absolute inset-0 bg-red-950/70 transition-all duration-500"></div>
-
-        <div class="relative z-10 max-w-sm">
-            <div class="w-16 h-16 border-2 border-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <h2 class="text-4xl font-serif font-bold mb-4 tracking-wide">For Tenants</h2>
-            <p class="text-gray-200 text-sm leading-relaxed mb-8">
-                Find your next home. Browse available rentals, submit an application, and make it yours.
-            </p>
-            <a href="/tenants" class="inline-flex items-center gap-2 bg-white text-red-950 font-semibold px-6 py-3 rounded shadow hover:bg-gray-100 transition">
-                View Rentals <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
+            <h2>For Tenants</h2>
+            <p>Find your next home. Browse available rentals, submit an application, and make it yours.</p>
+            <a th:href="@{/tenants}" class="btn">View Rentals &rarr;</a>
         </div>
     </div>
 
-    <!-- Колонка Собственников (Зеленый оттенок) -->
-    <div class="hero-col relative bg-cover bg-center flex flex-col justify-center items-center text-center p-8 text-white group"
-         style="background-image: url('https://unsplash.com');">
-        <div class="bg-overlay absolute inset-0 bg-emerald-950/70 transition-all duration-500"></div>
-
-        <div class="relative z-10 max-w-sm">
-            <div class="w-16 h-16 border-2 border-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                <i class="fa-solid fa-home"></i>
+    <!-- Блок Домовладельцев (Зеленый) -->
+    <div class="card card-homeowners" th:style="'background-image: url(' + @{/images/main/homeowners-bg.png} + ');'">
+        <div class="card-overlay">
+            <div class="circle-icon-wrapper">
+                <i class="card-icon icon-home-white"></i>
             </div>
-            <h2 class="text-4xl font-serif font-bold mb-4 tracking-wide">For Homeowners</h2>
-            <p class="text-gray-200 text-sm leading-relaxed mb-8">
-                Professional property management designed to protect your investment and maximize returns.
-            </p>
-            <a href="#" class="inline-flex items-center gap-2 bg-white text-emerald-950 font-semibold px-6 py-3 rounded shadow hover:bg-gray-100 transition">
-                Our Services <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
+            <h2>For Homeowners</h2>
+            <p>Professional property management designed to protect your investment and maximize returns.</p>
+            <a th:href="@{/homeowners}" class="btn">Our Services &rarr;</a>
         </div>
     </div>
 
-    <!-- Колонка Инвесторов (Синий оттенок) -->
-    <div class="hero-col relative bg-cover bg-center flex flex-col justify-center items-center text-center p-8 text-white group"
-         style="background-image: url('https://unsplash.com');">
-        <div class="bg-overlay absolute inset-0 bg-slate-900/75 transition-all duration-500"></div>
-
-        <div class="relative z-10 max-w-sm">
-            <div class="w-16 h-16 border-2 border-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-                <i class="fa-solid fa-chart-line"></i>
+    <!-- Блок Инвесторов (Фиолетовый) -->
+    <div class="card card-investors" th:style="'background-image: url(' + @{/images/main/investors-bg.png} + ');'">
+        <div class="card-overlay">
+            <div class="circle-icon-wrapper">
+                <i class="card-icon icon-investor-white"></i>
             </div>
-            <h2 class="text-4xl font-serif font-bold mb-4 tracking-wide">For Investors</h2>
-            <p class="text-gray-200 text-sm leading-relaxed mb-8">
-                Grow your portfolio. Reliable management, strong returns, long-term growth.
-            </p>
-            <a href="/investors" class="inline-flex items-center gap-2 bg-white text-slate-900 font-semibold px-6 py-3 rounded shadow hover:bg-gray-100 transition">
-                Learn More <i class="fa-solid fa-arrow-right text-xs"></i>
-            </a>
+            <h2>For Investors</h2>
+            <p>Grow your portfolio. Reliable management, strong returns, long-term growth.</p>
+            <a th:href="@{/investors}" class="btn">Learn More &rarr;</a>
         </div>
     </div>
-
 </main>
 
-<!-- 4. ФУТЕР-ЛИНИЯ ПРЕИМУЩЕСТВ -->
-<footer class="bg-gray-100 border-t border-gray-200 py-6">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600">
-        <div class="flex items-start gap-3">
-            <div class="text-xl text-emerald-600 mt-0.5"><i class="fa-solid fa-shield-circle-check"></i></div>
-            <div>
-                <h5 class="font-bold text-gray-900">License & Insured</h5>
-                <p class="text-xs text-gray-500">Fully licensed and insured for your peace of mind.</p>
-            </div>
+<!-- 3. ПРЕИМУЩЕСТВА В САМОМ НИЗУ (ФУТЕР) -->
+<footer class="features">
+    <div class="feature-item">
+        <i class="feat-icon icon-badge-dark"></i>
+        <div>
+            <h3>License & Insured</h3>
+            <p>Fully licensed and insured for your peace of mind.</p>
         </div>
-        <div class="flex items-start gap-3">
-            <div class="text-xl text-emerald-600 mt-0.5"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-            <div>
-                <h5 class="font-bold text-gray-900">Professional Maintenance</h5>
-                <p class="text-xs text-gray-500">Prompt, reliable maintenance to keep your property in top shape.</p>
-            </div>
+    </div>
+    <div class="feature-item">
+        <i class="feat-icon icon-tools-dark"></i>
+        <div>
+            <h3>Professional Maintenance</h3>
+            <p>Prompt, reliable maintenance to keep your property in top shape.</p>
         </div>
-        <div class="flex items-start gap-3">
-            <div class="text-xl text-emerald-600 mt-0.5"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-            <div>
-                <h5 class="font-bold text-gray-900">Transparent Reporting</h5>
-                <p class="text-xs text-gray-500">Clear financial reports and updates so you always stay informed.</p>
-            </div>
+    </div>
+    <div class="feature-item">
+        <i class="feat-icon icon-chart-dark"></i>
+        <div>
+            <h3>Transparent Reporting</h3>
+            <p>Clear financial reports and updates so you always stay informed.</p>
         </div>
     </div>
 </footer>

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'net.berryhomes'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
 description = 'berryHomes'
 
 java {
@@ -28,23 +28,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-aspectj'
-    implementation 'org.springframework.retry:spring-retry:2.0.12'
-    implementation 'io.github.cdimascio:dotenv-java:3.2.0'
-
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     // СУБД драйверы и утилиты
+    implementation 'org.springframework.retry:spring-retry:2.0.12'
+    implementation 'io.github.cdimascio:dotenv-java:3.2.0'
     implementation 'org.flywaydb:flyway-database-postgresql'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     implementation 'org.mapstruct:mapstruct:1.6.3'
     implementation 'com.bucket4j:bucket4j-core:8.10.1'
-
-
     runtimeOnly 'org.postgresql:postgresql'
     compileOnly 'org.projectlombok:lombok'
-
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
-
 
     // Тестирование
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

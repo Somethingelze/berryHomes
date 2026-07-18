@@ -100,11 +100,6 @@ public class OrphanFileCleanUpService {
     private Set<String> collectValidPathsFromDb() {
         Set<String> dbPaths = new HashSet<>();
 
-        projectRepository.findAll().stream()
-                .map(Project::getReportFilePath)
-                .filter(path -> path != null && !path.isBlank())
-                .forEach(dbPaths::add);
-
         projectImageRepository.findAll().stream()
                 .map(ProjectImage::getFilePath)
                 .filter(path -> path != null && !path.isBlank())

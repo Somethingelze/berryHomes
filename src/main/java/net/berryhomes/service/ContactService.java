@@ -1,5 +1,7 @@
 package net.berryhomes.service;
 
+import net.berryhomes.model.ContactStatus;
+import net.berryhomes.model.ContactType;
 import net.berryhomes.model.dto.ContactDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +15,9 @@ public interface ContactService {
     ContactDto saveContact(ContactDto contactDto);
 
     @Transactional(readOnly = true)
+    ContactDto getById(UUID id, Pageable pageable);
+
+    @Transactional(readOnly = true)
     Page<ContactDto> getByName(String name, Pageable pageable);
 
     @Transactional(readOnly = true)
@@ -24,7 +29,8 @@ public interface ContactService {
     @Transactional(readOnly = true)
     Page<ContactDto> getAll(Pageable pageable);
 
-    void deleteContact(UUID id);
+    @Transactional
+    ContactDto updateContactStatus(UUID id, ContactStatus contactStatus);
 
-    ContactDto sendContactByEmail(ContactDto contactDto);
+    void deleteContact(UUID id);
 }

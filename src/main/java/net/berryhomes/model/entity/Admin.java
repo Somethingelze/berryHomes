@@ -51,9 +51,11 @@ public class Admin implements UserDetails {
     @Column(name = "created_at", nullable = false)
     private ZonedDateTime createdAt;
 
+    @Builder.Default
     @Column(name = "failed_attempts", nullable = false)
     private int failedAttempts = 0;
 
+    @Builder.Default
     @Column(name = "account_non_locked", nullable = false)
     private boolean accountNonLocked = true;
 
