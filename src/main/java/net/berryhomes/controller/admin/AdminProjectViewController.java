@@ -94,9 +94,6 @@ public class AdminProjectViewController {
                             error.getRejectedValue(),
                             error.getDefaultMessage()));
 
-            bindingResult.getGlobalErrors().forEach(error ->
-                    log.error("Global error: {}", error));
-
             ModelAndView errorMav = new ModelAndView("admin/project-form");
             errorMav.addObject("projectDto", projectDto);
             return errorMav;
@@ -159,10 +156,5 @@ public class AdminProjectViewController {
         projectImageService.updateSortOrder(imageId, sortOrder);
         redirectAttributes.addFlashAttribute("successMessage", "Display order updated!");
         return new ModelAndView("redirect:/admin/projects/" + projectId + "/edit");
-    }
-
-    @InitBinder
-    public void initBinder(org.springframework.web.bind.WebDataBinder binder) {
-        binder.setDisallowedFields("createdAt", "updatedAt", "deletedAt");
     }
 }

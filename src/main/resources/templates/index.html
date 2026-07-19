@@ -16,77 +16,156 @@
             <span class="brand-name">BERRY HOMES</span>
             <span class="brand-sub">PROPERTY MANAGEMENT</span>
         </div>
-<!--        <div class="logo-divider"></div>-->
-<!--        <img th:src="@{/images/main/Max business group logo.jpg}" alt="Max Business Group Logo" class="logo-img second-logo">-->
     </div>
 
     <nav class="nav-menu">
         <a href="#">Blog</a>
         <a href="#">About Us</a>
         <a href="#">Contact</a>
-        <a href="#" class="nav-link-with-icon"><i class="icon icon-user"></i> Go Portal</a>
-        <a href="#" class="nav-link-with-icon"><i class="icon icon-globe"></i> Language ▾</a>
-        <a href="#" class="nav-link-with-icon"><i class="icon icon-pin"></i> Pittsburgh, PA</a>
+
+        <a href="#" class="nav-link-with-icon">
+            <span class="nav-header-icon-wrapper">
+                <!-- Портал (icon-portal.svg) -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="32" cy="22" r="10"/>
+                    <path d="M14 52 C14 39 21 32 32 32 C43 32 50 39 50 52"/>
+                </svg>
+            </span>
+            Go Portal
+        </a>
+
+        <a href="#" class="nav-link-with-icon">
+            <span class="nav-header-icon-wrapper">
+                <!-- Язык (icon-language.svg) -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="32" cy="32" r="22"/>
+                    <ellipse cx="32" cy="32" rx="9" ry="22"/>
+                    <line x1="10" y1="32" x2="54" y2="32"/>
+                    <path d="M13 21 H51"/>
+                    <path d="M13 43 H51"/>
+                </svg>
+            </span>
+            Language ▾
+        </a>
+
+        <a href="#" class="nav-link-with-icon">
+            <span class="nav-header-icon-wrapper">
+                <!-- Локация (icon-location.svg) -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M32 58 C32 58 14 40 14 26 C14 15 22 7 32 7 C42 7 50 15 50 26 C50 40 32 58 32 58 Z"/>
+                    <circle cx="32" cy="26" r="7"/>
+                </svg>
+            </span>
+            Pittsburgh, PA
+        </a>
     </nav>
 </header>
 
 <!-- 2. ТРИ ЦВЕТНЫХ БАННЕРА -->
 <main class="main-cards">
     <!-- Блок Арендаторов (Красный) -->
-    <div class="card card-tenants" th:style="'background-image: url(' + @{/images/main/tenants-bg.png} + ');'">
+    <a th:href="@{/tenants}" class="card card-tenants" th:style="'background-image: url(' + @{/images/main/tenants-background.jpg} + ');'">
         <div class="card-overlay">
             <div class="circle-icon-wrapper">
-                <i class="card-icon icon-tenant-white"></i>
+                <!-- Тенантс (icon-tenants.svg) -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="39" cy="21" r="6"/>
+                    <path d="M29 47 C29 37 33 31 39 31 C45 31 49 37 49 47"/>
+                    <circle cx="24" cy="25" r="7"/>
+                    <path d="M12 49 C12 38 17 31 24 31 C31 31 36 38 36 49"/>
+                </svg>
             </div>
             <h2>For Tenants</h2>
             <p>Find your next home. Browse available rentals, submit an application, and make it yours.</p>
-            <a th:href="@{/tenants}" class="btn">View Rentals &rarr;</a>
+            <span class="card-link-text">View Rentals &rarr;</span>
         </div>
-    </div>
+    </a>
 
     <!-- Блок Домовладельцев (Зеленый) -->
-    <div class="card card-homeowners" th:style="'background-image: url(' + @{/images/main/homeowners-bg.png} + ');'">
+    <a th:href="@{/homeowners}" class="card card-homeowners" th:style="'background-image: url(' + @{/images/main/homeowners-background.jpg} + ');'">
         <div class="card-overlay">
             <div class="circle-icon-wrapper">
-                <i class="card-icon icon-home-white"></i>
+                <!-- Хоум овнерс (icon-homeowners.svg) -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M8 33 L32 11 L56 33"/>
+                    <path d="M15 27 V53 H49 V27"/>
+                </svg>
             </div>
             <h2>For Homeowners</h2>
             <p>Professional property management designed to protect your investment and maximize returns.</p>
-            <a th:href="@{/homeowners}" class="btn">Our Services &rarr;</a>
+            <span class="card-link-text">Our Services &rarr;</span>
         </div>
-    </div>
+    </a>
 
     <!-- Блок Инвесторов (Фиолетовый) -->
-    <div class="card card-investors" th:style="'background-image: url(' + @{/images/main/investors-bg.png} + ');'">
+    <a th:href="@{/investors}" class="card card-investors" th:style="'background-image: url(' + @{/images/main/investors-background.jpg} + ');'">
         <div class="card-overlay">
             <div class="circle-icon-wrapper">
-                <i class="card-icon icon-investor-white"></i>
+                <!-- Инвесторс (icon-investors.svg) -->
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M15 50 V39"/>
+                    <path d="M29 50 V31"/>
+                    <path d="M43 50 V22"/>
+                    <path d="M14 33 L28 22 L44 10"/>
+                    <path d="M35 10 H44 V19"/>
+                </svg>
             </div>
             <h2>For Investors</h2>
             <p>Grow your portfolio. Reliable management, strong returns, long-term growth.</p>
-            <a th:href="@{/investors}" class="btn">Learn More &rarr;</a>
+            <span class="card-link-text">Learn More &rarr;</span>
         </div>
-    </div>
+    </a>
 </main>
 
 <!-- 3. ПРЕИМУЩЕСТВА В САМОМ НИЗУ (ФУТЕР) -->
 <footer class="features">
-    <div class="feature-item">
-        <i class="feat-icon icon-badge-dark"></i>
+    <div class="feature-item feat-tenants">
+        <div class="feat-icon-svg">
+            <!-- Иконка License -->
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M32 8 L54 16 V31 C54 45 45 53 32 58 C19 53 10 45 10 31 V16 Z"/>
+                <path d="M22 32 L29 40 L44 24"/>
+            </svg>
+        </div>
         <div>
             <h3>License & Insured</h3>
             <p>Fully licensed and insured for your peace of mind.</p>
         </div>
     </div>
-    <div class="feature-item">
-        <i class="feat-icon icon-tools-dark"></i>
+
+    <div class="feature-item feat-homeowners">
+        <div class="feat-icon-svg">
+            <!-- Иконка Maintenance -->
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="46" x2="46" y2="18"/>
+                <line x1="46" y1="18" x2="55" y2="15"/>
+                <line x1="46" y1="18" x2="49" y2="9"/>
+                <line x1="18" y1="46" x2="9" y2="49"/>
+                <line x1="18" y1="46" x2="15" y2="55"/>
+                <line x1="46" y1="46" x2="18" y2="18"/>
+                <rect x="41" y="41" width="14" height="9" rx="2" transform="rotate(45 48 45.5)"/>
+                <line x1="45.5" y1="44" x2="50.5" y2="49"/>
+                <line x1="21" y1="15" x2="15" y2="21"/>
+            </svg>
+        </div>
         <div>
             <h3>Professional Maintenance</h3>
             <p>Prompt, reliable maintenance to keep your property in top shape.</p>
         </div>
     </div>
-    <div class="feature-item">
-        <i class="feat-icon icon-chart-dark"></i>
+
+    <div class="feature-item feat-investors">
+        <div class="feat-icon-svg">
+            <!-- Иконка Reporting -->
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 15 H44 V54 H20 Z"/>
+                <rect x="26" y="9" width="12" height="8" rx="2"/>
+                <line x1="25" y1="27" x2="39" y2="27"/>
+                <line x1="25" y1="34" x2="39" y2="34"/>
+                <line x1="25" y1="41" x2="33" y2="41"/>
+                <path d="M38 45 L48 35 L52 39 L42 49 Z"/>
+            </svg>
+        </div>
         <div>
             <h3>Transparent Reporting</h3>
             <p>Clear financial reports and updates so you always stay informed.</p>

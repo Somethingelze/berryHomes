@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. ГЛОБАЛЬНЫЕ СБРОСЫ СТИЛЕЙ И ШРИФТЫ
+   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +13,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Шапка сайта */
+/* ==========================================================================
+   2. ШАПКА САЙТА (ХЭДЕР) С ИНЛАЙН-SVG И ОРИГИНАЛЬНЫМИ ТЕКСТАМИ
+   ========================================================================== */
 .header {
     display: flex;
     justify-content: space-between;
@@ -18,37 +23,45 @@ body {
     padding: 12px 40px;
     border-bottom: 1px solid #e5e7eb;
     background: #ffffff;
+    height: 70px;
 }
+
 .logo-area {
     display: flex;
     align-items: center;
     gap: 12px;
 }
+
 .logo-img {
     height: 42px;
     object-fit: contain;
 }
+
 .logo-text {
     display: flex;
     flex-direction: column;
 }
+
 .brand-name {
     font-size: 18px;
     font-weight: 800;
     color: #111827;
     letter-spacing: 0.5px;
 }
+
 .brand-sub {
     font-size: 9px;
     color: #6b7280;
     letter-spacing: 1.5px;
 }
+
 .logo-divider {
     width: 1px;
     height: 30px;
     background-color: #d1d5db;
     margin: 0 4px;
 }
+
 .second-logo {
     height: 38px;
 }
@@ -58,31 +71,76 @@ body {
     align-items: center;
     gap: 24px;
 }
+
 .nav-menu a {
     text-decoration: none;
     color: #374151;
     font-size: 13.5px;
     font-weight: 500;
+    transition: color 0.2s ease;
 }
+
+.nav-menu a:hover {
+    color: #111827;
+}
+
 .nav-link-with-icon {
     display: inline-flex;
     align-items: center;
     gap: 6px;
 }
 
-/* Сетка баннеров */
+/* Контейнер для SVG-иконок в шапке сайта */
+.nav-header-icon-wrapper {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #374151; /* Цвет берется от ссылки */
+    vertical-align: middle;
+}
+
+.nav-header-icon-wrapper svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.nav-link-with-icon:hover .nav-header-icon-wrapper {
+    color: #111827; /* Иконка темнеет вместе с текстом */
+}
+
+/* ==========================================================================
+   3. ГЛАВНАЯ СЕТКА КАРТОЧЕК (С СОБСТВЕННЫМИ КРУГАМИ ДЛЯ SVG)
+   ========================================================================== */
 .main-cards {
     display: flex;
-    height: calc(100vh - 140px);
-    min-height: 520px;
+    height: calc(100vh - 70px);
     width: 100%;
 }
+
 .card {
     flex: 1;
     background-size: cover;
     background-position: center;
     position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    border-radius 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+.card:hover {
+    transform: scale(1.02);
+    border-radius: 16px;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
 .card-overlay {
     height: 100%;
     width: 100%;
@@ -91,102 +149,206 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 45px;
+    padding: 0 40px;
     color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
 }
 
-/* Затемняющие цветные фильтры в соответствии с макетом */
-.card-tenants .card-overlay { background: rgba(157, 23, 49, 0.88); }
-.card-homeowners .card-overlay { background: rgba(11, 74, 40, 0.88); }
-.card-investors .card-overlay { background: rgba(43, 23, 66, 0.88); }
+.card:hover .card-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+}
 
-/* Контейнеры для иконок в круге */
+/* Отрисовка белого круга вокруг вашей SVG-иконки на карточке */
 .circle-icon-wrapper {
-    width: 76px;
-    height: 76px;
-    border: 2px solid rgba(255, 255, 255, 0.7);
+    width: 90px;
+    height: 90px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff; /* Задает белый цвет линиям вашей SVG-иконки внутри круга */
+    transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.circle-icon-wrapper svg {
+    width: 78px; /* Увеличили размер иконки с 38px до 48px */
+    height: 78px;
+}
+
+.card:hover .circle-icon-wrapper {
+    transform: scale(1.08);
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .card h2 {
-    font-size: 34px;
-    margin-bottom: 16px;
+    font-size: 46px;
+    margin-bottom: 20px;
     font-weight: 600;
     letter-spacing: -0.5px;
 }
+
 .card p {
-    font-size: 14.5px;
-    line-height: 1.5;
-    max-width: 310px;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 420px;
     margin-bottom: 35px;
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
-/* Белые кнопки */
-.btn {
-    background-color: #ffffff;
-    padding: 12px 32px;
-    border-radius: 4px;
-    text-decoration: none;
+.card-link-text {
+    display: inline-block;
+    color: #ffffff;
     font-weight: 700;
-    font-size: 13px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    padding-bottom: 6px;
 }
-.card-tenants .btn { color: #9d1731; }
-.card-homeowners .btn { color: #0b4a28; }
-.card-investors .btn { color: #2b1742; }
-.btn:hover { transform: scale(1.04); }
 
-/* Преимущества внизу */
+.card-link-text::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.card:hover .card-link-text::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* ==========================================================================
+   4. НИЖНИЙ БЛОК ПРЕИМУЩЕСТВ (ФУТЕР)
+   ========================================================================== */
 .features {
     display: flex;
-    justify-content: space-around;
-    padding: 30px 40px;
+    justify-content: space-between;
+    padding: 0;
     background-color: #ffffff;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid #e5e7eb;
+    min-height: 150px;
+    width: 100%;
 }
+
 .feature-item {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 45px 40px;
+}
+
+.feature-item:not(:last-child) {
+    border-right: 1px solid #e5e7eb;
+}
+
+.feat-icon-svg {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
-    gap: 16px;
-    max-width: 320px;
+    justify-content: center;
 }
-.feature-item h3 { font-size: 14.5px; color: #111827; margin-bottom: 3px; font-weight: 700; }
-.feature-item p { font-size: 12.5px; color: #4b5563; line-height: 1.4; }
 
-/* 🛠️ ТЕХНИЧЕСКИЕ CSS-ЗАГЛУШКИ ДЛЯ ИКОНОК (ВМЕСТО ВНЕШНИХ КАРТИНОК И ШРИФТОВ) */
+.feat-icon-svg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.feature-item h3 {
+    font-size: 18px;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.feature-item p {
+    font-size: 14px;
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   5. ЦВЕТОВОЕ СООТВЕТСТВИЕ КОЛОНОК ФУТЕРА
+   ========================================================================== */
+.feat-tenants { color: #9d1731; }
+.feat-tenants h3 { color: #9d1731; }
+
+.feat-homeowners { color: #0b4a28; }
+.feat-homeowners h3 { color: #0b4a28; }
+
+.feat-investors { color: #2b1742; }
+.feat-investors h3 { color: #2b1742; }
+
+/* ==========================================================================
+   6. СТАРЫЕ ТЕХНИЧЕСКИЕ CSS-ЗАГЛУШКИ ДЛЯ ИКОНОК КАРТОЧЕК
+   ========================================================================== */
 .icon, .card-icon, .feat-icon {
     display: inline-block;
     position: relative;
 }
 
-/* Иконки в шапке сайта */
 .icon-user { width: 12px; height: 12px; border: 2px solid #555; border-radius: 50%; box-shadow: 0 5px 0 #555; margin-bottom: 4px; }
 .icon-globe { width: 14px; height: 14px; border: 2px solid #555; border-radius: 50%; }
 .icon-pin { width: 8px; height: 12px; background: #555; border-radius: 4px 4px 0 0; }
 
-/* Белые иконки по центру баннеров */
 .icon-tenant-white { width: 22px; height: 22px; border: 2px solid #fff; border-radius: 50%; box-shadow: 0 8px 0 #fff; margin-bottom: 8px; }
 .icon-home-white { width: 26px; height: 20px; border: 2px solid #fff; border-bottom: 4px solid #fff; border-top: none; }
 .icon-home-white::before { content:''; position:absolute; top:-10px; left:-2px; border-left:15px solid transparent; border-right:15px solid transparent; border-bottom:10px solid #fff; }
 .icon-investor-white { width: 24px; height: 24px; border-left: 3px solid #fff; border-bottom: 3px solid #fff; }
 .icon-investor-white::before { content:'↗'; position:absolute; top: -2px; left: 4px; color:#fff; font-size:20px; font-weight:bold; }
 
-/* Темные иконки в футере */
-.icon-badge-dark { width: 22px; height: 22px; border: 2px solid #111827; border-radius: 50%; }
-.icon-badge-dark::after { content:'✓'; position:absolute; top:0; left:5px; color:#111827; font-weight:bold; }
-.icon-tools-dark { width: 22px; height: 22px; border-left: 4px solid #111827; border-bottom: 4px solid #111827; transform: rotate(-45deg); }
-.icon-chart-dark { width: 24px; height: 24px; border-bottom: 3px solid #111827; border-left: 3px solid #111827; }
-
-/* Мобильная адаптивность */
+/* ==========================================================================
+   7. МОБИЛЬНАЯ АДАПТИВНОСТЬ
+   ========================================================================== */
 @media (max-width: 1024px) {
-    .main-cards { flex-direction: column; height: auto; }
-    .card { height: 380px; }
-    .features { flex-direction: column; gap: 24px; padding: 30px; }
-    .header { flex-direction: column; gap: 16px; text-align: center; }
+    .main-cards {
+        flex-direction: column;
+        height: auto;
+    }
+    .card {
+        height: 420px;
+    }
+    .card h2 {
+        font-size: 32px;
+    }
+    .card p {
+        font-size: 16px;
+        max-width: 320px;
+    }
+    .card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    .features {
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+    .feature-item {
+        width: 100%;
+        padding: 30px 20px;
+    }
+    .feature-item:not(:last-child) {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    .header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        height: auto;
+    }
 }

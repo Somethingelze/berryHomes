@@ -1,12 +1,10 @@
-package net.berryhomes.service.impl.project;
+package net.berryhomes.service.impl.Project;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;
-import net.berryhomes.model.dto.ProjectDocumentDto;
 import net.berryhomes.model.dto.ProjectDto;
-import net.berryhomes.model.dto.ProjectImageDto;
 import net.berryhomes.model.entity.Project;
 import net.berryhomes.exception.business.ProjectNotFoundException;
 import net.berryhomes.mapper.ProjectMapper;
@@ -14,8 +12,6 @@ import net.berryhomes.model.entity.ProjectDocument;
 import net.berryhomes.model.entity.ProjectImage;
 import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.FileStorageService;
-import net.berryhomes.service.ProjectDocumentService;
-import net.berryhomes.service.ProjectImageService;
 import net.berryhomes.service.ProjectService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -26,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

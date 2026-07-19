@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="top-contacts">
-                <span>📞 (412) 555-0123</span>
+                <span>📞 [[${settings.get('site_phone')}]]</span>
             </div>
         </div>
     </div>
@@ -83,9 +83,9 @@
                         <h3 class="card-title">Contact Your Manager</h3>
                         <p class="card-text">Have questions or need assistance? We're here to help.</p>
                         <div class="manager-info">
-                            <strong>Email:</strong> info@berryhomespm.com<br>
-                            <strong>Hours:</strong> Mon - Fri: 9:00 AM - 5:00 PM<br>
-                            <strong>Office:</strong> Pittsburgh, PA 15222
+                            <strong>Email:</strong> <span th:text="${settings.get('site_email')}">info@berryhomespm.com</span><br>
+                            <strong>Hours:</strong> <span th:text="${settings.get('site_hours')}">Mon - Fri: 9:00 AM - 5:00 PM</span><br>
+                            <strong>Office:</strong> <span th:text="${settings.get('site_office')}">Pittsburgh, PA 15222</span>
                         </div>
                     </div>
                     <!-- Кнопка активирует класс кастомного модального окна -->

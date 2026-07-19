@@ -1,4 +1,4 @@
-package net.berryhomes.service.impl.SecurityServices;
+package net.berryhomes.service.impl.Security;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

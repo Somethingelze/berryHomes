@@ -23,8 +23,6 @@ import java.util.UUID;
 public class AdminContactViewController {
 
     private final ContactService contactService;
-    private final ProjectService projectService;
-    private final FileStorageService fileStorageService;
 
     @GetMapping
     public ModelAndView listContacts(

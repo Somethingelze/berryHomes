@@ -1,4 +1,4 @@
-package net.berryhomes.service.impl.FileService;
+package net.berryhomes.service.impl.File;
 
 import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;

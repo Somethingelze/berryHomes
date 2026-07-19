@@ -49,14 +49,14 @@
                 <!-- Поле: Официальный телефон -->
                 <div class="settings-form-group">
                     <label class="input-label-text">Official Phone Number</label>
-                    <input type="text" name="company_phone" th:value="${settings['company_phone']}" class="admin-input-field" placeholder="(412) 555-0123" required="required" />
+                    <input type="text" name="site_phone" th:value="${settings['site_phone']}" class="admin-input-field" placeholder="(412) 555-0123" required="required" />
                     <small class="settings-help-text">Used for click-to-call direct links on mobile layouts.</small>
                 </div>
 
                 <!-- Поле: Официальный Email -->
                 <div class="settings-form-group" style="margin-top: 20px;">
                     <label class="input-label-text">Official Email Address</label>
-                    <input type="email" name="company_email" th:value="${settings['company_email']}" class="admin-input-field" placeholder="info@berryhomespm.com" required="required" />
+                    <input type="email" name="site_email" th:value="${settings['site_email']}" class="admin-input-field" placeholder="info@berryhomespm.com" required="required" />
                     <small class="settings-help-text">All public general inquiry mailto links will route here.</small>
                 </div>
             </div>
@@ -66,18 +66,11 @@
                 <h3 class="settings-card-title">🌐 External Portals Redirects</h3>
                 <p class="settings-card-desc">Configure target links for the "Open Portal" buttons in Tenant and Owner Centers.</p>
 
-                <!-- Поле: Ссылка на портал арендаторов -->
-                <div class="settings-form-group">
-                    <label class="input-label-text">Tenant Portal URL</label>
-                    <input type="url" name="tenant_portal_url" th:value="${settings['tenant_portal_url']}" class="admin-input-field" placeholder="https://tenantcloud.com" required="required" />
-                    <small class="settings-help-text">The URL where residents pay rent and log non-emergency issues.</small>
-                </div>
-
-                <!-- Поле: Ссылка на портал собственников -->
+                <!-- Поле: Ссылка на портал -->
                 <div class="settings-form-group" style="margin-top: 20px;">
-                    <label class="input-label-text">Owner Portal URL</label>
-                    <input type="url" name="owner_portal_url" th:value="${settings['owner_portal_url']}" class="admin-input-field" placeholder="https://tenantcloud.comowner-portal" required="required" />
-                    <small class="settings-help-text">The URL where landlords monitor metrics and financial performance.</small>
+                    <label class="input-label-text">Portal URL</label>
+                    <input type="url" name="portal_url" th:value="${settings['portal_url']}" class="admin-input-field" placeholder="https://tenantcloud.com" required="required" />
+                    <small class="settings-help-text">The URL for tenants and owners.</small>
                 </div>
             </div>
 

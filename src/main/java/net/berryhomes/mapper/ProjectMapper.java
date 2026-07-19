@@ -24,6 +24,8 @@ public interface ProjectMapper {
     @Mapping(target = "projectImages", ignore = true)
     @Mapping(target = "projectDocument", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     Project toProjectEntity(ProjectDto projectDto);
 
     @Mapping(target = "projectId", ignore = true)
@@ -40,6 +42,8 @@ public interface ProjectMapper {
     @Mapping(target = "projectImages", ignore = true)
     @Mapping(target = "projectDocument", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     void updateProjectFromDto(ProjectDto dto, @MappingTarget Project entity);
 
     @AfterMapping

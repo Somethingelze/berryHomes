@@ -29,15 +29,6 @@ public record ProjectDto(
         String cashOnCashReturn,
         String estPayback,
 
-        @DateTimeFormat(pattern = "dd.MM.yyyy, HH:mm")
-        ZonedDateTime createdAt,
-
-        @DateTimeFormat(pattern = "dd.MM.yyyy, HH:mm")
-        ZonedDateTime updatedAt,
-
-        @DateTimeFormat(pattern = "dd.MM.yyyy, HH:mm")
-        ZonedDateTime deletedAt,
-
         List<ProjectImageDto> projectImages,
         ProjectDocumentDto projectDocument
 

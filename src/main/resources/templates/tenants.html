@@ -30,7 +30,7 @@
                 <a href="/" class="brand-text">BERRY <span style="color: #DC3545;">HOMES</span></a>
             </div>
             <div class="top-nav-meta">
-                <span>📞 <a href="tel:4125550123" class="clickable-phone">(412) 555-0123</a></span>
+                <span>📞 <a href="tel:4125550123" class="clickable-phone">[[${settings.get('site_phone')}]]</a></span>
                 <span>📍 Pittsburgh, PA</span>
             </div>
         </div>
@@ -111,11 +111,16 @@
                         <h3 class="card-title">Contact Us</h3>
                         <p class="card-desc">We're here to help during business hours.</p>
                         <div class="manager-details-box">
-                            <strong>Phone:</strong> <a href="tel:4125550123" style="color: inherit; text-decoration: none;">(412) 555-0123</a><br>
-                            <strong>Email:</strong> info@berryhomespm.com<br>
-                            <strong>Hours:</strong> Mon - Fri: 9:00 AM - 5:00 PM<br>
-                            <strong>Office:</strong> Pittsburgh, PA 15222
+                            <strong>Phone:</strong>
+                            <a th:href="${settings?.get('site_phone')} ? 'tel:' + ${settings.get('site_phone')} : '#'"
+                               th:text="${settings?.get('site_phone')} ?: '(412) 555-0123'"
+                               style="color: inherit; text-decoration: none;">(412) 555-0123</a><br>
+
+                            <strong>Email:</strong> <span th:text="${settings?.get('site_email')} ?: 'info@berryhomespm.com'">info@berryhomespm.com</span><br>
+                            <strong>Hours:</strong> <span th:text="${settings?.get('site_hours')} ?: 'Mon - Fri: 9:00 AM - 5:00 PM'">Mon - Fri: 9:00 AM - 5:00 PM</span><br>
+                            <strong>Office:</strong> <span th:text="${settings?.get('site_office')} ?: 'Pittsburgh, PA 15222'">Pittsburgh, PA 15222</span>
                         </div>
+
                     </div>
                     <button class="btn-action-outline" onclick="document.getElementById('tenantMessageModal').classList.add('active')">
                         <span>Send a Message</span>

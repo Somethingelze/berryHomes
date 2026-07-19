@@ -1,29 +1,28 @@
 package net.berryhomes.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.UUID;
+import java.time.ZonedDateTime;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "settings", schema = "berryhomes")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Setting {
+
     @Id
-    @ColumnDefault("gen_random_uuid()")
-    @Column(name = "id", nullable = false)
-    private UUID id;
-
     @Column(name = "setting_key", nullable = false, length = 100)
-    private String settingKey;
+    private String key;
 
-    @Column(name = "setting_value", length = Integer.MAX_VALUE)
-    private String settingValue;
+    @Column(name = "setting_value", nullable = false, columnDefinition = "TEXT")
+    private String value;
 
+    @Column(name = "updated_at")
+    @UpdateTimestamp
+    private ZonedDateTime updatedAt;
 }

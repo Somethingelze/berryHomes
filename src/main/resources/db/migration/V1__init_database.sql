@@ -1,18 +1,6 @@
 CREATE SCHEMA IF NOT EXISTS berryhomes;
 
-CREATE TABLE IF NOT EXISTS berryhomes.admins
-(
-    id               UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
-    login            VARCHAR(50)  NOT NULL UNIQUE,
-    password_hash    VARCHAR(100) NOT NULL,
-    role             VARCHAR(20)  NOT NULL,
-    failed_attempts   INTEGER,
-    account_non_locked BOOLEAN,
-    lock_Time         TIMESTAMPTZ,
-    created_at       TIMESTAMPTZ  NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
--- 1. ТАБЛИЦА ПРОЕКТОВ (Строго по полям вашего Java-класса Project)
+-- 1. ТАБЛИЦА ПРОЕКТОВ
 CREATE TABLE IF NOT EXISTS berryhomes.projects
 (
     id                  UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
@@ -33,7 +21,7 @@ CREATE TABLE IF NOT EXISTS berryhomes.projects
     deleted_at          TIMESTAMPTZ
 );
 
--- 2. ТАБЛИЦА ИЗОБРАЖЕНИЙ ПРОЕКТОВ ( project_images )
+-- 2. ТАБЛИЦА ИЗОБРАЖЕНИЙ ПРОЕКТОВ
 CREATE TABLE IF NOT EXISTS berryhomes.project_images
 (
     id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -44,7 +32,7 @@ CREATE TABLE IF NOT EXISTS berryhomes.project_images
         REFERENCES berryhomes.projects (id) ON DELETE CASCADE
 );
 
--- 3. ТАБЛИЦА ДОКУМЕНТОВ ПРОЕКТОВ ( project_documents )
+-- 3. ТАБЛИЦА ДОКУМЕНТОВ ПРОЕКТОВ
 CREATE TABLE IF NOT EXISTS berryhomes.project_documents
 (
     id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -54,6 +42,7 @@ CREATE TABLE IF NOT EXISTS berryhomes.project_documents
         REFERENCES berryhomes.projects (id) ON DELETE CASCADE
 );
 
+-- 4. ТАБЛИЦА КОНТАКТОВ
 CREATE TABLE IF NOT EXISTS berryhomes.contacts
 (
     id         UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
@@ -69,11 +58,25 @@ CREATE TABLE IF NOT EXISTS berryhomes.contacts
     CONSTRAINT status_chk CHECK (status IN ('NEW', 'IN_PROGRESS', 'CLOSED'))
 );
 
+-- 5. ТАБЛИЦА АДМИНИСТРАТОРОВ САЙТА
+CREATE TABLE IF NOT EXISTS berryhomes.admins
+(
+    id                 UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
+    login              VARCHAR(50)  NOT NULL UNIQUE,
+    password_hash      VARCHAR(100) NOT NULL,
+    role               VARCHAR(20)  NOT NULL,
+    failed_attempts    INTEGER,
+    account_non_locked BOOLEAN,
+    lock_Time          TIMESTAMPTZ,
+    created_at         TIMESTAMPTZ  NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 6. ТАБЛИЦА НАСТРОЕК САЙТА
 CREATE TABLE IF NOT EXISTS berryhomes.settings
 (
-    id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    setting_key   VARCHAR(100) NOT NULL UNIQUE,
-    setting_value TEXT
+    setting_key   VARCHAR(100) PRIMARY KEY NOT NULL UNIQUE,
+    setting_value TEXT,
+    updated_at    TIMESTAMPTZ
 );
 
 CREATE INDEX IF NOT EXISTS idx_contacts_email ON berryhomes.contacts (email);

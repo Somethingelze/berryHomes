@@ -1,14 +1,12 @@
-package net.berryhomes.service.impl.FileService;
+package net.berryhomes.service.impl.File;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.berryhomes.model.entity.Project;
 import net.berryhomes.model.entity.ProjectDocument;
 import net.berryhomes.model.entity.ProjectImage;
 import net.berryhomes.repository.ProjectDocumentRepository;
 import net.berryhomes.repository.ProjectImageRepository;
 import net.berryhomes.repository.ProjectRepository;
-import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

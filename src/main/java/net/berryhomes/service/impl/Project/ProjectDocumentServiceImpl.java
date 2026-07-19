@@ -1,4 +1,4 @@
-package net.berryhomes.service.impl.project;
+package net.berryhomes.service.impl.Project;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import net.berryhomes.mapper.ProjectMapper;
 import net.berryhomes.repository.ProjectDocumentRepository;
 import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.ProjectDocumentService;
-import net.berryhomes.service.impl.FileService.FileStorageServiceImpl;
+import net.berryhomes.service.impl.File.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
