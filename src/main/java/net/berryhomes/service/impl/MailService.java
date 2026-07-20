@@ -41,7 +41,7 @@ public class MailService {
                         "Тип: %s\nСтатус: %s\nДата: %s\n\n" +
                         "Сообщение:\n%s",
                 dto.id(), dto.name(), dto.email(), dto.phone(),
-                dto.contactType(), dto.contactStatus(), dto.createdAt(),
+                dto.type(), dto.status(), dto.createdAt(),
                 dto.message()
         );
 

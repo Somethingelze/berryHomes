@@ -15,7 +15,7 @@ import java.util.ArrayList;
 @Mapper(
         componentModel = MappingConstants.ComponentModel.SPRING,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE // Заставляет MapStruct создавать новые коллекции при маппинге
+        collectionMappingStrategy = CollectionMappingStrategy.TARGET_IMMUTABLE
 )
 public interface ProjectMapper {
 

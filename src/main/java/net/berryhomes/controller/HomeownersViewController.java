@@ -30,8 +30,8 @@ public class HomeownersViewController {
         mav.addObject("portalUrl", PORTAL_URL_VAL);
 
         ContactDto emptyForm = ContactDto.builder()
-                .contactType(ContactType.HOMEOWNER)
-                .contactStatus(ContactStatus.NEW)
+                .type(ContactType.HOMEOWNER)
+                .status(ContactStatus.NEW)
                 .build();
 
         mav.addObject("contactDto", emptyForm);

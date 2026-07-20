@@ -31,8 +31,8 @@ public class TenantsViewController {
         mav.addObject("portalUrl", PORTAL_URL_VAL);
 
         ContactDto emptyForm = ContactDto.builder()
-                .contactType(ContactType.TENANT)
-                .contactStatus(ContactStatus.NEW)
+                .type(ContactType.TENANT)
+                .status(ContactStatus.NEW)
                 .build();
         mav.addObject("contactDto", emptyForm);
 

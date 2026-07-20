@@ -12,32 +12,29 @@ import java.util.UUID;
 
 public interface ContactService {
 
-    @Transactional
     ContactDto saveContact(ContactDto contactDto);
 
-    @Transactional(readOnly = true)
     ContactDto getById(UUID id, Pageable pageable);
 
-    @Transactional(readOnly = true)
     Page<ContactDto> getByName(String name, Pageable pageable);
 
-    @Transactional(readOnly = true)
     Page<ContactDto> getByEmail(String email, Pageable pageable);
 
-    @Transactional(readOnly = true)
     Page<ContactDto> getByPhone(String phone, Pageable pageable);
 
-    @Transactional(readOnly = true)
     Page<ContactDto> getAll(Pageable pageable);
 
-    @Transactional
     ContactDto updateContactStatus(UUID id, ContactStatus contactStatus);
+
+    Page<ContactDto> filterContacts(ContactType type, ContactStatus status, Pageable pageable);
+
+    public Page<ContactDto> searchContacts(String search, Pageable pageable);
 
     long countByStatus(ContactStatus status);
 
-    long countByType(ContactType  type);
+    long countByType(ContactType type);
 
-     List<ContactDto> getRecentLeads(Pageable pageable);
+    List<ContactDto> getRecentLeads(Pageable pageable);
 
     void deleteContact(UUID id);
 }

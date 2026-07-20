@@ -11,6 +11,5 @@ import org.mapstruct.MappingConstants;
 public interface ContactMapper {
 
     ContactDto toDto(Contact contact);
-
     Contact toEntity(ContactDto contactDto);
 }

@@ -28,9 +28,9 @@ public record ContactDto(
         @Size(min = 3, max = 30)
         String phone,
 
-        ContactType contactType,
+        ContactType type,
 
-        ContactStatus contactStatus,
+        ContactStatus status,
 
         @NotBlank
         @Size(min = 5)

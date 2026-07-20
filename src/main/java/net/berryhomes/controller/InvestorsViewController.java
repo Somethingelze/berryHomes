@@ -43,8 +43,8 @@ public class InvestorsViewController {
         mav.addObject("projects", recentProjects);
 
         ContactDto emptyForm = ContactDto.builder()
-                .contactType(ContactType.INVESTOR)
-                .contactStatus(ContactStatus.NEW)
+                .type(ContactType.INVESTOR)
+                .status(ContactStatus.NEW)
                 .build();
 
         mav.addObject("contactDto", emptyForm);

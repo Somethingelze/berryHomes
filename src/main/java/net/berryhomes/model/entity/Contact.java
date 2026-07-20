@@ -38,11 +38,11 @@ public class Contact {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false, length = 20)
-    ContactType contactType;
+    ContactType type;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 20)
-    ContactStatus contactStatus;
+    ContactStatus status;
 
     @Column(name = "message", length = Integer.MAX_VALUE)
     private String message;

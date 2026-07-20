@@ -30,12 +30,51 @@
             <div style="color: #718096; font-size: 0.9rem;" th:text="'Total leads: ' + ${contactPage.totalElements}">Total leads: 0</div>
         </div>
 
-        <!-- ПАНЕЛЬ УМНОГО ПОИСКА -->
+        <!-- ПАНЕЛЬ УМНОГО ПОИСКА И ФИЛЬТРАЦИИ -->
         <div class="search-bar-box">
-            <form th:action="@{/admin/contacts}" method="get" class="search-form">
-                <input type="text" name="search" th:value="${currentSearch}" class="search-input" placeholder="Smart search: type name, email or phone number..." />
-                <button type="submit" class="btn-admin">Search</button>
-                <a th:href="@{/admin/contacts}" th:if="${currentSearch != null and currentSearch != ''}" style="color: #718096; text-decoration: none; padding-top: 10px; font-size: 0.9rem; margin-left: 10px;">Clear filter</a>
+            <form th:action="@{/admin/contacts}" method="get" class="search-form" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+
+                <!-- Верхняя строка: Умный поиск -->
+                <div style="display: flex; gap: 10px; width: 100%;">
+                    <input type="text" name="search" th:value="${currentSearch}" class="search-input" placeholder="Smart search: type name, email or phone number..." style="flex: 1;" />
+                    <button type="submit" class="btn-admin">Search</button>
+                </div>
+
+                <!-- Нижняя строка: Выпадающие списки фильтров -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+
+                    <!-- Фильтр по Типу контакта (TENANT, HOMEOWNER, INVESTOR) -->
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <label style="font-size: 0.85rem; color: #4A5568; font-weight: 600;">Type:</label>
+                        <select name="typeFilter" class="status-select" onchange="this.form.submit()" style="padding: 8px 12px; border-radius: 6px; min-width: 140px;">
+                            <option value="">All Types</option>
+                            <option value="TENANT" th:selected="${currentTypeFilter == 'TENANT'}">Tenant</option>
+                            <option value="HOMEOWNER" th:selected="${currentTypeFilter == 'HOMEOWNER'}">Homeowner</option>
+                            <option value="INVESTOR" th:selected="${currentTypeFilter == 'INVESTOR'}">Investor</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <label style="font-size: 0.85rem; color: #4A5568; font-weight: 600;">Status:</label>
+                        <select name="statusFilter" class="status-select" onchange="this.form.submit()" style="padding: 8px 12px; border-radius: 6px; min-width: 140px;">
+                            <option value="">All Statuses</option>
+                            <option th:each="status : ${statuses}"
+                                    th:value="${status}"
+                                    th:text="${status}"
+                                    th:selected="${status.name() == currentStatusFilter}">
+                                NEW
+                            </option>
+                        </select>
+                    </div>
+
+                    <!-- Ссылка полного сброса всех выбранных параметров фильтрации -->
+                    <a th:href="@{/admin/contacts}"
+                       th:if="${(currentSearch != null and currentSearch != '') or (currentTypeFilter != null and currentTypeFilter != '') or (currentStatusFilter != null and currentStatusFilter != '')}"
+                       style="color: #dc2626; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-left: auto; border-bottom: 1px dashed #dc2626; padding-bottom: 2px;">
+                        Clear all filters
+                    </a>
+                </div>
+
             </form>
         </div>
 
@@ -66,9 +105,9 @@
                         <div style="font-weight: 600;" th:text="${contact.createdAt() != null ? #strings.substring(contact.createdAt().toString(), 0, 16).replace('T', ' ') : ''}">2026-07-16 12:00</div>
                         <!-- Бейджи типов на основе Enum ContactType -->
                         <div class="contact-meta-info">
-                            <span th:if="${contact.contactType().name() == 'TENANT'}" class="badge badge-tenant">Tenant</span>
-                            <span th:if="${contact.contactType().name() == 'HOMEOWNER'}" class="badge badge-owner">Homeowner</span>
-                            <span th:if="${contact.contactType().name() == 'INVESTOR'}" class="badge badge-investor">Investor</span>
+                            <span th:if="${contact.type().name() == 'TENANT'}" class="badge badge-tenant">Tenant</span>
+                            <span th:if="${contact.type().name() == 'HOMEOWNER'}" class="badge badge-owner">Homeowner</span>
+                            <span th:if="${contact.type().name() == 'INVESTOR'}" class="badge badge-investor">Investor</span>
                         </div>
                     </td>
 
@@ -90,11 +129,10 @@
                     <td>
                         <form th:action="@{/admin/contacts/{id}/status(id=${contact.id()})}" method="post" style="margin:0;">
                             <select name="status" class="status-select" onchange="this.form.submit()">
-                                <!-- Итерируем все статусы из Enum ContactStatus -->
                                 <option th:each="status : ${statuses}"
                                         th:value="${status}"
                                         th:text="${status}"
-                                        th:selected="${status == contact.contactStatus()}">
+                                        th:selected="${status == contact.status()}">
                                     NEW
                                 </option>
                             </select>
@@ -112,7 +150,7 @@
                 </tbody>
             </table>
 
-            <!-- БЛОК ПАГИНАЦИИ (SPRING DATA PAGE) -->
+            <!-- БЛОК ПАГИНАЦИИ (SPRING DATA PAGE) С СОХРАНЕНИЕМ ФИЛЬТРОВ -->
             <div class="pagination-box" th:if="${contactPage.totalPages > 1}">
                 <div style="color: #718096; font-size: 0.85rem;"
                      th:text="'Page ' + (${contactPage.number} + 1) + ' of ' + ${contactPage.totalPages}">
@@ -120,21 +158,21 @@
                 </div>
                 <div class="pagination-links">
                     <!-- Ссылка "Назад" -->
-                    <a th:href="@{/admin/contacts(page=${contactPage.number - 1}, search=${currentSearch})}"
+                    <a th:href="@{/admin/contacts(page=${contactPage.number - 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
                        th:classappend="${contactPage.hasPrevious() ? '' : 'disabled'}">
                         &larr; Previous
                     </a>
 
                     <!-- Цифровые страницы -->
                     <a th:each="i : ${#numbers.sequence(0, contactPage.totalPages - 1)}"
-                       th:href="@{/admin/contacts(page=${i}, search=${currentSearch})}"
+                       th:href="@{/admin/contacts(page=${i}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
                        th:text="${i + 1}"
                        th:classappend="${i == contactPage.number ? 'active' : ''}">
                         1
                     </a>
 
                     <!-- Ссылка "Вперед" -->
-                    <a th:href="@{/admin/contacts(page=${contactPage.number + 1}, search=${currentSearch})}"
+                    <a th:href="@{/admin/contacts(page=${contactPage.number + 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
                        th:classappend="${contactPage.hasNext() ? '' : 'disabled'}">
                         Next &rarr;
                     </a>

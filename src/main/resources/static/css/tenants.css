@@ -1,340 +1,583 @@
-/* Базовые стили и шрифты */
-body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #2D3748;
-    background-color: #FFFFFF;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
+/* ==========================================================================
+   1. КОНТЕЙНЕРЫ И СТРУКТУРА СТРАНИЦЫ
+   ========================================================================== */
+.page-wrapper {
+    background-color: #f9fafb;
+    min-height: calc(100vh - 140px);
 }
 
 .container {
-    max-width: 1140px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px;
     box-sizing: border-box;
 }
 
-/* Верхняя панель навигации */
-.navbar {
-    background: #FFFFFF;
-    padding: 15px 0;
-    border-bottom: 1px solid #F0F4F8;
+/* ==========================================================================
+   2. ПАНЕЛЬ ТАБОВ АУДИТОРИИ (ПЕРЕКЛЮЧАТЕЛИ)
+   ========================================================================== */
+.audience-tabs-container {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.navbar-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.brand-block {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand-text {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #0F3D23;
-    text-decoration: none;
-    letter-spacing: 0.5px;
-}
-
-.top-nav-meta {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 0.85rem;
-    color: #718096;
-}
-
-.clickable-phone {
-    color: #2D3748;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s;
-}
-
-.clickable-phone:hover {
-    color: #B8255F;
-}
-
-/* Переключатели аудиторий (Табы) */
 .audience-tabs {
     display: flex;
-    justify-content: center;
-    border-bottom: 1px solid #E2E8F0;
-    background: #FFFFFF;
+    justify-content: flex-start;
+    gap: 32px;
 }
 
 .audience-tabs a {
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 18px 25px;
-    color: #718096;
     text-decoration: none;
+    color: #6b7280;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 20px 0;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.audience-tabs a:hover {
+    color: #111827;
 }
 
 .audience-tabs a.active-tenant {
-    color: #B8255F;
-    border-bottom: 3px solid #B8255F;
-    background-color: #FDF2F5;
+    color: #9d1731; /* Фирменный бордовый цвет арендаторов с главной */
 }
 
-/* ГлавныйHero баннер */
+.audience-tabs a.active-tenant::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #9d1731;
+}
+
+/* ==========================================================================
+   3. ГЕРОЙ БЛОК (HERO BANNER)
+   ========================================================================== */
 .hero-tenant {
-    background-color: #FCFBF7;
-    padding: 50px 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
-.hero-grid {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+.hero-overlay {
+    background: linear-gradient(90deg, rgba(157, 23, 49, 0.95) 0%, rgba(157, 23, 49, 0.75) 100%);
+    padding: 75px 0;
+    color: #ffffff;
 }
 
-.hero-left, .hero-right {
-    flex: 1;
+.hero-content {
+    max-width: 650px;
 }
 
 .display-title {
-    font-size: 2.8rem;
+    font-size: 42px;
     font-weight: 700;
-    margin: 0 0 10px 0;
-    color: #1A202C;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
 }
 
 .lead-text {
-    color: #718096;
-    font-size: 1.1rem;
+    font-size: 17.5px;
+    line-height: 1.6;
+    opacity: 0.95;
     margin: 0;
-    line-height: 1.5;
 }
 
-.placeholder-img-box {
-    width: 100%;
-    height: 240px;
-    background: #EDF2F7;
-    border: 1px dashed #CBD5E1;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #718096;
-}
-
-/* Главная секция карточек услуг */
+/* ==========================================================================
+   4. СЕКЦИЯ ОСНОВНЫХ КАРТОЧЕК УСЛУГ И КНОПКИ
+   ========================================================================== */
 .services-section {
-    padding: 60px 0;
+    padding: 70px 0;
 }
 
 .services-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    justify-content: center;
 }
 
 .card-column {
-    flex: 1;
-    max-width: 360px;
+    display: flex;
 }
 
 .tenant-card {
-    background: #FFFFFF;
-    border: 1px solid #EEF0F2;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
-    padding: 35px 25px;
-    text-align: center;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
-    box-sizing: border-box;
-    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    border-radius 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.tenant-card:hover {
+    transform: scale(1.03);
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    border-color: transparent;
+}
+
+.card-body {
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .card-icon-wrap {
-    width: 56px;
-    height: 56px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 24px auto;
+    background-color: rgba(157, 23, 49, 0.08);
+    color: #9d1731;
+    border: 2px solid rgba(157, 23, 49, 0.2);
 }
 
-.pink-light { background-color: #FDF2F5; color: #B8255F; }
-.red-light { background-color: #FFF5F5; color: #D32F2F; }
-.green-light { background-color: #F0FDF4; color: #16A34A; }
-
 .card-icon-wrap svg {
-    width: 26px;
-    height: 26px;
-    fill: currentColor;
+    width: 32px;
+    height: 32px;
+    display: block;
 }
 
 .card-title {
-    font-size: 1.3rem;
+    font-size: 22px;
     font-weight: 700;
+    color: #111827;
     margin: 0 0 12px 0;
-    color: #1A202C;
 }
 
 .card-desc {
-    color: #718096;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    margin: 0 0 20px 0;
+    color: #4b5563;
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0;
 }
 
-/* Списки */
+/* Списки внутри карточек */
 .bullet-emergency-list {
     list-style: none;
     padding: 0;
-    margin: 0 auto 20px auto;
-    max-width: 180px;
+    margin: 20px auto 0 auto;
     text-align: left;
-    font-size: 0.88rem;
-    color: #C62828;
-    font-weight: 500;
-    line-height: 1.8;
+    max-width: 200px;
 }
 
+.bullet-emergency-list li {
+    font-size: 14px;
+    color: #111827;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.bullet-emergency-list li::before {
+    content: "•";
+    color: #dc2626;
+    font-weight: bold;
+    display: inline-block;
+    width: 16px;
+    font-size: 16px;
+}
+
+/* Информационный блок менеджера */
 .manager-details-box {
+    margin-top: 20px;
+    border-top: 1px dashed #e5e7eb;
+    padding-top: 18px;
     text-align: left;
-    background: #F8F9FA;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 0.82rem;
-    color: #4A5568;
-    line-height: 1.6;
-    border: 1px solid #E2E8F0;
+    width: 100%;
 }
 
-/* Кнопки действий */
-.btn-action-pink { background-color: #B8255F; color: #FFFFFF; border: none; font-weight: 600; padding: 13px; text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; cursor: pointer; }
-.btn-action-pink:hover { background-color: #961e4e; }
+.detail-row {
+    font-size: 14px;
+    color: #4b5563;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
 
-.btn-action-red { background-color: #D32F2F; color: #FFFFFF; border: none; font-weight: 600; padding: 13px; text-decoration: none; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; cursor: pointer; }
-.btn-action-red:hover { background-color: #B71C1C; }
+.detail-row strong {
+    color: #111827;
+}
 
-.btn-action-outline { border: 2px solid #2D3748; color: #2D3748; font-weight: 600; padding: 11px; background: transparent; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; box-sizing: border-box; font-size: 0.9rem; cursor: pointer; transition: background 0.2s, color 0.2s; }
-.btn-action-outline:hover { background-color: #2D3748; color: #FFFFFF; }
+.detail-row a {
+    color: #9d1731;
+    text-decoration: none;
+    font-weight: 500;
+}
 
-/* Секция документов (Нижняя часть макета) */
+.detail-row a:hover {
+    text-decoration: underline;
+}
+
+/* Универсальные кнопки действий для ссылок */
+.btn-block-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 54px;
+    padding: 0 20px;
+    background-color: #9d1731;
+    color: #ffffff;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-block-action:hover {
+    background-color: #7a1226;
+}
+
+.btn-block-action .arrow-svg {
+    width: 16px;
+    height: 16px;
+}
+
+.btn-block-action.btn-danger-alert {
+    background-color: #dc2626;
+}
+
+.btn-block-action.btn-danger-alert:hover {
+    background-color: #b91c1c;
+}
+
+.btn-block-action.btn-outline-burgundy {
+    background-color: transparent;
+    color: #9d1731;
+    border: 2px solid #9d1731; /* Насыщенная сплошная рамка */
+}
+
+.btn-block-action.btn-outline-burgundy:hover {
+    background-color: #9d1731;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   5. СЕКЦИЯ ДОКУМЕНТОВ (TENANT DOCUMENTS)
+   ========================================================================== */
 .documents-section {
-    background-color: #FAFAFA;
-    border-top: 1px solid #E2E8F0;
-    border-bottom: 1px solid #E2E8F0;
-    padding: 60px 0;
-    text-align: center;
+    padding: 70px 0 80px 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb;
+}
+
+.section-header {
+    margin-bottom: 45px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.section-subtitle {
+    font-size: 15px;
+    color: #6b7280;
+    margin: 8px 0 0 0;
 }
 
 .docs-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-    justify-content: center;
-    margin-top: 35px;
 }
 
 .doc-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
-    padding: 30px 20px;
-    flex: 1;
-    max-width: 340px;
-    box-sizing: border-box;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 35px 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 
-.doc-icon-top {
-    color: #B8255F;
-    font-size: 1.8rem;
-    margin-bottom: 12px;
+.doc-body {
+    margin-bottom: 24px;
+}
+
+.doc-icon-svg {
+    color: #9d1731;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.doc-icon-svg svg {
+    width: 36px;
+    height: 36px;
 }
 
 .doc-title {
-    font-size: 1rem;
+    font-size: 18px;
     font-weight: 700;
-    margin: 0 0 8px 0;
+    color: #111827;
+    margin: 0 0 10px 0;
 }
 
 .doc-desc {
-    color: #718096;
-    font-size: 0.82rem;
-    line-height: 1.4;
-    margin: 0 0 20px 0;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
 }
 
-.btn-download-link {
-    color: #2D3748;
+.doc-download-link {
+    color: #9d1731;
     text-decoration: none;
+    font-size: 14px;
     font-weight: 700;
-    font-size: 0.85rem;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-.btn-download-link:hover {
-    text-decoration: underline;
-    color: #B8255F;
+    transition: color 0.2s ease;
 }
 
-/* Отзывы и Футер */
-.review-banner-box {
-    padding: 40px 0;
+.doc-download-link:hover {
+    color: #7a1226;
+    text-decoration: underline;
 }
-.review-bg-card {
-    background-color: #FDFBF7;
-    border-radius: 12px;
-    padding: 30px;
+
+/* ==========================================================================
+   6. МОДАЛЬНОЕ ОКНО И ФОРМА ОБРАТНОЙ СВЯЗИ
+   ========================================================================== */
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.custom-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    position: relative;
+    z-index: 3001;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.modal-header {
+    padding: 24px 30px;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
     justify-content: space-between;
-    gap: 30px;
-}
-.review-left-side { display: flex; align-items: center; gap: 20px; }
-.review-btn-dark { background: #1A202C; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; text-decoration: none; cursor: pointer; }
-.review-btn-dark:hover { background: #2D3748; }
-
-footer {
-    background: #0B1C10;
-    color: #718096;
-    padding: 25px 0;
-    font-size: 0.82rem;
-    text-align: center;
+    align-items: center;
 }
 
-/* Модальное окно */
-.custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
-.custom-modal.active { display: flex; }
-.modal-content { background: #FFFFFF; border-radius: 12px; width: 100%; max-width: 480px; padding: 30px; box-sizing: border-box; position: relative; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #A0AEC0; }
-.form-group { margin-bottom: 15px; text-align: left; }
-.form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #4A5568; margin-bottom: 5px; }
-.form-control { width: 100%; padding: 10px; border: 1px solid #CBD5E1; border-radius: 6px; box-sizing: border-box; }
-.modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
-.btn-light { background: #EDF2F7; color: #4A5568; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-.btn-primary { background: #B8255F; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+.modal-heading {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
 
-/* Анимации Toast */
-@keyframes fadeInDown { from { opacity: 0; transform: translate(-50%, -40px); } to { opacity: 1; transform: translate(-50%, 0); } }
-@keyframes fadeOutUp { from { opacity: 1; transform: translate(-50%, 0); } to { opacity: 0; transform: translate(-50%, -40px); display: none; } }
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: #9ca3af;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
 
-/* Адаптивность */
-@media (max-width: 992px) {
-    .hero-grid, .services-grid, .docs-grid, .review-bg-card { flex-direction: column; text-align: center; }
-    .card-column, .doc-card { max-width: 100%; width: 100%; }
-    .manager-details-box { text-align: center; }
-    .review-left-side { flex-direction: column; }
+.close-btn:hover {
+    color: #111827;
+}
+
+form {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14.5px;
+    color: #111827;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #9d1731;
+    box-shadow: 0 0 0 3px rgba(157, 23, 49, 0.12);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.btn-secondary {
+    padding: 11px 20px;
+    background: #f3f4f6;
+    color: #374151;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #e5e7eb;
+}
+
+.btn-submit {
+    padding: 11px 24px;
+    background: #9d1731;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+    background: #7a1226;
+}
+
+/* ==========================================================================
+   7. УВЕДОМЛЕНИЯ ОПОВЕЩЕНИЙ (TOAST ANIMATIONS)
+   ========================================================================== */
+.toast-notification {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #10b981; /* Зеленый цвет успеха */
+    color: #FFFFFF;
+    padding: 16px 32px;
+    border-radius: 10px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    z-index: 4000;
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+.toast-notification svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translate(-50%, -30px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@keyframes fadeOutUp {
+    from { opacity: 1; transform: translate(-50%, 0); }
+    to { opacity: 0; transform: translate(-50%, -30px); }
+}
+
+/* ==========================================================================
+   8. МОБИЛЬНАЯ АДАПТИВНОСТЬ
+   ========================================================================= */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+    .audience-tabs {
+        gap: 20px;
+    }
+    .audience-tabs a {
+        font-size: 12.5px;
+        padding: 16px 0;
+    }
+    .display-title {
+        font-size: 32px;
+    }
+    .lead-text {
+        font-size: 16px;
+    }
+    .hero-overlay {
+        padding: 55px 0;
+    }
+    .services-grid, .docs-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .tenant-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
 }

@@ -85,9 +85,9 @@
                             </div>
                             <div>
                                 <!-- Вывод источника в виде компактного текстового маркера -->
-                                <span th:if="${lead.contactType().name() == 'TENANT'}" style="color: #B8255F; font-size: 0.8rem; font-weight: 600;">[Tenant]</span>
-                                <span th:if="${lead.contactType().name() == 'HOMEOWNER' or lead.contactType().name() == 'OWNER'}" style="color: #16A34A; font-size: 0.8rem; font-weight: 600;">[Owner]</span>
-                                <span th:if="${lead.contactType().name() == 'INVESTOR'}" style="color: #4F46E5; font-size: 0.8rem; font-weight: 600;">[Investor]</span>
+                                <span th:if="${lead.type().name() == 'TENANT'}" style="color: #B8255F; font-size: 0.8rem; font-weight: 600;">[Tenant]</span>
+                                <span th:if="${lead.type().name() == 'HOMEOWNER'}" style="color: #16A34A; font-size: 0.8rem; font-weight: 600;">[Owner]</span>
+                                <span th:if="${lead.type().name() == 'INVESTOR'}" style="color: #4F46E5; font-size: 0.8rem; font-weight: 600;">[Investor]</span>
                             </div>
                         </li>
                     </ul>
