@@ -156,7 +156,7 @@
             </div>
             <form th:action="@{/investors/message}" th:object="${contactDto}" method="POST">
 
-                <input type="hidden" th:field="*{contactType}" />
+                <input type="hidden" th:field="*{type}" />
 
                 <div class="form-group">
                     <label class="form-label">Your Name</label>

@@ -136,8 +136,8 @@
             <form th:action="@{/homeowners/message}" th:object="${contactDto}" method="POST">
 
                 <!-- Скрытые поля для передачи системных Enum-параметров, которые вы заложили в ModelAndView -->
-                <input type="hidden" th:field="*{contactType}" />
-                <input type="hidden" th:field="*{contactStatus}" />
+                <input type="hidden" th:field="*{type}" />
+                <input type="hidden" th:field="*{status}" />
 
                 <div class="form-group">
                     <label class="form-label">Your Name</label>

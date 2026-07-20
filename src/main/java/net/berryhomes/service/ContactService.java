@@ -3,6 +3,7 @@ package net.berryhomes.service;
 import net.berryhomes.model.ContactStatus;
 import net.berryhomes.model.ContactType;
 import net.berryhomes.model.dto.ContactDto;
+import net.berryhomes.model.entity.Contact;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +27,7 @@ public interface ContactService {
 
     ContactDto updateContactStatus(UUID id, ContactStatus contactStatus);
 
-    Page<ContactDto> filterContacts(ContactType type, ContactStatus status, Pageable pageable);
-
-    public Page<ContactDto> searchContacts(String search, Pageable pageable);
+    Page<Contact> getContacts(String search, ContactType type, ContactStatus status, Pageable pageable);
 
     long countByStatus(ContactStatus status);
 

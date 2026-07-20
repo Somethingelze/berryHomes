@@ -37,26 +37,17 @@ public class AdminContactViewController {
             @RequestParam(required = false) ContactStatus statusFilter) {
 
         ModelAndView mav = new ModelAndView("admin/contacts");
+
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
-        Page<ContactDto> contactPage;
 
-        if (search != null && !search.trim().isEmpty()) {
-            contactPage = contactService.searchContacts(search, pageable);
-
-            mav.addObject("currentSearch", search.trim());
-            mav.addObject("currentTypeFilter", "");
-            mav.addObject("currentStatusFilter", "");
-        }
-        else {
-            contactPage = contactService.filterContacts(typeFilter, statusFilter, pageable);
-
-            mav.addObject("currentSearch", "");
-            mav.addObject("currentTypeFilter", typeFilter != null ? typeFilter.name() : "");
-            mav.addObject("currentStatusFilter", statusFilter != null ? statusFilter.name() : "");
-        }
+        Page<Contact> contactPage = contactService.getContacts(search, typeFilter, statusFilter, pageable);
 
         mav.addObject("contactPage", contactPage);
         mav.addObject("statuses", ContactStatus.values());
+
+        mav.addObject("currentSearch", (search != null) ? search.trim() : "");
+        mav.addObject("currentTypeFilter", typeFilter != null ? typeFilter.name() : "");
+        mav.addObject("currentStatusFilter", statusFilter != null ? statusFilter.name() : "");
 
         return mav;
     }

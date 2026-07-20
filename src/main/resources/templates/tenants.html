@@ -252,8 +252,8 @@
         <form th:action="@{/tenants/message}" th:object="${contactDto}" method="POST">
 
             <!-- Скрытые поля для системных параметров (Бэкенд-логика) -->
-            <input type="hidden" th:field="*{contactType}" />
-            <input type="hidden" th:field="*{contactStatus}" />
+            <input type="hidden" th:field="*{type}" />
+            <input type="hidden" th:field="*{status}" />
 
             <div class="form-group">
                 <label class="form-label">Your Name</label>

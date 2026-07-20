@@ -92,8 +92,8 @@ public class ContactServiceImpl implements ContactService {
                 .map(contactMapper::toDto);
     }
 
-    @Transactional
     @Override
+    @Transactional
     public ContactDto updateContactStatus(UUID id, ContactStatus contactStatus) {
         log.info("Start updating contact by id: {} to status: {}", id, contactStatus);
 
@@ -107,71 +107,28 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ContactDto> filterContacts(ContactType type, ContactStatus status, Pageable pageable) {
-        if (type != null && status != null) {
-            return contactRepository.findByTypeAndStatus(type, status, pageable)
-                    .orElseThrow(() -> {
-                        log.info("No contact with type {} and status {} was found", type, status);
-                        return new ContactNotFoundException("Contacts with type " + type +
-                                " and status " + status + " was not found");
-                    })
-                    .map(contactMapper::toDto);
-        }
-        if (type != null) {
-            return contactRepository.findByType(type, pageable)
-                    .orElseThrow(() -> {
-                        log.info("No contact with type {} was found", type);
-                        return new ContactNotFoundException("Contacts with type " + type + "was not found");
-                    })
-                    .map(contactMapper::toDto);
-        }
-        if (status != null) {
-            return contactRepository.findByStatus(status, pageable)
-                    .orElseThrow(() -> {
-                        log.info("No contact with staus {} was found", status);
-                        return new ContactNotFoundException("Contacts with status " + status + "was not found");
-                    })
-                    .map(contactMapper::toDto);
-        }
-        return contactRepository.findAll(pageable)
-                .map(contactMapper::toDto);
-    }
 
-    @Transactional(readOnly = true)
-    public Page<ContactDto> searchContacts(String search, Pageable pageable) {
-        String query = search.trim();
-        if (query.contains("@")) {
-            return contactRepository.findAllByEmailContainingIgnoreCase(query, pageable).orElseThrow(() -> {
-                log.info("No contact found with email: {}", search);
-                return new ContactNotFoundException("Contact with email " + search + " was not found");
-            })
-                    .map(contactMapper::toDto);
-        } else if (query.matches(".*\\d+.*")) {
-            return contactRepository.findAllByPhoneContainingIgnoreCase(query, pageable).orElseThrow(() -> {
-                log.info("No contact found with phone: {}", search);
-                throw new ContactNotFoundException("Contact with phone " + search + " was not found");
-                    })
-                    .map(contactMapper::toDto);
-        } else {
-            return contactRepository.findAllByNameContainingIgnoreCase(query, pageable).orElseThrow(() ->    {
-                log.info("No contact with name {} was found", search);
-                return new ContactNotFoundException("No contact with name " + search + " was not found");
-                    })
-                    .map(contactMapper::toDto);
-        }
+    public Page<Contact> getContacts(String search, ContactType type, ContactStatus status, Pageable pageable) {
+        String query = (search != null) ? search.trim() : "";
+        return contactRepository.findByAllFilters(query, type, status, pageable);
     }
 
     @Override
+    @Transactional(readOnly = true)
+
     public long countByStatus(ContactStatus status) {
         return contactRepository.countByStatus(status);
     }
 
     @Override
+    @Transactional(readOnly = true)
+
     public long countByType(ContactType type) {
         return contactRepository.countByType(type);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ContactDto> getRecentLeads(Pageable pageable) {
         return contactRepository.findAll(pageable).getContent().stream()
                 .map(contactMapper::toDto)
