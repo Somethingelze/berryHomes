@@ -1,0 +1,507 @@
+    /* Базовые параметры разметки и сброс отступов */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Глобальные переменные проекта: Цвета и палитры брендов */
+    :root {
+        --bg-creamy-fallback: #F4EFE2; /* Насыщенный уютный бежевый фон, если картинка текстуры не прогрузилась */
+        --color-tenants: #802A36;
+        --color-homeowners: #1B3824;
+        --color-investors: #6A3B73;   /* Яркий фиолетовый */
+        --text-dark: #2B2925;         /* Контрастный темный текст */
+        --text-muted: #575349;        /* Выразительный приглушенный текст подписей */
+        --border-soft: #bdb6a7;       /* Цвет тонких вертикальных разделителей */
+    }
+
+    /* Настройки отображения шрифтов и акварельного фонда страниц */
+    body {
+        /* Lora на первом месте для мягкого, округлого и уютного вида всего текста на сайте */
+        font-family: 'Lora', 'Georgia', serif;
+        background-color: var(--bg-creamy-fallback);
+        background-image: url("../images/main/beige_bg.JPEG");
+        background-repeat: repeat;
+        background-size: 500px auto;
+        color: var(--text-dark);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* Главный фиксированный контейнер сетки сайта */
+    .page-container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    /* Общие стили для нативных векторных inline SVG элементов */
+    .icon-svg, .arrow-svg, .badge-svg, .feature-svg, .btn-arrow-svg, .nav-svg-icon {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /* HEADER (ШАПКА САЙТА) */
+    .header {
+        background-color: transparent;
+        border-bottom: 1px solid var(--border-soft);
+        padding: 22px 0;
+        margin-bottom: 25px;
+    }
+
+    .header-container {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .logo img {
+        height: 65px;
+        width: auto;
+    }
+
+    .logo-text p {
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--text-muted);
+        margin-top: 2px;
+        font-weight: 600;
+    }
+
+    .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .nav-links-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-menu a {
+        text-decoration: none;
+        color: var(--text-dark);
+        font-size: 14px;
+        font-weight: 600; /* Повышенная плотность ссылок */
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .nav-divider {
+        width: 1px;
+        height: 14px;
+        background-color: var(--border-soft);
+        margin: 0 15px;
+    }
+
+    /* Иконки в хэдере: размер прежний, но линии стали жирнее */
+    .nav-svg-icon {
+        width: 20px;
+        height: 20px;
+        stroke-width: 3.5px !important;
+    }
+
+    .location {
+        font-weight: 700 !important;
+    }
+
+    /* ==========================================================================
+       ВЕРХНИЙ РЯД: ОТЦЕНТРОВАННЫЕ КНОПКИ И СКВОЗНЫЕ РАЗДЕЛИТЕЛИ ОДИНАКОВОЙ ДЛИНЫ
+       ========================================================================== */
+    .quick-nav-row {
+        display: grid;
+        /* Кнопки перестроятся сами, когда их ширина станет меньше 280px */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        padding: 5px 0 15px 0;
+        margin-bottom: 25px;
+        width: 100%;
+    }
+
+    .quick-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        max-width: 360px; /* Жестко ограничиваем размер, чтобы кнопка не росла вширь */
+        margin: 0 auto;  /* Центрируем кнопку в своей ячейке */
+        padding: 8px 15px;
+        position: relative;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.25s ease;
+    }
+
+    /* Вертикальные разделительные линии одинаковой длины между кнопками */
+    .quick-button:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: -4px; /* Линия встает ровно по центру зазора 7px между ячейками */
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: var(--border-soft);
+    }
+
+    /* Контейнер для группировки иконки и текстового описания кнопки */
+    .quick-content {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        text-align: center;
+    }
+
+    /* Размеры иконок в верхних кнопках навигации (приравнены к нижним преимуществам) */
+    .icon-svg {
+        width: 50px;
+        height: 50px;
+        stroke-width: 4px !important;
+        transition: transform 0.25s ease;
+    }
+
+    /* Cтрелочки перехода */
+    .arrow-svg, .btn-arrow-svg {
+        width: 40px;
+        height: 40px;
+        stroke-width: 3.5px !important;
+        transition: transform 0.25s ease;
+    }
+
+    .quick-text h3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 19px;
+        font-weight: 700;
+        transform-origin: center center;
+    }
+
+    .quick-text p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 15px;
+        color: var(--text-dark);
+        font-weight: 500;
+        margin-top: 1px;
+        transform-origin: center center;
+    }
+
+    /* Анимация текста, главной иконки и стрелочки при наведении */
+    .quick-button:hover .quick-text {
+        transform: scale(1.03);
+    }
+
+    .quick-button:hover .icon-svg {
+        transform: scale(1.08);
+    }
+
+    .quick-button:hover .arrow-svg {
+        transform: scale(1.15) translateX(3px); /* Стрелка чуть сдвигается вперед */
+    }
+
+    /* Плавный переход для текстового контейнера в кнопке */
+    .quick-text {
+        transition: transform 0.25s ease;
+        transform-origin: left center;
+    }
+
+    /* ==========================================================================
+       СРЕДНИЙ РЯД: ТРИ КАРТОЧКИ (СКРУГЛЕННЫЙ ВЕРХ И АКВАРЕЛЬНОЕ ТАЯНИЕ)
+       ========================================================================== */
+    .main-cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+        margin-bottom: 30px;
+    }
+
+    /* Элемент главной карточки */
+    .main-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid rgba(211, 202, 186, 0.4); /* Едва заметная легкая граница */
+        border-radius: 14px;
+        background-color: rgba(247, 244, 235, 0.3); /* Легкая подложка для проявления границы */
+        padding-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Анимация увеличения карточки на размер зазора при наведении курсора */
+    .main-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(117, 112, 101, 0.15);
+        z-index: 10; /* Карточка перекрывает соседей при увеличении */
+    }
+
+    /* Контейнер картинки со скругленным верхом и мягким акварельным низом */
+    .image-mask-container {
+        width: 100%;
+        height: 330px;
+        overflow: hidden;
+        position: relative;
+        border-radius: 14px 14px 0 0;
+        -webkit-mask-image: -webkit-linear-gradient(to bottom, #ffffff 72%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #ffffff 72%, transparent 100%);
+    }
+
+    .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Зона размещения текстового контента под изображением карточки */
+    .card-content-area {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 10px;
+        position: relative;
+        margin-top: -15px; /* Подтягиваем весь текстовый блок ближе к картинке */
+    }
+
+    /* Увеличенный круглый бейдж под новые размеры иконок */
+    .floating-badge-circle {
+        background-color: var(--bg-creamy-fallback);
+        border: 1px solid var(--border-soft);
+        width: 86px;
+        height: 86px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -65px; /* Сильнее вытолкнули круг наверх на изображение */
+        margin-bottom: 0px; /* Полностью убрали отступ снизу, чтобы текст начинался сразу */
+        z-index: 5;
+        transition: transform 0.3s ease;
+    }
+
+    /* Интерактивный подъем круглой иконки при наведении на карточку */
+    .main-card:hover .floating-badge-circle {
+        transform: scale(1.05) translateY(-5px);
+    }
+
+    /* Иконки внутри карточек увеличены в полтора раза */
+    .badge-svg {
+        width: 60px;
+        height: 60px;
+        stroke-width: 4px !important; /* Жирный контур */
+    }
+
+    .main-card h2 {
+        font-family: 'Playfair Display', 'Georgia', serif;
+        font-size: 36px;
+        font-weight: 700;
+        margin-top: 10px; /* Небольшой аккуратный зазор от круга */
+        margin-bottom: 8px;
+    }
+
+    /* Текст описания внутри карточек сделан темным и плотным */
+    .description-text {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--text-dark);
+        font-weight: 500;
+        max-width: 290px;
+        height: 75px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+    }
+
+    /* Стилизация и геометрия кнопок под карточками */
+    .action-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 185px;
+        padding: 13px 22px;
+        background-color: transparent;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+
+    .action-btn span {
+        white-space: nowrap;
+    }
+
+
+    /* ==========================================================================
+       НИЖНИЙ РЯД: ОТЦЕНТРОВАННЫЕ ПРЕИМУЩЕСТВА С ИДЕНТИЧНЫМИ РАЗДЕЛИТЕЛЯМИ
+       ========================================================================== */
+    .features-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 7px;
+        padding-bottom: 40px;
+        width: 100%;
+    }
+
+    .feature-card {
+        display: flex;
+        align-items: center;
+        text-align: center; /* Центрируем сами строки текста */
+        gap: 16px; /* Зазор между иконкой преимущества и его заголовком */
+        width: 100%;
+        padding: 0 15px;
+        position: relative;
+    }
+
+    /* Вертикальные разделительные линии в нижнем блоке (идентичны верхним) */
+    .feature-card:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: -4px; /* Линия встает ровно по центру зазора 7px */
+        top: 0;
+        height: 100%;
+        width: 1px;
+        background-color: var(--border-soft);
+    }
+
+    .feature-icon-box {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+    }
+
+    /* Нижние SVG иконки преимуществ сделаны крупными и жирными */
+    .feature-svg {
+        width: 100%;
+        height: 100%;
+        stroke-width: 4px !important; /* Максимальная жирность линий */
+    }
+
+    .feature-info-text h4 {
+        font-size: 16.5px;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    /* Мелкий текст преимуществ сделан более контрастным */
+    .feature-info-text p {
+        font-size: 13.5px;
+        color: var(--text-dark);
+        line-height: 1.4;
+        font-weight: 500;
+    }
+
+
+    /* ==========================================================================
+       РАСПРЕДЕЛЕНИЕ ЦВЕТОВЫХ КАТЕГОРИЙ ДЛЯ INLINE SVG
+       ========================================================================== */
+
+    /* Направление Арендаторов (Бордовые элементы) */
+    .item-tenants h3, .item-tenants h2, .item-tenants h4,
+    .item-tenants .icon-svg, .item-tenants .arrow-svg,
+    .item-tenants .badge-svg, .item-tenants .feature-svg, .item-tenants .btn-arrow-svg {
+        color: var(--color-tenants);
+    }
+    .item-tenants .action-btn { border: 1px solid var(--color-tenants); color: var(--color-tenants); }
+    .item-tenants .action-btn:hover { background-color: var(--color-tenants); color: #FFFFFF; }
+
+    /* Направление Домовладельцев (Зеленые элементы) */
+    .item-homeowners h3, .item-homeowners h2, .item-homeowners h4,
+    .item-homeowners .icon-svg, .item-homeowners .arrow-svg,
+    .item-homeowners .badge-svg, .item-homeowners .feature-svg, .item-homeowners .btn-arrow-svg {
+        color: var(--color-homeowners);
+    }
+    .item-homeowners .action-btn { border: 1px solid var(--color-homeowners); color: var(--color-homeowners); }
+    .item-homeowners .action-btn:hover { background-color: var(--color-homeowners); color: #FFFFFF; }
+
+    /* Направление Инвесторов (Светлые фиолетовые элементы) */
+    .item-investors h3, .item-investors h2, .item-investors h4,
+    .item-investors .icon-svg, .item-investors .arrow-svg,
+    .item-investors .badge-svg, .item-investors .feature-svg, .item-investors .btn-arrow-svg {
+        color: var(--color-investors);
+    }
+    .item-investors .action-btn { border: 1px solid var(--color-investors); color: var(--color-investors); }
+    .item-investors .action-btn:hover { background-color: var(--color-investors); color: #FFFFFF; }
+
+    .action-btn:hover .btn-arrow-svg { color: #FFFFFF !important; }
+
+
+    /* ==========================================================================
+       ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ И МОБИЛЬНАЯ АДАПТИВНОСТЬ
+       ========================================================================== */
+    .decor-berry {
+        position: absolute;
+        bottom: -10px;
+        width: 155px;
+        height: auto;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .left-berry { left: 10px; }
+    .right-berry { right: 10px; }
+
+    /* Адаптивный сброс сетки на мобильных разрешениях */
+    /* Промежуточная адаптивность: включается ТОЛЬКО при сужении экрана менее 1200px */
+    @media (max-width: 1200px) {
+        /* Сжимаем зазоры между элементами меню хедера */
+        .nav-menu {
+            gap: 12px;
+        }
+        /* Аккуратно ужимаем отступы вокруг палочек-разделителей */
+        .nav-divider {
+            margin: 0 6px;
+        }
+        /* Делаем ссылки в меню чуть компактнее */
+        .nav-menu a {
+            font-size: 13px;
+            gap: 5px;
+        }
+        .logo-text h1 {
+            font-size: 20px;
+        }
+
+        /* Ужимаем внутренние боковые отступы в кнопках верхнего блока */
+        .quick-button {
+            padding: 4px 5px;
+            gap: 6px;
+        }
+        /* Корректируем позицию разделителей под уменьшенный зазор */
+        .quick-button:not(:last-child)::after {
+            right: -5px;
+        }
+        /* Пропорционально уменьшаем шрифты верхних кнопок при сжатии окна */
+        .quick-text h3 {
+            font-size: 15.5px;
+        }
+        .quick-text p {
+            font-size: 12px;
+        }
+        /* Слегка уменьшаем иконки, чтобы они гарантированно влезли по ширине карточек */
+        .icon-svg {
+            width: 34px;
+            height: 34px;
+        }
+        .arrow-svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+
