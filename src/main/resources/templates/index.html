@@ -1,33 +1,52 @@
 <!DOCTYPE html>
 <!-- Пространство имен Thymeleaf и локализация страницы на английский язык -->
-<html xmlns:th="http://thymeleaf.org" lang="en">
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLanguage}">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta charset="UTF-8">
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Berry Homes - Property Management</title>
     <!-- Основной файл стилей главной страницы -->
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <!-- Шрифтовые наборы Poppins и Playfair Display -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link href="https://googleapis.com" rel="stylesheet">
+    <!-- Подключает общие стили публичного интерфейса. -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
 </head>
-<body>
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
+<body class="home-page">
 
 <!-- Включение фрагмента шапки сайта -->
-<div th:replace="~{fragments/header :: site-header}"></div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div th:replace="~{fragments/header :: public-header}">
+</div>
 
 <!-- Главный контейнер контента страницы -->
+<!-- Элемент main формирует соответствующую часть интерфейса. -->
 <main class="page-container">
 
     <!-- Левый декоративный элемент в углу экрана -->
-    <img th:src="@{/images/main/berries_left.png}" alt="" class="decor-berry left-berry">
+    <!-- Элемент img формирует соответствующую часть интерфейса. -->
+    <img th:src="@{/images/main/berries_.png}" alt="" class="decor-berry left-berry">
     <!-- Правый декоративный элемент в углу экрана -->
-    <img th:src="@{/images/main/berries_right.png}" alt="" class="decor-berry right-berry">
+    <!-- Элемент img формирует соответствующую часть интерфейса. -->
+    <img th:src="@{/images/main/berries_.png}" alt="" class="decor-berry right-berry">
 
     <!-- ВЕРХНИЙ БЛОК: Кнопки быстрой навигации со сквозными ссылками -->
+    <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="quick-nav-row">
 
         <!-- Ссылка на страницу Tenants -->
+        <!-- Элемент a формирует соответствующую часть интерфейса. -->
         <a th:href="@{/tenants}" class="quick-button item-tenants">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="quick-content">
                 <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="39" cy="21" r="6"/>
@@ -35,8 +54,11 @@
                     <circle cx="24" cy="25" r="7"/>
                     <path d="M12 49 C12 38 17 31 24 31 C31 31 36 38 36 49"/>
                 </svg>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="quick-text">
-                    <h3>For Tenants</h3>
+                    <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+                    <h3 th:text="#{home.tenants.title}">For Tenants</h3>
+                    <!-- Элемент p формирует соответствующую часть интерфейса. -->
                     <p>Find your next home.</p>
                 </div>
             </div>
@@ -47,14 +69,19 @@
         </a>
 
         <!-- Ссылка на страницу Homeowners -->
+        <!-- Элемент a формирует соответствующую часть интерфейса. -->
         <a th:href="@{/homeowners}" class="quick-button item-homeowners">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="quick-content">
                 <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M8 33 L32 11 L56 33"/>
                     <path d="M15 27 V53 H49 V27"/>
                 </svg>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="quick-text">
-                    <h3>For Homeowners</h3>
+                    <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+                    <h3 th:text="#{home.owners.title}">For Homeowners</h3>
+                    <!-- Элемент p формирует соответствующую часть интерфейса. -->
                     <p>Manage your property.</p>
                 </div>
             </div>
@@ -65,7 +92,9 @@
         </a>
 
         <!-- Ссылка на страницу Investors -->
+        <!-- Элемент a формирует соответствующую часть интерфейса. -->
         <a th:href="@{/investors}" class="quick-button item-investors">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="quick-content">
                 <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15 50 V39"/>
@@ -74,8 +103,11 @@
                     <path d="M14 33 L28 22 L44 10"/>
                     <path d="M35 10 H44 V19"/>
                 </svg>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="quick-text">
-                    <h3>For Investors</h3>
+                    <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+                    <h3 th:text="#{home.investors.title}">For Investors</h3>
+                    <!-- Элемент p формирует соответствующую часть интерфейса. -->
                     <p>Grow your portfolio.</p>
                 </div>
             </div>
@@ -88,14 +120,20 @@
     </section>
 
     <!-- Горизонтальный ряд: Три основные карточки с презентацией разделов -->
+    <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="main-cards-row">
 
         <!-- Карточка: Tenants -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="main-card item-tenants">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="image-mask-container">
+                <!-- Элемент img формирует соответствующую часть интерфейса. -->
                 <img th:src="@{/images/main/tenants background.png}" alt="For Tenants" class="card-image">
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="floating-badge-circle">
                     <svg class="badge-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="39" cy="21" r="6"/>
@@ -104,9 +142,13 @@
                         <path d="M12 49 C12 38 17 31 24 31 C31 31 36 38 36 49"/>
                     </svg>
                 </div>
-                <h2>For Tenants</h2>
+                <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+                <h2 th:text="#{home.tenants.title}">For Tenants</h2>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p class="description-text">Find your next home. Browse available rentals, submit an application, and make it yours.</p>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/tenants}" class="action-btn">
+                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
                     <span>View Rentals</span>
                     <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="32" x2="48" y2="32"/>
@@ -117,20 +159,29 @@
         </div>
 
         <!-- Карточка: Homeowners -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="main-card item-homeowners">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="image-mask-container">
+                <!-- Элемент img формирует соответствующую часть интерфейса. -->
                 <img th:src="@{/images/main/homeowners background.png}" alt="For Homeowners" class="card-image">
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="floating-badge-circle">
                     <svg class="badge-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M8 33 L32 11 L56 33"/>
                         <path d="M15 27 V53 H49 V27"/>
                     </svg>
                 </div>
-                <h2>For Homeowners</h2>
+                <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+                <h2 th:text="#{home.owners.title}">For Homeowners</h2>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p class="description-text">Professional property management designed to protect your investment and maximize returns.</p>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/homeowners}" class="action-btn">
+                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
                     <span>Our Services</span>
                     <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="32" x2="48" y2="32"/>
@@ -141,11 +192,16 @@
         </div>
 
         <!-- Карточка: Investors -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="main-card item-investors">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="image-mask-container">
+                <!-- Элемент img формирует соответствующую часть интерфейса. -->
                 <img th:src="@{/images/main/investors background.png}" alt="For Investors" class="card-image">
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="floating-badge-circle">
                     <svg class="badge-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M15 50 V39"/>
@@ -155,9 +211,13 @@
                         <path d="M35 10 H44 V19"/>
                     </svg>
                 </div>
-                <h2>For Investors</h2>
+                <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+                <h2 th:text="#{home.investors.title}">For Investors</h2>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p class="description-text">Grow your portfolio. Reliable management, strong returns, long-term growth.</p>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/investors}" class="action-btn">
+                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
                     <span>Learn More</span>
                     <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="32" x2="48" y2="32"/>
@@ -170,24 +230,32 @@
     </section>
 
     <!-- Горизонтальный ряд: Информационные блоки преимуществ -->
+    <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="features-row">
 
         <!-- Преимущество: Лицензирование -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="feature-card item-tenants">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
                 <svg class="feature-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M32 8 L54 16 V31 C54 45 45 53 32 58 C19 53 10 45 10 31 V16 Z"/>
                     <path d="M22 32 L29 40 L44 24"/>
                 </svg>
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
+                <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
                 <h4>License & Insured</h4>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p>Fully licensed and insured for your peace of mind.</p>
             </div>
         </div>
 
         <!-- Преимущество: Обслуживание -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="feature-card item-homeowners">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
                 <svg class="feature-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="46" x2="46" y2="18"/>
@@ -201,14 +269,19 @@
                     <line x1="21" y1="15" x2="15" y2="21"/>
                 </svg>
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
+                <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
                 <h4>Professional Maintenance</h4>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p>Prompt, reliable maintenance to keep your property in top shape.</p>
             </div>
         </div>
 
         <!-- Преимущество: Отчетность -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="feature-card item-investors">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
                 <svg class="feature-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M20 15 H44 V54 H20 Z"/>
@@ -219,8 +292,11 @@
                     <path d="M38 45 L48 35 L52 39 L42 49 Z"/>
                 </svg>
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
+                <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
                 <h4>Transparent Reporting</h4>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p>Clear financial reports and updates so you always stay informed.</p>
             </div>
         </div>
@@ -229,5 +305,11 @@
 
 </main>
 
+<!-- Подключает поведение общей мобильной навигации. -->
+<!-- Элемент script формирует соответствующую часть интерфейса. -->
+<script th:replace="~{fragments/header :: public-navigation-script}">
+</script>
+<!-- Подключает единый подвал публичного сайта. -->
+<div th:replace="~{fragments/header :: public-footer}"></div>
 </body>
 </html>

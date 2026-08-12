@@ -16,6 +16,8 @@ import net.berryhomes.service.impl.File.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.UUID;
 
@@ -57,7 +59,15 @@ public class ProjectDocumentServiceImpl implements ProjectDocumentService {
             return new ProjectFileNotFoundException(String.format("Document with id %s not found", documentId));
         });
 
-        fileStorageService.deleteFile(projectDocument.getFilePath());
+        deleteFileAfterCommit(projectDocument.getFilePath());
         projectDocumentRepository.delete(projectDocument);
+    }
+    private void deleteFileAfterCommit(String filePath) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+
+            public void afterCommit() {
+                fileStorageService.deleteFile(filePath);
+            }
+        });
     }
 }

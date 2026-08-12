@@ -35,7 +35,7 @@ public class InvestorsViewController {
     public ModelAndView showInvestorCenter() {
         ModelAndView mav = new ModelAndView("investors");
 
-        Pageable pageable = PageRequest.of(0, 3, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(0, 24, Sort.by("createdAt").descending());
 
         Page<ProjectDto> projectPage = projectService.getAllActiveProjects(pageable);
 
@@ -55,7 +55,7 @@ public class InvestorsViewController {
     public ModelAndView handleInvestorMessage(@ModelAttribute("contactDto") @Valid ContactDto dto,
                                               BindingResult bindingResult,
                                               RedirectAttributes redirectAttributes) {
-        Pageable pageable = PageRequest.of(0, 3, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(0, 24, Sort.by("createdAt").descending());
 
         if (bindingResult.hasErrors()) {
             ModelAndView mav = new ModelAndView("investors");

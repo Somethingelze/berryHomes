@@ -49,10 +49,13 @@ public class FileStorageServiceImpl implements FileStorageService {
             }
             String uniqueFilename = UUID.randomUUID().toString() + extension;
 
-            Path targetDir = this.rootLocation.resolve(subDirectory);
+            Path targetDir = this.rootLocation.resolve(subDirectory).normalize();
+            if (!targetDir.startsWith(this.rootLocation)) {
+                throw new IllegalArgumentException("Недопустимая директория для загрузки");
+            }
             Files.createDirectories(targetDir);
 
-            Path targetLocation = targetDir.resolve(uniqueFilename);
+            Path targetLocation = targetDir.resolve(uniqueFilename).normalize();
 
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
@@ -64,10 +67,21 @@ public class FileStorageServiceImpl implements FileStorageService {
     }
 
     @Override
+    public Path resolveFile(String filePath) {
+        Path resolved = this.rootLocation.resolve(filePath).normalize();
+        if (!resolved.startsWith(this.rootLocation)) {
+            throw new IllegalArgumentException("Недопустимый путь к файлу");
+        }
+        return resolved;
+    }
+
     public void deleteFile(String filePath) {
         if (filePath == null || filePath.isBlank()) return;
         try {
             Path fileToDestroy = this.rootLocation.resolve(filePath).normalize();
+            if (!fileToDestroy.startsWith(this.rootLocation)) {
+                throw new IllegalArgumentException("Недопустимый путь к файлу");
+            }
             Files.deleteIfExists(fileToDestroy);
         } catch (IOException e) {
             throw new RuntimeException("Не удалось удалить файл с диска: " + filePath, e);

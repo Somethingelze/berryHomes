@@ -1,60 +1,97 @@
 <!DOCTYPE html>
-<!-- Пространство имен Thymeleaf и локализация хедера -->
-<html xmlns:th="http://thymeleaf.org" lang="en">
-<head></head>
+<!-- Объявляет документ с общими фрагментами интерфейса. -->
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLanguage}">
 <body>
-
-<header th:fragment="site-header" class="header">
-    <div class="header-container">
-
-        <!-- Логотип компании -->
-        <div class="logo">
-            <img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes Logo">
-        </div>
-
-        <!-- Навигационное меню шапки сайта -->
-        <nav class="nav-menu">
-            <!-- Ссылки главного меню -->
-            <div class="nav-links-group">
-                <a href="#">Blog</a>
-                <span class="nav-divider"></span>
-                <a href="#">About Us</a>
-                <span class="nav-divider"></span>
-                <a href="#">Contact</a>
-            </div>
-
-            <!-- Кнопка Go Portal -->
-            <a href="#" class="nav-icon-link">
-                <svg class="nav-svg-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="32" cy="22" r="10"/>
-                    <path d="M14 52 C14 39 21 32 32 32 C43 32 50 39 50 52"/>
-                </svg>
-                <span>Go Portal</span>
+<!-- Создаёт единую шапку всех публичных страниц. -->
+<header class="global-header" th:fragment="public-header">
+    <!-- Ограничивает ширину содержимого шапки. -->
+    <div class="global-shell global-header__row">
+        <!-- Возвращает пользователя на главную страницу. -->
+        <a class="global-brand" th:href="@{/}" aria-label="Berry Homes">
+            <!-- Показывает основной логотип компании. -->
+            <img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
+        </a>
+        <!-- Содержит главную навигацию сайта. -->
+        <nav class="global-nav" aria-label="Main navigation">
+            <!-- Открывает главную страницу. -->
+            <a th:href="@{/}" th:text="#{nav.home}">Home</a>
+            <!-- Открывает страницу о компании. -->
+            <a th:href="@{/about}" th:text="#{nav.about}">About Us</a>
+            <!-- Открывает страницу статей. -->
+            <a th:href="@{/blog}" th:text="#{nav.blog}">Blog</a>
+            <!-- Открывает страницу контактов. -->
+            <a th:href="@{/contact}" th:text="#{nav.contact}">Contact Us</a>
+            <!-- Открывает внешний кабинет TenantCloud. -->
+            <a class="global-nav__compact" th:href="${settings['portal_url']} ?: 'https://www.tenantcloud.com/'" target="_blank" rel="noopener">
+                <!-- Показывает иконку кабинета. -->
+                <img th:src="@{/images/main/icon-portal.svg}" alt="">
+                <!-- Подписывает ссылку кабинета. -->
+                <span th:text="#{nav.portal}">Go Portal</span>
             </a>
-
-            <!-- Выбор языка -->
-            <a href="#" class="nav-icon-link">
-                <svg class="nav-svg-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="32" cy="32" r="22"/>
-                    <ellipse cx="32" cy="32" rx="9" ry="22"/>
-                    <line x1="10" y1="32" x2="54" y2="32"/>
-                    <path d="M13 21 H51"/>
-                    <path d="M13 43 H51"/>
-                </svg>
-                <span>Language ▾</span>
-            </a>
-
-            <!-- Локация -->
-            <a href="#" class="nav-icon-link location">
-                <svg class="nav-svg-icon" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M32 58 C32 58 14 40 14 26 C14 15 22 7 32 7 C42 7 50 15 50 26 C50 40 32 58 32 58 Z"/>
-                    <circle cx="32" cy="26" r="7"/>
-                </svg>
-                <span>Pittsburgh, PA</span>
+            <!-- Содержит выбор языка интерфейса. -->
+            <details class="language-menu">
+                <!-- Открывает меню выбора языка. -->
+                <summary>
+                    <!-- Показывает иконку языка. -->
+                    <img th:src="@{/images/main/icon-language.svg}" alt="">
+                    <!-- Подписывает переключатель языка. -->
+                    <span th:text="#{nav.language}">Language</span>
+                    <!-- Показывает указатель выпадающего меню. -->
+                    <span aria-hidden="true">▾</span>
+                </summary>
+                <!-- Содержит доступные языки. -->
+                <div class="language-menu__options">
+                    <!-- Переключает интерфейс на английский язык. -->
+                    <a href="?lang=en">English</a>
+                    <!-- Переключает интерфейс на русский язык. -->
+                    <a href="?lang=ru">Русский</a>
+                </div>
+            </details>
+            <!-- Открывает расположение офиса в Google Maps. -->
+            <a class="global-nav__compact" th:href="${googleMapsUrl}" target="_blank" rel="noopener">
+                <!-- Показывает иконку геолокации. -->
+                <img th:src="@{/images/main/icon-location.svg}" alt="">
+                <!-- Показывает локализованный адрес офиса. -->
+                <span th:text="${settings['site_office']} ?: #{common.location}">Pittsburgh, PA 15222</span>
             </a>
         </nav>
+        <!-- Открывает навигацию на узких экранах. -->
+        <button class="global-menu-button" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
     </div>
 </header>
+<!-- Создаёт единый подвал публичных страниц. -->
+<footer class="global-footer" th:fragment="public-footer">
+    <!-- Ограничивает ширину содержимого подвала. -->
+    <div class="global-shell global-footer__row">
+        <!-- Показывает компактный логотип. -->
+        <img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
+        <!-- Показывает сведения об авторских правах. -->
+        <p>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></p>
+        <!-- Открывает адрес компании в Google Maps. -->
+        <a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings['site_office']} ?: #{common.location}">Pittsburgh, PA 15222</a>
+    </div>
+</footer>
+<!-- Подключает поведение мобильного меню. -->
+<script th:fragment="public-navigation-script">
+    const menuButton = document.querySelector('.global-menu-button');
+    const navigation = document.querySelector('.global-nav');
 
+    if (menuButton && navigation) {
+        menuButton.addEventListener('click', () => {
+            const isOpen = navigation.classList.toggle('global-nav--open');
+            menuButton.setAttribute('aria-expanded', String(isOpen));
+        });
+    }
+
+
+    const flashMessages = document.querySelectorAll('.toast, .success-toast, .success, [data-flash-message]');
+
+    flashMessages.forEach((message) => {
+        window.setTimeout(() => {
+            message.classList.add('flash-message--closing');
+            window.setTimeout(() => message.remove(), 260);
+        }, 3000);
+    });
+</script>
 </body>
 </html>

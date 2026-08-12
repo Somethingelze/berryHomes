@@ -18,6 +18,7 @@ import java.util.Map;
 public class AdminSettingsViewController {
 
     private final SystemSettingService settingService;
+    private final net.berryhomes.service.AuditService auditService;
 
     @GetMapping
     public ModelAndView showSettings() {
@@ -30,6 +31,7 @@ public class AdminSettingsViewController {
     public ModelAndView saveSettings(@RequestParam Map<String, String> allParams,
                                      RedirectAttributes redirectAttributes) {
         settingService.saveSettings(allParams);
+        auditService.record("UPDATE", "SYSTEM_SETTINGS", null, "Public site settings updated");
         redirectAttributes.addFlashAttribute("successMessage", "System settings updated successfully!");
         return new ModelAndView("redirect:/admin/settings");
     }

@@ -33,29 +33,32 @@ public class AdminProjectViewController {
     private final ProjectService projectService;
     private final ProjectDocumentService projectDocumentService;
     private final ProjectImageService projectImageService;
+    private final net.berryhomes.service.AuditService auditService;
 
     // 1. Просмотр активных проектов
     @GetMapping
     public ModelAndView listActiveProjects(@RequestParam(defaultValue = "0") int page,
                                            @RequestParam(defaultValue = "10") int size) {
         ModelAndView mav = new ModelAndView("admin/projects-list");
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(Math.max(page, 0), java.util.Set.of(10, 20, 50, 100).contains(size) ? size : 10, Sort.by("createdAt").descending());
 
         Page<ProjectDto> activeProjects = projectService.getAllActiveProjects(pageable);
 
         mav.addObject("projectPage", activeProjects);
         mav.addObject("isArchiveView", false);
+        mav.addObject("currentSize", java.util.Set.of(10, 20, 50, 100).contains(size) ? size : 10);
         return mav;
     }
 
     // 2. Просмотр архивных проектов (Soft Deleted)
     @GetMapping("/archived")
-    public ModelAndView listArchivedProjects(@RequestParam(defaultValue = "0") int page) {
+    public ModelAndView listArchivedProjects(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         ModelAndView mav = new ModelAndView("admin/projects-list");
-        Pageable pageable = PageRequest.of(page, 10, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(Math.max(page, 0), java.util.Set.of(10, 20, 50, 100).contains(size) ? size : 10, Sort.by("createdAt").descending());
 
         mav.addObject("projectPage", projectService.getAllArchivedProjects(pageable));
         mav.addObject("isArchiveView", true);
+        mav.addObject("currentSize", java.util.Set.of(10, 20, 50, 100).contains(size) ? size : 10);
         return mav;
     }
 
@@ -107,6 +110,7 @@ public class AdminProjectViewController {
             log.info("New project created successfully");
         }
 
+        auditService.record("SAVE", "PROJECT", projectDto.id() == null ? null : projectDto.id().toString(), projectDto.address());
         redirectAttributes.addFlashAttribute("successMessage", "Investment project saved successfully!");
         return new ModelAndView("redirect:/admin/projects");
     }
@@ -115,6 +119,7 @@ public class AdminProjectViewController {
     @PostMapping("/{id}/archive")
     public ModelAndView archiveProject(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
         projectService.archiveProject(id);
+        auditService.record("ARCHIVE", "PROJECT", id.toString(), null);
         redirectAttributes.addFlashAttribute("successMessage", "Project archived successfully!");
         return new ModelAndView("redirect:/admin/projects");
     }
@@ -123,6 +128,7 @@ public class AdminProjectViewController {
     @PostMapping("/{id}/restore")
     public ModelAndView restoreProject(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
         projectService.restoreProject(id);
+        auditService.record("RESTORE", "PROJECT", id.toString(), null);
         redirectAttributes.addFlashAttribute("successMessage", "Project restored successfully!");
         return new ModelAndView("redirect:/admin/projects/archived");
     }

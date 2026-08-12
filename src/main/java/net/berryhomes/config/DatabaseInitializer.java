@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.model.entity.Admin;
 import net.berryhomes.repository.AdminRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -18,18 +19,26 @@ public class DatabaseInitializer implements CommandLineRunner {
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Value("${app.admin.initial-login:}")
+    private String initialLogin;
+
+    @Value("${app.admin.initial-password:}")
+    private String initialPassword;
+
     @Override
     public void run(String... args) throws Exception {
-        if (adminRepository.count() == 0) {
+        if (adminRepository.count() == 0 && !initialLogin.isBlank() && !initialPassword.isBlank()) {
             Admin admin = Admin.builder()
-                    .login("admin")
+                    .login(initialLogin)
                     .role("ADMIN")
-                    .passwordHash(passwordEncoder.encode("admin"))
+                    .passwordHash(passwordEncoder.encode(initialPassword))
                     .createdAt(ZonedDateTime.now())
                     .build();
             Admin createdAdmin = adminRepository.save(admin);
 
-            log.info("Default admin account created successfully! {}", createdAdmin.toString());
+            log.info("Initial admin account created successfully for {}", createdAdmin.getLogin());
+        } else if (adminRepository.count() == 0) {
+            log.warn("No administrator exists. Set APP_ADMIN_INITIAL_LOGIN and APP_ADMIN_INITIAL_PASSWORD to bootstrap one.");
         }
     }
 }

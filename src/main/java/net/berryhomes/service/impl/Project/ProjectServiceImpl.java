@@ -20,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -132,7 +134,7 @@ public class ProjectServiceImpl implements ProjectService {
 
         if (projectDocument != null && !projectDocument.isEmpty()) {
             if (project.getProjectDocument() != null) {
-                fileStorageService.deleteFile(project.getProjectDocument().getFilePath());
+                deleteFileAfterCommit(project.getProjectDocument().getFilePath());
             }
 
             String relativePath = fileStorageService.saveFile(projectDocument, "documents/" + project.getId());
@@ -189,10 +191,20 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found: " + id));
 
-        project.getProjectImages().forEach(img -> fileStorageService.deleteFile(img.getFilePath()));
-        fileStorageService.deleteFile(project.getProjectDocument().getFilePath());
+        project.getProjectImages().forEach(img -> deleteFileAfterCommit(img.getFilePath()));
+        if (project.getProjectDocument() != null) {
+            deleteFileAfterCommit(project.getProjectDocument().getFilePath());
+        }
         projectRepository.delete(project);
 
         log.info("Project and all its physical files successfully deleted: {}", id);
+    }
+    private void deleteFileAfterCommit(String filePath) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+
+            public void afterCommit() {
+                fileStorageService.deleteFile(filePath);
+            }
+        });
     }
 }

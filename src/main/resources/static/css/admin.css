@@ -1,227 +1,597 @@
 /* Базовые стили админки */
 body {
+
+    /* Настраивает CSS-свойство font-family для текущего элемента. */
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #1A202C;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #F7FAFC;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 0;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство min-height для текущего элемента. */
     min-height: 100vh;
+
+    /* Настраивает CSS-свойство -webkit-font-smoothing для текущего элемента. */
     -webkit-font-smoothing: antialiased;
+
+
 }
+
 
 /* Макет: Боковая панель и Основной контент */
 .admin-sidebar {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 260px;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #0F291B;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #FFFFFF;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство flex-direction для текущего элемента. */
     flex-direction: column;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 30px 0;
+
+    /* Настраивает CSS-свойство box-sizing для текущего элемента. */
     box-sizing: border-box;
+
+
 }
+
 
 .sidebar-brand {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 1.2rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 0 25px 30px 25px;
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: 1px solid rgba(255,255,255,0.1);
+
+    /* Настраивает CSS-свойство letter-spacing для текущего элемента. */
     letter-spacing: 0.5px;
+
+
 }
+
 
 .sidebar-menu {
+
+    /* Настраивает CSS-свойство list-style для текущего элемента. */
     list-style: none;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 20px 0;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0;
+
+
 }
+
 
 .sidebar-menu a {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: block;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 12px 25px;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #A0AEC0;
+
+    /* Настраивает CSS-свойство text-decoration для текущего элемента. */
     text-decoration: none;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 500;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.95rem;
+
+    /* Настраивает CSS-свойство transition для текущего элемента. */
     transition: all 0.2s;
+
+
 }
+
 
 .sidebar-menu a:hover, .sidebar-menu a.active {
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #FFFFFF;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: rgba(255,255,255,0.05);
+
+    /* Настраивает CSS-свойство border-left для текущего элемента. */
     border-left: 4px solid #16A34A;
+
+
 }
 
+
 .admin-content {
+
+    /* Настраивает CSS-свойство flex для текущего элемента. */
     flex: 1;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 40px;
+
+    /* Настраивает CSS-свойство box-sizing для текущего элемента. */
     box-sizing: border-box;
+
+
 }
+
 
 /* Компоненты контента */
 .page-header {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: space-between;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 30px;
+
+
 }
 
+
 .page-title {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 1.75rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0;
+
+
 }
+
 
 /* Панель поиска */
 .search-bar-box {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 20px;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 8px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 25px;
+
+
 }
+
 
 .search-form {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 15px;
+
+
 }
+
 
 .search-input {
+
+    /* Настраивает CSS-свойство flex для текущего элемента. */
     flex: 1;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 10px 15px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #CBD5E1;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.9rem;
+
+
 }
+
 
 .btn-admin {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #16A34A;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: none;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 10px 20px;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство cursor для текущего элемента. */
     cursor: pointer;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.9rem;
+
+
 }
 
+
 .btn-admin-danger {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #E53E3E;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: none;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 6px 12px;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+    /* Настраивает CSS-свойство cursor для текущего элемента. */
     cursor: pointer;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.8rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+
 }
+
 
 /* Таблица данных */
 .table-responsive {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 8px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство overflow для текущего элемента. */
     overflow: hidden;
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+
+
 }
+
 
 .admin-table {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 100%;
+
+    /* Настраивает CSS-свойство border-collapse для текущего элемента. */
     border-collapse: collapse;
+
+    /* Настраивает CSS-свойство text-align для текущего элемента. */
     text-align: left;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.9rem;
+
+
 }
+
 
 .admin-table th {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #F8F9FA;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #718096;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 15px 20px;
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство text-transform для текущего элемента. */
     text-transform: uppercase;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.75rem;
+
+    /* Настраивает CSS-свойство letter-spacing для текущего элемента. */
     letter-spacing: 0.5px;
+
+
 }
+
 
 .admin-table td {
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 18px 20px;
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство vertical-align для текущего элемента. */
     vertical-align: top;
+
+
 }
+
 
 .admin-table tr:last-child td {
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: none;
+
+
 }
+
 
 .contact-meta-info {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.8rem;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #718096;
+
+    /* Настраивает CSS-свойство margin-top для текущего элемента. */
     margin-top: 4px;
+
+
 }
 
+
 .message-text-cell {
+
+    /* Настраивает CSS-свойство max-width для текущего элемента. */
     max-width: 300px;
+
+    /* Настраивает CSS-свойство white-space для текущего элемента. */
     white-space: pre-line;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #4A5568;
+
+    /* Настраивает CSS-свойство line-height для текущего элемента. */
     line-height: 1.5;
+
+
 }
+
 
 /* Бейджи статусов и типов */
 .badge {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: inline-block;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 4px 10px;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.75rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+    /* Настраивает CSS-свойство text-transform для текущего элемента. */
     text-transform: uppercase;
+
+
 }
 
-.badge-tenant { background-color: #FDF2F5; color: #B8255F; }
-.badge-owner { background-color: #F0FDF4; color: #16A34A; }
-.badge-investor { background-color: #F0F5FF; color: #4F46E5; }
+
+.badge-tenant {
+ /* Настраивает CSS-свойство background-color для текущего элемента. */
+ background-color: #FDF2F5;
+ /* Настраивает CSS-свойство color для текущего элемента. */
+ color: #B8255F;
+
+}
+
+.badge-owner {
+ /* Настраивает CSS-свойство background-color для текущего элемента. */
+ background-color: #F0FDF4;
+ /* Настраивает CSS-свойство color для текущего элемента. */
+ color: #16A34A;
+
+}
+
+.badge-investor {
+ /* Настраивает CSS-свойство background-color для текущего элемента. */
+ background-color: #F0F5FF;
+ /* Настраивает CSS-свойство color для текущего элемента. */
+ color: #4F46E5;
+
+}
+
 
 .status-select {
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 6px 10px;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #CBD5E1;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.8rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #FFFFFF;
+
+
 }
+
 
 /* Управление пагинацией */
 .pagination-box {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: space-between;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 20px;
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border-top для текущего элемента. */
     border-top: 1px solid #E2E8F0;
+
+
 }
+
 
 .pagination-links {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 8px;
+
+
 }
+
 
 .pagination-links a {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: block;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 8px 14px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #4A5568;
+
+    /* Настраивает CSS-свойство text-decoration для текущего элемента. */
     text-decoration: none;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.85rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+
 }
+
 
 .pagination-links a.active {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #16A34A;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #FFFFFF;
+
+    /* Настраивает CSS-свойство border-color для текущего элемента. */
     border-color: #16A34A;
+
+
 }
 
+
 .pagination-links a.disabled {
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #A0AEC0;
+
+    /* Настраивает CSS-свойство pointer-events для текущего элемента. */
     pointer-events: none;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #EDF2F7;
+
+
 }

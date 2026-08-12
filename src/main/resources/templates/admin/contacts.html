@@ -1,63 +1,129 @@
 <!DOCTYPE html>
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
 <html xmlns:th="http://thymeleaf.org" lang="en">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta charset="UTF-8">
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Admin: Contacts Management - Berry Homes</title>
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin.css}" />
+    <!-- Подключает единый строгий стиль рабочего интерфейса. -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/admin-workspace.css}">
 </head>
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body>
 
     <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-sidebar">
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="sidebar-brand">
-            <i class="fa-solid fa-basket-shopping text-success me-2"></i> BERRY HOMES
+            <i class="fa-solid fa-basket-shopping text-success me-2">
+</i> BERRY HOMES
         </div>
+        <!-- Элемент ul формирует соответствующую часть интерфейса. -->
         <ul class="sidebar-menu">
-            <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
-            <li><a th:href="@{/admin/contacts}" class="active">Contacts / Leads</a></li>
-            <li><a th:href="@{/admin/projects}">Investment Projects</a></li>
-            <li><a th:href="@{/admin/settings}">System Settings</a></li>
-            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181;">Logout ↩</a></li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/dashboard}">Dashboard</a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/contacts}" class="active">Contacts / Leads <b th:if="${newContactCount > 0}" th:text="${newContactCount}">0</b></a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/projects}">Investment Projects</a>
+            <!-- Открывает рабочий документооборот. -->
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
+                <a th:href="@{/admin/documents}">Documents <b th:if="${unsortedDocumentCount > 0}" th:text="${unsortedDocumentCount}">0</b></a>
+            </li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/settings}">System Settings</a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li style="margin-top: auto;">
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/logout}" style="color: #FC8181;">Logout ↩</a>
+</li>
         </ul>
     </div>
 
     <!-- ОСНОВНОЙ КОНТЕНТ АДМИНКИ -->
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-content">
 
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="page-header">
+            <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
             <h1 class="page-title">Contacts &amp; Leads Management</h1>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div style="color: #718096; font-size: 0.9rem;" th:text="'Total leads: ' + ${contactPage.totalElements}">Total leads: 0</div>
         </div>
 
         <!-- ПАНЕЛЬ УМНОГО ПОИСКА И ФИЛЬТРАЦИИ -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="search-bar-box">
+            <!-- Элемент form формирует соответствующую часть интерфейса. -->
             <form th:action="@{/admin/contacts}" method="get" class="search-form" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
 
                 <!-- Верхняя строка: Умный поиск -->
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div style="display: flex; gap: 10px; width: 100%;">
+                    <!-- Элемент input формирует соответствующую часть интерфейса. -->
                     <input type="text" name="search" th:value="${currentSearch}" class="search-input" placeholder="Smart search: type name, email or phone number..." style="flex: 1;" />
+                    <!-- Элемент button формирует соответствующую часть интерфейса. -->
                     <button type="submit" class="btn-admin">Search</button>
+<!-- Selects the number of contacts shown per page. -->
+<select name="size" class="status-select" onchange="this.form.submit()">
+<option th:each="option : ${ {10,20,50,100} }" th:value="${option}" th:text="|${option} per page|" th:selected="${option == currentSize}">10 per page</option>
+</select>
                 </div>
 
                 <!-- Нижняя строка: Выпадающие списки фильтров -->
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
 
                     <!-- Фильтр по Типу контакта (TENANT, HOMEOWNER, INVESTOR) -->
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div style="display: flex; align-items: center; gap: 8px;">
+                        <!-- Элемент label формирует соответствующую часть интерфейса. -->
                         <label style="font-size: 0.85rem; color: #4A5568; font-weight: 600;">Type:</label>
+                        <!-- Элемент select формирует соответствующую часть интерфейса. -->
                         <select name="typeFilter" class="status-select" onchange="this.form.submit()" style="padding: 8px 12px; border-radius: 6px; min-width: 140px;">
+                            <!-- Элемент option формирует соответствующую часть интерфейса. -->
                             <option value="">All Types</option>
+                            <!-- Элемент option формирует соответствующую часть интерфейса. -->
                             <option value="TENANT" th:selected="${currentTypeFilter == 'TENANT'}">Tenant</option>
+                            <!-- Элемент option формирует соответствующую часть интерфейса. -->
                             <option value="HOMEOWNER" th:selected="${currentTypeFilter == 'HOMEOWNER'}">Homeowner</option>
+                            <!-- Элемент option формирует соответствующую часть интерфейса. -->
                             <option value="INVESTOR" th:selected="${currentTypeFilter == 'INVESTOR'}">Investor</option>
                         </select>
                     </div>
 
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div style="display: flex; align-items: center; gap: 8px;">
+                        <!-- Элемент label формирует соответствующую часть интерфейса. -->
                         <label style="font-size: 0.85rem; color: #4A5568; font-weight: 600;">Status:</label>
+                        <!-- Элемент select формирует соответствующую часть интерфейса. -->
                         <select name="statusFilter" class="status-select" onchange="this.form.submit()" style="padding: 8px 12px; border-radius: 6px; min-width: 140px;">
+                            <!-- Элемент option формирует соответствующую часть интерфейса. -->
                             <option value="">All Statuses</option>
+                            <!-- Элемент option формирует соответствующую часть интерфейса. -->
                             <option th:each="status : ${statuses}"
                                     th:value="${status}"
                                     th:text="${status}"
@@ -68,6 +134,7 @@
                     </div>
 
                     <!-- Ссылка полного сброса всех выбранных параметров фильтрации -->
+                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
                     <a th:href="@{/admin/contacts}"
                        th:if="${(currentSearch != null and currentSearch != '') or (currentTypeFilter != null and currentTypeFilter != '') or (currentStatusFilter != null and currentStatusFilter != '')}"
                        style="color: #dc2626; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-left: auto; border-bottom: 1px dashed #dc2626; padding-bottom: 2px;">
@@ -79,59 +146,88 @@
         </div>
 
         <!-- ТАБЛИЦА С ЛИДАМИ ИЗ БАЗЫ ДАННЫХ -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="table-responsive">
+            <!-- Элемент table формирует соответствующую часть интерфейса. -->
             <table class="admin-table">
+                <!-- Элемент thead формирует соответствующую часть интерфейса. -->
                 <thead>
+                <!-- Элемент tr формирует соответствующую часть интерфейса. -->
                 <tr>
+                    <!-- Элемент th формирует соответствующую часть интерфейса. -->
                     <th>Date &amp; Source</th>
+                    <!-- Элемент th формирует соответствующую часть интерфейса. -->
                     <th>User Info</th>
+                    <!-- Элемент th формирует соответствующую часть интерфейса. -->
                     <th>Message</th>
+                    <!-- Элемент th формирует соответствующую часть интерфейса. -->
                     <th>Status Action</th>
+                    <!-- Элемент th формирует соответствующую часть интерфейса. -->
                     <th>Actions</th>
                 </tr>
                 </thead>
+                <!-- Элемент tbody формирует соответствующую часть интерфейса. -->
                 <tbody>
                 <!-- Если база данных пуста -->
+                <!-- Элемент tr формирует соответствующую часть интерфейса. -->
                 <tr th:if="${#lists.isEmpty(contactPage.content)}">
+                    <!-- Элемент td формирует соответствующую часть интерфейса. -->
                     <td colspan="5" style="text-align: center; color: #718096; padding: 30px;">
                         No contact requests found matching the criteria.
                     </td>
                 </tr>
 
                 <!-- Цикл итерации по списку Contact Entity (Без вызовов методов-скобок) -->
+                <!-- Элемент tr формирует соответствующую часть интерфейса. -->
                 <tr th:unless="${#lists.isEmpty(contactPage.content)}" th:each="contact : ${contactPage.content}">
                     <!-- Колонка: Дата и Источник -->
+                    <!-- Элемент td формирует соответствующую часть интерфейса. -->
                     <td>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div style="font-weight: 600;"
                              th:text="${contact.createdAt != null ? #temporals.format(contact.createdAt, 'yyyy-MM-dd HH:mm') : ''}">
                             2026-07-16 12:00
                         </div>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="contact-meta-info">
                             <!-- Сравнение Java-Enums через строковое представление встроенными средствами Thymeleaf -->
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span th:if="${#strings.toString(contact.type) == 'TENANT'}" class="badge badge-tenant">Tenant</span>
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span th:if="${#strings.toString(contact.type) == 'HOMEOWNER'}" class="badge badge-owner">Homeowner</span>
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span th:if="${#strings.toString(contact.type) == 'INVESTOR'}" class="badge badge-investor">Investor</span>
                         </div>
                     </td>
 
                     <!-- Колонка: Контакты пользователя -->
+                    <!-- Элемент td формирует соответствующую часть интерфейса. -->
                     <td>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div style="font-weight: 700; color: #2D3748;" th:text="${contact.name}">John Doe</div>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="contact-meta-info" th:text="'✉️ ' + ${contact.email}">john@example.com</div>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="contact-meta-info" th:text="'📞 ' + ${contact.phone}">(412) 555-0199</div>
                     </td>
 
                     <!-- Колонка: Текст обращения -->
+                    <!-- Элемент td формирует соответствующую часть интерфейса. -->
                     <td>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="message-text-cell" th:text="${contact.message}">
                             Text of the request...
                         </div>
                     </td>
 
                     <!-- Колонка: Управление статусом -->
+                    <!-- Элемент td формирует соответствующую часть интерфейса. -->
                     <td>
+                        <!-- Элемент form формирует соответствующую часть интерфейса. -->
                         <form th:action="@{/admin/contacts/{id}/status(id=${contact.id})}" method="post" style="margin:0;">
+                            <!-- Элемент select формирует соответствующую часть интерфейса. -->
                             <select name="status" class="status-select" onchange="this.form.submit()">
+                                <!-- Элемент option формирует соответствующую часть интерфейса. -->
                                 <option th:each="status : ${statuses}"
                                         th:value="${status}"
                                         th:text="${status}"
@@ -143,9 +239,12 @@
                     </td>
 
                     <!-- Колонка: Кнопка удаления -->
+                    <!-- Элемент td формирует соответствующую часть интерфейса. -->
                     <td>
+                        <!-- Элемент form формирует соответствующую часть интерфейса. -->
                         <form th:action="@{/admin/contacts/{id}/delete(id=${contact.id})}" method="POST"
                               onsubmit="return confirm('Are you sure you want to delete this lead? This action cannot be undone.');" style="margin:0;">
+                            <!-- Элемент button формирует соответствующую часть интерфейса. -->
                             <button type="submit" class="btn-admin-danger">Delete</button>
                         </form>
                     </td>
@@ -154,28 +253,34 @@
             </table>
 
             <!-- БЛОК ПАГИНАЦИИ (SPRING DATA PAGE) С СОХРАНЕНИЕМ ФИЛЬТРОВ -->
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="pagination-box" th:if="${contactPage.totalPages > 1}">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div style="color: #718096; font-size: 0.85rem;"
                      th:text="'Page ' + (${contactPage.number} + 1) + ' of ' + ${contactPage.totalPages}">
                     Page 1 of 1
                 </div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="pagination-links">
                     <!-- Ссылка "Назад" -->
-                    <a th:href="@{/admin/contacts(page=${contactPage.number - 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
+                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
+                    <a th:href="@{/admin/contacts(page=${contactPage.number - 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter}, size=${currentSize})}"
                        th:classappend="${contactPage.hasPrevious() ? '' : 'disabled'}">
                         &larr; Previous
                     </a>
 
                     <!-- Цифровые страницы -->
+                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
                     <a th:each="i : ${#numbers.sequence(0, contactPage.totalPages - 1)}"
-                       th:href="@{/admin/contacts(page=${i}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
+                       th:href="@{/admin/contacts(page=${i}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter}, size=${currentSize})}"
                        th:text="${i + 1}"
                        th:classappend="${i == contactPage.number ? 'active' : ''}">
                         1
                     </a>
 
                     <!-- Ссылка "Вперед" -->
-                    <a th:href="@{/admin/contacts(page=${contactPage.number + 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
+                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
+                    <a th:href="@{/admin/contacts(page=${contactPage.number + 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter}, size=${currentSize})}"
                        th:classappend="${contactPage.hasNext() ? '' : 'disabled'}">
                         Next &rarr;
                     </a>
@@ -183,34 +288,7 @@
             </div>
         </div>
 
-            <!-- БЛОК ПАГИНАЦИИ (SPRING DATA PAGE) С СОХРАНЕНИЕМ ФИЛЬТРОВ -->
-            <div class="pagination-box" th:if="${contactPage.totalPages > 1}">
-                <div style="color: #718096; font-size: 0.85rem;"
-                     th:text="'Page ' + (${contactPage.number} + 1) + ' of ' + ${contactPage.totalPages}">
-                    Page 1 of 1
-                </div>
-                <div class="pagination-links">
-                    <!-- Ссылка "Назад" -->
-                    <a th:href="@{/admin/contacts(page=${contactPage.number - 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
-                       th:classappend="${contactPage.hasPrevious() ? '' : 'disabled'}">
-                        &larr; Previous
-                    </a>
 
-                    <!-- Цифровые страницы -->
-                    <a th:each="i : ${#numbers.sequence(0, contactPage.totalPages - 1)}"
-                       th:href="@{/admin/contacts(page=${i}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
-                       th:text="${i + 1}"
-                       th:classappend="${i == contactPage.number ? 'active' : ''}">
-                        1
-                    </a>
-
-                    <!-- Ссылка "Вперед" -->
-                    <a th:href="@{/admin/contacts(page=${contactPage.number + 1}, search=${currentSearch}, typeFilter=${currentTypeFilter}, statusFilter=${currentStatusFilter})}"
-                       th:classappend="${contactPage.hasNext() ? '' : 'disabled'}">
-                        Next &rarr;
-                    </a>
-                </div>
-            </div>
         </div>
 
     </div>

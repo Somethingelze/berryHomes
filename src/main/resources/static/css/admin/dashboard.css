@@ -1,162 +1,413 @@
 /* Сетка виджетов (Карточки сверху) */
 .widgets-grid {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: grid;
+
+    /* Настраивает CSS-свойство grid-template-cols для текущего элемента. */
     grid-template-cols: repeat(auto-fit, minmax(240px, 1fr));
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 20px;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 40px;
+
+
 }
+
 
 .widget-card {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 8px;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 25px;
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: space-between;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+
 }
+
 
 .widget-info-left {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство flex-direction для текущего элемента. */
     flex-direction: column;
+
+
 }
+
 
 .widget-title {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.8rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #718096;
+
+    /* Настраивает CSS-свойство text-transform для текущего элемента. */
     text-transform: uppercase;
+
+    /* Настраивает CSS-свойство letter-spacing для текущего элемента. */
     letter-spacing: 0.5px;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 8px;
+
+
 }
+
 
 .widget-value {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 2rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 800;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #1A202C;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0;
+
+
 }
+
 
 .widget-icon-right {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 48px;
+
+    /* Настраивает CSS-свойство height для текущего элемента. */
     height: 48px;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #F7FAFC;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 50%;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: center;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 1.5rem;
+
+
 }
 
-.icon-green-bg { background-color: #F0FDF4; color: #16A34A; }
-.icon-blue-bg { background-color: #EFF6FF; color: #3B82F6; }
+
+.icon-green-bg {
+ /* Настраивает CSS-свойство background-color для текущего элемента. */
+ background-color: #F0FDF4;
+ /* Настраивает CSS-свойство color для текущего элемента. */
+ color: #16A34A;
+
+}
+
+.icon-blue-bg {
+ /* Настраивает CSS-свойство background-color для текущего элемента. */
+ background-color: #EFF6FF;
+ /* Настраивает CSS-свойство color для текущего элемента. */
+ color: #3B82F6;
+
+}
+
 
 /* Двухколоночный контент аналитики */
 .dashboard-details-layout {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 30px;
+
+
 }
+
 
 .layout-column-main {
+
+    /* Настраивает CSS-свойство flex для текущего элемента. */
     flex: 1.5;
+
+
 }
 
+
 .layout-column-side {
+
+    /* Настраивает CSS-свойство flex для текущего элемента. */
     flex: 1;
+
+
 }
+
 
 /* Панели блоков */
 .dashboard-block-card {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 8px;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 25px;
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 30px;
+
+
 }
 
+
 .block-card-title {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 1.1rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0 0 20px 0;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #2D3748;
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: 1px solid #EDF2F7;
+
+    /* Настраивает CSS-свойство padding-bottom для текущего элемента. */
     padding-bottom: 12px;
+
+
 }
+
 
 /* Стили распределения по типам (Прогресс-бары на чистом CSS) */
 .type-distribution-row {
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 18px;
+
+
 }
+
 
 .type-dist-labels {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: space-between;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.85rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #4A5568;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 6px;
+
+
 }
+
 
 .progress-bar-bg {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 100%;
+
+    /* Настраивает CSS-свойство height для текущего элемента. */
     height: 8px;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #EDF2F7;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+    /* Настраивает CSS-свойство overflow для текущего элемента. */
     overflow: hidden;
+
+
 }
 
+
 .progress-bar-fill {
+
+    /* Настраивает CSS-свойство height для текущего элемента. */
     height: 100%;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+
 }
+
 
 /* Компактная лента активности */
 .recent-leads-list {
+
+    /* Настраивает CSS-свойство list-style для текущего элемента. */
     list-style: none;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 0;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0;
+
+
 }
+
 
 .recent-lead-item {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: space-between;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 14px 0;
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: 1px solid #F1F5F9;
+
+
 }
+
 
 .recent-lead-item:last-child {
+
+    /* Настраивает CSS-свойство border-bottom для текущего элемента. */
     border-bottom: none;
+
+
 }
+
 
 .lead-item-name {
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.9rem;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #2D3748;
+
+
 }
+
 
 .lead-item-time {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.75rem;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #A0AEC0;
+
+    /* Настраивает CSS-свойство margin-top для текущего элемента. */
     margin-top: 2px;
+
+
 }
 
+
 @media (max-width: 992px) {
+
     .dashboard-details-layout {
+
+        /* Настраивает CSS-свойство flex-direction для текущего элемента. */
         flex-direction: column;
-    }
+
+
 }
+
+
+}
+
 
 /* Эффект наведения для кликабельных карточек дашборда */
 .widget-card-link:hover .widget-card {
+
+    /* Настраивает CSS-свойство border-color для текущего элемента. */
     border-color: #16A34A;
+
+    /* Настраивает CSS-свойство transform для текущего элемента. */
     transform: translateY(-2px);
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+
+    /* Настраивает CSS-свойство transition для текущего элемента. */
     transition: all 0.2s ease-in-out;
+
+
 }
 
+
 .widget-card {
+
+    /* Настраивает CSS-свойство transition для текущего элемента. */
     transition: all 0.2s ease-in-out;
+
+
 }

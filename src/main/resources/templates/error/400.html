@@ -1,25 +1,44 @@
 <!DOCTYPE html>
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
 <html lang="en" xmlns:th="http://thymeleaf.org">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta charset="UTF-8">
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Bad Request - Berry Homes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Элемент script формирует соответствующую часть интерфейса. -->
+    <script src="https://cdn.tailwindcss.com">
+</script>
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="bg-slate-50 font-sans flex flex-col justify-center items-center min-h-screen text-center p-4">
 
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="max-w-md bg-white p-8 rounded-xl shadow-sm border border-slate-100">
-    <div class="text-6xl text-amber-500 mb-4"><i class="bi bi-x-circle-fill"></i></div>
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
+    <div class="text-6xl text-amber-500 mb-4">
+<i class="bi bi-x-circle-fill">
+</i>
+</div>
+    <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
     <h1 class="text-4xl font-black text-slate-900 mb-2">400</h1>
+    <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
     <h2 class="text-xl font-bold text-slate-700 mb-4">Invalid Request Data</h2>
 
+    <!-- Элемент p формирует соответствующую часть интерфейса. -->
     <p class="text-sm text-gray-500 leading-relaxed mb-8" th:text="${message}">
         The system could not process your request due to invalid or oversized data input.
     </p>
 
+    <!-- Элемент button формирует соответствующую часть интерфейса. -->
     <button onclick="window.history.back()" class="inline-flex items-center gap-2 bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-lg hover:bg-slate-900 transition w-full justify-center">
-        <i class="bi bi-arrow-left"></i> Go Back & Fix
+        <i class="bi bi-arrow-left">
+</i> Go Back & Fix
     </button>
 </div>
 

@@ -13,13 +13,17 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @Slf4j
 public class RateLimitingFilter implements Filter {
 
-    private final Map<String, Bucket> cache = new ConcurrentHashMap<>();
+    private static final Set<String> CONTACT_ENDPOINTS = Set.of("/tenants/message", "/homeowners/message", "/investors/message", "/contact/message");
+    private static final long ENTRY_TTL_MILLIS = Duration.ofHours(1).toMillis();
+    private static final int MAX_CACHE_ENTRIES = 10_000;
+    private final Map<String, ClientBucket> cache = new ConcurrentHashMap<>();
 
     private Bucket createNewBucket() {
         Refill refill = Refill.intervally(1, Duration.ofSeconds(20));
@@ -34,10 +38,22 @@ public class RateLimitingFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        if ("POST".equalsIgnoreCase(httpRequest.getMethod()) && httpRequest.getRequestURI().endsWith("/contacts/save")) {
+        if ("POST".equalsIgnoreCase(httpRequest.getMethod()) && CONTACT_ENDPOINTS.contains(httpRequest.getRequestURI().substring(httpRequest.getContextPath().length()))) {
             
             String ip = getClientIP(httpRequest);
-            Bucket bucket = cache.computeIfAbsent(ip, k -> createNewBucket());
+            long now = System.currentTimeMillis();
+            if (cache.size() >= MAX_CACHE_ENTRIES) {
+                cache.entrySet().removeIf(entry -> now - entry.getValue().lastSeenMillis > ENTRY_TTL_MILLIS);
+                if (cache.size() >= MAX_CACHE_ENTRIES && !cache.containsKey(ip)) {
+                    httpResponse.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
+                    return;
+                }
+            }
+            ClientBucket clientBucket = cache.compute(ip, (key, current) ->
+                    current == null || now - current.lastSeenMillis > ENTRY_TTL_MILLIS
+                            ? new ClientBucket(createNewBucket(), now)
+                            : new ClientBucket(current.bucket, now));
+            Bucket bucket = clientBucket.bucket;
 
             if (!bucket.tryConsume(1)) {
                 log.warn("[Rate Limit] Превышен лимит запросов для IP: {} на URL: {}", ip, httpRequest.getRequestURI());
@@ -53,10 +69,7 @@ public class RateLimitingFilter implements Filter {
     }
 
     private String getClientIP(HttpServletRequest request) {
-        String xfHeader = request.getHeader("X-Forwarded-For");
-        if (xfHeader == null) {
-            return request.getRemoteAddr();
-        }
-        return xfHeader.split(",")[0].trim();
+        return request.getRemoteAddr();
     }
+    private record ClientBucket(Bucket bucket, long lastSeenMillis) {}
 }

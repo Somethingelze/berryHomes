@@ -1,281 +1,955 @@
-/* Базовые стили */
-body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #2D3748;
-    background-color: #FAFAFA;
-    margin: 0;
-    padding: 0;
-    -webkit-font-smoothing: antialiased;
+:root{
+/* Настраивает CSS-свойство --green для текущего элемента. */
+--green:#0e462e;
+/* Настраивает CSS-свойство --ink для текущего элемента. */
+--ink:#153a2a;
+/* Настраивает CSS-свойство --cream для текущего элемента. */
+--cream:#faf6e9;
+/* Настраивает CSS-свойство --line для текущего элемента. */
+--line:#d7d0bb;
+/* Настраивает CSS-свойство --accent для текущего элемента. */
+--accent:#a82447
+}
+*{
+/* Настраивает CSS-свойство box-sizing для текущего элемента. */
+box-sizing:border-box
+}
+body{
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:var(--cream);
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#102d20;
+/* Настраивает CSS-свойство font для текущего элемента. */
+font:14px Arial,sans-serif
+}
+.shell{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:min(1280px,calc(100% - 48px));
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:auto
+}
+.site-header{
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#fffdf6;
+/* Настраивает CSS-свойство border-bottom для текущего элемента. */
+border-bottom:1px solid var(--line)
+}
+.topbar{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:89px;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:space-between
+}
+.site-logo img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:225px;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:block
+}
+.main-nav{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:35px;
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:600;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:13px
+}
+.main-nav a{
+/* Настраивает CSS-свойство text-decoration для текущего элемента. */
+text-decoration:none
+}
+.main-nav span{
+/* Настраивает CSS-свойство white-space для текущего элемента. */
+white-space:nowrap
+}
+.audience-tabs{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:70px;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:center;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:0
+}
+.audience-tabs a{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:31%;
+/* Настраивает CSS-свойство max-width для текущего элемента. */
+max-width:330px;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:17px;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:center;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:14px;
+/* Настраивает CSS-свойство border-right для текущего элемента. */
+border-right:1px solid var(--line);
+/* Настраивает CSS-свойство text-decoration для текущего элемента. */
+text-decoration:none;
+/* Настраивает CSS-свойство font для текущего элемента. */
+font:600 17px Georgia,serif
+}
+.audience-tabs a:last-child{
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:0
+}
+.audience-tabs img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:30px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:30px;
+/* Настраивает CSS-свойство object-fit для текущего элемента. */
+object-fit:contain
+}
+.audience-tabs .active{
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#382d7a;
+/* Настраивает CSS-свойство border-bottom для текущего элемента. */
+border-bottom:4px solid var(--green)
+}
+.hero{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:420px;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:url("/images/investors/know before you buy bg.png") center/cover no-repeat
+}
+.hero-content{
+/* Настраивает CSS-свойство padding-top для текущего элемента. */
+padding-top:48px
+}
+.hero p{
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:800;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:13px;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green);
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0 0 15px
+}
+.hero h1,.deliver h2,.projects h2,.how h2,.call h2{
+/* Настраивает CSS-свойство font-family для текущего элемента. */
+font-family:Georgia,serif;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green)
+}
+.hero h1{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:62px;
+/* Настраивает CSS-свойство line-height для текущего элемента. */
+line-height:.98;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.hero i{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:block;
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:47px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:2px;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:var(--accent);
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:22px 0
+}
+.hero strong{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:block;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:17px
+}
+.hero-content>div{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:13px;
+/* Настраивает CSS-свойство margin-top для текущего элемента. */
+margin-top:28px
+}
+.button{
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:0;
+/* Настраивает CSS-свойство border-radius для текущего элемента. */
+border-radius:4px;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:var(--green);
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#fff;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:13px 18px;
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:700;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:inline-flex;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:11px;
+/* Настраивает CSS-свойство cursor для текущего элемента. */
+cursor:pointer;
+/* Настраивает CSS-свойство text-decoration для текущего элемента. */
+text-decoration:none
+}
+.button img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:21px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:21px;
+/* Настраивает CSS-свойство filter для текущего элемента. */
+filter:brightness(0) invert(1)
+}
+.button-outline{
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#fff;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green);
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid var(--green)
+}
+.button-outline img{
+/* Настраивает CSS-свойство filter для текущего элемента. */
+filter:none
+}
+.deliver{
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:url("/images/investors/icons _we deliver_.png") center/cover no-repeat;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:25px 0 35px
+}
+.deliver h2,.how h2{
+/* Настраивает CSS-свойство text-align для текущего элемента. */
+text-align:center;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:27px;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0 0 16px
+}
+.deliver-grid{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство grid-template-columns для текущего элемента. */
+grid-template-columns:repeat(6,1fr);
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid rgba(215,208,187,.6);
+/* Настраивает CSS-свойство border-radius для текущего элемента. */
+border-radius:8px
+}
+.deliver-grid article{
+/* Настраивает CSS-свойство text-align для текущего элемента. */
+text-align:center;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:20px 17px;
+/* Настраивает CSS-свойство border-right для текущего элемента. */
+border-right:1px solid rgba(215,208,187,.8)
+}
+.deliver-grid article:last-child{
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:0
+}
+.deliver-grid img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:47px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:47px
+}
+.deliver-grid h3{
+/* Настраивает CSS-свойство font для текущего элемента. */
+font:700 14px/1.15 Georgia,serif;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:12px 0
+}
+.deliver-grid p{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px;
+/* Настраивает CSS-свойство line-height для текущего элемента. */
+line-height:1.55;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.projects{
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:18px 0 28px
+}
+.projects-heading{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:space-between;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0 4px 15px
+}
+.projects-heading h2{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:25px;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.projects-heading h2 span{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:16px;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#748d1b
+}
+.projects-heading>span{
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:700;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:12px
+}
+.project-carousel{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:relative
+}
+.project-viewport{
+/* Настраивает CSS-свойство overflow для текущего элемента. */
+overflow:hidden
+}
+.project-track{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:17px
+}
+.project-card{
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#fffdf8;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid var(--line);
+/* Настраивает CSS-свойство border-radius для текущего элемента. */
+border-radius:5px;
+/* Настраивает CSS-свойство min-width для текущего элемента. */
+min-width:calc((100% - 34px)/3);
+/* Настраивает CSS-свойство overflow для текущего элемента. */
+overflow:hidden
+}
+.project-image{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:180px;
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:relative;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#dae1ca
+}
+.project-image>img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:100%;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:100%;
+/* Настраивает CSS-свойство object-fit для текущего элемента. */
+object-fit:cover
+}
+.image-fallback{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:100%;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство place-items для текущего элемента. */
+place-items:center;
+/* Настраивает CSS-свойство font для текущего элемента. */
+font:26px Georgia,serif;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green)
+}
+.project-image button{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство bottom для текущего элемента. */
+bottom:8px;
+/* Настраивает CSS-свойство right для текущего элемента. */
+right:8px;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:0;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:rgba(12,58,37,.85);
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:white;
+/* Настраивает CSS-свойство border-radius для текущего элемента. */
+border-radius:3px;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:7px 9px;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px;
+/* Настраивает CSS-свойство cursor для текущего элемента. */
+cursor:pointer
+}
+.project-body{
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:12px
+}
+.project-body h3{
+/* Настраивает CSS-свойство font для текущего элемента. */
+font:700 16px Georgia,serif;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.project-body>p{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:3px 0 11px
+}
+.project-body dl{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство grid-template-columns для текущего элемента. */
+grid-template-columns:1fr 1fr;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:6px 12px;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.project-body dl div{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:space-between;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:4px;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:9px
+}
+.project-body dt{
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:400
+}
+.project-body dd{
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0;
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:700
+}
+.project-body footer{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:space-between;
+/* Настраивает CSS-свойство border-top для текущего элемента. */
+border-top:1px solid var(--line);
+/* Настраивает CSS-свойство margin-top для текущего элемента. */
+margin-top:11px;
+/* Настраивает CSS-свойство padding-top для текущего элемента. */
+padding-top:10px
+}
+.project-body footer button,.project-body footer a{
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:0;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:none;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green);
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:0;
+/* Настраивает CSS-свойство text-decoration для текущего элемента. */
+text-decoration:none;
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:700;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px;
+/* Настраивает CSS-свойство cursor для текущего элемента. */
+cursor:pointer
+}
+.carousel-arrow{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство top для текущего элемента. */
+top:65px;
+/* Настраивает CSS-свойство z-index для текущего элемента. */
+z-index:2;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid var(--line);
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:white;
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:34px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:34px;
+/* Настраивает CSS-свойство border-radius для текущего элемента. */
+border-radius:50%;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:17px;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green)
+}
+.prev{
+/* Настраивает CSS-свойство left для текущего элемента. */
+left:-16px
+}
+.next{
+/* Настраивает CSS-свойство right для текущего элемента. */
+right:-16px
+}
+.how{
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:url("/images/investors/how it works icons.png") center/cover no-repeat;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:25px 0 42px
+}
+.steps{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство grid-template-columns для текущего элемента. */
+grid-template-columns:repeat(6,1fr);
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:15px
+}
+.steps article{
+/* Настраивает CSS-свойство text-align для текущего элемента. */
+text-align:center;
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:relative
+}
+.steps article:not(:last-child):after{
+/* Настраивает CSS-свойство content для текущего элемента. */
+content:"→";
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство right для текущего элемента. */
+right:-15px;
+/* Настраивает CSS-свойство top для текущего элемента. */
+top:62px;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#758b25
+}
+.steps b{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство place-items для текущего элемента. */
+place-items:center;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:auto;
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:24px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:24px;
+/* Настраивает CSS-свойство border-radius для текущего элемента. */
+border-radius:50%;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:var(--green);
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#fff
+}
+.steps img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:54px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:54px;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:9px
+}
+.steps h3{
+/* Настраивает CSS-свойство font для текущего элемента. */
+font:700 13px/1.1 Georgia,serif;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0 0 7px
+}
+.steps p{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:10px;
+/* Настраивает CSS-свойство line-height для текущего элемента. */
+line-height:1.45;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.call{
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:url("/images/investors/schedule investor call bg.png") center/cover no-repeat;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:23px 0
+}
+.call .shell{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:space-between;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:0 78px
+}
+.call h2{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:28px;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:0
+}
+.call p{
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:3px 0 0
+}
+.site-footer{
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:18px 0;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#fffdf6
+}
+.site-footer .shell{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:flex;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:center;
+/* Настраивает CSS-свойство justify-content для текущего элемента. */
+justify-content:space-between;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px
+}
+.site-footer img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:180px
+}
+.success-toast{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:fixed;
+/* Настраивает CSS-свойство top для текущего элемента. */
+top:18px;
+/* Настраивает CSS-свойство left для текущего элемента. */
+left:50%;
+/* Настраивает CSS-свойство transform для текущего элемента. */
+transform:translateX(-50%);
+/* Настраивает CSS-свойство z-index для текущего элемента. */
+z-index:20;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#d5eb73;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:11px 16px;
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:700
+}
+.modal{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:none;
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:fixed;
+/* Настраивает CSS-свойство inset для текущего элемента. */
+inset:0;
+/* Настраивает CSS-свойство z-index для текущего элемента. */
+z-index:30
+}
+.modal.open{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:block
+}
+.modal-backdrop{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство inset для текущего элемента. */
+inset:0;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:rgba(0,0,0,.66)
+}
+.modal-box{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:relative;
+/* Настраивает CSS-свойство z-index для текущего элемента. */
+z-index:1;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:7vh auto;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:var(--cream);
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:min(510px,calc(100% - 32px));
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:32px
+}
+.close{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство right для текущего элемента. */
+right:12px;
+/* Настраивает CSS-свойство top для текущего элемента. */
+top:8px;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:0;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:none;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:27px
+}
+.modal-box h2{
+/* Настраивает CSS-свойство font-family для текущего элемента. */
+font-family:Georgia,serif;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:var(--green)
+}
+.modal-box form{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:12px
+}
+.modal-box label{
+/* Настраивает CSS-свойство font-weight для текущего элемента. */
+font-weight:700;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:12px
+}
+.modal-box input,.modal-box textarea{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:block;
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:100%;
+/* Настраивает CSS-свойство margin-top для текущего элемента. */
+margin-top:4px;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid var(--line);
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:9px;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:#fff
+}
+.gallery-box{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:relative;
+/* Настраивает CSS-свойство z-index для текущего элемента. */
+z-index:1;
+/* Настраивает CSS-свойство margin для текущего элемента. */
+margin:3vh auto;
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:min(1050px,calc(100% - 30px));
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:94vh;
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:grid;
+/* Настраивает CSS-свойство place-items для текущего элемента. */
+place-items:center
+}
+.gallery-box>img{
+/* Настраивает CSS-свойство max-width для текущего элемента. */
+max-width:100%;
+/* Настраивает CSS-свойство max-height для текущего элемента. */
+max-height:86vh;
+/* Настраивает CSS-свойство object-fit для текущего элемента. */
+object-fit:contain
+}
+.gallery-box .close{
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#fff
+}
+.gallery-nav{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство top для текущего элемента. */
+top:48%;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid white;
+/* Настраивает CSS-свойство background для текущего элемента. */
+background:rgba(0,0,0,.35);
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#fff;
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:44px;
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:44px;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:20px
+}
+.gallery-prev{
+/* Настраивает CSS-свойство left для текущего элемента. */
+left:0
+}
+.gallery-next{
+/* Настраивает CSS-свойство right для текущего элемента. */
+right:0
+}
+.gallery-box p{
+/* Настраивает CSS-свойство position для текущего элемента. */
+position:absolute;
+/* Настраивает CSS-свойство bottom для текущего элемента. */
+bottom:0;
+/* Настраивает CSS-свойство color для текущего элемента. */
+color:#fff
+}
+.modal-open{
+/* Настраивает CSS-свойство overflow для текущего элемента. */
+overflow:hidden
+}
+.empty-state{
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:45px;
+/* Настраивает CSS-свойство text-align для текущего элемента. */
+text-align:center;
+/* Настраивает CSS-свойство border для текущего элемента. */
+border:1px solid var(--line)
+}
+@media(max-width:900px){
+.main-nav{
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:12px;
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px
+}
+.deliver-grid,.steps{
+/* Настраивает CSS-свойство grid-template-columns для текущего элемента. */
+grid-template-columns:repeat(3,1fr)
+}
+.deliver-grid article:nth-child(3){
+/* Настраивает CSS-свойство border-right для текущего элемента. */
+border-right:0
+}
+.project-card{
+/* Настраивает CSS-свойство min-width для текущего элемента. */
+min-width:calc(50% - 9px)
+}
+.hero{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:380px
+}
+.call .shell{
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:0 25px
+}
+.call h2{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:23px
 }
 
-.container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
+}
+@media(max-width:600px){
+.shell{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:min(100% - 28px,1280px)
+}
+.topbar{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:auto;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:14px 0
+}
+.site-logo img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:150px
+}
+.main-nav{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:none
+}
+.audience-tabs{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:auto
+}
+.audience-tabs a{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:6px;
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:10px 2px
+}
+.audience-tabs img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:21px
+}
+.hero{
+/* Настраивает CSS-свойство height для текущего элемента. */
+height:330px;
+/* Настраивает CSS-свойство background-position для текущего элемента. */
+background-position:58% center
+}
+.hero-content{
+/* Настраивает CSS-свойство padding-top для текущего элемента. */
+padding-top:38px
+}
+.hero h1{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:45px
+}
+.hero strong{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:14px;
+/* Настраивает CSS-свойство max-width для текущего элемента. */
+max-width:240px
+}
+.hero-content>div{
+/* Настраивает CSS-свойство flex-wrap для текущего элемента. */
+flex-wrap:wrap;
+/* Настраивает CSS-свойство margin-top для текущего элемента. */
+margin-top:19px
+}
+.deliver-grid,.steps{
+/* Настраивает CSS-свойство grid-template-columns для текущего элемента. */
+grid-template-columns:repeat(2,1fr)
+}
+.deliver-grid article:nth-child(n){
+/* Настраивает CSS-свойство border-right для текущего элемента. */
+border-right:1px solid var(--line)
+}
+.steps article:not(:last-child):after{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:none
+}
+.project-card{
+/* Настраивает CSS-свойство min-width для текущего элемента. */
+min-width:100%
+}
+.projects-heading>span{
+/* Настраивает CSS-свойство display для текущего элемента. */
+display:none
+}
+.call .shell,.site-footer .shell{
+/* Настраивает CSS-свойство padding для текущего элемента. */
+padding:0;
+/* Настраивает CSS-свойство align-items для текущего элемента. */
+align-items:flex-start;
+/* Настраивает CSS-свойство flex-direction для текущего элемента. */
+flex-direction:column;
+/* Настраивает CSS-свойство gap для текущего элемента. */
+gap:14px
+}
+.call h2{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:22px
+}
+.call .button{
+/* Настраивает CSS-свойство font-size для текущего элемента. */
+font-size:11px
+}
+.site-footer img{
+/* Настраивает CSS-свойство width для текущего элемента. */
+width:150px
 }
 
-/* Навигация */
-.navbar {
-    background: #FFFFFF;
-    border-bottom: 1px solid #E2E8F0;
-    padding: 20px 0;
 }
 
-.navbar-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+/* Синхронизирует ширину Investors с остальными публичными страницами. */
+.shell {
+    /* Ограничивает содержимое восемьюдесятью процентами экрана. */
+    width: min(80vw, 1440px);
 }
 
-.brand-text {
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: #198754;
-    text-decoration: none;
-    letter-spacing: 0.5px;
+/* Расширяет Investors на планшетах. */
+@media (max-width: 1120px) {
+    /* Настраивает контейнер среднего экрана. */
+    .shell {
+        /* Оставляет безопасные боковые поля. */
+        width: 92vw;
+    }
 }
 
-.audience-tabs {
-    display: flex;
-    justify-content: center;
-    background: #FFFFFF;
-    border-bottom: 1px solid #E2E8F0;
-}
-
-.audience-tabs a {
-    font-size: 0.8rem;
-    font-weight: 700;
-    padding: 18px 25px;
-    color: #718096;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.audience-tabs a.active-investor {
-    color: #0F291B;
-    border-bottom: 3px solid #0F291B;
-    background-color: #F8F9FA;
-}
-
-/* Герой-блок в глубоких темно-зеленых тонах */
-.hero-investor {
-    background-color: #0F291B;
-    color: #FFFFFF;
-    padding: 70px 0;
-    position: relative;
-}
-
-.hero-grid {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.hero-left, .hero-right {
-    flex: 1;
-}
-
-.display-title {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 0 0 15px 0;
-    line-height: 1.2;
-}
-
-.lead-text {
-    color: #CBD5E1;
-    font-size: 1.15rem;
-    margin: 0 0 30px 0;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.btn-primary-gold {
-    background-color: #16A34A;
-    color: #FFFFFF;
-    padding: 14px 24px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
-.btn-outline-white {
-    border: 1px solid rgba(255,255,255,0.4);
-    color: #FFFFFF;
-    padding: 14px 24px;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
-.placeholder-hero-img {
-    width: 100%;
-    height: 260px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #CBD5E1;
-}
-
-/* Секция проектов из БД */
-.projects-section {
-    padding: 60px 0;
-    background: #F7FAFC;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.section-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin: 0;
-    color: #1A202C;
-}
-
-.projects-grid {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.project-card {
-    background: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    border-radius: 12px;
-    flex: 0 1 calc(33.333% - 20px);
-    box-sizing: border-box;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-}
-
-.project-img-box {
-    height: 200px;
-    background-color: #EDF2F7;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #A0AEC0;
-}
-
-.project-status-badge {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #0F291B;
-    color: #FFFFFF;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 4px;
-    text-transform: uppercase;
-}
-
-.project-body {
-    padding: 25px;
-}
-
-.project-address {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin: 0 0 4px 0;
-    color: #1A202C;
-}
-
-.project-location {
-    font-size: 0.8rem;
-    color: #A0AEC0;
-    margin: 0 0 20px 0;
-}
-
-/* Таблица финансовых показателей в карточке */
-.finance-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-}
-
-.finance-table tr {
-    border-bottom: 1px solid #F1F5F9;
-}
-
-.finance-table td {
-    padding: 8px 0;
-}
-
-.finance-label {
-    color: #718096;
-}
-
-.finance-value {
-    text-align: right;
-    font-weight: 700;
-    color: #2D3748;
-}
-
-.text-emerald {
-    color: #16A34A;
-}
-
-.project-footer-btns {
-    display: flex;
-    border-top: 1px solid #E2E8F0;
-    background: #F8F9FA;
-}
-
-.project-footer-btns a {
-    flex: 1;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-decoration: none;
-    color: #4A5568;
-}
-
-.project-footer-btns a:first-child {
-    border-end: 1px solid #E2E8F0;
-}
-
-.project-footer-btns a.btn-download {
-    color: #16A34A;
-}
-
-/* Модальное окно */
-.custom-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; align-items: center; justify-content: center; }
-.custom-modal.active { display: flex; }
-.modal-content { background: #FFFFFF; border-radius: 12px; width: 100%; max-width: 480px; padding: 30px; box-sizing: border-box; position: relative; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #A0AEC0; }
-.form-group { margin-bottom: 15px; text-align: left; }
-.form-label { display: block; font-size: 0.85rem; font-weight: 600; color: #4A5568; margin-bottom: 5px; }
-.form-control { width: 100%; padding: 10px; border: 1px solid #CBD5E1; border-radius: 6px; box-sizing: border-box; }
-.modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px; }
-.btn-light { background: #EDF2F7; color: #4A5568; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-.btn-primary { background: #16A34A; color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; }
-
-footer { background: #0F291B; color: #94A3B8; padding: 30px 0; text-align: center; font-size: 0.85rem; }
-
-@media (max-width: 992px) {
-    .hero-grid, .section-header { flex-direction: column; text-align: center; gap: 30px; }
-    .hero-buttons { justify-content: center; }
-    .project-card { flex: 0 1 100%; width: 100%; }
+/* Расширяет Investors на телефонах. */
+@media (max-width: 620px) {
+    /* Настраивает мобильный контейнер. */
+    .shell {
+        /* Оставляет минимальные безопасные поля. */
+        width: 94vw;
+    }
 }

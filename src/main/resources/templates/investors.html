@@ -1,193 +1,400 @@
-<!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org" lang="en">
+<!doctype html>
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLanguage}">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Investors - Berry Homes</title>
-    <!-- Подключаем вынесенные стили из статики -->
-    <link rel="stylesheet" th:href="@{/css/investors.css}" />
-    <style>
-        /* Стили анимации всплывающего Toast-уведомления "Thank you" */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translate(-50%, -40px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
-        }
-        @keyframes fadeOutUp {
-            from { opacity: 1; transform: translate(-50%, 0); }
-            to { opacity: 0; transform: translate(-50%, -40px); display: none; }
-        }
-    </style>
+<!-- Элемент meta формирует соответствующую часть интерфейса. -->
+<meta charset="UTF-8">
+<!-- Элемент meta формирует соответствующую часть интерфейса. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Элемент title формирует соответствующую часть интерфейса. -->
+<title>For Investors | Berry Homes</title>
+<!-- Элемент link формирует соответствующую часть интерфейса. -->
+<link rel="stylesheet" th:href="@{/css/investors.css}">
+    <!-- Подключает общие стили публичного интерфейса. -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
 </head>
-<body>
-
-    <!-- УВЕДОМЛЕНИЕ "THANK YOU" ПОСЛЕ УСПЕШНОЙ ОТПРАВКИ -->
-    <div th:if="${successMessage}" id="successToast"
-         style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-                    background-color: #16A34A; color: #FFFFFF; padding: 16px 30px;
-                    border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-                    z-index: 2000; font-weight: 600; font-size: 0.95rem;
-                    display: flex; align-items: center; gap: 10px;
-                    animation: fadeInDown 0.4s ease, fadeOutUp 0.4s ease 3.6s forwards;">
-        <svg style="width:20px; height:20px; fill:currentColor;" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-        </svg>
-        <span th:text="${successMessage}">Thank you for your message!</span>
-    </div>
-
-    <!-- НАВИГАЦИЯ -->
-    <div class="navbar">
-        <div class="container navbar-flex">
-            <div class="brand-block">
-                <a href="/" class="brand-text">BERRY HOMES</a>
-            </div>
-            <div class="top-nav-meta">
-                <span>📞 <a href="tel:4125550123" class="clickable-phone" style="color:#2D3748; text-decoration:none; font-weight:600;">(412) 555-0123</a></span>
-                <span>📍 Pittsburgh, PA</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ПЕРЕКЛЮЧАТЕЛИ АУДИТОРИЙ -->
-    <div class="audience-tabs">
-        <a href="/tenants">For Tenants</a>
-        <a href="/homeowners">For Homeowners</a>
-        <a href="/investors" class="active-investor">For Investors</a>
-    </div>
-
-    <!-- ГЕРОЙ БЛОК -->
-    <div class="hero-investor">
-        <div class="container hero-grid">
-            <div class="hero-left">
-                <span style="color: #16A34A; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 10px;">FOR INVESTORS</span>
-                <h1 class="display-title">Know Before<br/>You Buy.</h1>
-                <p class="lead-text">Make informed decisions. Protect your investment.</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn-primary-gold">View Investment Projects</a>
-                    <button class="btn-outline-white" style="background:transparent; cursor:pointer;" onclick="document.getElementById('investorMessageModal').classList.add('active')">Schedule Consultation</button>
-                </div>
-            </div>
-            <div class="hero-right">
-                <div class="placeholder-hero-img">
-                    <span>🖼️ [Изображение фасада: investors-bg.png]</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- СЕКЦИЯ ДИНАМИЧЕСКИХ ПРОЕКТОВ ИЗ БД -->
-    <div class="projects-section" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Recent Investment Projects</h2>
-            </div>
-
-            <div th:if="${#lists.isEmpty(projects)}" style="text-align: center; padding: 40px; color: #718096; background: #FFFFFF; border-radius: 8px; border: 1px solid #E2E8F0;">
-                No recent investment projects found.
-            </div>
-
-            <div th:unless="${#lists.isEmpty(projects)}" class="projects-grid">
-                <div th:each="project : ${projects}" class="project-card">
-                    <div>
-                        <div class="project-img-box">
-                            <span th:if="${project.getFirstImageUrl() == ''}">🏠 Property Image</span>
-                            <img th:if="${project.getFirstImageUrl() != ''}" th:src="@{'/' + ${project.getFirstImageUrl()}}" alt="Project Image" style="width:100%; height:100%; object-fit:cover;" />
-                        </div>
-
-                        <div class="project-body">
-                            <!-- Вывод полей строго по вашей сущности -->
-                            <h3 class="project-address" th:text="${project.address}">123 Main St</h3>
-                            <p class="project-location" th:text="${project.cityZip}">Pittsburgh, PA 15210</p>
-
-                            <table class="finance-table">
-                                <tr>
-                                    <td class="finance-label">Purchase Price</td>
-                                    <td class="finance-value" th:text="${project.purchasePrice}">$0</td>
-                                </tr>
-                                <tr>
-                                    <td class="finance-label">Monthly Rent</td>
-                                    <td class="finance-value" th:text="${project.monthlyRent}">$0</td>
-                                </tr>
-                                <tr>
-                                    <td class="finance-label">Renovation Budget</td>
-                                    <td class="finance-value" th:text="${project.renovationBudget}">$0</td>
-                                </tr>
-                                <tr>
-                                    <td class="finance-label">Est. NOI (Annual)</td>
-                                    <td class="finance-value" th:text="${project.estNoiAnnual}">$0</td>
-                                </tr>
-                                <tr>
-                                    <td class="finance-label">Total Investment</td>
-                                    <td class="finance-value" th:text="${project.totalInvestment}">$0</td>
-                                </tr>
-                                <tr>
-                                    <td class="finance-label">Cash-on-Cash Return</td>
-                                    <td class="finance-value text-emerald" th:text="${project.cashOnCashReturn}">0%</td>
-                                </tr>
-                                <tr>
-                                    <td class="finance-label">Est. Payback</td>
-                                    <td class="finance-value" th:text="${project.estPayback}">0 yrs</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="project-footer-btns">
-                        <a th:href="@{/investors/projects/{id}(id=${project.id})}">View Project</a>
-
-                        <a th:if="${project.projectDocument != null}"
-                           th:href="@{'/' + ${project.projectDocument.filePath()}}"
-                           target="_blank"
-                           class="btn-download">Download Report ⬇️</a>
-
-                        <span th:if="${project.projectDocument == null}"
-                              class="btn-download"
-                              style="opacity: 0.5; cursor: not-allowed; background: #CBD5E0;">No Report 🚫</span>
-                    </div>
-                </div>
-            </div>
-
-
-    <!-- МОДАЛЬНОЕ ОКНО ОБРАТНОЙ СВЯЗИ ДЛЯ ИНВЕСТОРОВ -->
-    <div class="custom-modal" id="investorMessageModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="section-title" style="font-size:1.25rem; margin:0;">Schedule a Consultation</h5>
-                <button class="close-btn" onclick="document.getElementById('investorMessageModal').classList.remove('active')">&times;</button>
-            </div>
-            <form th:action="@{/investors/message}" th:object="${contactDto}" method="POST">
-
-                <input type="hidden" th:field="*{type}" />
-
-                <div class="form-group">
-                    <label class="form-label">Your Name</label>
-                    <input type="text" th:field="*{name}" class="form-control" placeholder="John Doe" required="required" />
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" th:field="*{email}" class="form-control" placeholder="johndoe@example.com" required="required" />
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Phone Number</label>
-                    <input type="text" th:field="*{phone}" class="form-control" placeholder="(412) 555-0199" required="required" />
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Message / Investment Goals</label>
-                    <textarea th:field="*{message}" class="form-control" rows="4" placeholder="Tell us about your portfolio goals..." required="required"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-light" onclick="document.getElementById('investorMessageModal').classList.remove('active')">Cancel</button>
-                    <button type="submit" class="btn-primary">Submit Request</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- ФУТЕР -->
-    <footer>
-        <div class="container">
-            <p>© 2026 Berry Homes Property Management, LLC. All rights reserved.</p>
-        </div>
-    </footer>
-
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
+<body class="investor-page">
+<!-- Подключает единую шапку публичного сайта. -->
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div th:replace="~{fragments/header :: public-header}">
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div th:if="${successMessage}" class="success-toast" th:text="${successMessage}">Thank you for your message!</div>
+<!-- Элемент main формирует соответствующую часть интерфейса. -->
+<main>
+<!-- Элемент section формирует соответствующую часть интерфейса. -->
+<section class="hero">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="shell hero-content">
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p th:text="#{investor.eyebrow}">FOR INVESTORS</p>
+<!-- Элемент h1 формирует соответствующую часть интерфейса. -->
+<h1 th:text="#{investor.title}">Know Before You Buy.</h1>
+<i>
+</i>
+<!-- Элемент strong формирует соответствующую часть интерфейса. -->
+<strong th:text="#{investor.subtitle}">Make informed decisions. Protect your investment.</strong>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a class="button" href="#projects">
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-trend-line.svg}" alt="">View Investment Projects</a>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="button button-outline" type="button" data-open-contact>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-calendar.svg}" alt="">Schedule Consultation</button>
+</div>
+</div>
+</section>
+<!-- Элемент section формирует соответствующую часть интерфейса. -->
+<section class="deliver">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="shell">
+<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+<h2>⌁ &nbsp; We Deliver &nbsp; ⌁</h2>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="deliver-grid">
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-search.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>Property Purchase<br>Review</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We review the asking price and determine if it is fair based on the property condition and market value.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-calculator.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>Renovation Budget</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>Independent renovation estimate with a clear scope and realistic cost.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-trend-line.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>Rental Market Analysis</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We analyze the market and provide expected rental income.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-clock.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>Investment Feasibility</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We calculate cash flow, expenses, returns, and payback period.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-shield-check.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>Independent Renovation Oversight</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We inspect workmanship throughout the project to protect your investment.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-house.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>Property Management</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We lease, manage, and maintain your property for long term cash flow.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- Элемент section формирует соответствующую часть интерфейса. -->
+<section class="projects" id="projects">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="shell">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="projects-heading">
+<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+<h2>Recent Investment Projects <span>⌁</span>
+</h2>
+<!-- Элемент span формирует соответствующую часть интерфейса. -->
+<span>Use the arrows to see all projects</span>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div th:if="${#lists.isEmpty(projects)}" class="empty-state" th:text="#{investor.empty}">New investment projects are coming soon.</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div th:unless="${#lists.isEmpty(projects)}" class="project-carousel">
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="carousel-arrow prev" data-carousel-prev aria-label="Previous projects">←</button>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="project-viewport">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="project-track" data-carousel-track>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article th:each="project : ${projects}" class="project-card">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="project-image">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div hidden>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:each="image : ${project.projectImages}" class="project-gallery-source" th:src="|/${image.filePath()}|" th:alt="|${project.address} photo|">
+</div>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:if="${project.getFirstImageUrl() != null and project.getFirstImageUrl() != &apos;&apos;}" th:src="|/${project.getFirstImageUrl()}|" th:alt="${project.address}">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div th:if="${project.getFirstImageUrl() == null or project.getFirstImageUrl() == &apos;&apos;}" class="image-fallback">Berry Homes</div>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button data-open-gallery>⌗ View photos</button>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="project-body">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3 th:text="${project.address}">123 Main St</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p th:text="${project.cityZip}">Pittsburgh, PA</p>
+<!-- Элемент dl формирует соответствующую часть интерфейса. -->
+<dl>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Purchase Price</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.purchasePrice}">$0</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Monthly Rent</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.monthlyRent}">$0</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Renovation Budget</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.renovationBudget}">$0</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Est. NOI (Annual)</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.estNoiAnnual}">$0</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Total Investment</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.totalInvestment}">$0</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Project Rent</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.monthlyRent}">$0</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Cash-on-Cash Return</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.cashOnCashReturn}">0%</dd>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент dt формирует соответствующую часть интерфейса. -->
+<dt>Est. Payback</dt>
+<!-- Элемент dd формирует соответствующую часть интерфейса. -->
+<dd th:text="${project.estPayback}">—</dd>
+</div>
+</dl>
+<!-- Элемент footer формирует соответствующую часть интерфейса. -->
+<footer>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button data-open-gallery>◉ View Project</button>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:if="${project.projectDocument != null}" th:href="|/${project.projectDocument.filePath()}|" target="_blank">⌑ Download Report</a>
+</footer>
+</div>
+</article>
+</div>
+</div>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="carousel-arrow next" data-carousel-next aria-label="Next projects">→</button>
+</div>
+</div>
+</section>
+<!-- Элемент section формирует соответствующую часть интерфейса. -->
+<section class="how">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="shell">
+<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+<h2>⌁ &nbsp; How It Works &nbsp; ⌁</h2>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="steps">
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<b>1</b>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-house.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>You Find a Property</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We show you where to look and what to consider.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<b>2</b>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-calculator.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>We Evaluate It</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We visit the property, identify issues, and make a renovation budget estimate.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<b>3</b>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-trend-line.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>We Analyze It</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We analyze rental market and calculate income, expenses, and payback.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<b>4</b>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-clipboard-list.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>You Decide</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>You review the numbers and decide if the investment makes sense.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<b>5</b>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-maintenance.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>We Oversee the Renovation</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We connect you with trusted contractors and independently inspect the work.</p>
+</article>
+<!-- Элемент article формирует соответствующую часть интерфейса. -->
+<article>
+<b>6</b>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-key.svg}" alt="">
+<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+<h3>We Lease & Manage</h3>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p>We find great tenants and manage the property for long term cash flow.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- Элемент section формирует соответствующую часть интерфейса. -->
+<section class="call">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="shell">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div>
+<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+<h2 th:text="#{investor.ready}">Ready to Review Your Next Investment?</h2>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p th:text="#{investor.ready.text}">Let’s analyze the numbers and build a plan that works for you.</p>
+</div>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="button" data-open-contact>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/investors/icon-calendar.svg}" alt="">Schedule Investor Call</button>
+</div>
+</section>
+</main>
+<!-- Элемент footer формирует соответствующую часть интерфейса. -->
+<footer class="site-footer">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="shell">
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
+<!-- Элемент span формирует соответствующую часть интерфейса. -->
+<span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>.<br>All rights reserved.</span>
+<!-- Элемент span формирует соответствующую часть интерфейса. -->
+<span>☎ (412) 555-0123<br>✉ investors@berryhomespm.com</span>
+<!-- Элемент span формирует соответствующую часть интерфейса. -->
+<span>● &nbsp; ◉</span>
+</div>
+</footer>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="modal" id="contactModal">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="modal-backdrop" data-close-modal>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="modal-box">
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="close" data-close-modal>×</button>
+<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
+<h2>Schedule a Consultation</h2>
+<!-- Элемент form формирует соответствующую часть интерфейса. -->
+<form th:action="@{/investors/message}" th:object="${contactDto}" method="post">
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="hidden" th:field="*{type}">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label>Your Name<input th:field="*{name}" required>
+</label>
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label>Email<input type="email" th:field="*{email}" required>
+</label>
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label>Phone<input th:field="*{phone}" required>
+</label>
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label>Investment Goals<textarea th:field="*{message}" rows="4" required>
+</textarea>
+</label>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="button" type="submit">Send Request</button>
+</form>
+</div>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="modal gallery-modal" id="galleryModal">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="modal-backdrop" data-close-gallery>
+</div>
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
+<div class="gallery-box">
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="close" data-close-gallery>×</button>
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="gallery-nav gallery-prev">←</button>
+<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<img id="galleryImage" src="" alt="">
+<!-- Элемент button формирует соответствующую часть интерфейса. -->
+<button class="gallery-nav gallery-next">→</button>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p id="galleryCounter">
+</p>
+</div>
+</div>
+<!-- Элемент script формирует соответствующую часть интерфейса. -->
+<script>(()=>{const body=document.body,contact=document.querySelector("#contactModal"),gallery=document.querySelector("#galleryModal"),set=(m,on)=>{m.classList.toggle("open",on);body.classList.toggle("modal-open",on);};document.querySelectorAll("[data-open-contact]").forEach(e=>e.onclick=()=>set(contact,true));contact.querySelectorAll("[data-close-modal]").forEach(e=>e.onclick=()=>set(contact,false));const track=document.querySelector("[data-carousel-track]"),move=n=>track.parentElement.scrollBy({left:n*(track.querySelector(".project-card").offsetWidth+18),behavior:"smooth"});document.querySelector("[data-carousel-prev]").onclick=()=>move(-1);document.querySelector("[data-carousel-next]").onclick=()=>move(1);let photos=[],index=0;const image=document.querySelector("#galleryImage"),counter=document.querySelector("#galleryCounter"),render=()=>{image.src=photos[index].src;image.alt=photos[index].alt;counter.textContent=(index+1)+" / "+photos.length;},open=card=>{photos=[...card.querySelectorAll(".project-gallery-source")];if(!photos.length)return;index=0;render();set(gallery,true);};document.querySelectorAll("[data-open-gallery]").forEach(e=>e.onclick=()=>open(e.closest(".project-card")));document.querySelector(".gallery-next").onclick=()=>{index=(index+1)%photos.length;render();};document.querySelector(".gallery-prev").onclick=()=>{index=(index-1+photos.length)%photos.length;render();};gallery.querySelectorAll("[data-close-gallery]").forEach(e=>e.onclick=()=>set(gallery,false));document.addEventListener("keydown",e=>{if(e.key==="Escape"){set(contact,false);set(gallery,false)}if(gallery.classList.contains("open")&&e.key==="ArrowRight")document.querySelector(".gallery-next").click();if(gallery.classList.contains("open")&&e.key==="ArrowLeft")document.querySelector(".gallery-prev").click();});})();</script>
+<!-- Подключает поведение общей мобильной навигации. -->
+<!-- Элемент script формирует соответствующую часть интерфейса. -->
+<script th:replace="~{fragments/header :: public-navigation-script}">
+</script>
 </body>
 </html>

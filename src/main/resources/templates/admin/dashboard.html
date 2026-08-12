@@ -1,92 +1,179 @@
 <!DOCTYPE html>
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
 <html xmlns:th="http://thymeleaf.org" lang="en">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta charset="UTF-8">
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Admin Dashboard - Berry Homes</title>
     <!-- Подключаем вынесенные стили дашборда из вашей подпапки -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}" />
     <!-- Подключаем базовые стили админки для общего каркаса и Sidebar -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}" />
+    <!-- Подключает единый строгий стиль рабочего интерфейса. -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/admin-workspace.css}">
 </head>
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body>
 
     <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-sidebar">
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="sidebar-brand">
             BERRY HOMES
         </div>
+        <!-- Элемент ul формирует соответствующую часть интерфейса. -->
         <ul class="sidebar-menu">
-            <li><a th:href="@{/admin/dashboard}" class="active">Dashboard</a></li>
-            <li><a th:href="@{/admin/contacts}">Contacts / Leads</a></li>
-            <li><a th:href="@{/admin/projects}">Investment Projects</a></li>
-            <li><a th:href="@{/admin/settings}">System Settings</a></li>
-            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a></li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/dashboard}" class="active">Dashboard</a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/contacts}">Contacts / Leads <b th:if="${newContactCount > 0}" th:text="${newContactCount}">0</b></a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/projects}">Investment Projects</a>
+            <!-- Открывает рабочий документооборот. -->
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
+                <a th:href="@{/admin/documents}">Documents <b th:if="${unsortedDocumentCount > 0}" th:text="${unsortedDocumentCount}">0</b></a>
+            </li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/settings}">System Settings</a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li style="margin-top: auto;">
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a>
+</li>
         </ul>
     </div>
 
     <!-- ОСНОВНОЙ КОНТЕНТ ДАШБОРДА -->
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-content">
 
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="page-header">
+            <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
             <h1 class="page-title">Dashboard Overview</h1>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div style="color: #718096; font-size: 0.9rem;">Real-time system state</div>
         </div>
 
         <!-- СЕТКА ИНФОРМАЦИОННЫХ КАРТОЧЕК (WIDGETS) -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="widgets-grid">
 
             <!-- Карточка 1: Новые обращения (Ведет на список контактов) -->
+            <!-- Элемент a формирует соответствующую часть интерфейса. -->
             <a th:href="@{/admin/contacts}" class="widget-card-link" style="text-decoration: none; color: inherit; display: block;">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="widget-card">
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="widget-info-left">
+                        <!-- Элемент span формирует соответствующую часть интерфейса. -->
                         <span class="widget-title">New Leads</span>
+                        <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                         <h3 class="widget-value" th:text="${stats.totalNewLeads()}">0</h3>
                     </div>
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="widget-icon-right icon-blue-bg">✉️</div>
                 </div>
             </a>
 
             <!-- Карточка 2: Всего активных проектов (Ведет на список проектов) -->
+            <!-- Элемент a формирует соответствующую часть интерфейса. -->
             <a th:href="@{/admin/projects}" class="widget-card-link" style="text-decoration: none; color: inherit; display: block;">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="widget-card">
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="widget-info-left">
+                        <!-- Элемент span формирует соответствующую часть интерфейса. -->
                         <span class="widget-title">Active Projects</span>
+                        <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                         <h3 class="widget-value" th:text="${stats.totalProjects()}">0</h3>
                     </div>
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="widget-icon-right icon-green-bg">🏠</div>
                 </div>
             </a>
 
+            <!-- Карточка очереди неразобранных документов. -->
+            <a th:href="@{/admin/documents?category=UNSORTED}" class="widget-card-link">
+                <!-- Создаёт рабочую карточку документов. -->
+                <div class="widget-card">
+                    <!-- Группирует подпись и значение. -->
+                    <div class="widget-info-left">
+                        <!-- Подписывает показатель. -->
+                        <span class="widget-title">Unsorted Documents</span>
+                        <!-- Показывает количество документов. -->
+                        <h3 class="widget-value" th:text="${unsortedDocumentCount}">0</h3>
+                    </div>
+                    <!-- Показывает строгую иконку документа. -->
+                    <div class="widget-icon-right">▤</div>
+                </div>
+            </a>
         </div>
 
         <!-- ДВУХКОЛОНОЧНЫЙ КОНТЕНТ АНАЛИТИКИ -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="dashboard-details-layout">
 
             <!-- Левая колонка: Лента последних событий -->
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="layout-column-main">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="dashboard-block-card">
+                    <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                     <h3 class="block-card-title">Recent Activity</h3>
 
                     <!-- Если новых заявок вообще нет -->
+                    <!-- Элемент p формирует соответствующую часть интерфейса. -->
                     <p th:if="${#lists.isEmpty(stats.recentLeads())}" style="color: #A0AEC0; font-size: 0.9rem; text-align: center; padding: 20px 0;">
                         No recent incoming requests found.
                     </p>
 
                     <!-- Список последних 5 лидов -->
+                    <!-- Элемент ul формирует соответствующую часть интерфейса. -->
                     <ul th:unless="${#lists.isEmpty(stats.recentLeads())}" class="recent-leads-list">
+                        <!-- Элемент li формирует соответствующую часть интерфейса. -->
                         <li th:each="lead : ${stats.recentLeads()}" class="recent-lead-item">
+                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
                             <div>
+                                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                                 <div class="lead-item-name">
                                     <!-- Ссылка ведет на общий список контактов, сохраняя фокус -->
+                                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
                                     <a th:href="@{/admin/contacts(search=${lead.email()})}" style="color: inherit; text-decoration: none;" th:text="${lead.name()}">John Doe</a>
                                 </div>
+                                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                                 <div class="lead-item-time" th:text="${lead.email()}">john@example.com</div>
                             </div>
+                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
                             <div>
                                 <!-- Вывод источника в виде компактного текстового маркера -->
+                                <!-- Элемент span формирует соответствующую часть интерфейса. -->
                                 <span th:if="${lead.type().name() == 'TENANT'}" style="color: #B8255F; font-size: 0.8rem; font-weight: 600;">[Tenant]</span>
+                                <!-- Элемент span формирует соответствующую часть интерфейса. -->
                                 <span th:if="${lead.type().name() == 'HOMEOWNER'}" style="color: #16A34A; font-size: 0.8rem; font-weight: 600;">[Owner]</span>
+                                <!-- Элемент span формирует соответствующую часть интерфейса. -->
                                 <span th:if="${lead.type().name() == 'INVESTOR'}" style="color: #4F46E5; font-size: 0.8rem; font-weight: 600;">[Investor]</span>
                             </div>
                         </li>
@@ -95,40 +182,64 @@
             </div>
 
             <!-- Правая колонка: Распределение заявок по типам -->
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="layout-column-side">
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="dashboard-block-card">
+                    <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                     <h3 class="block-card-title">Lead Distribution</h3>
 
                     <!-- Строка: Арендаторы -->
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="type-distribution-row">
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="type-dist-labels">
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span>For Tenants</span>
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span th:text="${stats.tenantLeadsCount()}">0</span>
                         </div>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" style="width: 100%; background-color: #B8255F;"></div>
+                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                            <div class="progress-bar-fill" style="width: 100%; background-color: #B8255F;">
+</div>
                         </div>
                     </div>
 
                     <!-- Строка: Собственники -->
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="type-distribution-row">
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="type-dist-labels">
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span>For Homeowners</span>
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span th:text="${stats.homeownerLeadsCount()}">0</span>
                         </div>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" style="width: 100%; background-color: #16A34A;"></div>
+                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                            <div class="progress-bar-fill" style="width: 100%; background-color: #16A34A;">
+</div>
                         </div>
                     </div>
 
                     <!-- Строка: Инвесторы -->
+                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
                     <div class="type-distribution-row">
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="type-dist-labels">
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span>For Investors</span>
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
                             <span th:text="${stats.investorLeadsCount()}">0</span>
                         </div>
+                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
                         <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" style="width: 100%; background-color: #4F46E5;"></div>
+                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                            <div class="progress-bar-fill" style="width: 100%; background-color: #4F46E5;">
+</div>
                         </div>
                     </div>
 
@@ -139,6 +250,8 @@
 
     </div>
 
-    <script src="dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Элемент script формирует соответствующую часть интерфейса. -->
+    <script src="dist/js/bootstrap.bundle.min.js">
+</script>
 </body>
 </html>

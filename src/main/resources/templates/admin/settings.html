@@ -1,85 +1,205 @@
 <!DOCTYPE html>
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
 <html xmlns:th="http://thymeleaf.org" lang="en">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta charset="UTF-8">
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>System Settings - Berry Homes</title>
     <!-- Подключаем базовый каркас админки и изолированные стили настроек -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}" />
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin/settings-admin.css}" />
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin/project-form.css}" />
+    <!-- Подключает единый строгий стиль рабочего интерфейса. -->
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/admin-workspace.css}">
 </head>
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body>
 
     <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-sidebar">
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="sidebar-brand">
             BERRY HOMES
         </div>
+        <!-- Элемент ul формирует соответствующую часть интерфейса. -->
         <ul class="sidebar-menu">
-            <li><a th:href="@{/admin/dashboard}">Dashboard</a></li>
-            <li><a th:href="@{/admin/contacts}">Contacts / Leads</a></li>
-            <li><a th:href="@{/admin/projects}">Investment Projects</a></li>
-            <li><a th:href="@{/admin/settings}" class="active">System Settings</a></li>
-            <li style="margin-top: auto;"><a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a></li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/dashboard}">Dashboard</a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/contacts}">Contacts / Leads <b th:if="${newContactCount > 0}" th:text="${newContactCount}">0</b></a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/projects}">Investment Projects</a>
+            <!-- Открывает рабочий документооборот. -->
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
+                <a th:href="@{/admin/documents}">Documents <b th:if="${unsortedDocumentCount > 0}" th:text="${unsortedDocumentCount}">0</b></a>
+            </li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li>
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/admin/settings}" class="active">System Settings</a>
+</li>
+            <!-- Элемент li формирует соответствующую часть интерфейса. -->
+            <li style="margin-top: auto;">
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a th:href="@{/logout}" style="color: #FC8181; text-decoration: none;">Logout ↩</a>
+</li>
         </ul>
     </div>
 
     <!-- ОСНОВНОЙ КОНТЕНТ НАСТРОЕК -->
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-content">
 
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="page-header">
+            <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
             <h1 class="page-title">System Settings</h1>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div style="color: #718096; font-size: 0.9rem;">Global site configurations</div>
         </div>
 
         <!-- УВЕДОМЛЕНИЕ ОБ УСПЕШНОМ СОХРАНЕНИИ -->
+        <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div th:if="${successMessage}" class="alert-success" th:text="${successMessage}">
             Settings updated successfully!
         </div>
 
         <!-- ГЛАВНАЯ ФОРМА НАСТРОЕК -->
+        <!-- Элемент form формирует соответствующую часть интерфейса. -->
         <form th:action="@{/admin/settings/save}" method="post">
 
             <!-- БЛОК 1: КОНТАКТНЫЕ ДАННЫЕ КОМПАНИИ -->
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="settings-section-card">
+                <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                 <h3 class="settings-card-title">📞 Company Contacts</h3>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p class="settings-card-desc">These values are automatically updated in the header and footer across all public pages.</p>
 
                 <!-- Поле: Официальный телефон -->
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="settings-form-group">
+                    <!-- Элемент label формирует соответствующую часть интерфейса. -->
                     <label class="input-label-text">Official Phone Number</label>
+                    <!-- Элемент input формирует соответствующую часть интерфейса. -->
                     <input type="text" name="site_phone" th:value="${settings['site_phone']}" class="admin-input-field" placeholder="(412) 555-0123" required="required" />
+                    <!-- Элемент small формирует соответствующую часть интерфейса. -->
                     <small class="settings-help-text">Used for click-to-call direct links on mobile layouts.</small>
                 </div>
 
                 <!-- Поле: Официальный Email -->
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="settings-form-group" style="margin-top: 20px;">
+                    <!-- Элемент label формирует соответствующую часть интерфейса. -->
                     <label class="input-label-text">Official Email Address</label>
+                    <!-- Элемент input формирует соответствующую часть интерфейса. -->
                     <input type="email" name="site_email" th:value="${settings['site_email']}" class="admin-input-field" placeholder="info@berryhomespm.com" required="required" />
+                    <!-- Элемент small формирует соответствующую часть интерфейса. -->
                     <small class="settings-help-text">All public general inquiry mailto links will route here.</small>
                 </div>
             </div>
 
             <!-- БЛОК 2: ССЫЛКИ НА ВНЕШНИЕ ПОРТАЛЫ (TENANTCLOUD И АНАЛОГИ) -->
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="settings-section-card" style="margin-top: 25px;">
+                <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                 <h3 class="settings-card-title">🌐 External Portals Redirects</h3>
+                <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p class="settings-card-desc">Configure target links for the "Open Portal" buttons in Tenant and Owner Centers.</p>
 
                 <!-- Поле: Ссылка на портал -->
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="settings-form-group" style="margin-top: 20px;">
+                    <!-- Элемент label формирует соответствующую часть интерфейса. -->
                     <label class="input-label-text">Portal URL</label>
+                    <!-- Элемент input формирует соответствующую часть интерфейса. -->
                     <input type="url" name="portal_url" th:value="${settings['portal_url']}" class="admin-input-field" placeholder="https://tenantcloud.com" required="required" />
+                    <!-- Элемент small формирует соответствующую часть интерфейса. -->
                     <small class="settings-help-text">The URL for tenants and owners.</small>
                 </div>
             </div>
 
             <!-- ФУТЕР ФОРМЫ С КНОПКАМИ ДЕЙСТВИЙ -->
-            <div class="form-footer-actions">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+            <!-- Configures business identity, licensing, channels, and footer content. -->
+<div class="settings-section-card settings-grid">
+<h3 class="settings-card-title">Business Identity and Public Channels</h3>
+<label>Copyright year<input class="admin-input-field" name="copyright_year" th:value="${settings['copyright_year']}" required></label>
+<label>Legal company name<input class="admin-input-field" name="company_legal_name" th:value="${settings['company_legal_name']}" required></label>
+<label>Short company name<input class="admin-input-field" name="company_short_name" th:value="${settings['company_short_name']}" required></label>
+<label>License number<input class="admin-input-field" name="license_number" th:value="${settings['license_number']}"></label>
+<label>License text (English)<input class="admin-input-field" name="license_text" th:value="${settings['license_text']}"></label>
+<label>License text (Russian)<input class="admin-input-field" name="license_text_ru" th:value="${settings['license_text_ru']}"></label>
+<label>Partner name<input class="admin-input-field" name="partner_name" th:value="${settings['partner_name']}"></label>
+<label>Partner text (English)<input class="admin-input-field" name="partner_text" th:value="${settings['partner_text']}"></label>
+<label>Partner text (Russian)<input class="admin-input-field" name="partner_text_ru" th:value="${settings['partner_text_ru']}"></label>
+<label>Emergency phone<input class="admin-input-field" name="emergency_phone" th:value="${settings['emergency_phone']}"></label>
+<label>Investor email<input class="admin-input-field" type="email" name="investor_email" th:value="${settings['investor_email']}"></label>
+<label>Google Maps URL<input class="admin-input-field" type="url" name="google_maps_url" th:value="${settings['google_maps_url']}"></label>
+<label>Facebook URL<input class="admin-input-field" type="url" name="facebook_url" th:value="${settings['facebook_url']}"></label>
+<label>Instagram URL<input class="admin-input-field" type="url" name="instagram_url" th:value="${settings['instagram_url']}"></label>
+<label>Footer tagline (English)<input class="admin-input-field" name="footer_tagline" th:value="${settings['footer_tagline']}"></label>
+<label>Footer tagline (Russian)<input class="admin-input-field" name="footer_tagline_ru" th:value="${settings['footer_tagline_ru']}"></label>
+<label>Show social links<select class="admin-input-field" name="show_social_links"><option value="false" th:selected="${settings['show_social_links'] != 'true'}">No</option><option value="true" th:selected="${settings['show_social_links'] == 'true'}">Yes</option></select></label>
+</div>
+<div class="form-footer-actions">
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/admin/dashboard}" class="btn-form-cancel">Cancel</a>
+                <!-- Элемент button формирует соответствующую часть интерфейса. -->
                 <button type="submit" class="btn-form-save">Save Configuration</button>
             </div>
 
+            <!-- Содержит локализованные адрес и часы работы. -->
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+            <div class="settings-section-card">
+                <!-- Подписывает блок локализации. -->
+                <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
+                <h3 class="settings-card-title">Localized Office Information</h3>
+                <!-- Редактирует адрес на английском. -->
+                <!-- Элемент label формирует соответствующую часть интерфейса. -->
+                <label class="input-label-text">Office address (English)</label>
+                <!-- Хранит английский адрес. -->
+                <!-- Элемент input формирует соответствующую часть интерфейса. -->
+                <input class="admin-input-field" name="site_office" th:value="${settings['site_office']}" required>
+                <!-- Редактирует адрес на русском. -->
+                <!-- Элемент label формирует соответствующую часть интерфейса. -->
+                <label class="input-label-text">Office address (Russian)</label>
+                <!-- Хранит русский адрес. -->
+                <!-- Элемент input формирует соответствующую часть интерфейса. -->
+                <input class="admin-input-field" name="site_office_ru" th:value="${settings['site_office_ru']}" required>
+                <!-- Редактирует часы на английском. -->
+                <!-- Элемент label формирует соответствующую часть интерфейса. -->
+                <label class="input-label-text">Office hours (English)</label>
+                <!-- Хранит английские часы работы. -->
+                <!-- Элемент input формирует соответствующую часть интерфейса. -->
+                <input class="admin-input-field" name="site_hours" th:value="${settings['site_hours']}" required>
+                <!-- Редактирует часы на русском. -->
+                <!-- Элемент label формирует соответствующую часть интерфейса. -->
+                <label class="input-label-text">Office hours (Russian)</label>
+                <!-- Хранит русские часы работы. -->
+                <!-- Элемент input формирует соответствующую часть интерфейса. -->
+                <input class="admin-input-field" name="site_hours_ru" th:value="${settings['site_hours_ru']}" required>
+            </div>
         </form> <!-- ЗДЕСЬ ЗАКАНЧИВАЕТСЯ ГЛАВНАЯ ФОРМА НАСТРОЕК -->
     </div>
 

@@ -21,6 +21,7 @@ public class AdminDashboardController {
 
     private final ContactService contactService;
     private final ProjectService projectService;
+    private final net.berryhomes.service.ManagedDocumentService managedDocumentService;
 
     @GetMapping
     public ModelAndView showDashboard() {
@@ -38,6 +39,7 @@ public class AdminDashboardController {
         );
 
         mav.addObject("stats", stats);
+        mav.addObject("unsortedDocumentCount", managedDocumentService.countUnsorted());
         return mav;
     }
 }

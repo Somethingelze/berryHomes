@@ -1,57 +1,114 @@
 <!DOCTYPE html>
+<!-- Элемент html формирует соответствующую часть интерфейса. -->
 <html xmlns:th="http://thymeleaf.org" lang="ru">
+<!-- Элемент head формирует соответствующую часть интерфейса. -->
 <head>
+    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta charset="UTF-8">
+    <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Админ-панель | Проекты</title>
+    <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link href="https://cloudflare.com" rel="stylesheet">
+    <!-- Подключает единый строгий стиль рабочего интерфейса. -->
+    <link rel="stylesheet" th:href="@{/css/admin-workspace.css}">
 </head>
+<!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="bg-light">
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="container-fluid">
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="row">
+        <!-- Элемент nav формирует соответствующую часть интерфейса. -->
         <nav class="col-md-2 bg-dark min-vh-100 p-3 text-white">
+            <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
             <h4 class="mb-4">BerryHomes</h4>
+            <!-- Элемент ul формирует соответствующую часть интерфейса. -->
             <ul class="nav flex-column gap-2">
-                <li class="nav-item"><a class="nav-link text-white-50 px-3 py-2" href="/admin/contacts">📋 Контакты</a></li>
-                <li class="nav-item"><a class="nav-link text-white bg-primary rounded px-3 py-2" href="/admin/projects">🏗️ Проекты</a></li>
+                <!-- Элемент li формирует соответствующую часть интерфейса. -->
+                <li class="nav-item">
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a class="nav-link text-white-50 px-3 py-2" href="/admin/contacts">📋 Контакты</a>
+</li>
+                <!-- Элемент li формирует соответствующую часть интерфейса. -->
+                <li class="nav-item">
+<!-- Элемент a формирует соответствующую часть интерфейса. -->
+<a class="nav-link text-white bg-primary rounded px-3 py-2" href="/admin/projects">🏗️ Проекты</a>
+                <!-- Открывает документооборот. -->
+                <li class="nav-item"><a class="nav-link" href="/admin/documents">▤ Документы</a></li>
+</li>
             </ul>
         </nav>
 
+        <!-- Элемент main формирует соответствующую часть интерфейса. -->
         <main class="col-md-10 p-4">
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="d-flex justify-content-between align-items-center mb-4">
+                <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2>Управление проектами</h2>
+                <!-- Элемент button формирует соответствующую часть интерфейса. -->
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createProjectModal">+ Создать проект</button>
             </div>
 
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="nav nav-tabs mb-4">
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a class="nav-link" th:classappend="${!isArchived} ? 'active fw-bold'" href="/admin/projects?archived=false">Активные</a>
+                <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a class="nav-link" th:classappend="${isArchived} ? 'active fw-bold'" href="/admin/projects?archived=true">Архив</a>
             </div>
 
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card shadow-sm">
+                <!-- Элемент table формирует соответствующую часть интерфейса. -->
                 <table class="table table-hover align-middle mb-0">
+                    <!-- Элемент thead формирует соответствующую часть интерфейса. -->
                     <thead class="table-light">
+                    <!-- Элемент tr формирует соответствующую часть интерфейса. -->
                     <tr>
+                        <!-- Элемент th формирует соответствующую часть интерфейса. -->
                         <th>UUID</th>
+                        <!-- Элемент th формирует соответствующую часть интерфейса. -->
                         <th>Название (RU / EN)</th>
+                        <!-- Элемент th формирует соответствующую часть интерфейса. -->
                         <th>Локация</th>
+                        <!-- Элемент th формирует соответствующую часть интерфейса. -->
                         <th class="text-end">Действия</th>
                     </tr>
                     </thead>
+                    <!-- Элемент tbody формирует соответствующую часть интерфейса. -->
                     <tbody>
+                    <!-- Элемент tr формирует соответствующую часть интерфейса. -->
                     <tr th:each="p : ${projectsPage.content}">
-                        <td class="font-monospace text-muted small" th:text="${p.id}"></td>
+                        <!-- Элемент td формирует соответствующую часть интерфейса. -->
+                        <td class="font-monospace text-muted small" th:text="${p.id}">
+</td>
+                        <!-- Элемент td формирует соответствующую часть интерфейса. -->
                         <td>
-                            <strong th:text="${p.titleRu}"></strong><br>
-                            <span class="text-muted small" th:text="${p.titleEn}"></span>
+                            <!-- Элемент strong формирует соответствующую часть интерфейса. -->
+                            <strong th:text="${p.titleRu}">
+</strong>
+<br>
+                            <!-- Элемент span формирует соответствующую часть интерфейса. -->
+                            <span class="text-muted small" th:text="${p.titleEn}">
+</span>
                         </td>
-                        <td th:text="${p.location}"></td>
+                        <!-- Элемент td формирует соответствующую часть интерфейса. -->
+                        <td th:text="${p.location}">
+</td>
+                        <!-- Элемент td формирует соответствующую часть интерфейса. -->
                         <td class="text-end">
+                            <!-- Элемент form формирует соответствующую часть интерфейса. -->
                             <form th:if="${!isArchived}" th:action="@{/admin/projects/archive}" method="post" class="d-inline">
+                                <!-- Элемент input формирует соответствующую часть интерфейса. -->
                                 <input type="hidden" name="id" th:value="${p.id}">
+                                <!-- Элемент button формирует соответствующую часть интерфейса. -->
                                 <button type="submit" class="btn btn-sm btn-outline-warning me-1">В архив</button>
                             </form>
+                            <!-- Элемент form формирует соответствующую часть интерфейса. -->
                             <form th:action="@{/admin/projects/delete}" method="post" class="d-inline" onsubmit="return confirm('Удалить?')">
+                                <!-- Элемент input формирует соответствующую часть интерфейса. -->
                                 <input type="hidden" name="id" th:value="${p.id}">
+                                <!-- Элемент button формирует соответствующую часть интерфейса. -->
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
                             </form>
                         </td>
@@ -64,34 +121,101 @@
 </div>
 
 <!-- Модал создания проекта с загрузкой файлов -->
+<!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="modal fade" id="createProjectModal" tabindex="-1">
+    <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="modal-dialog modal-lg">
+        <!-- Элемент form формирует соответствующую часть интерфейса. -->
         <form th:action="@{/admin/projects/create}" method="post" enctype="multipart/form-data" class="modal-content">
-            <div class="modal-header"><h5>Новый проект</h5></div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+            <div class="modal-header">
+<!-- Элемент h5 формирует соответствующую часть интерфейса. -->
+<h5>Новый проект</h5>
+</div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="modal-bodyrow g-3">
-                <div class="col-md-6 mb-2"><label class="form-label">Название (RU)</label><input type="text" name="titleRu" class="form-control" required></div>
-                <div class="col-md-6 mb-2"><label class="form-label">Название (EN)</label><input type="text" name="titleEn" class="form-control" required></div>
-                <div class="col-md-6 mb-2"><label class="form-label">Краткое описание (RU)</label><input type="text" name="shortDescRu" class="form-control" required></div>
-                <div class="col-md-6 mb-2"><label class="form-label">Краткое описание (EN)</label><input type="text" name="shortDescEn" class="form-control" required></div>
-                <div class="col-12 mb-2"><label class="form-label">Локация</label><input type="text" name="location" class="form-control" required></div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-6 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Название (RU)</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="titleRu" class="form-control" required>
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-6 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Название (EN)</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="titleEn" class="form-control" required>
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-6 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Краткое описание (RU)</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="shortDescRu" class="form-control" required>
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-6 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Краткое описание (EN)</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="shortDescEn" class="form-control" required>
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-12 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Локация</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="location" class="form-control" required>
+</div>
 
                 <!-- Файлы -->
-                <div class="col-12 mb-2"><label class="form-label">Файл отчета (PDF/Doc)</label><input type="file" name="reportFile" class="form-control"></div>
-                <div class="col-12 mb-2"><label class="form-label">Изображения проекта (можно несколько)</label><input type="file" name="images" class="form-control" multiple></div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-12 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Файл отчета (PDF/Doc)</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="file" name="reportFile" class="form-control">
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-12 mb-2">
+<!-- Элемент label формирует соответствующую часть интерфейса. -->
+<label class="form-label">Изображения проекта (можно несколько)</label>
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="file" name="images" class="form-control" multiple>
+</div>
 
                 <hr>
                 <h6>Документы проекта</h6>
-                <div class="col-md-4"><input type="text" name="docTitlesRu" class="form-control" placeholder="Название дока (RU)"></div>
-                <div class="col-md-4"><input type="text" name="docTitlesEn" class="form-control" placeholder="Название дока (EN)"></div>
-                <div class="col-md-4"><input type="file" name="docs" class="form-control"></div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-4">
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="docTitlesRu" class="form-control" placeholder="Название дока (RU)">
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-4">
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="text" name="docTitlesEn" class="form-control" placeholder="Название дока (EN)">
+</div>
+                <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <div class="col-md-4">
+<!-- Элемент input формирует соответствующую часть интерфейса. -->
+<input type="file" name="docs" class="form-control">
+</div>
             </div>
+            <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="modal-footer">
+                <!-- Элемент button формирует соответствующую часть интерфейса. -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <!-- Элемент button формирует соответствующую часть интерфейса. -->
                 <button type="submit" class="btn btn-success">Создать проект</button>
             </div>
         </form>
     </div>
 </div>
-<script src="https://jsdelivr.net"></script>
+<!-- Элемент script формирует соответствующую часть интерфейса. -->
+<script src="https://jsdelivr.net">
+</script>
 </body>
 </html>

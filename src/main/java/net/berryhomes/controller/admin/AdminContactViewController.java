@@ -27,6 +27,7 @@ import java.util.UUID;
 public class AdminContactViewController {
 
     private final ContactService contactService;
+    private final net.berryhomes.service.AuditService auditService;
 
     @GetMapping
     public ModelAndView listContacts(
@@ -38,7 +39,7 @@ public class AdminContactViewController {
 
         ModelAndView mav = new ModelAndView("admin/contacts");
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(Math.max(page, 0), java.util.Set.of(10, 20, 50, 100).contains(size) ? size : 10, Sort.by("createdAt").descending());
 
         Page<Contact> contactPage = contactService.getContacts(search, typeFilter, statusFilter, pageable);
 
@@ -48,6 +49,7 @@ public class AdminContactViewController {
         mav.addObject("currentSearch", (search != null) ? search.trim() : "");
         mav.addObject("currentTypeFilter", typeFilter != null ? typeFilter.name() : "");
         mav.addObject("currentStatusFilter", statusFilter != null ? statusFilter.name() : "");
+        mav.addObject("currentSize", java.util.Set.of(10, 20, 50, 100).contains(size) ? size : 10);
 
         return mav;
     }
@@ -57,6 +59,7 @@ public class AdminContactViewController {
                                      @RequestParam ContactStatus status,
                                      RedirectAttributes redirectAttributes) {
         contactService.updateContactStatus(id, status);
+        auditService.record("UPDATE_STATUS", "CONTACT", id.toString(), status.name());
         redirectAttributes.addFlashAttribute("successMessage", "Status updated successfully!");
         return new ModelAndView("redirect:/admin/contacts");
     }
@@ -65,6 +68,7 @@ public class AdminContactViewController {
     @PostMapping("/{id}/delete")
     public ModelAndView deleteContact(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
         contactService.deleteContact(id);
+        auditService.record("DELETE", "CONTACT", id.toString(), null);
         redirectAttributes.addFlashAttribute("successMessage", "Contact deleted successfully!");
         return new ModelAndView("redirect:/admin/contacts");
     }

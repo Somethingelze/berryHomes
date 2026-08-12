@@ -1,39 +1,96 @@
 /* Стили карточек разделов настроек */
 .settings-section-card {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 8px;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 30px;
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.01);
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 25px;
+
+
 }
+
 
 .settings-card-title {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 1.1rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #2D3748;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0 0 8px 0;
+
+
 }
 
+
 .settings-card-desc {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.82rem;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #718096;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 0 0 20px 0;
+
+
 }
+
 
 /* Ограничение ширины для полей ввода */
 .settings-form-group {
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 20px;
+
+    /* Настраивает CSS-свойство max-width для текущего элемента. */
     max-width: 550px;
+
+
 }
+
 
 .settings-form-group:last-child {
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 0;
+
+
 }
 
+
 .settings-help-text {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.78rem;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #A0AEC0;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: block;
+
+    /* Настраивает CSS-свойство margin-top для текущего элемента. */
     margin-top: 5px;
+
+
 }

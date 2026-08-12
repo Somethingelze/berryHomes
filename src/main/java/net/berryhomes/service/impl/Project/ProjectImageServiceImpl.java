@@ -16,6 +16,8 @@ import net.berryhomes.service.impl.File.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.UUID;
 
@@ -56,7 +58,7 @@ public class ProjectImageServiceImpl implements ProjectImageService {
             log.info("Try to find image with id {} not found", imageId);
             return new ProjectFileNotFoundException(String.format("Image with id %s not found", imageId));
         });
-        fileStorageService.deleteFile(projectImage.getFilePath());
+        deleteFileAfterCommit(projectImage.getFilePath());
         projectImageRepository.delete(projectImage);
     }
 
@@ -69,5 +71,13 @@ public class ProjectImageServiceImpl implements ProjectImageService {
         });
         projectImage.setSortOrder(sortOrder);
         projectImageRepository.save(projectImage);
+    }
+    private void deleteFileAfterCommit(String filePath) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+
+            public void afterCommit() {
+                fileStorageService.deleteFile(filePath);
+            }
+        });
     }
 }

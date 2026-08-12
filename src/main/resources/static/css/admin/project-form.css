@@ -1,183 +1,469 @@
 /* Базовая разметка формы */
 .form-card-box {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 8px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 30px;
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+
+
 }
+
 
 .form-grid-row {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: grid;
+
+    /* Настраивает CSS-свойство grid-template-cols для текущего элемента. */
     grid-template-cols: repeat(2, 1fr);
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 20px;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 25px;
+
+
 }
+
 
 .form-group-full {
+
+    /* Настраивает CSS-свойство grid-column для текущего элемента. */
     grid-column: span 2;
+
+
 }
+
 
 .input-label-text {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: block;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.85rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #4A5568;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 8px;
+
+
 }
+
 
 .admin-input-field {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 100%;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 10px 14px;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #CBD5E1;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство box-sizing для текущего элемента. */
     box-sizing: border-box;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.9rem;
+
+    /* Настраивает CSS-свойство font-family для текущего элемента. */
     font-family: inherit;
+
+    /* Настраивает CSS-свойство transition для текущего элемента. */
     transition: border-color 0.2s;
+
+
 }
 
+
 .admin-input-field:focus {
+
+    /* Настраивает CSS-свойство outline для текущего элемента. */
     outline: none;
+
+    /* Настраивает CSS-свойство border-color для текущего элемента. */
     border-color: #16A34A;
+
+
 }
+
 
 /* Блок управления медиа-файлами */
 .media-management-section {
+
+    /* Настраивает CSS-свойство margin-top для текущего элемента. */
     margin-top: 40px;
+
+    /* Настраивает CSS-свойство border-top для текущего элемента. */
     border-top: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство padding-top для текущего элемента. */
     padding-top: 30px;
+
+
 }
 
+
 .media-section-title {
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 1.2rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 700;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 20px;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #2D3748;
+
+
 }
+
 
 /* Адаптивная сетка загруженных картинок */
 .images-gallery-flex {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 20px;
+
+    /* Настраивает CSS-свойство flex-wrap для текущего элемента. */
     flex-wrap: wrap;
+
+    /* Настраивает CSS-свойство margin-top для текущего элемента. */
     margin-top: 15px;
+
+
 }
+
 
 .uploaded-image-card {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 160px;
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство overflow для текущего элемента. */
     overflow: hidden;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство flex-direction для текущего элемента. */
     flex-direction: column;
+
+    /* Настраивает CSS-свойство box-shadow для текущего элемента. */
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+
+
 }
+
 
 .gallery-card-img {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 100%;
+
+    /* Настраивает CSS-свойство height для текущего элемента. */
     height: 110px;
+
+    /* Настраивает CSS-свойство object-fit для текущего элемента. */
     object-fit: cover;
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #EDF2F7;
+
+
 }
 
+
 .gallery-card-actions {
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 10px;
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #F8F9FA;
+
+    /* Настраивает CSS-свойство border-top для текущего элемента. */
     border-top: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство flex-direction для текущего элемента. */
     flex-direction: column;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 8px;
+
+
 }
+
 
 /* Блок сортировки картинок */
 .sort-order-form {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 5px;
+
+
 }
 
+
 .sort-order-input {
+
+    /* Настраивает CSS-свойство width для текущего элемента. */
     width: 45px;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 4px;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.8rem;
+
+    /* Настраивает CSS-свойство text-align для текущего элемента. */
     text-align: center;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #CBD5E1;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 4px;
+
+
 }
+
 
 /* Список документов */
 .attached-docs-list {
+
+    /* Настраивает CSS-свойство list-style для текущего элемента. */
     list-style: none;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 0;
+
+    /* Настраивает CSS-свойство margin для текущего элемента. */
     margin: 15px 0 0 0;
+
+
 }
 
+
 .doc-item-row {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: space-between;
+
+    /* Настраивает CSS-свойство align-items для текущего элемента. */
     align-items: center;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 12px 20px;
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: #F8F9FA;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 10px;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.9rem;
+
+
 }
+
 
 /* Кнопки формы */
 .form-footer-actions {
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: flex;
+
+    /* Настраивает CSS-свойство justify-content для текущего элемента. */
     justify-content: flex-end;
+
+    /* Настраивает CSS-свойство gap для текущего элемента. */
     gap: 15px;
+
+    /* Настраивает CSS-свойство margin-top для текущего элемента. */
     margin-top: 35px;
+
+    /* Настраивает CSS-свойство border-top для текущего элемента. */
     border-top: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство padding-top для текущего элемента. */
     padding-top: 25px;
+
+
 }
+
 
 .btn-form-save {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #16A34A;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #FFFFFF;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: none;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 12px 30px;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство cursor для текущего элемента. */
     cursor: pointer;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.95rem;
+
+
 }
+
 
 .btn-form-save:hover {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #15803D;
+
+
 }
+
 
 .btn-form-cancel {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #EDF2F7;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #4A5568;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: 1px solid #E2E8F0;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 12px 25px;
+
+    /* Настраивает CSS-свойство border-radius для текущего элемента. */
     border-radius: 6px;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство text-decoration для текущего элемента. */
     text-decoration: none;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.95rem;
+
+    /* Настраивает CSS-свойство display для текущего элемента. */
     display: inline-block;
+
+
 }
+
 
 .btn-form-cancel:hover {
+
+    /* Настраивает CSS-свойство background-color для текущего элемента. */
     background-color: #E2E8F0;
+
+
 }
+
 
 .btn-media-delete {
+
+    /* Настраивает CSS-свойство background для текущего элемента. */
     background: transparent;
+
+    /* Настраивает CSS-свойство border для текущего элемента. */
     border: none;
+
+    /* Настраивает CSS-свойство color для текущего элемента. */
     color: #E53E3E;
+
+    /* Настраивает CSS-свойство font-size для текущего элемента. */
     font-size: 0.8rem;
+
+    /* Настраивает CSS-свойство font-weight для текущего элемента. */
     font-weight: 600;
+
+    /* Настраивает CSS-свойство cursor для текущего элемента. */
     cursor: pointer;
+
+    /* Настраивает CSS-свойство padding для текущего элемента. */
     padding: 0;
+
+    /* Настраивает CSS-свойство text-align для текущего элемента. */
     text-align: center;
+
+
 }
 
+
 .btn-media-delete:hover {
+
+    /* Настраивает CSS-свойство text-decoration для текущего элемента. */
     text-decoration: underline;
+
+
 }
