@@ -19,7 +19,7 @@ public class SecurityConfig {
                 .requestMatchers("/admin/audit/**").hasRole("ADMIN")
                 .requestMatchers("/admin/users/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/admin/documents/*/archive", "/admin/documents/*/restore").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/contacts/*/delete", "/admin/projects/*/archive",
+                .requestMatchers(HttpMethod.POST, "/admin/contacts/*/delete", "/admin/projects/*/archive", "/admin/blog/*/delete",
                         "/admin/projects/*/restore", "/admin/projects/media/**").hasRole("ADMIN")
                 .requestMatchers("/admin/**").hasAnyRole("ADMIN", "MANAGER")
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/documents/**").permitAll()

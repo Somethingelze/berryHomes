@@ -92,3 +92,6 @@ app:
     dir: uploads/
   management:
     email: ${MAIL_MANAGER:manager@berryhomes.com}
+  admin:
+    initial-login: ${ADMIN_LOGIN:admin}
+    initial-password: ${ADMIN_PASSWORD:admin}

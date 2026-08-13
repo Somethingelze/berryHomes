@@ -25,6 +25,15 @@
 <div th:if="${successMessage}" class="success-toast" th:text="${successMessage}">Thank you for your message!</div>
 <!-- Элемент main формирует соответствующую часть интерфейса. -->
 <main>
+<!-- Provides the same audience navigation used on tenant and owner pages. -->
+<nav class="audience-nav site-shell investor-audience-nav" aria-label="Audience navigation">
+<!-- Links to the tenant center. -->
+<a class="tenant" href="/tenants"><img th:src="@{/images/tenants/icon-tenant-portal.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+<!-- Links to the owner center. -->
+<a class="owner" href="/homeowners"><img th:src="@{/images/tenants/icon-house-small.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
+<!-- Marks the current investor section. -->
+<a class="investor active" href="/investors"><img th:src="@{/images/main/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+</nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="hero">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
@@ -42,11 +51,11 @@
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="button" href="#projects">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-trend-line.svg}" alt="">View Investment Projects</a>
+<img th:src="@{/images/investors/icon-trend-line.svg}" alt=""><span th:text="#{investor.projects}">View Investment Projects</span></a>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="button button-outline" type="button" data-open-contact>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-calendar.svg}" alt="">Schedule Consultation</button>
+<img th:src="@{/images/investors/icon-calendar.svg}" alt=""><span th:text="#{investor.consultation}">Schedule Consultation</span></button>
 </div>
 </div>
 </section>
@@ -55,7 +64,7 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="shell">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>⌁ &nbsp; We Deliver &nbsp; ⌁</h2>
+<h2>⌁ &nbsp; <span th:text="#{investor.deliver}">We Deliver</span> &nbsp; ⌁</h2>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="deliver-grid">
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -63,54 +72,54 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-search.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Property Purchase<br>Review</h3>
+<h3 th:utext="#{investor.service1.title}">Property Purchase<br>Review</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We review the asking price and determine if it is fair based on the property condition and market value.</p>
+<p th:text="#{investor.service1.text}">We review the asking price and determine if it is fair based on the property condition and market value.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-calculator.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Renovation Budget</h3>
+<h3 th:text="#{investor.service2.title}">Renovation Budget</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>Independent renovation estimate with a clear scope and realistic cost.</p>
+<p th:text="#{investor.service2.text}">Independent renovation estimate with a clear scope and realistic cost.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-trend-line.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Rental Market Analysis</h3>
+<h3 th:text="#{investor.service3.title}">Rental Market Analysis</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We analyze the market and provide expected rental income.</p>
+<p th:text="#{investor.service3.text}">We analyze the market and provide expected rental income.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-clock.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Investment Feasibility</h3>
+<h3 th:text="#{investor.service4.title}">Investment Feasibility</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We calculate cash flow, expenses, returns, and payback period.</p>
+<p th:text="#{investor.service4.text}">We calculate cash flow, expenses, returns, and payback period.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-shield-check.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Independent Renovation Oversight</h3>
+<h3 th:text="#{investor.service5.title}">Independent Renovation Oversight</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We inspect workmanship throughout the project to protect your investment.</p>
+<p th:text="#{investor.service5.text}">We inspect workmanship throughout the project to protect your investment.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-house.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Property Management</h3>
+<h3 th:text="#{investor.service6.title}">Property Management</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We lease, manage, and maintain your property for long term cash flow.</p>
+<p th:text="#{investor.service6.text}">We lease, manage, and maintain your property for long term cash flow.</p>
 </article>
 </div>
 </div>
@@ -122,10 +131,10 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="projects-heading">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>Recent Investment Projects <span>⌁</span>
+<h2><span th:text="#{investor.recent}">Recent Investment Projects</span> <span>⌁</span>
 </h2>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>Use the arrows to see all projects</span>
+<span th:text="#{investor.arrows}">Use the arrows to see all projects</span>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div th:if="${#lists.isEmpty(projects)}" class="empty-state" th:text="#{investor.empty}">New investment projects are coming soon.</div>
@@ -151,7 +160,7 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div th:if="${project.getFirstImageUrl() == null or project.getFirstImageUrl() == &apos;&apos;}" class="image-fallback">Berry Homes</div>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button data-open-gallery>⌗ View photos</button>
+<button data-open-gallery>⌗ <span th:text="#{investor.view_photos}">View photos</span></button>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="project-body">
@@ -164,56 +173,56 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Purchase Price</dt>
+<dt th:text="#{investor.metric.purchase}">Purchase Price</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.purchasePrice}">$0</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Monthly Rent</dt>
+<dt th:text="#{investor.metric.rent}">Monthly Rent</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.monthlyRent}">$0</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Renovation Budget</dt>
+<dt th:text="#{investor.metric.renovation}">Renovation Budget</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.renovationBudget}">$0</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Est. NOI (Annual)</dt>
+<dt th:text="#{investor.metric.noi}">Est. NOI (Annual)</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.estNoiAnnual}">$0</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Total Investment</dt>
+<dt th:text="#{investor.metric.total}">Total Investment</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.totalInvestment}">$0</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Project Rent</dt>
+<dt th:text="#{investor.metric.project_rent}">Project Rent</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.monthlyRent}">$0</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Cash-on-Cash Return</dt>
+<dt th:text="#{investor.metric.return}">Cash-on-Cash Return</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.cashOnCashReturn}">0%</dd>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент dt формирует соответствующую часть интерфейса. -->
-<dt>Est. Payback</dt>
+<dt th:text="#{investor.metric.payback}">Est. Payback</dt>
 <!-- Элемент dd формирует соответствующую часть интерфейса. -->
 <dd th:text="${project.estPayback}">—</dd>
 </div>
@@ -221,9 +230,9 @@
 <!-- Элемент footer формирует соответствующую часть интерфейса. -->
 <footer>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button data-open-gallery>◉ View Project</button>
+<button data-open-gallery>◉ <span th:text="#{investor.view_project}">View Project</span></button>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:if="${project.projectDocument != null}" th:href="|/${project.projectDocument.filePath()}|" target="_blank">⌑ Download Report</a>
+<a th:if="${project.projectDocument != null}" th:href="|/${project.projectDocument.filePath()}|" target="_blank">⌑ <span th:text="#{investor.download_report}">Download Report</span></a>
 </footer>
 </div>
 </article>
@@ -239,7 +248,7 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="shell">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>⌁ &nbsp; How It Works &nbsp; ⌁</h2>
+<h2>⌁ &nbsp; <span th:text="#{investor.how}">How It Works</span> &nbsp; ⌁</h2>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="steps">
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -248,9 +257,9 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-house.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>You Find a Property</h3>
+<h3 th:text="#{investor.step1.title}">You Find a Property</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We show you where to look and what to consider.</p>
+<p th:text="#{investor.step1.text}">We show you where to look and what to consider.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
@@ -258,9 +267,9 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-calculator.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>We Evaluate It</h3>
+<h3 th:text="#{investor.step2.title}">We Evaluate It</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We visit the property, identify issues, and make a renovation budget estimate.</p>
+<p th:text="#{investor.step2.text}">We visit the property, identify issues, and make a renovation budget estimate.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
@@ -268,9 +277,9 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-trend-line.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>We Analyze It</h3>
+<h3 th:text="#{investor.step3.title}">We Analyze It</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We analyze rental market and calculate income, expenses, and payback.</p>
+<p th:text="#{investor.step3.text}">We analyze rental market and calculate income, expenses, and payback.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
@@ -278,9 +287,9 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-clipboard-list.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>You Decide</h3>
+<h3 th:text="#{investor.step4.title}">You Decide</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>You review the numbers and decide if the investment makes sense.</p>
+<p th:text="#{investor.step4.text}">You review the numbers and decide if the investment makes sense.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
@@ -288,9 +297,9 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-maintenance.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>We Oversee the Renovation</h3>
+<h3 th:text="#{investor.step5.title}">We Oversee the Renovation</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We connect you with trusted contractors and independently inspect the work.</p>
+<p th:text="#{investor.step5.text}">We connect you with trusted contractors and independently inspect the work.</p>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
@@ -298,9 +307,9 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-key.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>We Lease & Manage</h3>
+<h3 th:text="#{investor.step6.title}">We Lease & Manage</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>We find great tenants and manage the property for long term cash flow.</p>
+<p th:text="#{investor.step6.text}">We find great tenants and manage the property for long term cash flow.</p>
 </article>
 </div>
 </div>
@@ -319,22 +328,44 @@
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="button" data-open-contact>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-calendar.svg}" alt="">Schedule Investor Call</button>
+<img th:src="@{/images/investors/icon-calendar.svg}" alt=""><span th:text="#{investor.call}">Schedule Investor Call</span></button>
 </div>
 </section>
 </main>
 <!-- Элемент footer формирует соответствующую часть интерфейса. -->
 <footer class="site-footer">
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="shell">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
+<!-- Элемент div формирует основное содержимое футера. -->
+<div class="site-shell footer-main">
+<!-- Элемент img отображает логотип компании. -->
 <img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>.<br>All rights reserved.</span>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>☎ (412) 555-0123<br>✉ investors@berryhomespm.com</span>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>● &nbsp; ◉</span>
+<!-- Элемент p отображает настраиваемый слоган. -->
+<p th:text="${settings[&apos;footer_tagline&apos;]} ?: #{footer.tagline}">Professional Management. Better Living.</p>
+<!-- Элемент address объединяет контактные данные. -->
+<address>
+<!-- Элемент a позволяет позвонить. -->
+<a th:href="|tel:${settings?.get(&apos;site_phone&apos;)}|" th:text="${settings?.get(&apos;site_phone&apos;)} ?: &apos;(412) 555-0123&apos;">(412) 555-0123</a>
+<!-- Элемент a позволяет написать на почту. -->
+<a th:href="|mailto:${settings?.get(&apos;site_email&apos;)}|" th:text="${settings?.get(&apos;site_email&apos;)} ?: &apos;info@berryhomespm.com&apos;">info@berryhomespm.com</a>
+<!-- Элемент a открывает офис на карте Google. -->
+<a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings[&apos;site_office&apos;]} ?: #{common.location}">Pittsburgh, PA 15222</a>
+</address>
+<!-- Элемент div объединяет ссылки на социальные сети. -->
+<div class="socials">
+<!-- Элемент a открывает Facebook. -->
+<a href="#" aria-label="Facebook"><img th:src="@{/images/tenants/icon-facebook.svg}" alt=""></a>
+<!-- Элемент a открывает Instagram. -->
+<a href="#" aria-label="Instagram"><img th:src="@{/images/tenants/icon-instagram.svg}" alt=""></a>
+</div>
+</div>
+<!-- Элемент div формирует нижнюю полосу футера. -->
+<div class="footer-bar">
+<!-- Элемент div ограничивает ширину нижней строки. -->
+<div class="site-shell">
+<!-- Элемент span отображает авторские права. -->
+<span>© <span th:text="${settings[&apos;copyright_year&apos;]} ?: &apos;2026&apos;">2026</span> <span th:text="${settings[&apos;company_legal_name&apos;]} ?: &apos;Berry Homes Property Management, LLC&apos;">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
+<!-- Элемент span отображает юридические ссылки. -->
+<span><span th:text="#{footer.privacy}">Privacy Policy</span> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
+</div>
 </div>
 </footer>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
@@ -347,26 +378,26 @@
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="close" data-close-modal>×</button>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>Schedule a Consultation</h2>
+<h2 th:text="#{investor.consultation}">Schedule a Consultation</h2>
 <!-- Элемент form формирует соответствующую часть интерфейса. -->
 <form th:action="@{/investors/message}" th:object="${contactDto}" method="post">
 <!-- Элемент input формирует соответствующую часть интерфейса. -->
 <input type="hidden" th:field="*{type}">
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Your Name<input th:field="*{name}" required>
+<label><span th:text="#{common.name}">Your Name</span><input th:field="*{name}" required>
 </label>
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Email<input type="email" th:field="*{email}" required>
+<label><span th:text="#{common.email}">Email</span><input type="email" th:field="*{email}" required>
 </label>
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Phone<input th:field="*{phone}" required>
+<label><span th:text="#{common.phone}">Phone</span><input th:field="*{phone}" required>
 </label>
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Investment Goals<textarea th:field="*{message}" rows="4" required>
+<label><span th:text="#{investor.goals}">Investment Goals</span><textarea th:field="*{message}" rows="4" required>
 </textarea>
 </label>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button class="button" type="submit">Send Request</button>
+<button class="button" type="submit" th:text="#{investor.send_request}">Send Request</button>
 </form>
 </div>
 </div>

@@ -30,15 +30,15 @@
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="tenant" href="/tenants">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-tenants.svg}" alt="">For Tenants</a>
+<img th:src="@{/images/homeowners/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="owner active" href="/homeowners">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-house.svg}" alt="">For Homeowners</a>
+<img th:src="@{/images/homeowners/icon-house.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="investor" href="/investors">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-investors.svg}" alt="">For Investors</a>
+<img th:src="@{/images/homeowners/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
 </nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="hero site-shell owner-hero">
@@ -74,10 +74,10 @@
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
 <p th:text="#{owner.portal.text}">Secure access to your property information, financials, and important documents.</p>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a class="primary-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener">Access Owner Portal <img th:src="@{/images/homeowners/icon-external-link.svg}" alt="">
+<a class="primary-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener"><span th:text="#{owner.portal.open}">Access Owner Portal</span> <img th:src="@{/images/homeowners/icon-external-link.svg}" alt="">
 </a>
 <!-- Элемент small формирует соответствующую часть интерфейса. -->
-<small>♢ &nbsp; Powered by TenantCloud</small>
+<small th:utext="#{common.portal.powered}">♢ &nbsp; Powered by TenantCloud</small>
 </div>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -129,7 +129,7 @@
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="outline-button modal-open" type="button">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-envelope.svg}" alt="">Send a Message</button>
+<img th:src="@{/images/homeowners/icon-envelope.svg}" alt=""><span th:text="#{common.send}">Send a Message</span></button>
 </div>
 </article>
 </section>
@@ -140,7 +140,7 @@
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>— ❧</span> How It Works <span>❧ —</span>
+<span>— ❧</span> <span th:text="#{owner.how}">How It Works</span> <span>❧ —</span>
 </h2>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="steps">
@@ -150,11 +150,11 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/homeowners/icon-monitor-person.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Access Your Owner Portal</h3>
+<h3 th:text="#{owner.step1}">Access Your Owner Portal</h3>
 <i>
 </i>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>View statements, documents, maintenance updates, and everything related to your property.</p>
+<p th:text="#{owner.step1.text}">View statements, documents, maintenance updates, and everything related to your property.</p>
 </article>
 <em>→</em>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -163,11 +163,11 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/homeowners/icon-trend-line.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Track Your Investment</h3>
+<h3 th:text="#{owner.step2}">Track Your Investment</h3>
 <i>
 </i>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>Monitor your property's performance and stay informed with real-time updates.</p>
+<p th:text="#{owner.step2.text}">Monitor your property's performance and stay informed with real-time updates.</p>
 </article>
 <em>→</em>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -176,11 +176,11 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/homeowners/icon-chat.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3>Need Assistance?</h3>
+<h3 th:text="#{owner.step3}">Need Assistance?</h3>
 <i>
 </i>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>Your property manager is just a message or phone call away whenever you need help.</p>
+<p th:text="#{owner.step3.text}">Your property manager is just a message or phone call away whenever you need help.</p>
 </article>
 </div>
 </section>
@@ -206,9 +206,9 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="site-shell">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. All rights reserved.</span>
+<span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>Privacy Policy &nbsp; | &nbsp; Terms of Use &nbsp; | &nbsp; Fair Housing</span>
+<span><span th:text="#{footer.privacy}">Privacy Policy</span> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="socials">
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
@@ -232,7 +232,7 @@
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:text="#{owner.contact}">Contact Your Manager</h2>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p>Tell us how we can help.</p>
+<p th:text="#{contact.tell_us}">Tell us how we can help.</p>
 <!-- Элемент form формирует соответствующую часть интерфейса. -->
 <form th:action="@{/homeowners/message}" th:object="${contactDto}" method="post">
 <!-- Элемент input формирует соответствующую часть интерфейса. -->
@@ -240,20 +240,20 @@
 <!-- Элемент input формирует соответствующую часть интерфейса. -->
 <input type="hidden" th:field="*{status}">
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Name<input th:field="*{name}" required minlength="3" maxlength="100">
+<label><span th:text="#{common.name}">Name</span><input th:field="*{name}" required minlength="3" maxlength="100">
 </label>
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Email<input type="email" th:field="*{email}" required maxlength="100">
+<label><span th:text="#{common.email}">Email</span><input type="email" th:field="*{email}" required maxlength="100">
 </label>
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Phone<input type="tel" th:field="*{phone}" required minlength="3" maxlength="30">
+<label><span th:text="#{common.phone}">Phone</span><input type="tel" th:field="*{phone}" required minlength="3" maxlength="30">
 </label>
 <!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label>Message<textarea th:field="*{message}" required minlength="5" rows="4">
+<label><span th:text="#{common.message}">Message</span><textarea th:field="*{message}" required minlength="5" rows="4">
 </textarea>
 </label>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button class="primary-button" type="submit">Submit Message</button>
+<button class="primary-button" type="submit" th:text="#{common.submit_message}">Submit Message</button>
 </form>
 </dialog>
 <!-- Элемент script формирует соответствующую часть интерфейса. -->

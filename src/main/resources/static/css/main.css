@@ -394,6 +394,8 @@ body {
     /* Настраивает CSS-свойство margin-bottom для текущего элемента. */
     margin-bottom: 10px;
 
+    margin-top: 10px;
+
     /* Растягивает сетку верхнего ряда на 100% ширины контейнера страницы */
     /* Настраивает CSS-свойство width для текущего элемента. */
     width: 100%;
@@ -773,11 +775,11 @@ body {
 
         /* Создает градиентную маску исчезновения для браузеров WebKit */
         /* Настраивает CSS-свойство -webkit-mask-image для текущего элемента. */
-        -webkit-mask-image: -webkit-linear-gradient(to bottom, #ffffff 72%, transparent 100%);
+        -webkit-mask-image: -webkit-linear-gradient(to bottom, #fff 72%, transparent 100%);
 
         /* Создает стандартную линейную маску плавного растворения картинки к низу */
         /* Настраивает CSS-свойство mask-image для текущего элемента. */
-        mask-image: linear-gradient(to bottom, #ffffff 72%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #fff 72%, transparent 100%);
 
 
 }

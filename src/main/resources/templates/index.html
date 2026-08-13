@@ -59,7 +59,7 @@
                     <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                     <h3 th:text="#{home.tenants.title}">For Tenants</h3>
                     <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                    <p>Find your next home.</p>
+                    <p th:text="#{home.quick.tenants}">Find your next home.</p>
                 </div>
             </div>
             <svg class="arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -82,7 +82,7 @@
                     <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                     <h3 th:text="#{home.owners.title}">For Homeowners</h3>
                     <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                    <p>Manage your property.</p>
+                    <p th:text="#{home.quick.owners}">Manage your property.</p>
                 </div>
             </div>
             <svg class="arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -108,7 +108,7 @@
                     <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
                     <h3 th:text="#{home.investors.title}">For Investors</h3>
                     <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                    <p>Grow your portfolio.</p>
+                    <p th:text="#{home.quick.investors}">Grow your portfolio.</p>
                 </div>
             </div>
             <svg class="arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -145,11 +145,11 @@
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.tenants.title}">For Tenants</h2>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p class="description-text">Find your next home. Browse available rentals, submit an application, and make it yours.</p>
+                <p class="description-text" th:text="#{home.rentals.text}">Find your next home. Browse available rentals, submit an application, and make it yours.</p>
                 <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/tenants}" class="action-btn">
                     <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>View Rentals</span>
+                    <span th:text="#{home.rentals.button}">View Rentals</span>
                     <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="32" x2="48" y2="32"/>
                         <path d="M36 20 L48 32 L36 44"/>
@@ -178,11 +178,11 @@
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.owners.title}">For Homeowners</h2>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p class="description-text">Professional property management designed to protect your investment and maximize returns.</p>
+                <p class="description-text" th:text="#{home.services.text}">Professional property management designed to protect your investment and maximize returns.</p>
                 <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/homeowners}" class="action-btn">
                     <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>Our Services</span>
+                    <span th:text="#{home.services.button}">Our Services</span>
                     <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="32" x2="48" y2="32"/>
                         <path d="M36 20 L48 32 L36 44"/>
@@ -214,11 +214,11 @@
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.investors.title}">For Investors</h2>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p class="description-text">Grow your portfolio. Reliable management, strong returns, long-term growth.</p>
+                <p class="description-text" th:text="#{home.portfolio.text}">Grow your portfolio. Reliable management, strong returns, long-term growth.</p>
                 <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/investors}" class="action-btn">
                     <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>Learn More</span>
+                    <span th:text="#{common.learn_more}">Learn More</span>
                     <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="32" x2="48" y2="32"/>
                         <path d="M36 20 L48 32 L36 44"/>
@@ -246,9 +246,9 @@
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
                 <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
-                <h4>License & Insured</h4>
+                <h4 th:text="#{home.licensed}">Licensed & Insured</h4>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p>Fully licensed and insured for your peace of mind.</p>
+                <p th:text="#{home.licensed.text}">Fully licensed and insured for your peace of mind.</p>
             </div>
         </div>
 
@@ -272,9 +272,9 @@
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
                 <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
-                <h4>Professional Maintenance</h4>
+                <h4 th:text="#{home.maintenance}">Professional Maintenance</h4>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p>Prompt, reliable maintenance to keep your property in top shape.</p>
+                <p th:text="#{home.maintenance.text}">Prompt, reliable maintenance to keep your property in top shape.</p>
             </div>
         </div>
 
@@ -295,9 +295,9 @@
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
                 <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
-                <h4>Transparent Reporting</h4>
+                <h4 th:text="#{home.reporting}">Transparent Reporting</h4>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p>Clear financial reports and updates so you always stay informed.</p>
+                <p th:text="#{home.reporting.text}">Clear financial reports and updates so you always stay informed.</p>
             </div>
         </div>
 
