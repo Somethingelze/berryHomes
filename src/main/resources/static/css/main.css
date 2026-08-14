@@ -1529,3 +1529,151 @@ body {
         width: 94vw;
     }
 }
+
+
+/* Paints every replacement Main icon with its existing section color. */
+.main-masked-icon {
+    /* Uses the color already assigned to the surrounding audience card. */
+    background-color: currentColor;
+    /* Prevents the external SVG files from repeating inside their boxes. */
+    -webkit-mask-repeat: no-repeat;
+    /* Prevents the external SVG files from repeating in standards-based browsers. */
+    mask-repeat: no-repeat;
+    /* Centers each new SVG shape inside the existing icon dimensions. */
+    -webkit-mask-position: center;
+    /* Centers each new SVG shape in standards-based browsers. */
+    mask-position: center;
+    /* Preserves the complete icon shape inside its existing box. */
+    -webkit-mask-size: contain;
+    /* Preserves the complete icon shape in standards-based browsers. */
+    mask-size: contain;
+    /* Keeps flex layouts from compressing decorative symbols. */
+    flex-shrink: 0;
+}
+
+/* Loads the new upper Tenants icon. */
+.icon-tenants-up,
+.icon-tenants {
+    /* Uses the supplied Tenants artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-tenants.svg");
+    /* Uses the supplied Tenants artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-tenants.svg");
+}
+
+/* Uses the dedicated upper Tenants asset in quick navigation. */
+.icon-tenants-up {
+    /* Loads the supplied upper-navigation variant. */
+    -webkit-mask-image: url("/images/main/icon-tenants-up.svg");
+    /* Loads the supplied upper-navigation variant in standards-based browsers. */
+    mask-image: url("/images/main/icon-tenants-up.svg");
+}
+
+/* Loads the new Homeowners card icon. */
+.icon-homeowners {
+    /* Uses the supplied Homeowners artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-homeowners.svg");
+    /* Uses the supplied Homeowners artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-homeowners.svg");
+}
+
+/* Loads the new upper Homeowners icon. */
+.icon-homeowners-up {
+    /* Uses the supplied upper-navigation artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-homeowners-up.svg");
+    /* Uses the supplied upper-navigation artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-homeowners-up.svg");
+}
+
+/* Loads the new Investors card icon. */
+.icon-investors {
+    /* Uses the supplied Investors artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-investors.svg");
+    /* Uses the supplied Investors artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-investors.svg");
+}
+
+/* Loads the new upper Investors icon. */
+.icon-investors-up {
+    /* Uses the supplied upper-navigation artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-investors-up.svg");
+    /* Uses the supplied upper-navigation artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-investors-up.svg");
+}
+
+/* Loads the new shared arrow artwork. */
+.icon-arrow {
+    /* Uses the supplied arrow as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-arrow.svg");
+    /* Uses the supplied arrow in standards-based browsers. */
+    mask-image: url("/images/main/icon-arrow.svg");
+}
+
+/* Loads the new licensing icon. */
+.icon-license {
+    /* Uses the supplied licensing artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-license.svg");
+    /* Uses the supplied licensing artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-license.svg");
+}
+
+/* Loads the new maintenance icon. */
+.icon-maintenance {
+    /* Uses the supplied maintenance artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-maintenance.svg");
+    /* Uses the supplied maintenance artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-maintenance.svg");
+}
+
+/* Loads the new reporting icon. */
+.icon-reporting {
+    /* Uses the supplied reporting artwork as the visible shape. */
+    -webkit-mask-image: url("/images/main/icon-reporting.svg");
+    /* Uses the supplied reporting artwork in standards-based browsers. */
+    mask-image: url("/images/main/icon-reporting.svg");
+}
+
+/* Fits the new berry compositions beside the outer advantages. */
+.feature-berry {
+    /* Matches the berry height to the compact advantage block. */
+    width: clamp(54px, 5.8vw, 88px);
+    /* Preserves the supplied square composition. */
+    height: clamp(54px, 5.8vw, 88px);
+    /* Keeps the complete berry artwork visible. */
+    object-fit: contain;
+    /* Prevents the decoration from taking clicks from nearby content. */
+    pointer-events: none;
+    /* Prevents the decoration from shrinking before the text does. */
+    flex-shrink: 0;
+}
+
+/* Keeps the left berry at the outside edge of the Tenants advantage. */
+.feature-berry-left {
+    /* Pulls the artwork toward the left card boundary as in the layout. */
+    margin-left: -15px;
+}
+
+/* Keeps the right berry at the outside edge of the Investors advantage. */
+.feature-berry-right {
+    /* Pulls the artwork toward the right card boundary as in the layout. */
+    margin-right: -15px;
+}
+
+/* Proportionally reduces only the new berry decorations on phones. */
+@media (max-width: 620px) {
+    /* Keeps the outer cards readable in the unchanged three-column layout. */
+    .feature-berry {
+        /* Uses a smaller width while preserving the artwork proportions. */
+        width: clamp(28px, 8vw, 42px);
+        /* Uses the same smaller height on narrow screens. */
+        height: clamp(28px, 8vw, 42px);
+    }
+
+    /* Tightens only the outer advantage cards around their added artwork. */
+    .features-row .feature-card.item-tenants,
+    .features-row .feature-card.item-investors {
+        /* Preserves enough room for the text and icon. */
+        gap: 6px;
+        /* Reduces side padding without changing the grid. */
+        padding-inline: 6px;
+    }
+}

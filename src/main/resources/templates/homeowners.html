@@ -43,7 +43,7 @@
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="hero site-shell owner-hero">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/Owner center background.png}" alt="A bright Berry Homes living room">
+<img th:src="@{/images/homeowners/owner_center.png}" alt="A bright Berry Homes living room">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="hero-copy">
 <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
@@ -59,13 +59,15 @@
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article class="feature-card owner-portal">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img class="card-bg" th:src="@{/images/homeowners/Owner portal bg.png}" alt="">
+<img class="card-bg" th:src="@{/images/homeowners/owner_portal.png}" alt="">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="round-icon">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-house.svg}" alt="">
+<!-- Элемент img отображает новую акварельную подложку иконки. -->
+<img class="round-icon-bg" th:src="@{/images/homeowners/circle_owner_portal.png}" alt="">
+<!-- Элемент img отображает иконку портала поверх подложки. -->
+<img class="round-icon-symbol" th:src="@{/images/homeowners/icon-house.svg}" alt="">
 </span>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:text="#{owner.portal}">Owner Portal</h2>
@@ -83,13 +85,15 @@
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article class="feature-card owner-contact">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img class="card-bg" th:src="@{/images/homeowners/contact your manager bg.png}" alt="">
+<img class="card-bg" th:src="@{/images/homeowners/contact.png}" alt="">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="round-icon">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-chat.svg}" alt="">
+<!-- Элемент img отображает новую акварельную подложку иконки. -->
+<img class="round-icon-bg" th:src="@{/images/homeowners/circle_contact.png}" alt="">
+<!-- Элемент img отображает иконку связи поверх подложки. -->
+<img class="round-icon-symbol" th:src="@{/images/homeowners/icon-chat.svg}" alt="">
 </span>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:text="#{owner.contact}">Contact Your Manager</h2>
@@ -136,11 +140,15 @@
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="how-it-works site-shell">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img class="how-bg" th:src="@{/images/homeowners/how it works bg.png}" alt="">
+<img class="how-bg" th:src="@{/images/homeowners/how_it_works.png}" alt="">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>— ❧</span> <span th:text="#{owner.how}">How It Works</span> <span>❧ —</span>
+<h2 class="section-heading-with-branches">
+<!-- Элемент img отображает левую декоративную ветвь. -->
+<span class="heading-branch heading-branch-left" aria-hidden="true"></span>
+<!-- Элемент span отображает локализованный заголовок секции. -->
+<span th:text="#{owner.how}">How It Works</span>
+<!-- Элемент img отображает правую декоративную ветвь. -->
+<span class="heading-branch heading-branch-right" aria-hidden="true"></span>
 </h2>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="steps">

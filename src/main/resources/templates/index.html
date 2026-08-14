@@ -32,13 +32,6 @@
 <!-- Элемент main формирует соответствующую часть интерфейса. -->
 <main class="page-container">
 
-    <!-- Левый декоративный элемент в углу экрана -->
-    <!-- Элемент img формирует соответствующую часть интерфейса. -->
-    <img th:src="@{/images/main/berries_.png}" alt="" class="decor-berry left-berry">
-    <!-- Правый декоративный элемент в углу экрана -->
-    <!-- Элемент img формирует соответствующую часть интерфейса. -->
-    <img th:src="@{/images/main/berries_.png}" alt="" class="decor-berry right-berry">
-
     <!-- ВЕРХНИЙ БЛОК: Кнопки быстрой навигации со сквозными ссылками -->
     <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="quick-nav-row">
@@ -48,12 +41,8 @@
         <a th:href="@{/tenants}" class="quick-button item-tenants">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="quick-content">
-                <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="39" cy="21" r="6"/>
-                    <path d="M29 47 C29 37 33 31 39 31 C45 31 49 37 49 47"/>
-                    <circle cx="24" cy="25" r="7"/>
-                    <path d="M12 49 C12 38 17 31 24 31 C31 31 36 38 36 49"/>
-                </svg>
+                <!-- Показывает новую иконку раздела с текущим цветом карточки. -->
+                <span class="icon-svg main-masked-icon icon-tenants-up" aria-hidden="true"></span>
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="quick-text">
                     <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -62,10 +51,8 @@
                     <p th:text="#{home.quick.tenants}">Find your next home.</p>
                 </div>
             </div>
-            <svg class="arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="32" x2="48" y2="32"/>
-                <path d="M36 20 L48 32 L36 44"/>
-            </svg>
+            <!-- Показывает новую стрелку перехода с текущим цветом раздела. -->
+            <span class="arrow-svg main-masked-icon icon-arrow" aria-hidden="true"></span>
         </a>
 
         <!-- Ссылка на страницу Homeowners -->
@@ -73,10 +60,8 @@
         <a th:href="@{/homeowners}" class="quick-button item-homeowners">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="quick-content">
-                <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M8 33 L32 11 L56 33"/>
-                    <path d="M15 27 V53 H49 V27"/>
-                </svg>
+                <!-- Показывает новую иконку раздела с текущим цветом карточки. -->
+                <span class="icon-svg main-masked-icon icon-homeowners-up" aria-hidden="true"></span>
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="quick-text">
                     <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -85,10 +70,8 @@
                     <p th:text="#{home.quick.owners}">Manage your property.</p>
                 </div>
             </div>
-            <svg class="arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="32" x2="48" y2="32"/>
-                <path d="M36 20 L48 32 L36 44"/>
-            </svg>
+            <!-- Показывает новую стрелку перехода с текущим цветом раздела. -->
+            <span class="arrow-svg main-masked-icon icon-arrow" aria-hidden="true"></span>
         </a>
 
         <!-- Ссылка на страницу Investors -->
@@ -96,13 +79,8 @@
         <a th:href="@{/investors}" class="quick-button item-investors">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="quick-content">
-                <svg class="icon-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M15 50 V39"/>
-                    <path d="M29 50 V31"/>
-                    <path d="M43 50 V22"/>
-                    <path d="M14 33 L28 22 L44 10"/>
-                    <path d="M35 10 H44 V19"/>
-                </svg>
+                <!-- Показывает новую иконку раздела с текущим цветом карточки. -->
+                <span class="icon-svg main-masked-icon icon-investors-up" aria-hidden="true"></span>
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="quick-text">
                     <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -111,10 +89,8 @@
                     <p th:text="#{home.quick.investors}">Grow your portfolio.</p>
                 </div>
             </div>
-            <svg class="arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="32" x2="48" y2="32"/>
-                <path d="M36 20 L48 32 L36 44"/>
-            </svg>
+            <!-- Показывает новую стрелку перехода с текущим цветом раздела. -->
+            <span class="arrow-svg main-masked-icon icon-arrow" aria-hidden="true"></span>
         </a>
 
     </section>
@@ -129,18 +105,14 @@
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="image-mask-container">
                 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                <img th:src="@{/images/main/tenants background.png}" alt="For Tenants" class="card-image">
+                <img th:src="@{/images/main/tenants_bg.png}" alt="For Tenants" class="card-image">
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="floating-badge-circle">
-                    <svg class="badge-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="39" cy="21" r="6"/>
-                        <path d="M29 47 C29 37 33 31 39 31 C45 31 49 37 49 47"/>
-                        <circle cx="24" cy="25" r="7"/>
-                        <path d="M12 49 C12 38 17 31 24 31 C31 31 36 38 36 49"/>
-                    </svg>
+                    <!-- Показывает новую иконку карточки с текущим цветом раздела. -->
+                    <span class="badge-svg main-masked-icon icon-tenants" aria-hidden="true"></span>
                 </div>
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.tenants.title}">For Tenants</h2>
@@ -150,10 +122,8 @@
                 <a th:href="@{/tenants}" class="action-btn">
                     <!-- Элемент span формирует соответствующую часть интерфейса. -->
                     <span th:text="#{home.rentals.button}">View Rentals</span>
-                    <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="32" x2="48" y2="32"/>
-                        <path d="M36 20 L48 32 L36 44"/>
-                    </svg>
+                    <!-- Показывает новую стрелку кнопки с текущим цветом карточки. -->
+                    <span class="btn-arrow-svg main-masked-icon icon-arrow" aria-hidden="true"></span>
                 </a>
             </div>
         </div>
@@ -164,16 +134,14 @@
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="image-mask-container">
                 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                <img th:src="@{/images/main/homeowners background.png}" alt="For Homeowners" class="card-image">
+                <img th:src="@{/images/main/homeowners_bg.png}" alt="For Homeowners" class="card-image">
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="floating-badge-circle">
-                    <svg class="badge-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M8 33 L32 11 L56 33"/>
-                        <path d="M15 27 V53 H49 V27"/>
-                    </svg>
+                    <!-- Показывает новую иконку карточки с текущим цветом раздела. -->
+                    <span class="badge-svg main-masked-icon icon-homeowners" aria-hidden="true"></span>
                 </div>
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.owners.title}">For Homeowners</h2>
@@ -183,10 +151,8 @@
                 <a th:href="@{/homeowners}" class="action-btn">
                     <!-- Элемент span формирует соответствующую часть интерфейса. -->
                     <span th:text="#{home.services.button}">Our Services</span>
-                    <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="32" x2="48" y2="32"/>
-                        <path d="M36 20 L48 32 L36 44"/>
-                    </svg>
+                    <!-- Показывает новую стрелку кнопки с текущим цветом карточки. -->
+                    <span class="btn-arrow-svg main-masked-icon icon-arrow" aria-hidden="true"></span>
                 </a>
             </div>
         </div>
@@ -197,19 +163,14 @@
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="image-mask-container">
                 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                <img th:src="@{/images/main/investors background.png}" alt="For Investors" class="card-image">
+                <img th:src="@{/images/main/investors_bg.png}" alt="For Investors" class="card-image">
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="floating-badge-circle">
-                    <svg class="badge-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 50 V39"/>
-                        <path d="M29 50 V31"/>
-                        <path d="M43 50 V22"/>
-                        <path d="M14 33 L28 22 L44 10"/>
-                        <path d="M35 10 H44 V19"/>
-                    </svg>
+                    <!-- Показывает новую иконку карточки с текущим цветом раздела. -->
+                    <span class="badge-svg main-masked-icon icon-investors" aria-hidden="true"></span>
                 </div>
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.investors.title}">For Investors</h2>
@@ -219,14 +180,11 @@
                 <a th:href="@{/investors}" class="action-btn">
                     <!-- Элемент span формирует соответствующую часть интерфейса. -->
                     <span th:text="#{common.learn_more}">Learn More</span>
-                    <svg class="btn-arrow-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="32" x2="48" y2="32"/>
-                        <path d="M36 20 L48 32 L36 44"/>
-                    </svg>
+                    <!-- Показывает новую стрелку кнопки с текущим цветом карточки. -->
+                    <span class="btn-arrow-svg main-masked-icon icon-arrow" aria-hidden="true"></span>
                 </a>
             </div>
         </div>
-
     </section>
 
     <!-- Горизонтальный ряд: Информационные блоки преимуществ -->
@@ -236,12 +194,12 @@
         <!-- Преимущество: Лицензирование -->
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="feature-card item-tenants">
+            <!-- Размещает левую ягодную композицию у внешнего края преимущества. -->
+            <img th:src="@{/images/main/berries_left.png}" alt="" class="feature-berry feature-berry-left">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
-                <svg class="feature-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M32 8 L54 16 V31 C54 45 45 53 32 58 C19 53 10 45 10 31 V16 Z"/>
-                    <path d="M22 32 L29 40 L44 24"/>
-                </svg>
+                <!-- Показывает новую иконку преимущества с текущим цветом раздела. -->
+                <span class="feature-svg main-masked-icon icon-license" aria-hidden="true"></span>
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
@@ -257,17 +215,8 @@
         <div class="feature-card item-homeowners">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
-                <svg class="feature-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="46" x2="46" y2="18"/>
-                    <line x1="46" y1="18" x2="55" y2="15"/>
-                    <line x1="46" y1="18" x2="49" y2="9"/>
-                    <line x1="18" y1="46" x2="9" y2="49"/>
-                    <line x1="18" y1="46" x2="15" y2="55"/>
-                    <line x1="46" y1="46" x2="18" y2="18"/>
-                    <rect x="41" y="41" width="14" height="9" rx="2" transform="rotate(45 48 45.5)"/>
-                    <line x1="45.5" y1="44" x2="50.5" y2="49"/>
-                    <line x1="21" y1="15" x2="15" y2="21"/>
-                </svg>
+                <!-- Показывает новую иконку преимущества с текущим цветом раздела. -->
+                <span class="feature-svg main-masked-icon icon-maintenance" aria-hidden="true"></span>
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
@@ -283,14 +232,8 @@
         <div class="feature-card item-investors">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
-                <svg class="feature-svg" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20 15 H44 V54 H20 Z"/>
-                    <rect x="26" y="9" width="12" height="8" rx="2"/>
-                    <line x1="25" y1="27" x2="39" y2="27"/>
-                    <line x1="25" y1="34" x2="39" y2="34"/>
-                    <line x1="25" y1="41" x2="33" y2="41"/>
-                    <path d="M38 45 L48 35 L52 39 L42 49 Z"/>
-                </svg>
+                <!-- Показывает новую иконку преимущества с текущим цветом раздела. -->
+                <span class="feature-svg main-masked-icon icon-reporting" aria-hidden="true"></span>
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-info-text">
@@ -299,6 +242,8 @@
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p th:text="#{home.reporting.text}">Clear financial reports and updates so you always stay informed.</p>
             </div>
+            <!-- Размещает правую ягодную композицию у внешнего края преимущества. -->
+            <img th:src="@{/images/main/berries_right.png}" alt="" class="feature-berry feature-berry-right">
         </div>
 
     </section>

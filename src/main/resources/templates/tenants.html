@@ -38,13 +38,13 @@
         <!-- Элемент a формирует соответствующую часть интерфейса. -->
         <a class="investor" href="/investors">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/main/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+<img th:src="@{/images/tenants/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
     </nav>
 
     <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="hero site-shell tenant-hero">
         <!-- Элемент img формирует соответствующую часть интерфейса. -->
-        <img th:src="@{/images/tenants/tenants bg.png}" alt="A bright Berry Homes living room">
+        <img th:src="@{/images/tenants/for_tenants.png}" alt="A bright Berry Homes living room">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="hero-copy">
 <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
@@ -61,13 +61,15 @@
         <!-- Элемент article формирует соответствующую часть интерфейса. -->
         <article class="feature-card portal-card">
             <!-- Элемент img формирует соответствующую часть интерфейса. -->
-            <img class="card-bg" th:src="@{/images/tenants/tenants portal bg.png}" alt="">
+            <img class="card-bg" th:src="@{/images/tenants/tenant_portal.png}" alt="">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="round-icon">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-tenant-portal.svg}" alt="">
+<!-- Элемент img отображает новую акварельную подложку иконки. -->
+<img class="round-icon-bg" th:src="@{/images/tenants/circle_tenant_portal.png}" alt="">
+<!-- Элемент img отображает иконку портала поверх подложки. -->
+<img class="round-icon-symbol" th:src="@{/images/tenants/icon-tenant-portal.svg}" alt="">
 </span>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:text="#{tenant.portal}">Tenant Portal</h2>
@@ -87,13 +89,15 @@
         <!-- Элемент article формирует соответствующую часть интерфейса. -->
         <article class="feature-card emergency-card">
             <!-- Элемент img формирует соответствующую часть интерфейса. -->
-            <img class="card-bg" th:src="@{/images/tenants/emergency bg.png}" alt="">
+            <img class="card-bg" th:src="@{/images/tenants/emergency.png}" alt="">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="round-icon">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-warning.svg}" alt="">
+<!-- Элемент img отображает новую акварельную подложку иконки. -->
+<img class="round-icon-bg" th:src="@{/images/tenants/circle_emergency.png}" alt="">
+<!-- Элемент img отображает предупреждающую иконку поверх подложки. -->
+<img class="round-icon-symbol" th:src="@{/images/tenants/icon-warning.svg}" alt="">
 </span>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:utext="#{tenant.emergency.html}">Emergency<br>Maintenance</h2>
@@ -131,13 +135,15 @@
         <!-- Элемент article формирует соответствующую часть интерфейса. -->
         <article class="feature-card contact-card">
             <!-- Элемент img формирует соответствующую часть интерфейса. -->
-            <img class="card-bg" th:src="@{/images/tenants/contact us bg.png}" alt="">
+            <img class="card-bg" th:src="@{/images/tenants/contact_us.png}" alt="">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="round-icon">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-phone.svg}" alt="">
+<!-- Элемент img отображает новую акварельную подложку иконки. -->
+<img class="round-icon-bg" th:src="@{/images/tenants/circle_contact_us.png}" alt="">
+<!-- Элемент img отображает телефонную иконку поверх подложки. -->
+<img class="round-icon-symbol" th:src="@{/images/tenants/icon-phone.svg}" alt="">
 </span>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:text="#{tenant.contact}">Contact Us</h2>
@@ -196,7 +202,7 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="document-grid">
             <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article style="--doc-bg:url('../images/tenants/move in guide bg.png')">
+            <article style="--doc-bg:url('../images/tenants/move_in_guide.png')">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-house-small.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -207,7 +213,7 @@
 <a href="#" aria-disabled="true">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
 </article>
             <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article style="--doc-bg:url('../images/tenants/move out check list bg.png')">
+            <article style="--doc-bg:url('../images/tenants/move_out_checklist.png')">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-clipboard-check.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -218,7 +224,7 @@
 <a href="#" aria-disabled="true">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
 </article>
             <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article style="--doc-bg:url('../images/tenants/handbook bg.png')">
+            <article style="--doc-bg:url('../images/tenants/resident_handbook.png')">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-book-open.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -234,7 +240,7 @@
     <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="thanks-banner site-shell">
         <!-- Элемент img формирует соответствующую часть интерфейса. -->
-        <img th:src="@{/images/tenants/share your exp bg.png}" alt="A basket of berries and flowers">
+        <img th:src="@{/images/tenants/share_your_exp_bg.png}" alt="A basket of berries and flowers">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->

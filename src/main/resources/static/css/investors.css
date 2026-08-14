@@ -128,7 +128,7 @@ border-bottom:4px solid var(--green)
 /* Настраивает CSS-свойство height для текущего элемента. */
 height:420px;
 /* Настраивает CSS-свойство background для текущего элемента. */
-background:url("/images/investors/know before you buy bg.png") center/cover no-repeat
+background:url("/images/investors/for_investors.png") center/cover no-repeat
 }
 .hero-content{
 /* Настраивает CSS-свойство padding-top для текущего элемента. */
@@ -230,7 +230,7 @@ filter:none
 }
 .deliver{
 /* Настраивает CSS-свойство background для текущего элемента. */
-background:url("/images/investors/icons _we deliver_.png") center/cover no-repeat;
+background:none;
 /* Настраивает CSS-свойство padding для текущего элемента. */
 padding:25px 0 35px
 }
@@ -500,7 +500,7 @@ right:-16px
 }
 .how{
 /* Настраивает CSS-свойство background для текущего элемента. */
-background:url("/images/investors/how it works icons.png") center/cover no-repeat;
+background:none;
 /* Настраивает CSS-свойство padding для текущего элемента. */
 padding:25px 0 42px
 }
@@ -560,7 +560,7 @@ margin:9px
 /* Настраивает CSS-свойство font для текущего элемента. */
 font:700 13px/1.1 Georgia,serif;
 /* Настраивает CSS-свойство margin для текущего элемента. */
-margin:0 0 7px
+margin:0 auto 7px
 }
 .steps p{
 /* Настраивает CSS-свойство font-size для текущего элемента. */
@@ -572,7 +572,7 @@ margin:0
 }
 .call{
 /* Настраивает CSS-свойство background для текущего элемента. */
-background:url("/images/investors/schedule investor call bg.png") center/cover no-repeat;
+background:url("/images/investors/schedule_investor_call_bg.png") center/cover no-repeat;
 /* Настраивает CSS-свойство padding для текущего элемента. */
 padding:23px 0
 }
@@ -952,4 +952,222 @@ width:150px
         /* Оставляет минимальные безопасные поля. */
         width: 94vw;
     }
+}
+
+
+/* Uses the new independent watercolor layers behind Investors service icons. */
+.deliver-grid article,
+.how .steps article {
+/* Prevents each circular texture from repeating. */
+background-repeat:no-repeat;
+/* Centers each circular texture behind its SVG icon. */
+background-position:center 8px;
+/* Scales the texture independently from its icon. */
+background-size:82px 82px;
+}
+
+/* Assigns the first watercolor layer to the first service. */
+.deliver-grid article:nth-child(1) {
+/* Loads the first independent circle texture. */
+background-image:url("/images/investors/circle_1.png");
+}
+
+/* Assigns the second watercolor layer to the second service. */
+.deliver-grid article:nth-child(2) {
+/* Loads the second independent circle texture. */
+background-image:url("/images/investors/circle_2.png");
+}
+
+/* Assigns the third watercolor layer to the third service. */
+.deliver-grid article:nth-child(3) {
+/* Loads the third independent circle texture. */
+background-image:url("/images/investors/circle_3.png");
+}
+
+/* Assigns the fourth watercolor layer to the fourth service. */
+.deliver-grid article:nth-child(4) {
+/* Loads the fourth independent circle texture. */
+background-image:url("/images/investors/circle_4.png");
+}
+
+/* Assigns the fifth watercolor layer to the fifth service. */
+.deliver-grid article:nth-child(5) {
+/* Loads the fifth independent circle texture. */
+background-image:url("/images/investors/circle_5.png");
+}
+
+/* Assigns the sixth watercolor layer to the sixth service. */
+.deliver-grid article:nth-child(6) {
+/* Loads the sixth independent circle texture. */
+background-image:url("/images/investors/circle_6.png");
+}
+
+/* Places service SVG icons above their watercolor textures. */
+.deliver-grid article > img {
+/* Keeps the icon above the independent background layer. */
+position:relative;
+/* Gives the icon an explicit stacking level. */
+z-index:1;
+/* Adds breathing room within its circular texture. */
+width:57.4px;
+/* Uses the same square size for every service icon. */
+height:57.4px;
+/* Centers the icon over its circular texture. */
+margin:0 auto 18px;
+}
+
+/* Positions How It Works textures below the numbered markers. */
+.how .steps article {
+/* Aligns the circle with the step icon rather than its number. */
+background-position:center 33px;
+}
+
+/* Starts the second section with the fourth texture. */
+.how .steps article:nth-child(1) {
+/* Loads a deliberately reordered circle texture. */
+background-image:url("/images/investors/circle_4.png");
+}
+
+/* Uses the first texture for the second step. */
+.how .steps article:nth-child(2) {
+/* Loads a deliberately reordered circle texture. */
+background-image:url("/images/investors/circle_1.png");
+}
+
+/* Uses the sixth texture for the third step. */
+.how .steps article:nth-child(3) {
+/* Loads a deliberately reordered circle texture. */
+background-image:url("/images/investors/circle_6.png");
+}
+
+/* Uses the second texture for the fourth step. */
+.how .steps article:nth-child(4) {
+/* Loads a deliberately reordered circle texture. */
+background-image:url("/images/investors/circle_2.png");
+}
+
+/* Uses the fifth texture for the fifth step. */
+.how .steps article:nth-child(5) {
+/* Loads a deliberately reordered circle texture. */
+background-image:url("/images/investors/circle_5.png");
+}
+
+/* Uses the third texture for the sixth step. */
+.how .steps article:nth-child(6) {
+/* Loads a deliberately reordered circle texture. */
+background-image:url("/images/investors/circle_3.png");
+}
+
+/* Keeps How It Works icons above their circular textures. */
+.how .steps article > img {
+/* Gives each SVG icon an explicit stacking level. */
+position:relative;
+/* Places each icon above its PNG texture. */
+z-index:1;
+}
+
+
+/* Aligns section titles with the new branch SVG decorations. */
+.section-heading-with-branches {
+/* Places both branches and the title on one line. */
+display:flex;
+/* Vertically centers the decorative branches with the title. */
+align-items:center;
+/* Centers the complete heading composition. */
+justify-content:center;
+/* Keeps balanced space around the title. */
+gap:clamp(8px,1.4vw,18px);
+}
+
+/* Sizes the independent decorative branch images. */
+.section-heading-with-branches .heading-branch {
+/* Gives the horizontal artwork a responsive width. */
+width:clamp(230px,30vw,410px);
+/* Keeps the branch compact beside the heading. */
+height:120px;
+/* Expands the square SVG canvas into its intended horizontal shape. */
+object-fit:fill;
+/* Prevents generic icon filters from recoloring the artwork unexpectedly. */
+filter:none;
+}
+
+/* Uses the transparent calendar SVG as an exact current-color mask. */
+.calendar-button::before {
+/* Creates a separate calendar shape before the button text. */
+content:"";
+/* Matches the existing button icon width. */
+width:21px;
+/* Matches the existing button icon height. */
+height:21px;
+/* Prevents the icon from shrinking beside longer translated text. */
+flex:0 0 21px;
+/* Paints the calendar in the current button text color. */
+background-color:currentColor;
+/* Applies the transparent calendar artwork in WebKit browsers. */
+-webkit-mask:url("/images/investors/icon-calendar.svg") center/contain no-repeat;
+/* Applies the transparent calendar artwork in standards-based browsers. */
+mask:url("/images/investors/icon-calendar.svg") center/contain no-repeat;
+}
+
+/* Hides the source image after its shape is reproduced by the color mask. */
+.calendar-button > img[src$="icon-calendar.svg"] {
+/* Avoids displaying a second calendar beside the masked one. */
+display:none;
+}
+
+/* Keeps the step number separate above the icon composition. */
+.how .steps b {
+/* Centers the number without overlapping the watercolor circle. */
+margin:0 auto 21px;
+}
+
+/* Matches the How It Works icon spacing to We Deliver. */
+.how .steps article > img {
+/* Centers the icon inside its independent circular background. */
+display:block;
+/* Uses the same balanced spacing as the service icons. */
+width:57.4px;
+/* Uses the same square size for every process icon. */
+height:57.4px;
+/* Centers the icon over its circular texture. */
+margin:0 auto 18px;
+}
+
+
+/* Scales the enlarged branch artwork down only on mobile screens. */
+@media(max-width:620px) {
+/* Keeps the decorative title composition inside the phone viewport. */
+.section-heading-with-branches .heading-branch {
+/* Reduces each branch proportionally from its desktop size. */
+width:clamp(46px,18vw,72px);
+/* Preserves the enlarged branch aspect ratio on phones. */
+height:clamp(24px,9.4vw,38px);
+}
+}
+
+
+/* Recolors Investors branch decorations to the exact neighboring heading color. */
+.section-heading-with-branches .heading-branch {
+/* Uses the heading color as the visible branch color. */
+background-color:currentColor;
+/* Loads the supplied left branch as the visible shape. */
+-webkit-mask:url("/images/investors/icon-branch-left.svg") center/100% 100% no-repeat;
+/* Loads the supplied left branch in standards-based browsers. */
+mask:url("/images/investors/icon-branch-left.svg") center/100% 100% no-repeat;
+}
+
+/* Loads the mirrored right Investors branch artwork. */
+.section-heading-with-branches .heading-branch-right {
+/* Uses the supplied right branch as the mask. */
+-webkit-mask-image:url("/images/investors/icon-branch-right.svg");
+/* Uses the supplied right branch in standards-based browsers. */
+mask-image:url("/images/investors/icon-branch-right.svg");
+}
+
+/* Enlarges only the arrows that remain visible in the horizontal step layout. */
+.how .steps article:not(:last-child)::after {
+/* Makes each arrow three times the original inherited text size. */
+font-size:48px;
+/* Keeps the enlarged symbol in a compact line box. */
+line-height:1;
 }

@@ -28,11 +28,11 @@
 <!-- Provides the same audience navigation used on tenant and owner pages. -->
 <nav class="audience-nav site-shell investor-audience-nav" aria-label="Audience navigation">
 <!-- Links to the tenant center. -->
-<a class="tenant" href="/tenants"><img th:src="@{/images/tenants/icon-tenant-portal.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+<a class="tenant" href="/tenants"><img th:src="@{/images/investors/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
 <!-- Links to the owner center. -->
-<a class="owner" href="/homeowners"><img th:src="@{/images/tenants/icon-house-small.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
+<a class="owner" href="/homeowners"><img th:src="@{/images/investors/icon-house.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
 <!-- Marks the current investor section. -->
-<a class="investor active" href="/investors"><img th:src="@{/images/main/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+<a class="investor active" href="/investors"><img th:src="@{/images/investors/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
 </nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="hero">
@@ -53,7 +53,7 @@
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-trend-line.svg}" alt=""><span th:text="#{investor.projects}">View Investment Projects</span></a>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button class="button button-outline" type="button" data-open-contact>
+<button class="button button-outline calendar-button" type="button" data-open-contact>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-calendar.svg}" alt=""><span th:text="#{investor.consultation}">Schedule Consultation</span></button>
 </div>
@@ -64,7 +64,14 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="shell">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>⌁ &nbsp; <span th:text="#{investor.deliver}">We Deliver</span> &nbsp; ⌁</h2>
+<h2 class="section-heading-with-branches">
+<!-- Элемент img отображает левую декоративную ветвь. -->
+<span class="heading-branch heading-branch-left" aria-hidden="true"></span>
+<!-- Элемент span отображает локализованный заголовок секции. -->
+<span th:text="#{investor.deliver}">We Deliver</span>
+<!-- Элемент img отображает правую декоративную ветвь. -->
+<span class="heading-branch heading-branch-right" aria-hidden="true"></span>
+</h2>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="deliver-grid">
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -248,7 +255,14 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="shell">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>⌁ &nbsp; <span th:text="#{investor.how}">How It Works</span> &nbsp; ⌁</h2>
+<h2 class="section-heading-with-branches">
+<!-- Элемент img отображает левую декоративную ветвь. -->
+<span class="heading-branch heading-branch-left" aria-hidden="true"></span>
+<!-- Элемент span отображает локализованный заголовок секции. -->
+<span th:text="#{investor.how}">How It Works</span>
+<!-- Элемент img отображает правую декоративную ветвь. -->
+<span class="heading-branch heading-branch-right" aria-hidden="true"></span>
+</h2>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="steps">
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -295,7 +309,7 @@
 <article>
 <b>5</b>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-maintenance.svg}" alt="">
+<img th:src="@{/images/investors/icon-helmet.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
 <h3 th:text="#{investor.step5.title}">We Oversee the Renovation</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
@@ -326,7 +340,7 @@
 <p th:text="#{investor.ready.text}">Let’s analyze the numbers and build a plan that works for you.</p>
 </div>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button class="button" data-open-contact>
+<button class="button calendar-button" data-open-contact>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/investors/icon-calendar.svg}" alt=""><span th:text="#{investor.call}">Schedule Investor Call</span></button>
 </div>
@@ -352,9 +366,9 @@
 <!-- Элемент div объединяет ссылки на социальные сети. -->
 <div class="socials">
 <!-- Элемент a открывает Facebook. -->
-<a href="#" aria-label="Facebook"><img th:src="@{/images/tenants/icon-facebook.svg}" alt=""></a>
+<a href="#" aria-label="Facebook"><img th:src="@{/images/investors/icon-facebook.svg}" alt=""></a>
 <!-- Элемент a открывает Instagram. -->
-<a href="#" aria-label="Instagram"><img th:src="@{/images/tenants/icon-instagram.svg}" alt=""></a>
+<a href="#" aria-label="Instagram"><img th:src="@{/images/investors/icon-instagram.svg}" alt=""></a>
 </div>
 </div>
 <!-- Элемент div формирует нижнюю полосу футера. -->
