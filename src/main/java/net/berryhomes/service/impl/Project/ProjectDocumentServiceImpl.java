@@ -14,6 +14,7 @@ import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.ProjectDocumentService;
 import net.berryhomes.service.impl.File.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.transaction.support.TransactionSynchronization;
@@ -53,6 +54,7 @@ public class ProjectDocumentServiceImpl implements ProjectDocumentService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
     public void deleteDocument(UUID documentId) {
         ProjectDocument projectDocument = projectDocumentRepository.findById(documentId).orElseThrow(() -> {
             log.info("Try to find document with id {} not found", documentId);
@@ -66,7 +68,11 @@ public class ProjectDocumentServiceImpl implements ProjectDocumentService {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
 
             public void afterCommit() {
-                fileStorageService.deleteFile(filePath);
+                try {
+                    fileStorageService.deleteFile(filePath);
+                } catch (RuntimeException exception) {
+                    log.error("Database record was deleted, but physical document file {} could not be removed", filePath, exception);
+                }
             }
         });
     }

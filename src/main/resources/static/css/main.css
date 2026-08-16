@@ -34,7 +34,7 @@
 
     /* Яркий фиолетовый идентификационный цвет для направления инвесторов */
     /* Настраивает CSS-свойство --color-investors для текущего элемента. */
-    --color-investors: #6A3B73;
+    --color-investors: #6d4877;
 
     /* Контрастный темный текст для основного контента сайта */
     /* Настраивает CSS-свойство --text-dark для текущего элемента. */
@@ -1551,22 +1551,12 @@ body {
     flex-shrink: 0;
 }
 
-/* Loads the new upper Tenants icon. */
-.icon-tenants-up,
+/* Loads the updated Tenants icon everywhere it appears on the main page. */
 .icon-tenants {
-    /* Uses the supplied Tenants artwork as the visible shape. */
     -webkit-mask-image: url("/images/main/icon-tenants.svg");
-    /* Uses the supplied Tenants artwork in standards-based browsers. */
     mask-image: url("/images/main/icon-tenants.svg");
 }
 
-/* Uses the dedicated upper Tenants asset in quick navigation. */
-.icon-tenants-up {
-    /* Loads the supplied upper-navigation variant. */
-    -webkit-mask-image: url("/images/main/icon-tenants-up.svg");
-    /* Loads the supplied upper-navigation variant in standards-based browsers. */
-    mask-image: url("/images/main/icon-tenants-up.svg");
-}
 
 /* Loads the new Homeowners card icon. */
 .icon-homeowners {

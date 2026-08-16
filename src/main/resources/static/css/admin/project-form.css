@@ -236,6 +236,39 @@
 
 
 /* Блок сортировки картинок */
+.cover-badge {
+    position: absolute;
+    left: 44px;
+    top: 8px;
+    z-index: 2;
+    padding: 5px 8px;
+    border-radius: 5px;
+    color: #fff;
+    background: #17643c;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.image-delete-button {
+    border: 0;
+    padding: 0;
+    color: #a83232;
+    background: transparent;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.document-panel {
+    margin-top: 28px;
+}
+
+.media-help, .empty-media-message {
+    margin: 0;
+    color: #718096;
+    font-size: 0.85rem;
+}
+
 .sort-order-form {
 
     /* Настраивает CSS-свойство display для текущего элемента. */
@@ -466,4 +499,125 @@
     text-decoration: underline;
 
 
+}
+
+
+/* Interactive project media editor */
+.gallery-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 14px 0;
+    color: #66736b;
+    font-size: 0.88rem;
+}
+
+.uploaded-image-card {
+    position: relative;
+    cursor: grab;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.uploaded-image-card.is-dragging {
+    opacity: 0.55;
+    transform: scale(0.98);
+    box-shadow: 0 10px 24px rgba(18, 37, 28, 0.18);
+}
+
+.image-selection {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.image-selection input {
+    width: 17px;
+    height: 17px;
+    accent-color: #17643c;
+}
+
+.drag-handle {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    padding: 3px 7px;
+    border-radius: 6px;
+    color: #12251c;
+    background: rgba(255, 255, 255, 0.92);
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.media-danger-button {
+    border: 1px solid #c94545;
+    border-radius: 6px;
+    padding: 8px 13px;
+    color: #a83232;
+    background: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.media-danger-button:disabled,
+.btn-form-save:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-toast {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 1000;
+    max-width: min(420px, calc(100vw - 32px));
+    padding: 13px 18px;
+    border-radius: 8px;
+    color: #fff;
+    background: #17643c;
+    box-shadow: 0 10px 30px rgba(18, 37, 28, 0.24);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(14px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.admin-toast.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.admin-toast.is-error {
+    background: #a83232;
+}
+
+@media (max-width: 700px) {
+    .form-grid-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group-full {
+        grid-column: span 1;
+    }
+
+    .gallery-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .uploaded-image-card {
+        width: calc(50% - 10px);
+        min-width: 140px;
+    }
 }

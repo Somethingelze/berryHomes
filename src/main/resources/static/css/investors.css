@@ -232,7 +232,7 @@ filter:none
 /* Настраивает CSS-свойство background для текущего элемента. */
 background:none;
 /* Настраивает CSS-свойство padding для текущего элемента. */
-padding:25px 0 35px
+padding:10px 0 10px
 }
 .deliver h2,.how h2{
 /* Настраивает CSS-свойство text-align для текущего элемента. */
@@ -1084,7 +1084,7 @@ gap:clamp(8px,1.4vw,18px);
 /* Gives the horizontal artwork a responsive width. */
 width:clamp(230px,30vw,410px);
 /* Keeps the branch compact beside the heading. */
-height:120px;
+height:32px;
 /* Expands the square SVG canvas into its intended horizontal shape. */
 object-fit:fill;
 /* Prevents generic icon filters from recoloring the artwork unexpectedly. */
@@ -1170,4 +1170,235 @@ mask-image:url("/images/investors/icon-branch-right.svg");
 font-size:48px;
 /* Keeps the enlarged symbol in a compact line box. */
 line-height:1;
+}
+
+
+/* Keeps the Recent Projects title and its supplied branch icon consistent with section headings. */
+.projects-heading h2 {
+display:inline-flex;
+align-items:center;
+gap:.28em;
+color:var(--green);
+}
+
+.projects-heading h2 span {
+color:inherit;
+}
+
+.projects-heading .recent-projects-branch {
+width:3em;
+height:3em;
+flex:0 0 3em;
+background-color:currentColor;
+-webkit-mask:url("/images/investors/icon-branch-right.svg") center/contain no-repeat;
+mask:url("/images/investors/icon-branch-right.svg") center/contain no-repeat;
+}
+
+/* Keeps all six icon groups evenly spaced and centered inside the existing section width. */
+.how .steps {
+width:100%;
+margin-inline:auto;
+grid-template-columns:repeat(6,minmax(0,1fr));
+}
+
+/* Aligns every process arrow with the midpoint between neighboring icon centers. */
+.how .steps article:not(:last-child)::after {
+left:calc(100% + 7.5px);
+right:auto;
+top:74px;
+transform:translate(-50%,-50%);
+color:var(--green);
+}
+
+@media(max-width:900px) {
+.how .steps {
+grid-template-columns:repeat(3,minmax(0,1fr));
+}
+}
+
+@media(max-width:600px) {
+.how .steps {
+grid-template-columns:repeat(2,minmax(0,1fr));
+}
+}
+
+
+/* Places the Investors CTA copy inside the clear band between both painted edges. */
+@media(min-width:601px) {
+.call .shell {
+padding-left:clamp(280px,28vw,480px);
+padding-right:clamp(28px,5.5vw,78px);
+}
+
+.call .shell > div {
+flex:1;
+max-width:none;
+text-align:center;
+}
+}
+
+
+/* Makes investment projects the visual and interactive focal point of the page. */
+.projects {
+padding:42px 0 54px;
+background:linear-gradient(180deg,rgba(242,239,222,.52),rgba(255,253,248,.92) 48%,rgba(235,240,220,.48));
+border-top:1px solid rgba(117,139,37,.2);
+border-bottom:1px solid rgba(117,139,37,.2);
+}
+
+.projects-heading {
+margin-bottom:22px;
+}
+
+.projects-heading h2 span:first-child {
+font-size:clamp(25px,2.45vw,38px);
+line-height:1.1;
+}
+
+.projects-heading > span {
+padding:8px 12px;
+border-radius:999px;
+background:rgba(255,255,255,.72);
+color:var(--green);
+}
+
+.project-viewport {
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+scrollbar-width:none;
+cursor:grab;
+touch-action:pan-y;
+}
+
+.project-viewport::-webkit-scrollbar {
+display:none;
+}
+
+.project-viewport.is-dragging {
+scroll-snap-type:none;
+cursor:grabbing;
+user-select:none;
+}
+
+.project-track {
+gap:24px;
+padding:10px 4px 18px;
+}
+
+.project-card {
+flex:0 0 calc((100% - 24px)/2);
+min-width:calc((100% - 24px)/2);
+scroll-snap-align:start;
+border-radius:12px;
+border-color:rgba(117,139,37,.3);
+box-shadow:0 9px 24px rgba(45,61,37,.09);
+cursor:pointer;
+transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+
+.project-card:hover,
+.project-card:focus-visible {
+transform:translateY(-8px);
+box-shadow:0 20px 42px rgba(45,61,37,.18);
+border-color:rgba(82,105,30,.58);
+outline:none;
+}
+
+.project-image {
+height:clamp(240px,23vw,330px);
+overflow:hidden;
+}
+
+.project-image > img {
+transition:transform .45s ease;
+}
+
+.project-card:hover .project-image > img,
+.project-card:focus-visible .project-image > img {
+transform:scale(1.045);
+}
+
+.project-body {
+padding:18px;
+}
+
+.project-body h3 {
+font-size:clamp(18px,1.55vw,24px);
+color:var(--green);
+}
+
+.project-body > p {
+font-size:13px;
+}
+
+.project-body dl div {
+font-size:11px;
+}
+
+.carousel-arrow,
+.button,
+.project-image button,
+.project-body footer button,
+.project-body footer a {
+transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,color .2s ease;
+}
+
+.carousel-arrow:hover,
+.button:hover,
+.project-image button:hover {
+transform:translateY(-2px);
+box-shadow:0 8px 18px rgba(29,58,35,.18);
+}
+
+.gallery-box > img {
+touch-action:pan-y;
+cursor:grab;
+}
+
+.gallery-dots {
+position:absolute;
+left:50%;
+bottom:34px;
+display:flex;
+gap:7px;
+max-width:min(80%,620px);
+transform:translateX(-50%);
+}
+
+.gallery-dots button {
+width:9px;
+height:9px;
+padding:0;
+border:1px solid #fff;
+border-radius:50%;
+background:rgba(255,255,255,.35);
+cursor:pointer;
+}
+
+.gallery-dots button.active {
+background:#fff;
+transform:scale(1.25);
+}
+
+@media(max-width:760px) {
+.project-card {
+flex-basis:100%;
+min-width:100%;
+}
+
+.project-image {
+height:240px;
+}
+
+.projects-heading {
+align-items:flex-start;
+}
+}
+
+@media(prefers-reduced-motion:reduce) {
+.project-card,
+.project-image > img {
+transition:none;
+}
+
 }

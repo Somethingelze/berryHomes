@@ -10,7 +10,7 @@
 <!-- Элемент title формирует соответствующую часть интерфейса. -->
 <title>For Investors | Berry Homes</title>
 <!-- Элемент link формирует соответствующую часть интерфейса. -->
-<link rel="stylesheet" th:href="@{/css/investors.css}">
+<link rel="stylesheet" th:href="@{/css/investors.css(v=20260815)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
@@ -138,8 +138,7 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="projects-heading">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2><span th:text="#{investor.recent}">Recent Investment Projects</span> <span>⌁</span>
-</h2>
+<h2><span th:text="#{investor.recent}">Recent Investment Projects</span><span class="recent-projects-branch" aria-hidden="true"></span></h2>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span th:text="#{investor.arrows}">Use the arrows to see all projects</span>
 </div>
@@ -431,12 +430,185 @@
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="gallery-nav gallery-next">→</button>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p id="galleryCounter">
-</p>
+<p id="galleryCounter"></p>
+<div id="galleryDots" class="gallery-dots" aria-label="Project photos"></div>
 </div>
 </div>
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
-<script>(()=>{const body=document.body,contact=document.querySelector("#contactModal"),gallery=document.querySelector("#galleryModal"),set=(m,on)=>{m.classList.toggle("open",on);body.classList.toggle("modal-open",on);};document.querySelectorAll("[data-open-contact]").forEach(e=>e.onclick=()=>set(contact,true));contact.querySelectorAll("[data-close-modal]").forEach(e=>e.onclick=()=>set(contact,false));const track=document.querySelector("[data-carousel-track]"),move=n=>track.parentElement.scrollBy({left:n*(track.querySelector(".project-card").offsetWidth+18),behavior:"smooth"});document.querySelector("[data-carousel-prev]").onclick=()=>move(-1);document.querySelector("[data-carousel-next]").onclick=()=>move(1);let photos=[],index=0;const image=document.querySelector("#galleryImage"),counter=document.querySelector("#galleryCounter"),render=()=>{image.src=photos[index].src;image.alt=photos[index].alt;counter.textContent=(index+1)+" / "+photos.length;},open=card=>{photos=[...card.querySelectorAll(".project-gallery-source")];if(!photos.length)return;index=0;render();set(gallery,true);};document.querySelectorAll("[data-open-gallery]").forEach(e=>e.onclick=()=>open(e.closest(".project-card")));document.querySelector(".gallery-next").onclick=()=>{index=(index+1)%photos.length;render();};document.querySelector(".gallery-prev").onclick=()=>{index=(index-1+photos.length)%photos.length;render();};gallery.querySelectorAll("[data-close-gallery]").forEach(e=>e.onclick=()=>set(gallery,false));document.addEventListener("keydown",e=>{if(e.key==="Escape"){set(contact,false);set(gallery,false)}if(gallery.classList.contains("open")&&e.key==="ArrowRight")document.querySelector(".gallery-next").click();if(gallery.classList.contains("open")&&e.key==="ArrowLeft")document.querySelector(".gallery-prev").click();});})();</script>
+<script>
+(() => {
+    const body = document.body;
+    const contact = document.querySelector("#contactModal");
+    const gallery = document.querySelector("#galleryModal");
+    const setModal = (modal, open) => {
+        modal.classList.toggle("open", open);
+        body.classList.toggle("modal-open", open);
+    };
+
+    document.querySelectorAll("[data-open-contact]").forEach(button => {
+        button.addEventListener("click", () => setModal(contact, true));
+    });
+    contact.querySelectorAll("[data-close-modal]").forEach(button => {
+        button.addEventListener("click", () => setModal(contact, false));
+    });
+
+    const track = document.querySelector("[data-carousel-track]");
+    const viewport = track?.parentElement;
+    if (track && viewport) {
+        const cards = [...track.querySelectorAll(".project-card")];
+        let currentIndex = 0;
+        let pointerId = null;
+        let startX = 0;
+        let dragDistance = 0;
+        let dragged = false;
+
+        const measurements = () => {
+            const card = cards[0];
+            if (!card) return {step: 0, maxIndex: 0};
+            const gap = parseFloat(getComputedStyle(track).gap) || 24;
+            const step = card.getBoundingClientRect().width + gap;
+            const visibleCount = Math.max(1, Math.floor((viewport.clientWidth + gap) / step));
+            return {step, maxIndex: Math.max(0, cards.length - visibleCount)};
+        };
+        const previousButton = document.querySelector("[data-carousel-prev]");
+        const nextButton = document.querySelector("[data-carousel-next]");
+        const renderTrack = (animate = true) => {
+            const {step, maxIndex} = measurements();
+            currentIndex = Math.min(Math.max(currentIndex, 0), maxIndex);
+            track.style.transition = animate ? "transform .32s ease" : "none";
+            track.style.transform = `translate3d(${-currentIndex * step}px, 0, 0)`;
+            if (previousButton) previousButton.disabled = currentIndex === 0;
+            if (nextButton) nextButton.disabled = currentIndex === maxIndex;
+        };
+        const move = direction => {
+            currentIndex += direction;
+            renderTrack();
+        };
+
+        previousButton?.addEventListener("click", () => move(-1));
+        nextButton?.addEventListener("click", () => move(1));
+
+        viewport.addEventListener("pointerdown", event => {
+            if (event.button !== 0 || event.target.closest("button, a")) return;
+            pointerId = event.pointerId;
+            startX = event.clientX;
+            dragDistance = 0;
+            dragged = false;
+            viewport.setPointerCapture(pointerId);
+            viewport.classList.add("is-dragging");
+            track.style.transition = "none";
+        });
+        viewport.addEventListener("pointermove", event => {
+            if (event.pointerId !== pointerId) return;
+            dragDistance = event.clientX - startX;
+            if (Math.abs(dragDistance) > 5) dragged = true;
+            const {step} = measurements();
+            track.style.transform = `translate3d(${(-currentIndex * step) + dragDistance}px, 0, 0)`;
+        });
+        const finishDrag = event => {
+            if (event.pointerId !== pointerId) return;
+            if (Math.abs(dragDistance) > 45) currentIndex += dragDistance < 0 ? 1 : -1;
+            viewport.classList.remove("is-dragging");
+            pointerId = null;
+            renderTrack();
+        };
+        viewport.addEventListener("pointerup", finishDrag);
+        viewport.addEventListener("pointercancel", finishDrag);
+        viewport.addEventListener("click", event => {
+            if (!dragged) return;
+            event.preventDefault();
+            event.stopPropagation();
+            dragged = false;
+        }, true);
+        window.addEventListener("resize", () => renderTrack(false));
+        renderTrack(false);
+    }
+
+    let photos = [];
+    let index = 0;
+    const image = document.querySelector("#galleryImage");
+    const counter = document.querySelector("#galleryCounter");
+    const dots = document.querySelector("#galleryDots");
+    const preloadNeighbors = () => {
+        if (photos.length < 2) return;
+        const nextIndex = (index + 1) % photos.length;
+        const previousIndex = (index - 1 + photos.length) % photos.length;
+        Array.of(photos[nextIndex], photos[previousIndex])
+            .forEach(photo => { const preload = new Image(); preload.src = photo.src; });
+    };
+    const render = () => {
+        image.src = photos[index].src;
+        image.alt = photos[index].alt;
+        counter.textContent = `${index + 1} / ${photos.length}`;
+        dots.querySelectorAll("button").forEach((dot, dotIndex) => {
+            dot.classList.toggle("active", dotIndex === index);
+            dot.setAttribute("aria-current", dotIndex === index ? "true" : "false");
+        });
+        preloadNeighbors();
+    };
+    const buildDots = () => {
+        dots.replaceChildren(...photos.map((photo, dotIndex) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.setAttribute("aria-label", `Open photo ${dotIndex + 1}`);
+            dot.addEventListener("click", () => { index = dotIndex; render(); });
+            return dot;
+        }));
+    };
+    const openGallery = card => {
+        photos = [...card.querySelectorAll(".project-gallery-source")];
+        if (!photos.length) return;
+        index = 0;
+        buildDots();
+        render();
+        setModal(gallery, true);
+    };
+    const showRelativePhoto = direction => {
+        index = (index + direction + photos.length) % photos.length;
+        render();
+    };
+
+    document.querySelectorAll("[data-open-gallery]").forEach(button => {
+        button.addEventListener("click", () => openGallery(button.closest(".project-card")));
+    });
+    document.querySelectorAll(".project-card").forEach(card => {
+        if (!card.querySelector(".project-gallery-source")) return;
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.addEventListener("click", event => {
+            if (!event.target.closest("button, a")) openGallery(card);
+        });
+        card.addEventListener("keydown", event => {
+            if ((event.key === "Enter" || event.key === " ") && !event.target.closest("button, a")) {
+                event.preventDefault();
+                openGallery(card);
+            }
+        });
+    });
+
+    document.querySelector(".gallery-next").addEventListener("click", () => showRelativePhoto(1));
+    document.querySelector(".gallery-prev").addEventListener("click", () => showRelativePhoto(-1));
+    gallery.querySelectorAll("[data-close-gallery]").forEach(button => {
+        button.addEventListener("click", () => setModal(gallery, false));
+    });
+
+    let galleryStartX = 0;
+    image.addEventListener("pointerdown", event => { galleryStartX = event.clientX; });
+    image.addEventListener("pointerup", event => {
+        const distance = event.clientX - galleryStartX;
+        if (Math.abs(distance) > 45) showRelativePhoto(distance < 0 ? 1 : -1);
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            setModal(contact, false);
+            setModal(gallery, false);
+        }
+        if (gallery.classList.contains("open") && event.key === "ArrowRight") showRelativePhoto(1);
+        if (gallery.classList.contains("open") && event.key === "ArrowLeft") showRelativePhoto(-1);
+    });
+})();
+</script>
 <!-- Подключает поведение общей мобильной навигации. -->
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
 <script th:replace="~{fragments/header :: public-navigation-script}">

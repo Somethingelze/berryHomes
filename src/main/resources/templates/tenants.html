@@ -30,7 +30,7 @@
         <!-- Элемент a формирует соответствующую часть интерфейса. -->
         <a class="tenant active" href="/tenants">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-tenant-portal.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+<img th:src="@{/images/tenants/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
         <!-- Элемент a формирует соответствующую часть интерфейса. -->
         <a class="owner" href="/homeowners">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
@@ -69,7 +69,7 @@
 <!-- Элемент img отображает новую акварельную подложку иконки. -->
 <img class="round-icon-bg" th:src="@{/images/tenants/circle_tenant_portal.png}" alt="">
 <!-- Элемент img отображает иконку портала поверх подложки. -->
-<img class="round-icon-symbol" th:src="@{/images/tenants/icon-tenant-portal.svg}" alt="">
+<img class="round-icon-symbol" th:src="@{/images/tenants/icon-tenants.svg}" alt="">
 </span>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 th:text="#{tenant.portal}">Tenant Portal</h2>
@@ -202,7 +202,7 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="document-grid">
             <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article style="--doc-bg:url('../images/tenants/move_in_guide.png')">
+            <article th:classappend="${moveInGuide != null} ? 'document-card--active'" style="--doc-bg:url('../images/tenants/move_in_guide.png')">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-house-small.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -210,10 +210,11 @@
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
 <p th:text="#{tenant.movein.text}">Everything you need to know before moving into your new home.</p>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#" aria-disabled="true">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+<a th:if="${moveInGuide != null}" th:href="@{/tenants/documents/move-in-guide}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+<span class="document-unavailable" th:unless="${moveInGuide != null}">PDF coming soon</span>
 </article>
             <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article style="--doc-bg:url('../images/tenants/move_out_checklist.png')">
+            <article th:classappend="${moveOutChecklist != null} ? 'document-card--active'" style="--doc-bg:url('../images/tenants/move_out_checklist.png')">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-clipboard-check.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -221,10 +222,11 @@
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
 <p th:text="#{tenant.moveout.text}">A step-by-step checklist to help you prepare for a smooth move-out.</p>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#" aria-disabled="true">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+<a th:if="${moveOutChecklist != null}" th:href="@{/tenants/documents/move-out-checklist}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+<span class="document-unavailable" th:unless="${moveOutChecklist != null}">PDF coming soon</span>
 </article>
             <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article style="--doc-bg:url('../images/tenants/resident_handbook.png')">
+            <article th:classappend="${residentHandbook != null} ? 'document-card--active'" style="--doc-bg:url('../images/tenants/resident_handbook.png')">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-book-open.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
@@ -232,7 +234,8 @@
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
 <p th:text="#{tenant.handbook.text}">Your complete guide to policies, procedures, and important resident information.</p>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#" aria-disabled="true">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+<a th:if="${residentHandbook != null}" th:href="@{/tenants/documents/resident-handbook}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+<span class="document-unavailable" th:unless="${residentHandbook != null}">PDF coming soon</span>
 </article>
         </div>
     </section>
@@ -325,7 +328,24 @@
 </form>
 </dialog>
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
-<script>const modal=document.querySelector('.contact-modal');document.querySelector('.modal-open').addEventListener('click',()=>modal.showModal());document.querySelector('.modal-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});document.querySelectorAll('[aria-disabled="true"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));</script>
+<script>
+document.querySelectorAll('.document-card--active').forEach(card => {
+    const download = card.querySelector('a[href]');
+    if (!download) return;
+    card.tabIndex = 0;
+    card.setAttribute('role', 'link');
+    card.addEventListener('click', event => {
+        if (!event.target.closest('a, button')) download.click();
+    });
+    card.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            download.click();
+        }
+    });
+});
+
+const modal=document.querySelector('.contact-modal');document.querySelector('.modal-open').addEventListener('click',()=>modal.showModal());document.querySelector('.modal-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});document.querySelectorAll('[aria-disabled="true"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));</script>
 <!-- Подключает поведение общей мобильной навигации. -->
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
 <script th:replace="~{fragments/header :: public-navigation-script}">

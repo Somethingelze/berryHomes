@@ -4,7 +4,6 @@ volumes:
   pg_berryhomes_data:
   red_berryhomes_data:
   grafana_data:
-  berryhomes_uploads:
 
 networks:
   berryhomes_net:
@@ -62,7 +61,7 @@ services:
       - "8080:8080"
       - "9090:9090"
     volumes:
-      - berryhomes_uploads:/app/uploads
+      - ./uploads:/app/uploads
 
   # TODO заменить перед настройкой реальной почты
   mailpit:

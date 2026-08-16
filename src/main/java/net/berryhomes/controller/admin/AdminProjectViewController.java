@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Slf4j
@@ -113,6 +115,55 @@ public class AdminProjectViewController {
         auditService.record("SAVE", "PROJECT", projectDto.id() == null ? null : projectDto.id().toString(), projectDto.address());
         redirectAttributes.addFlashAttribute("successMessage", "Investment project saved successfully!");
         return new ModelAndView("redirect:/admin/projects");
+    }
+
+    @PostMapping("/save-ajax")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> saveProjectAjax(
+            @ModelAttribute("projectDto") @Valid ProjectDto projectDto,
+            BindingResult bindingResult,
+            @RequestParam(value = "images", required = false) List<MultipartFile> imageFiles,
+            @RequestParam(value = "document", required = false) MultipartFile documentFile) {
+        if (bindingResult.hasErrors()) {
+            String message = bindingResult.getFieldErrors().stream()
+                    .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                    .reduce((first, second) -> first + "; " + second)
+                    .orElse("Please check the project fields");
+            return ResponseEntity.badRequest().body(Map.of("success", false, "message", message));
+        }
+
+        ProjectDto savedProject = projectDto.id() == null
+                ? projectService.createProjectWithFiles(projectDto, imageFiles, documentFile)
+                : projectService.updateProjectWithFiles(projectDto.id(), projectDto, imageFiles, documentFile);
+        auditService.record("SAVE", "PROJECT", savedProject.id().toString(), savedProject.address());
+        return ResponseEntity.ok(Map.of(
+                "success", true,
+                "message", "Investment project saved successfully!",
+                "projectId", savedProject.id().toString(),
+                "editUrl", "/admin/projects/" + savedProject.id() + "/edit"));
+    }
+
+    @PostMapping("/media/images/order")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateImageOrder(@RequestParam UUID projectId,
+                                                                 @RequestParam List<UUID> imageIds) {
+        projectImageService.updateSortOrder(projectId, imageIds);
+        return ResponseEntity.ok(Map.of("success", true, "message", "Image order saved"));
+    }
+
+    @PostMapping("/media/images/delete")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> deleteProjectImages(@RequestParam UUID projectId,
+                                                                    @RequestParam List<UUID> imageIds) {
+        projectImageService.deleteImages(projectId, imageIds);
+        return ResponseEntity.ok(Map.of("success", true, "message", "Selected images deleted"));
+    }
+
+    @PostMapping("/media/document/{docId}/delete-ajax")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> deleteProjectDocumentAjax(@PathVariable UUID docId) {
+        projectDocumentService.deleteDocument(docId);
+        return ResponseEntity.ok(Map.of("success", true, "message", "Document deleted"));
     }
 
     // 6. Мягкое удаление (Архивация)

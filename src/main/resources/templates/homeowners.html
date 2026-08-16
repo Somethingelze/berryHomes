@@ -197,11 +197,11 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
+<img th:src="@{/images/logo-etc/berryhomes_logo.png}" alt="Berry Homes">
 <i>
 </i>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/logo-etc/Max business group logo.jpg}" alt="Max Business Group">
+<img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group">
 </div>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
 <p th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</p>
@@ -266,6 +266,20 @@
 </dialog>
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
 <script>const modal=document.querySelector('.contact-modal');document.querySelector('.modal-open').addEventListener('click',()=>modal.showModal());document.querySelector('.modal-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});</script>
+<script>
+const homeownerProcess = document.querySelector('.owner-page .how-it-works');
+if (homeownerProcess && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const processObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+            homeownerProcess.classList.add('is-visible');
+            processObserver.disconnect();
+        }
+    }, {threshold: .2});
+    processObserver.observe(homeownerProcess);
+} else {
+    homeownerProcess?.classList.add('is-visible');
+}
+</script>
 <!-- Подключает поведение общей мобильной навигации. -->
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
 <script th:replace="~{fragments/header :: public-navigation-script}">

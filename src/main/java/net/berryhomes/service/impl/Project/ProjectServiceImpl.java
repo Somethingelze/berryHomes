@@ -203,7 +203,11 @@ public class ProjectServiceImpl implements ProjectService {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
 
             public void afterCommit() {
-                fileStorageService.deleteFile(filePath);
+                try {
+                    fileStorageService.deleteFile(filePath);
+                } catch (RuntimeException exception) {
+                    log.error("Database record was updated, but replaced physical file {} could not be removed", filePath, exception);
+                }
             }
         });
     }

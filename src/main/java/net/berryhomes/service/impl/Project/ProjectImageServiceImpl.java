@@ -14,11 +14,13 @@ import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.ProjectImageService;
 import net.berryhomes.service.impl.File.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -53,6 +55,7 @@ public class ProjectImageServiceImpl implements ProjectImageService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
     public void deleteImage(UUID imageId) {
         ProjectImage projectImage = projectImageRepository.findById(imageId).orElseThrow(() -> {
             log.info("Try to find image with id {} not found", imageId);
@@ -64,6 +67,7 @@ public class ProjectImageServiceImpl implements ProjectImageService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
     public void updateSortOrder(UUID imageId, Integer sortOrder) {
         ProjectImage projectImage = projectImageRepository.findById(imageId).orElseThrow(() -> {
             log.info("Try to find image with id {} not found", imageId);
@@ -72,11 +76,46 @@ public class ProjectImageServiceImpl implements ProjectImageService {
         projectImage.setSortOrder(sortOrder);
         projectImageRepository.save(projectImage);
     }
+
+    @Override
+    @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
+    public void updateSortOrder(UUID projectId, List<UUID> imageIds) {
+        List<ProjectImage> images = projectImageRepository.findAllById(imageIds);
+        validateProjectImages(projectId, imageIds, images);
+        for (int index = 0; index < imageIds.size(); index++) {
+            UUID imageId = imageIds.get(index);
+            ProjectImage image = images.stream().filter(item -> item.getId().equals(imageId)).findFirst().orElseThrow();
+            image.setSortOrder(index);
+        }
+        projectImageRepository.saveAll(images);
+    }
+
+    @Override
+    @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
+    public void deleteImages(UUID projectId, List<UUID> imageIds) {
+        List<ProjectImage> images = projectImageRepository.findAllById(imageIds);
+        validateProjectImages(projectId, imageIds, images);
+        images.forEach(image -> deleteFileAfterCommit(image.getFilePath()));
+        projectImageRepository.deleteAll(images);
+    }
+
+    private void validateProjectImages(UUID projectId, List<UUID> imageIds, List<ProjectImage> images) {
+        if (images.size() != imageIds.size() || images.stream().anyMatch(image -> !image.getProject().getId().equals(projectId))) {
+            throw new ProjectFileNotFoundException("One or more project images were not found");
+        }
+    }
+
     private void deleteFileAfterCommit(String filePath) {
         TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
 
             public void afterCommit() {
-                fileStorageService.deleteFile(filePath);
+                try {
+                    fileStorageService.deleteFile(filePath);
+                } catch (RuntimeException exception) {
+                    log.error("Database record was deleted, but physical image file {} could not be removed", filePath, exception);
+                }
             }
         });
     }

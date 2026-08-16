@@ -19,7 +19,6 @@
 </head>
     <!-- Элемент body формирует соответствующую часть интерфейса. -->
     <body>
-
     <!-- Элемент div формирует соответствующую часть интерфейса. -->
     <div class="admin-sidebar">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
@@ -75,7 +74,7 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="form-card-box">
             <!-- Элемент form формирует соответствующую часть интерфейса. -->
-            <form th:action="@{/admin/projects/save}" th:object="${projectDto}" method="POST" enctype="multipart/form-data">
+            <form id="projectForm" th:action="@{/admin/projects/save-ajax}" th:object="${projectDto}" method="POST" enctype="multipart/form-data">
                 <!-- Элемент input формирует соответствующую часть интерфейса. -->
                 <input type="hidden" th:field="*{id}"/>
 
@@ -170,142 +169,51 @@
                     </div>
                 </div>
 
-                <!-- EXISTING IMAGES -->
-                <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                <div th:if="${projectDto.id() != null}" style="margin-top:30px;">
-                    <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
-                    <h4 class="input-label-text">Current Photo Gallery</h4>
-                    <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                    <p th:if="${projectDto.projectImages == null or #lists.isEmpty(projectDto.projectImages)}" style="color:#A0AEC0;">
-                        No images uploaded yet.
-                    </p>
-                    <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                    <div class="images-gallery-flex" th:if="${projectDto.projectImages != null}">
-                        <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                        <div class="uploaded-image-card" th:each="img : ${projectDto.projectImages}">
-                            <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                            <img th:src="@{'/' + ${img.filePath()}}" class="gallery-card-img" alt="Project image">
-                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
+                <!-- EXISTING PROJECT MEDIA -->
+                <section class="existing-media" th:if="${projectDto.id() != null}" th:data-project-id="${projectDto.id()}">
+                    <div class="gallery-toolbar">
+                        <div>
+                            <h4 class="input-label-text">Current Photo Gallery</h4>
+                            <p class="media-help">Drag cards to change their display order. The first image is used as the cover.</p>
+                        </div>
+                        <button id="deleteSelectedImages" type="button" class="media-danger-button" disabled>Delete selected</button>
+                    </div>
+                    <p id="emptyGalleryMessage" th:hidden="${projectDto.projectImages != null and !#lists.isEmpty(projectDto.projectImages)}" class="empty-media-message">No images uploaded yet.</p>
+                    <div id="projectImageGallery" class="images-gallery-flex" th:if="${projectDto.projectImages != null}">
+                        <article class="uploaded-image-card" draggable="true" th:each="img, status : ${projectDto.projectImages}" th:data-image-id="${img.id()}">
+                            <label class="image-selection" title="Select image">
+                                <input type="checkbox" class="image-checkbox" aria-label="Select image for deletion">
+                                <span></span>
+                            </label>
+                            <span class="drag-handle" title="Drag to reorder" aria-hidden="true">⋮⋮</span>
+                            <span class="cover-badge" th:hidden="${!status.first}">Cover</span>
+                            <img th:src="@{/{path}(path=${img.filePath()})}" class="gallery-card-img" alt="Project image">
                             <div class="gallery-card-actions">
-                                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                                    <span style="font-size:0.8rem; color:#718096;">
-                                        Order: <span th:text="${img.sortOrder()}">1</span>
-                                    </span>
-
-                                <!-- Форма изменения порядка (вызов внешней отправки через JS) -->
-                                <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                                <div class="sort-order-form">
-                                    <!-- Упростили ID, добавили класс для поиска через JS -->
-                                    <!-- Элемент input формирует соответствующую часть интерфейса. -->
-                                    <input type="number" th:id="'sortInput-' + ${img.id()}" th:value="${img.sortOrder()}" class="sort-order-input sort-value-field">
-
-                                    <!-- Изменили th:onclick на безопасные data-атрибуты -->
-                                    <!-- Элемент button формирует соответствующую часть интерфейса. -->
-                                    <button type="button"
-                                            class="btn-media-delete"
-                                            style="color: #16A34A;"
-                                            th:data-image-id="${img.id()}"
-                                            onclick="submitExternalSort(this)">✔</button>
-                                </div>
-
-                                <!-- Кнопка удаления привязана к внешней форме через атрибут form -->
-                                <!-- Элемент button формирует соответствующую часть интерфейса. -->
-                                <button th:form="'deleteImageForm-' + ${img.id()}" type="submit" class="btn-media-delete" onclick="return confirm('Delete this image?');">Delete</button>
+                                <span class="image-order-label">Position <b th:text="${status.count}">1</b></span>
+                                <button type="button" class="image-delete-button">Delete</button>
                             </div>
+                        </article>
+                    </div>
+
+                    <div class="document-panel">
+                        <h4 class="input-label-text">Current Financial Attachment</h4>
+                        <p id="emptyDocumentMessage" th:hidden="${projectDto.projectDocument != null}" class="empty-media-message">No document attached yet.</p>
+                        <div id="currentDocument" class="doc-item-row" th:if="${projectDto.projectDocument != null}" th:data-document-id="${projectDto.projectDocument.id()}">
+                            <a th:href="@{/{path}(path=${projectDto.projectDocument.filePath()})}" target="_blank">📄 Project report</a>
+                            <button id="deleteDocument" type="button" class="media-danger-button">Remove document</button>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- EXISTING SINGLE DOCUMENT -->
-                <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                <div th:if="${projectDto.id() != null}" style="margin-top:30px;">
-                    <!-- Элемент h4 формирует соответствующую часть интерфейса. -->
-                    <h4 class="input-label-text">Current Financial Attachment</h4>
-                    <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                    <p th:if="${projectDto.projectDocument == null}" style="color:#A0AEC0;">
-                        No document attached yet.
-                    </p>
-                    <!-- Элемент ul формирует соответствующую часть интерфейса. -->
-                    <ul class="attached-docs-list" th:if="${projectDto.projectDocument != null}">
-                        <!-- Элемент li формирует соответствующую часть интерфейса. -->
-                        <li class="doc-item-row">
-                            <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                            <div>
-                                <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                                <span style="color:#16A34A; margin-right:8px;">📄</span>
-                                <!-- Элемент strong формирует соответствующую часть интерфейса. -->
-                                <strong>
-                                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
-                                    <a th:href="@{'/' + ${projectDto.projectDocument.filePath()}}" target="_blank" th:text="'Project_Report_' + ${projectDto.id()} + '.pdf'">Report Name</a>
-                                </strong>
-                            </div>
-
-                            <!-- Элемент button формирует соответствующую часть интерфейса. -->
-                            <button th:form="'deleteDocForm-' + ${projectDto.projectDocument.id()}" type="submit" class="btn-media-delete" onclick="return confirm('Remove this document?');">
-                                Remove Doc
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-
-
-                <!-- FORM ACTIONS -->
-                <!-- Элемент div формирует соответствующую часть интерфейса. -->
                 <div class="form-footer-actions">
-                    <!-- Элемент a формирует соответствующую часть интерфейса. -->
                     <a th:href="@{/admin/projects}" class="btn-form-cancel">Cancel</a>
-                    <!-- Элемент button формирует соответствующую часть интерфейса. -->
-                    <button type="submit" class="btn-form-save">Save Project</button>
+                    <button id="saveProjectButton" type="submit" class="btn-form-save">Save Project</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ВНЕШНИЕ ИЗОЛИРОВАННЫЕ ФОРМЫ-->
-    <!-- Элемент div формирует соответствующую часть интерфейса. -->
-    <div th:if="${projectDto.id() != null}" style="display: none;">
-
-        <!-- Пулы форм для каждой картинки -->
-        <!-- Элемент div формирует соответствующую часть интерфейса. -->
-        <div th:each="img : ${projectDto.projectImages}">
-            <!-- Форма удаления картинки -->
-            <!-- Элемент form формирует соответствующую часть интерфейса. -->
-            <form th:id="'deleteImageForm-' + ${img.id()}" th:action="@{/admin/projects/media/image/{id}/delete(id=${img.id()})}" method="post">
-                <!-- Элемент input формирует соответствующую часть интерфейса. -->
-                <input type="hidden" name="projectId" th:value="${projectDto.id()}">
-            </form>
-
-            <!-- Форма обновления сортировки -->
-            <!-- Элемент form формирует соответствующую часть интерфейса. -->
-            <form th:id="'sortImageForm-' + ${img.id()}" th:action="@{/admin/projects/media/image/{id}/sort(id=${img.id()})}" method="post">
-                <!-- Элемент input формирует соответствующую часть интерфейса. -->
-                <input type="hidden" name="projectId" th:value="${projectDto.id()}">
-                <!-- Элемент input формирует соответствующую часть интерфейса. -->
-                <input type="hidden" th:id="'hiddenSort-' + ${img.id()}" name="sortOrder">
-            </form>
-        </div>
-        <!-- Форма удаления одиночного документа -->
-        <!-- Элемент div формирует соответствующую часть интерфейса. -->
-        <div th:if="${projectDto.projectDocument != null}">
-            <!-- Элемент form формирует соответствующую часть интерфейса. -->
-            <form th:id="'deleteDocForm-' + ${projectDto.projectDocument.id()}" th:action="@{/admin/projects/media/document/{id}/delete(id=${projectDto.projectDocument.id()})}" method="post">
-                <!-- Элемент input формирует соответствующую часть интерфейса. -->
-                <input type="hidden" name="projectId" th:value="${projectDto.id()}">
-            </form>
-        </div>
-    </div>
-
-    <!-- Элемент script формирует соответствующую часть интерфейса. -->
-    <script>
-        function submitExternalSort(buttonElement) {
-            const imageId = buttonElement.getAttribute('data-image-id');
-
-            const inputVal = document.getElementById('sortInput-' + imageId).value;
-
-            document.getElementById('hiddenSort-' + imageId).value = inputVal;
-            document.getElementById('sortImageForm-' + imageId).submit();
-        }
-    </script>
-
-    </body>
+    <div id="adminToast" class="admin-toast" role="status" aria-live="polite"></div>
+    <script src="/js/admin-project-form.js"></script>
+</body>
 </html>
