@@ -20,7 +20,7 @@
             <!-- Открывает страницу статей. -->
             <a th:href="@{/blog}" th:text="#{nav.blog}">Blog</a>
             <!-- Открывает страницу контактов. -->
-            <a th:href="@{/contact}" th:text="#{nav.contact}">Contact Us</a>
+            <a class="global-contact-trigger" th:href="@{/contact}" data-contact-open th:text="#{nav.contact}">Contact Us</a>
             <!-- Открывает внешний кабинет TenantCloud. -->
             <a class="global-nav__compact" th:href="${settings['portal_url']} ?: 'https://www.tenantcloud.com/'" target="_blank" rel="noopener">
                 <!-- Показывает иконку кабинета. -->
@@ -58,6 +58,38 @@
         <!-- Открывает навигацию на узких экранах. -->
         <button class="global-menu-button" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
     </div>
+
+    <!-- Provides the shared Contact Us experience without leaving the current page. -->
+    <dialog class="global-contact-modal" data-global-contact-modal th:attr="aria-label=#{nav.contact}">
+        <div class="global-contact-modal__layout">
+            <button class="global-contact-modal__close" type="button" data-contact-close th:attr="aria-label=#{common.close}">×</button>
+            <section class="global-contact-modal__form-panel">
+                <h2 th:text="#{nav.contact}">Contact Us</h2>
+                <p th:text="#{contact.modal.intro}">We would love to hear from you. Send us a message and we will get back to you as soon as possible.</p>
+                <form class="global-contact-form" th:action="@{/contact/message/modal}" method="post" data-global-contact-form>
+                    <label><span th:text="#{common.name}">Your Name</span><input name="name" required minlength="3" maxlength="100" autocomplete="name" th:placeholder="#{contact.modal.name_placeholder}"></label>
+                    <label><span th:text="#{common.email}">Email Address</span><input name="email" type="email" required maxlength="100" autocomplete="email" placeholder="you@example.com"></label>
+                    <label><span th:text="#{common.phone}">Phone Number</span><input name="phone" type="tel" required minlength="3" maxlength="30" autocomplete="tel" placeholder="(412) 555-0123"></label>
+                    <label><span th:text="#{contact.modal.subject}">I am contacting about</span><select name="type"><option value="GENERAL" th:text="#{contact.modal.general}">General Inquiry</option><option value="TENANT" th:text="#{contact.modal.tenant}">Tenant Support</option><option value="HOMEOWNER" th:text="#{contact.modal.homeowner}">Homeowner Services</option><option value="INVESTOR" th:text="#{contact.modal.investor}">Investment Consultation</option></select></label>
+                    <label><span th:text="#{common.message}">Message</span><textarea name="message" required minlength="5" rows="5" th:placeholder="#{contact.modal.message_placeholder}"></textarea></label>
+                    <label class="global-contact-form__consent"><input type="checkbox" required><span th:text="#{contact.modal.privacy}">I agree to the Privacy Policy.</span></label>
+                    <div class="global-contact-form__actions"><button type="submit" th:text="#{common.send}">Send Message</button><button type="button" data-contact-close th:text="#{contact.modal.cancel}">Cancel</button></div>
+                    <p class="global-contact-form__status" role="status" aria-live="polite" th:attr="data-success=#{contact.success},data-error=#{contact.modal.error}"></p>
+                </form>
+            </section>
+            <aside class="global-contact-modal__details">
+                <img th:src="@{/images/tenants/contact us bg.png}" alt="">
+                <h3 th:text="#{contact.modal.other_ways}">Other Ways to Reach Us</h3>
+                <div class="global-contact-modal__contact-list">
+                    <span><img th:src="@{/images/homeowners/icon-phone.svg}" alt=""><span><b th:text="#{contact.modal.call}">Call Us</b><a th:href="|tel:${settings?.get(&apos;site_phone&apos;)}|" th:text="${settings?.get(&apos;site_phone&apos;)} ?: &apos;(412) 555-0123&apos;">(412) 555-0123</a></span></span>
+                    <span><img th:src="@{/images/homeowners/icon-envelope.svg}" alt=""><span><b th:text="#{contact.modal.email}">Email Us</b><a th:href="|mailto:${settings?.get(&apos;site_email&apos;)}|" th:text="${settings?.get(&apos;site_email&apos;)} ?: &apos;info@berryhomespm.com&apos;">info@berryhomespm.com</a></span></span>
+                    <span><img th:src="@{/images/homeowners/icon-location.svg}" alt=""><span><b th:text="#{contact.modal.office}">Our Office</b><a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings[&apos;site_office&apos;]} ?: #{common.location}">Pittsburgh, PA 15222</a></span></span>
+                    <span><img th:src="@{/images/homeowners/icon-clock.svg}" alt=""><span><b th:text="#{contact.modal.hours}">Business Hours</b><span th:text="${settings?.get(&apos;site_hours&apos;)} ?: &apos;Mon – Fri: 9:00 AM – 5:00 PM&apos;">Mon – Fri: 9:00 AM – 5:00 PM</span></span></span>
+                </div>
+            </aside>
+        </div>
+    </dialog>
+
 </header>
 <!-- Создаёт единый подвал публичных страниц. -->
 <footer class="global-footer" th:fragment="public-footer">
@@ -92,6 +124,77 @@
             window.setTimeout(() => message.remove(), 260);
         }, 3000);
     });
+
+    (() => {
+        const contactModal = document.querySelector("[data-global-contact-modal]");
+        const contactTriggers = document.querySelectorAll("[data-contact-open], a[href='/contact']");
+        const contactForm = contactModal?.querySelector("[data-global-contact-form]");
+        const contactStatus = contactForm?.querySelector(".global-contact-form__status");
+
+        const openContactModal = () => {
+            if (contactModal && !contactModal.open) {
+                contactModal.showModal();
+            }
+        };
+
+        contactTriggers.forEach((trigger) => {
+            trigger.addEventListener("click", (event) => {
+                event.preventDefault();
+                navigation?.classList.remove("global-nav--open");
+                menuButton?.setAttribute("aria-expanded", "false");
+                openContactModal();
+            });
+        });
+
+        contactModal?.querySelectorAll("[data-contact-close]").forEach((button) => {
+            button.addEventListener("click", () => contactModal.close());
+        });
+
+        contactModal?.addEventListener("click", (event) => {
+            if (event.target === contactModal) {
+                contactModal.close();
+            }
+        });
+
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.searchParams.get("contact") === "open") {
+            openContactModal();
+            currentUrl.searchParams.delete("contact");
+            window.history.replaceState({}, "", currentUrl);
+        }
+
+        contactForm?.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            if (!contactForm.reportValidity()) {
+                return;
+            }
+
+            const submitButton = contactForm.querySelector("button[type=submit]");
+            submitButton.disabled = true;
+            contactStatus.textContent = "";
+            contactStatus.classList.remove("is-error");
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: "POST",
+                    body: new FormData(contactForm),
+                    headers: { "Accept": "application/json" }
+                });
+
+                if (!response.ok) {
+                    throw new Error("Contact form submission failed");
+                }
+
+                contactForm.reset();
+                contactStatus.textContent = contactStatus.dataset.success;
+            } catch (error) {
+                contactStatus.textContent = contactStatus.dataset.error;
+                contactStatus.classList.add("is-error");
+            } finally {
+                submitButton.disabled = false;
+            }
+        });
+    })();
 </script>
 </body>
 </html>

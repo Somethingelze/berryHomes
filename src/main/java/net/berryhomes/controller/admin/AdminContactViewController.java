@@ -58,8 +58,10 @@ public class AdminContactViewController {
     public ModelAndView updateStatus(@PathVariable UUID id,
                                      @RequestParam ContactStatus status,
                                      RedirectAttributes redirectAttributes) {
+        ContactDto before = contactService.getById(id, PageRequest.of(0, 1));
         contactService.updateContactStatus(id, status);
-        auditService.record("UPDATE_STATUS", "CONTACT", id.toString(), status.name());
+        auditService.record("UPDATE_STATUS", "CONTACT", id.toString(), before.name() + " · " + before.email()
+                + " || Status: " + before.status() + " → " + status);
         redirectAttributes.addFlashAttribute("successMessage", "Status updated successfully!");
         return new ModelAndView("redirect:/admin/contacts");
     }
@@ -67,10 +69,10 @@ public class AdminContactViewController {
 
     @PostMapping("/{id}/delete")
     public ModelAndView deleteContact(@PathVariable UUID id, RedirectAttributes redirectAttributes) {
+        ContactDto contact = contactService.getById(id, PageRequest.of(0, 1));
         contactService.deleteContact(id);
-        auditService.record("DELETE", "CONTACT", id.toString(), null);
+        auditService.record("DELETE", "CONTACT", id.toString(), contact.name() + " · " + contact.email());
         redirectAttributes.addFlashAttribute("successMessage", "Contact deleted successfully!");
         return new ModelAndView("redirect:/admin/contacts");
     }
 }
-

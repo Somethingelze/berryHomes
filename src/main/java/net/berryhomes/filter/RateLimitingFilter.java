@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class RateLimitingFilter implements Filter {
 
-    private static final Set<String> CONTACT_ENDPOINTS = Set.of("/tenants/message", "/homeowners/message", "/investors/message", "/contact/message");
+    private static final Set<String> CONTACT_ENDPOINTS = Set.of("/tenants/message", "/homeowners/message", "/investors/message", "/contact/message", "/contact/message/modal");
     private static final long ENTRY_TTL_MILLIS = Duration.ofHours(1).toMillis();
     private static final int MAX_CACHE_ENTRIES = 10_000;
     private final Map<String, ClientBucket> cache = new ConcurrentHashMap<>();

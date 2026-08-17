@@ -14,7 +14,6 @@ import net.berryhomes.repository.ProjectRepository;
 import net.berryhomes.service.FileStorageService;
 import net.berryhomes.service.ProjectService;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -92,6 +91,13 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional(readOnly = true)
+    public ProjectDto getProjectByIdIncludingArchived(UUID id) {
+        return projectMapper.toProjectDto(projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException("Project not found: " + id)));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
 //    @Cacheable(value = "projects", key = "#pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<ProjectDto> getAllActiveProjects(Pageable pageable) {
         log.info("Getting all active projects");
@@ -101,7 +107,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(value = "projects", key = "#pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<ProjectDto> getAllArchivedProjects(Pageable pageable)   {
         log.info("Getting all archived projects");
         return projectRepository.findAllByDeletedAtIsNotNull(pageable)
@@ -190,6 +195,10 @@ public class ProjectServiceImpl implements ProjectService {
 
         Project project = projectRepository.findById(id)
                 .orElseThrow(() -> new ProjectNotFoundException("Project not found: " + id));
+
+        if (project.getDeletedAt() == null) {
+            throw new IllegalStateException("Only archived projects can be permanently deleted");
+        }
 
         project.getProjectImages().forEach(img -> deleteFileAfterCommit(img.getFilePath()));
         if (project.getProjectDocument() != null) {

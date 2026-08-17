@@ -16,6 +16,7 @@ public interface ProjectService {
     ProjectDto createProjectWithFiles(ProjectDto projectDto, List<MultipartFile> documentImages, MultipartFile documentFile);
 
     ProjectDto getProjectById(UUID id);
+    ProjectDto getProjectByIdIncludingArchived(UUID id);
 
     Page<ProjectDto> getAllActiveProjects(Pageable pageable);
 

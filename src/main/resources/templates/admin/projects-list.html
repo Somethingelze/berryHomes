@@ -21,7 +21,7 @@
 
     <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
     <!-- Элемент div формирует соответствующую часть интерфейса. -->
-    <div class="admin-sidebar">
+    <div class="admin-sidebar" th:replace="~{admin/fragments/sidebar :: sidebar('projects')}">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="sidebar-brand">
             BERRY HOMES
@@ -53,7 +53,9 @@
             <!-- Элемент li формирует соответствующую часть интерфейса. -->
             <li>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="@{/admin/settings}">System Settings</a>
+<a th:if="${isAdmin}" th:href="@{/admin/audit}">Audit Log</a>
+<a th:if="${isAdmin}" th:href="@{/admin/users}">Team Accounts</a>
+<a th:if="${isAdmin}" th:href="@{/admin/settings}">System Settings</a>
 </li>
             <!-- Элемент li формирует соответствующую часть интерфейса. -->
             <li style="margin-top: auto;">
@@ -208,6 +210,13 @@
                             <form th:action="@{/admin/projects/{id}/restore(id=${project.id()})}" method="post" style="margin:0;" th:if="${isArchiveView}">
                                 <!-- Элемент button формирует соответствующую часть интерфейса. -->
                                 <button type="submit" class="btn-table-action" style="background-color:#E6FFFA; color:#047481; border-color:#B2F5EA;">Restore</button>
+                            </form>
+
+                            <form th:if="${isAdmin and isArchiveView}"
+                                  th:action="@{/admin/projects/{id}/delete(id=${project.id()})}"
+                                  method="post" style="margin:0;"
+                                  onsubmit="return confirm('Permanently delete this archived project and all its files? This action cannot be undone.');">
+                                <button type="submit" class="btn-table-action btn-table-danger">Delete permanently</button>
                             </form>
                         </div>
                     </td>

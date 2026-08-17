@@ -432,6 +432,56 @@ font-size:9px
 /* Настраивает CSS-свойство font-weight для текущего элемента. */
 font-weight:400
 }
+.project-body .metric-with-help {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.metric-help {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--green);
+    font: 700 10px/1 "DM Sans", Arial, sans-serif;
+    cursor: help;
+}
+.metric-tooltip {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 9px);
+    z-index: 8;
+    width: min(240px, 70vw);
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    background: #fffaf0;
+    box-shadow: 0 8px 24px rgba(30, 38, 31, .18);
+    color: #252923;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+}
+.metric-help:hover .metric-tooltip,
+.metric-help:focus .metric-tooltip,
+.metric-help:focus-visible .metric-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
 .project-body dd{
 /* Настраивает CSS-свойство margin для текущего элемента. */
 margin:0;
@@ -933,7 +983,7 @@ width:150px
 /* Синхронизирует ширину Investors с остальными публичными страницами. */
 .shell {
     /* Ограничивает содержимое восемьюдесятью процентами экрана. */
-    width: min(80vw, 1440px);
+    width: 87vw;
 }
 
 /* Расширяет Investors на планшетах. */
@@ -1401,4 +1451,158 @@ align-items:flex-start;
 transition:none;
 }
 
+}
+
+
+/* Applies the shared light-purple Investors identity without recoloring body copy or the footer. */
+.investor-page .hero h1,
+.investor-page .deliver h2,
+.investor-page .deliver-grid h3,
+.investor-page .projects h2,
+.investor-page .project-body h3,
+.investor-page .how h2,
+.investor-page .how .steps h3,
+.investor-page .call h2 {
+    color: #8b6ba0;
+}
+
+.investor-page .hero i {
+    width: 62px;
+    height: 3px;
+    background: #8b6ba0;
+}
+
+.investor-page .button {
+    background: #8b6ba0;
+    color: #ffffff;
+    border-color: #8b6ba0;
+}
+
+.investor-page .hero .button-outline {
+    background: transparent;
+    color: #8b6ba0;
+    border: 1px solid currentColor;
+}
+
+.investor-page .project-image button,
+.investor-page .project-body footer button,
+.investor-page .project-body footer a,
+.investor-page .carousel-arrow,
+.investor-page .metric-help,
+.investor-page .projects-heading > span {
+    color: #8b6ba0;
+}
+
+.investor-page .project-card {
+    border-color: rgba(139, 107, 160, .32);
+}
+
+.investor-page .deliver-grid article > img,
+.investor-page .how .steps article > img {
+    filter: brightness(0) saturate(100%) invert(50%) sepia(12%) saturate(1257%) hue-rotate(235deg) brightness(90%) contrast(85%);
+}
+
+/* Enlarges the two branch compositions while keeping them inside the shared shell. */
+.investor-page .deliver .section-heading-with-branches .heading-branch,
+.investor-page .how .section-heading-with-branches .heading-branch {
+    width: clamp(280px, 35vw, 520px);
+    height: 96px;
+}
+
+/* Removes the Recent Projects branch completely. */
+.investor-page .projects-heading .recent-projects-branch {
+    display: none;
+}
+
+/* Removes step numbers and lifts icons, text, textures, and arrows into their place. */
+.investor-page .how .steps b {
+    display: none;
+}
+
+.investor-page .how .steps article {
+    background-position: center 8px;
+}
+
+.investor-page .how .steps article:not(:last-child)::after {
+    top: 29px;
+    color: #8b6ba0;
+}
+
+@media (max-width: 620px) {
+    .investor-page .deliver .section-heading-with-branches .heading-branch,
+    .investor-page .how .section-heading-with-branches .heading-branch {
+        width: clamp(46px, 18vw, 72px);
+        height: clamp(24px, 9.4vw, 38px);
+    }
+}
+
+
+/* Keeps each complete watercolor circle visible while preserving the raised content position. */
+.investor-page .how .steps article {
+    padding-top: 13px;
+    background-position: center top;
+    transform: translateY(-13px);
+}
+
+.investor-page .how .steps article:not(:last-child)::after {
+    top: 42px;
+}
+
+/* Removes the outer frame and every separator from We Deliver. */
+.investor-page .deliver-grid {
+    border: 0;
+}
+
+.investor-page .deliver-grid article,
+.investor-page .deliver-grid article:last-child {
+    border: 0;
+}
+
+/* Pulls both enlarged branch pairs visibly closer to their titles. */
+.investor-page .deliver .section-heading-with-branches,
+.investor-page .how .section-heading-with-branches {
+    gap: 0;
+}
+
+.investor-page .deliver .heading-branch-left,
+.investor-page .how .heading-branch-left {
+    margin-right: clamp(-120px, -8vw, -50px);
+}
+
+.investor-page .deliver .heading-branch-right,
+.investor-page .how .heading-branch-right {
+    margin-left: clamp(-120px, -8vw, -50px);
+}
+
+@media (max-width: 620px) {
+    .investor-page .deliver .heading-branch-left,
+    .investor-page .how .heading-branch-left {
+        margin-right: -10px;
+    }
+
+    .investor-page .deliver .heading-branch-right,
+    .investor-page .how .heading-branch-right {
+        margin-left: -10px;
+    }
+}
+
+
+/* Keeps the raised How It Works artwork inside its paint area so no watercolor edge is clipped. */
+.investor-page .how .steps {
+    overflow: visible;
+}
+
+.investor-page .how .steps article {
+    background-position: center 13px;
+}
+
+/* Moves the visible branch artwork toward each heading by roughly one third of its width. */
+.investor-page .deliver .heading-branch-left,
+.investor-page .how .heading-branch-left {
+    transform: translateX(15%);
+}
+
+.investor-page .deliver .heading-branch-right,
+.investor-page .how .heading-branch-right {
+    transform: translateX(-15%);
 }

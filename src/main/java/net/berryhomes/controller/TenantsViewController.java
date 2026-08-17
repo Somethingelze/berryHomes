@@ -4,12 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import net.berryhomes.model.ContactStatus;
 import net.berryhomes.model.ContactType;
-import net.berryhomes.model.DocumentCategory;
-import net.berryhomes.model.entity.ManagedDocument;
+import net.berryhomes.model.TenantWebsiteDocument;
+import net.berryhomes.model.TenantWebsiteDocumentSlot;
 import net.berryhomes.model.dto.ContactDto;
 import net.berryhomes.service.ContactService;
-import net.berryhomes.service.FileStorageService;
-import net.berryhomes.service.ManagedDocumentService;
+import net.berryhomes.service.TenantWebsiteDocumentService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TenantsViewController {
 
     private final ContactService contactService;
-    private final ManagedDocumentService documentService;
-    private final FileStorageService fileStorageService;
+    private final TenantWebsiteDocumentService documentService;
 
     private static final String PORTAL_URL_VAL = "https://www.tenantcloud.com/";
 
@@ -69,30 +67,27 @@ public class TenantsViewController {
 
     @GetMapping("/documents/{slot}")
     public ResponseEntity<FileSystemResource> downloadTenantDocument(@PathVariable String slot) {
-        DocumentCategory category = switch (slot) {
-            case "move-in-guide" -> DocumentCategory.TENANT_MOVE_IN_GUIDE;
-            case "move-out-checklist" -> DocumentCategory.TENANT_MOVE_OUT_CHECKLIST;
-            case "resident-handbook" -> DocumentCategory.TENANT_RESIDENT_HANDBOOK;
-            default -> null;
-        };
-        if (category == null) return ResponseEntity.notFound().build();
-        return documentService.findActive(category).map(this::downloadResponse)
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    private ResponseEntity<FileSystemResource> downloadResponse(ManagedDocument document) {
-        FileSystemResource resource = new FileSystemResource(fileStorageService.resolveFile(document.getStoredPath()));
+        TenantWebsiteDocumentSlot documentSlot;
+        try { documentSlot = TenantWebsiteDocumentSlot.fromSlug(slot); }
+        catch (IllegalArgumentException exception) { return ResponseEntity.notFound().build(); }
+        TenantWebsiteDocument document = documentService.find(documentSlot);
+        if (!document.published()) return ResponseEntity.notFound().build();
+        FileSystemResource resource = documentService.resource(documentSlot);
         if (!resource.exists()) return ResponseEntity.notFound().build();
-        String safeFilename = document.getOriginalFilename().replace("\"", "");
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + safeFilename + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + document.originalFilename().replace("\"", "") + "\"")
                 .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
                 .body(resource);
     }
 
     private void addTenantDocuments(ModelAndView mav) {
-        mav.addObject("moveInGuide", documentService.findActive(DocumentCategory.TENANT_MOVE_IN_GUIDE).orElse(null));
-        mav.addObject("moveOutChecklist", documentService.findActive(DocumentCategory.TENANT_MOVE_OUT_CHECKLIST).orElse(null));
-        mav.addObject("residentHandbook", documentService.findActive(DocumentCategory.TENANT_RESIDENT_HANDBOOK).orElse(null));
+        mav.addObject("moveInGuide", published(TenantWebsiteDocumentSlot.MOVE_IN_GUIDE));
+        mav.addObject("moveOutChecklist", published(TenantWebsiteDocumentSlot.MOVE_OUT_CHECKLIST));
+        mav.addObject("residentHandbook", published(TenantWebsiteDocumentSlot.RESIDENT_HANDBOOK));
+    }
+
+    private TenantWebsiteDocument published(TenantWebsiteDocumentSlot slot) {
+        TenantWebsiteDocument document = documentService.find(slot);
+        return document.published() ? document : null;
     }
 }

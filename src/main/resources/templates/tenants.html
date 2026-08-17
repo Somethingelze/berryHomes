@@ -78,7 +78,7 @@
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p th:text="#{tenant.portal.text}">Pay rent, submit maintenance requests, view your lease and documents, and message your property manager.</p>
                 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-                <a class="primary-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener">
+                <a class="outline-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-lock.svg}" alt=""><span th:text="#{tenant.portal.open}">Open Tenant Portal</span> <span>→</span>
 </a>
@@ -119,10 +119,6 @@
 <li>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:src="@{/images/tenants/icon-thermometer.svg}" alt=""><span th:text="#{tenant.emergency.heat}">No Heat (in winter)</span></li>
-<!-- Элемент li формирует соответствующую часть интерфейса. -->
-<li>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-lightning.svg}" alt=""><span th:text="#{tenant.emergency.electric}">Electrical Hazard</span></li>
 </ul>
                 <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a class="primary-button emergency" th:href="|tel:${settings['emergency_phone']}|">

@@ -24,7 +24,7 @@
 
     <!-- БОКОВАЯ ПАНЕЛЬ НАВИГАЦИИ (SIDEBAR) -->
     <!-- Элемент div формирует соответствующую часть интерфейса. -->
-    <div class="admin-sidebar">
+    <div class="admin-sidebar" th:replace="~{admin/fragments/sidebar :: sidebar('dashboard')}">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="sidebar-brand">
             BERRY HOMES
@@ -56,7 +56,9 @@
             <!-- Элемент li формирует соответствующую часть интерфейса. -->
             <li>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="@{/admin/settings}">System Settings</a>
+<a th:if="${isAdmin}" th:href="@{/admin/audit}">Audit Log</a>
+<a th:if="${isAdmin}" th:href="@{/admin/users}">Team Accounts</a>
+<a th:if="${isAdmin}" th:href="@{/admin/settings}">System Settings</a>
 </li>
             <!-- Элемент li формирует соответствующую часть интерфейса. -->
             <li style="margin-top: auto;">

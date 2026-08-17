@@ -20,7 +20,7 @@
     <!-- Элемент body формирует соответствующую часть интерфейса. -->
     <body>
     <!-- Элемент div формирует соответствующую часть интерфейса. -->
-    <div class="admin-sidebar">
+    <div class="admin-sidebar" th:replace="~{admin/fragments/sidebar :: sidebar('projects')}">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="sidebar-brand">BERRY HOMES</div>
         <!-- Элемент ul формирует соответствующую часть интерфейса. -->
@@ -50,7 +50,9 @@
             <!-- Элемент li формирует соответствующую часть интерфейса. -->
             <li>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="@{/admin/settings}">System Settings</a>
+<a th:if="${isAdmin}" th:href="@{/admin/audit}">Audit Log</a>
+<a th:if="${isAdmin}" th:href="@{/admin/users}">Team Accounts</a>
+<a th:if="${isAdmin}" th:href="@{/admin/settings}">System Settings</a>
 </li>
             <!-- Элемент li формирует соответствующую часть интерфейса. -->
             <li style="margin-top:auto;">
@@ -176,7 +178,7 @@
                             <h4 class="input-label-text">Current Photo Gallery</h4>
                             <p class="media-help">Drag cards to change their display order. The first image is used as the cover.</p>
                         </div>
-                        <button id="deleteSelectedImages" type="button" class="media-danger-button" disabled>Delete selected</button>
+                        <button th:if="${isAdmin}" id="deleteSelectedImages" type="button" class="media-danger-button" disabled>Delete selected</button>
                     </div>
                     <p id="emptyGalleryMessage" th:hidden="${projectDto.projectImages != null and !#lists.isEmpty(projectDto.projectImages)}" class="empty-media-message">No images uploaded yet.</p>
                     <div id="projectImageGallery" class="images-gallery-flex" th:if="${projectDto.projectImages != null}">
@@ -190,7 +192,7 @@
                             <img th:src="@{/{path}(path=${img.filePath()})}" class="gallery-card-img" alt="Project image">
                             <div class="gallery-card-actions">
                                 <span class="image-order-label">Position <b th:text="${status.count}">1</b></span>
-                                <button type="button" class="image-delete-button">Delete</button>
+                                <button th:if="${isAdmin}" type="button" class="image-delete-button">Delete</button>
                             </div>
                         </article>
                     </div>
@@ -200,7 +202,7 @@
                         <p id="emptyDocumentMessage" th:hidden="${projectDto.projectDocument != null}" class="empty-media-message">No document attached yet.</p>
                         <div id="currentDocument" class="doc-item-row" th:if="${projectDto.projectDocument != null}" th:data-document-id="${projectDto.projectDocument.id()}">
                             <a th:href="@{/{path}(path=${projectDto.projectDocument.filePath()})}" target="_blank">📄 Project report</a>
-                            <button id="deleteDocument" type="button" class="media-danger-button">Remove document</button>
+                            <button th:if="${isAdmin}" id="deleteDocument" type="button" class="media-danger-button">Remove document</button>
                         </div>
                     </div>
                 </section>

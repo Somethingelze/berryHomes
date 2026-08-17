@@ -18,9 +18,15 @@ public class SecurityConfig {
                 .requestMatchers("/admin/settings/**").hasRole("ADMIN")
                 .requestMatchers("/admin/audit/**").hasRole("ADMIN")
                 .requestMatchers("/admin/users/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/documents/*/archive", "/admin/documents/*/restore").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/admin/contacts/*/delete", "/admin/projects/*/archive", "/admin/blog/*/delete",
-                        "/admin/projects/*/restore", "/admin/projects/media/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,
+                        "/admin/contacts/*/delete",
+                        "/admin/blog/*/delete",
+                        "/admin/tenant-website-documents/*/delete",
+                        "/admin/projects/*/delete",
+                        "/admin/projects/media/images/delete",
+                        "/admin/projects/media/image/*/delete",
+                        "/admin/projects/media/document/*/delete",
+                        "/admin/projects/media/document/*/delete-ajax").hasRole("ADMIN")
                 .requestMatchers("/admin/**").hasAnyRole("ADMIN", "MANAGER")
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/documents/**").permitAll()
                 .anyRequest().permitAll())
