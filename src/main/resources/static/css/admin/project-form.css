@@ -166,7 +166,7 @@
 .uploaded-image-card {
 
     /* Настраивает CSS-свойство width для текущего элемента. */
-    width: 160px;
+    width: 320px;
 
     /* Настраивает CSS-свойство background для текущего элемента. */
     background: #FFFFFF;
@@ -199,7 +199,7 @@
     width: 100%;
 
     /* Настраивает CSS-свойство height для текущего элемента. */
-    height: 110px;
+    height: 220px;
 
     /* Настраивает CSS-свойство object-fit для текущего элемента. */
     object-fit: cover;
@@ -210,6 +210,53 @@
 
 }
 
+
+.image-focus-editor {
+    position: relative;
+    overflow: hidden;
+    cursor: crosshair;
+    background: #EDF2F7;
+}
+
+.image-focus-editor .gallery-card-img {
+    display: block;
+    object-position: var(--focus-x, 50%) var(--focus-y, 50%);
+}
+
+.image-focus-marker {
+    position: absolute;
+    left: var(--focus-x, 50%);
+    top: var(--focus-y, 50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: #17643c;
+    box-shadow: 0 0 0 2px rgba(23, 100, 60, 0.9), 0 2px 8px rgba(0, 0, 0, 0.3);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.image-focus-button {
+    border: 1px solid #17643c;
+    border-radius: 5px;
+    padding: 7px 9px;
+    color: #17643c;
+    background: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.image-focus-button.is-dirty {
+    color: #fff;
+    background: #17643c;
+}
+
+.image-focus-button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
 
 .gallery-card-actions {
 
@@ -617,7 +664,7 @@
     }
 
     .uploaded-image-card {
-        width: calc(50% - 10px);
-        min-width: 140px;
+        width: min(100%, 320px);
+        min-width: 0;
     }
 }

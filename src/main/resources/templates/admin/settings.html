@@ -165,6 +165,23 @@
 <label>Footer tagline (Russian)<input class="admin-input-field" name="footer_tagline_ru" th:value="${settings['footer_tagline_ru']}"></label>
 <label>Show social links<select class="admin-input-field" name="show_social_links"><option value="false" th:selected="${settings['show_social_links'] != 'true'}">No</option><option value="true" th:selected="${settings['show_social_links'] == 'true'}">Yes</option></select></label>
 </div>
+
+<div class="settings-section-card settings-grid">
+    <h3 class="settings-card-title">Max Business Group</h3>
+    <p class="settings-card-desc">Contact details and external links displayed on the Max Business Group public page.</p>
+    <label>Office address
+        <input class="admin-input-field" name="mbg_office_address" th:value="${settings['mbg_office_address']}" placeholder="724 E Brady Street Butler, PA 16001" required>
+    </label>
+    <label>Office phone number
+        <input class="admin-input-field" name="mbg_office_phone" th:value="${settings['mbg_office_phone']}" placeholder="724-200-7309" required>
+    </label>
+    <label>TenantCloud URL
+        <input class="admin-input-field" type="url" name="mbg_tenantcloud_url" th:value="${settings['mbg_tenantcloud_url']}" placeholder="https://mbg.tenantcloud.com/" required>
+    </label>
+    <label>Facebook URL
+        <input class="admin-input-field" type="url" name="mbg_facebook_url" th:value="${settings['mbg_facebook_url']}" placeholder="https://www.facebook.com/MaxBusinessGroupRealEstateServices/" required>
+    </label>
+</div>
 <div class="form-footer-actions">
                 <!-- Элемент a формирует соответствующую часть интерфейса. -->
                 <a th:href="@{/admin/dashboard}" class="btn-form-cancel">Cancel</a>

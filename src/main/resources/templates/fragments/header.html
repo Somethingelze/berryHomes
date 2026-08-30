@@ -7,10 +7,10 @@
     <!-- Ограничивает ширину содержимого шапки. -->
     <div class="global-shell global-header__row">
         <!-- Возвращает пользователя на главную страницу. -->
-        <a class="global-brand" th:href="@{/}" aria-label="Berry Homes">
-            <!-- Показывает основной логотип компании. -->
-            <img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
-        </a>
+        <div class="global-brand">
+            <a th:href="@{/}" aria-label="Berry Homes"><img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes"></a>
+            <a class="global-brand__partner-link" th:href="@{/max-business-group}" aria-label="Max Business Group"><img class="global-brand__partner" th:src="@{/images/logo-etc/Max_business_group_logo_wide.png}" alt="Max Business Group"></a>
+        </div>
         <!-- Содержит главную навигацию сайта. -->
         <nav class="global-nav" aria-label="Main navigation">
             <!-- Открывает главную страницу. -->
@@ -72,21 +72,24 @@
                     <label><span th:text="#{common.phone}">Phone Number</span><input name="phone" type="tel" required minlength="3" maxlength="30" autocomplete="tel" placeholder="(412) 555-0123"></label>
                     <label><span th:text="#{contact.modal.subject}">I am contacting about</span><select name="type"><option value="GENERAL" th:text="#{contact.modal.general}">General Inquiry</option><option value="TENANT" th:text="#{contact.modal.tenant}">Tenant Support</option><option value="HOMEOWNER" th:text="#{contact.modal.homeowner}">Homeowner Services</option><option value="INVESTOR" th:text="#{contact.modal.investor}">Investment Consultation</option></select></label>
                     <label><span th:text="#{common.message}">Message</span><textarea name="message" required minlength="5" rows="5" th:placeholder="#{contact.modal.message_placeholder}"></textarea></label>
-                    <label class="global-contact-form__consent"><input type="checkbox" required><span th:text="#{contact.modal.privacy}">I agree to the Privacy Policy.</span></label>
-                    <div class="global-contact-form__actions"><button type="submit" th:text="#{common.send}">Send Message</button><button type="button" data-contact-close th:text="#{contact.modal.cancel}">Cancel</button></div>
+                    <label class="global-contact-form__consent privacy-consent"><input type="checkbox" name="privacyConsent" value="true" required><span><span th:text="#{privacy.consent.prefix}">I agree to the</span> <a th:href="@{/privacy-policy}" target="_blank" th:text="#{footer.privacy}">Privacy Policy</a>.</span></label>
+                    <div class="global-contact-form__actions"><button type="submit"><span th:text="#{common.send}">Send Message</span><img th:src="@{/images/contact-us/icon-paper-plane.svg}" alt=""></button><button type="button" data-contact-close th:text="#{contact.modal.cancel}">Cancel</button></div>
                     <p class="global-contact-form__status" role="status" aria-live="polite" th:attr="data-success=#{contact.success},data-error=#{contact.modal.error}"></p>
                 </form>
             </section>
             <aside class="global-contact-modal__details">
-                <img th:src="@{/images/tenants/contact us bg.png}" alt="">
+                <img th:src="@{/images/contact-us/contact_us_bg.png}" alt="">
                 <h3 th:text="#{contact.modal.other_ways}">Other Ways to Reach Us</h3>
                 <div class="global-contact-modal__contact-list">
-                    <span><img th:src="@{/images/homeowners/icon-phone.svg}" alt=""><span><b th:text="#{contact.modal.call}">Call Us</b><a th:href="|tel:${settings?.get(&apos;site_phone&apos;)}|" th:text="${settings?.get(&apos;site_phone&apos;)} ?: &apos;(412) 555-0123&apos;">(412) 555-0123</a></span></span>
-                    <span><img th:src="@{/images/homeowners/icon-envelope.svg}" alt=""><span><b th:text="#{contact.modal.email}">Email Us</b><a th:href="|mailto:${settings?.get(&apos;site_email&apos;)}|" th:text="${settings?.get(&apos;site_email&apos;)} ?: &apos;info@berryhomespm.com&apos;">info@berryhomespm.com</a></span></span>
-                    <span><img th:src="@{/images/homeowners/icon-location.svg}" alt=""><span><b th:text="#{contact.modal.office}">Our Office</b><a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings[&apos;site_office&apos;]} ?: #{common.location}">Pittsburgh, PA 15222</a></span></span>
-                    <span><img th:src="@{/images/homeowners/icon-clock.svg}" alt=""><span><b th:text="#{contact.modal.hours}">Business Hours</b><span th:text="${settings?.get(&apos;site_hours&apos;)} ?: &apos;Mon – Fri: 9:00 AM – 5:00 PM&apos;">Mon – Fri: 9:00 AM – 5:00 PM</span></span></span>
+                    <span><img th:src="@{/images/contact-us/icon-phone.svg}" alt=""><span><b th:text="#{contact.modal.call}">Call Us</b><a th:href="|tel:${settings?.get(&apos;site_phone&apos;)}|" th:text="${settings?.get(&apos;site_phone&apos;)} ?: &apos;(412) 555-0123&apos;">(412) 555-0123</a></span></span>
+                    <span><img th:src="@{/images/contact-us/icon-envelope.svg}" alt=""><span><b th:text="#{contact.modal.email}">Email Us</b><a th:href="|mailto:${settings?.get(&apos;site_email&apos;)}|" th:text="${settings?.get(&apos;site_email&apos;)} ?: &apos;info@berryhomespm.com&apos;">info@berryhomespm.com</a></span></span>
+                    <span><img th:src="@{/images/contact-us/icon-location.svg}" alt=""><span><b th:text="#{contact.modal.office}">Our Office</b><a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings[&apos;site_office&apos;]} ?: #{common.location}">Pittsburgh, PA 15222</a></span></span>
+                    <span><img th:src="@{/images/contact-us/icon-clock.svg}" alt=""><span><b th:text="#{contact.modal.hours}">Business Hours</b><span th:text="${settings?.get(&apos;site_hours&apos;)} ?: &apos;Mon – Fri: 9:00 AM – 5:00 PM&apos;">Mon – Fri: 9:00 AM – 5:00 PM</span></span></span>
                 </div>
             </aside>
+            <section class="global-contact-modal__success" role="status" aria-live="polite">
+                <p th:text="#{contact.modal.success}">Your message has been sent. Thank you for contacting us.</p>
+            </section>
         </div>
     </dialog>
 
@@ -96,9 +99,10 @@
     <!-- Ограничивает ширину содержимого подвала. -->
     <div class="global-shell global-footer__row">
         <!-- Показывает компактный логотип. -->
-        <img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
+        <img class="global-footer__berry-logo" th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
+        <img class="global-footer__mbg-logo" th:src="@{/images/logo-etc/Max_business_group_logo_wide.png}" alt="Max Business Group">
         <!-- Показывает сведения об авторских правах. -->
-        <p>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></p>
+        <p>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span> <a th:href="@{/privacy-policy}" th:text="#{footer.privacy}">Privacy Policy</a></p>
         <!-- Открывает адрес компании в Google Maps. -->
         <a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings['site_office']} ?: #{common.location}">Pittsburgh, PA 15222</a>
     </div>
@@ -133,6 +137,7 @@
 
         const openContactModal = () => {
             if (contactModal && !contactModal.open) {
+                contactModal.classList.remove("is-success");
                 contactModal.showModal();
             }
         };
@@ -148,6 +153,10 @@
 
         contactModal?.querySelectorAll("[data-contact-close]").forEach((button) => {
             button.addEventListener("click", () => contactModal.close());
+        });
+
+        contactModal?.addEventListener("close", () => {
+            contactModal.classList.remove("is-success");
         });
 
         contactModal?.addEventListener("click", (event) => {
@@ -186,7 +195,7 @@
                 }
 
                 contactForm.reset();
-                contactStatus.textContent = contactStatus.dataset.success;
+                contactModal.classList.add("is-success");
             } catch (error) {
                 contactStatus.textContent = contactStatus.dataset.error;
                 contactStatus.classList.add("is-error");

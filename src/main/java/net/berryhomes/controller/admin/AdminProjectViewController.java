@@ -159,6 +159,16 @@ public class AdminProjectViewController {
         return ResponseEntity.ok(Map.of("success", true, "message", "Image order saved"));
     }
 
+    @PostMapping("/media/image/{imageId}/focus")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> updateImageFocus(@PathVariable UUID imageId,
+                                                                 @RequestParam UUID projectId,
+                                                                 @RequestParam Integer focusX,
+                                                                 @RequestParam Integer focusY) {
+        projectImageService.updateFocusPoint(projectId, imageId, focusX, focusY);
+        return ResponseEntity.ok(Map.of("success", true, "message", "Image focus saved"));
+    }
+
     @PostMapping("/media/images/delete")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> deleteProjectImages(@RequestParam UUID projectId,

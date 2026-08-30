@@ -16,5 +16,7 @@ public interface ProjectImageService {
 
     void updateSortOrder(UUID projectId, List<UUID> imageIds);
 
+    void updateFocusPoint(UUID projectId, UUID imageId, Integer focusX, Integer focusY);
+
     void deleteImages(UUID projectId, List<UUID> imageIds);
 }

@@ -32,4 +32,12 @@ public class ProjectImage {
     @Builder.Default
     @Column(name = "sort_order")
     private Integer sortOrder = 0;
+
+    @Builder.Default
+    @Column(name = "focus_x", nullable = false)
+    private Integer focusX = 50;
+
+    @Builder.Default
+    @Column(name = "focus_y", nullable = false)
+    private Integer focusY = 50;
 }

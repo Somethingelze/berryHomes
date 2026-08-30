@@ -94,6 +94,25 @@ public class ProjectImageServiceImpl implements ProjectImageService {
     @Override
     @Transactional
     @CacheEvict(value = "projects", allEntries = true)
+    public void updateFocusPoint(UUID projectId, UUID imageId, Integer focusX, Integer focusY) {
+        if (focusX == null || focusY == null || focusX < 0 || focusX > 100 || focusY < 0 || focusY > 100) {
+            throw new IllegalArgumentException("Image focus coordinates must be between 0 and 100");
+        }
+
+        ProjectImage image = projectImageRepository.findById(imageId).orElseThrow(() ->
+                new ProjectFileNotFoundException(String.format("Image with id %s not found", imageId)));
+        if (!image.getProject().getId().equals(projectId)) {
+            throw new ProjectFileNotFoundException("Image does not belong to this project");
+        }
+
+        image.setFocusX(focusX);
+        image.setFocusY(focusY);
+        projectImageRepository.save(image);
+    }
+
+    @Override
+    @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
     public void deleteImages(UUID projectId, List<UUID> imageIds) {
         List<ProjectImage> images = projectImageRepository.findAllById(imageIds);
         validateProjectImages(projectId, imageIds, images);

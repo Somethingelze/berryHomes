@@ -10,7 +10,7 @@
 <!-- Элемент title формирует соответствующую часть интерфейса. -->
 <title>For Investors | Berry Homes</title>
 <!-- Элемент link формирует соответствующую часть интерфейса. -->
-<link rel="stylesheet" th:href="@{/css/investors.css(v=20260815)}">
+<link rel="stylesheet" th:href="@{/css/investors.css(v=20260830d)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
@@ -39,11 +39,10 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="shell hero-content">
 <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
-<h1 th:text="#{investor.title}">Know Before You Buy.</h1>
+<h1 th:text="#{investor.title}">Investor Center</h1>
+<strong th:text="#{investor.subtitle}">Make informed decisions. Protect your investment.</strong>
 <i>
 </i>
-<!-- Элемент strong формирует соответствующую часть интерфейса. -->
-<strong th:text="#{investor.subtitle}">Make informed decisions. Protect your investment.</strong>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
@@ -160,11 +159,28 @@
 <img th:each="image : ${project.projectImages}" class="project-gallery-source" th:src="|/${image.filePath()}|" th:alt="|${project.address} photo|">
 </div>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:if="${project.getFirstImageUrl() != null and project.getFirstImageUrl() != &apos;&apos;}" th:src="|/${project.getFirstImageUrl()}|" th:alt="${project.address}">
+<img th:if="${project.getFirstImage() != null}"
+     th:src="|/${project.getFirstImage().filePath()}|"
+     th:alt="${project.address}"
+     th:style="|--focus-x:${project.getFirstImage().focusX()}%; --focus-y:${project.getFirstImage().focusY()}%|">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div th:if="${project.getFirstImageUrl() == null or project.getFirstImageUrl() == &apos;&apos;}" class="image-fallback">Berry Homes</div>
+<div th:if="${project.getFirstImage() == null}" class="image-fallback">Berry Homes</div>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button data-open-gallery>⌗ <span th:text="#{investor.view_photos}">View photos</span></button>
+</div>
+<div class="project-thumbnails"
+     th:if="${project.projectImages != null and #lists.size(project.projectImages) > 1}">
+<button th:each="thumbnail, status : ${project.projectImages}"
+        th:if="${status.index > 0 and status.index < 4}"
+        class="project-thumbnail"
+        type="button"
+        data-open-gallery
+        th:data-gallery-index="${status.index}"
+        th:aria-label="|Open photo ${status.count} of ${project.address}|">
+<img th:src="|/${thumbnail.filePath()}|"
+     th:alt="|${project.address} photo ${status.count}|"
+     th:style="|--focus-x:${thumbnail.focusX()}%; --focus-y:${thumbnail.focusY()}%|">
+</button>
 </div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="project-body">
@@ -293,7 +309,7 @@
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-trend-line.svg}" alt="">
+<img th:src="@{/images/investors/icon-investors.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
 <h3 th:text="#{investor.step3.title}">We Analyze It</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
@@ -379,7 +395,7 @@
 <!-- Элемент span отображает авторские права. -->
 <span>© <span th:text="${settings[&apos;copyright_year&apos;]} ?: &apos;2026&apos;">2026</span> <span th:text="${settings[&apos;company_legal_name&apos;]} ?: &apos;Berry Homes Property Management, LLC&apos;">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
 <!-- Элемент span отображает юридические ссылки. -->
-<span><span th:text="#{footer.privacy}">Privacy Policy</span> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
+<span><a th:href="@{/privacy-policy}" th:text="#{footer.privacy}">Privacy Policy</a> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
 </div>
 </div>
 </footer>
@@ -411,6 +427,7 @@
 <label><span th:text="#{investor.goals}">Investment Goals</span><textarea th:field="*{message}" rows="4" required>
 </textarea>
 </label>
+<label class="privacy-consent"><input type="checkbox" name="privacyConsent" value="true" required><span><span th:text="#{privacy.consent.prefix}">I agree to the</span> <a th:href="@{/privacy-policy}" target="_blank" th:text="#{footer.privacy}">Privacy Policy</a>.</span></label>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="button" type="submit" th:text="#{investor.send_request}">Send Request</button>
 </form>
@@ -557,10 +574,10 @@
             return dot;
         }));
     };
-    const openGallery = card => {
+    const openGallery = (card, startIndex = 0) => {
         photos = [...card.querySelectorAll(".project-gallery-source")];
         if (!photos.length) return;
-        index = 0;
+        index = Math.min(Math.max(Number(startIndex) || 0, 0), photos.length - 1);
         buildDots();
         render();
         setModal(gallery, true);
@@ -571,7 +588,10 @@
     };
 
     document.querySelectorAll("[data-open-gallery]").forEach(button => {
-        button.addEventListener("click", () => openGallery(button.closest(".project-card")));
+        button.addEventListener("click", () => openGallery(
+            button.closest(".project-card"),
+            button.dataset.galleryIndex
+        ));
     });
     document.querySelectorAll(".project-card").forEach(card => {
         if (!card.querySelector(".project-gallery-source")) return;

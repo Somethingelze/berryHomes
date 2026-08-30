@@ -42,4 +42,11 @@ public record ProjectDto(
         }
         return "";
     }
+
+    public ProjectImageDto getFirstImage() {
+        if (projectImages != null && !projectImages.isEmpty()) {
+            return projectImages.getFirst();
+        }
+        return null;
+    }
 }

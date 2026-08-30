@@ -22,6 +22,7 @@ public class SecurityConfig {
                         "/admin/contacts/*/delete",
                         "/admin/blog/*/delete",
                         "/admin/tenant-website-documents/*/delete",
+                        "/admin/max-business-group-documents/*/delete",
                         "/admin/projects/*/delete",
                         "/admin/projects/media/images/delete",
                         "/admin/projects/media/image/*/delete",

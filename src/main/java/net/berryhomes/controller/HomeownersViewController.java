@@ -42,8 +42,9 @@ public class HomeownersViewController {
     @PostMapping("/message")
     public ModelAndView handleOwnerMessage(@ModelAttribute("contactDto") @Valid ContactDto dto,
                                            BindingResult bindingResult,
+                                           @org.springframework.web.bind.annotation.RequestParam(name = "privacyConsent", defaultValue = "false") boolean privacyConsent,
                                            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !privacyConsent) {
             ModelAndView mav = new ModelAndView("homeowners");
             mav.addObject("portalUrl", PORTAL_URL_VAL);
             return mav;

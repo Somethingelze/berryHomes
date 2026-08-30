@@ -7,12 +7,14 @@
     <meta charset="UTF-8">
     <!-- Элемент meta формирует соответствующую часть интерфейса. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Admin: Project Editor - Berry Homes</title>
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin/projects-admin.css}">
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/admin/project-form.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/project-form.css(v=20260830b)}">
     <!-- Подключает единый строгий стиль рабочего интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/admin-workspace.css}">
@@ -189,9 +191,15 @@
                             </label>
                             <span class="drag-handle" title="Drag to reorder" aria-hidden="true">⋮⋮</span>
                             <span class="cover-badge" th:hidden="${!status.first}">Cover</span>
-                            <img th:src="@{/{path}(path=${img.filePath()})}" class="gallery-card-img" alt="Project image">
+                            <div class="image-focus-editor"
+                                 th:style="|--focus-x:${img.focusX()}%; --focus-y:${img.focusY()}%|"
+                                 title="Click the most important point in the image">
+                                <img th:src="@{/{path}(path=${img.filePath()})}" class="gallery-card-img" alt="Project image" draggable="false">
+                                <span class="image-focus-marker" aria-hidden="true"></span>
+                            </div>
                             <div class="gallery-card-actions">
                                 <span class="image-order-label">Position <b th:text="${status.count}">1</b></span>
+                                <button type="button" class="image-focus-button">Save focus</button>
                                 <button th:if="${isAdmin}" type="button" class="image-delete-button">Delete</button>
                             </div>
                         </article>
@@ -216,6 +224,6 @@
     </div>
 
     <div id="adminToast" class="admin-toast" role="status" aria-live="polite"></div>
-    <script src="/js/admin-project-form.js"></script>
+    <script th:src="@{/js/admin-project-form.js(v=20260830b)}"></script>
 </body>
 </html>

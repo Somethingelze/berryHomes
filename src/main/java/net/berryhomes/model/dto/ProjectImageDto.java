@@ -13,7 +13,9 @@ public record ProjectImageDto (
         UUID id,
         UUID projectId,
         String filePath,
-        Integer sortOrder
+        Integer sortOrder,
+        Integer focusX,
+        Integer focusY
 ) implements java.io.Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

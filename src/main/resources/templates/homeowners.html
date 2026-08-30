@@ -198,10 +198,10 @@
 <i>
 </i>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group">
+<a th:href="@{/max-business-group}" aria-label="Max Business Group"><img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group"></a>
 </div>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</p>
+<p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><b>Office Phone Number: <a href="tel:+17242007309">724-200-7309</a></b></p>
 </section>
 </main>
 <!-- Элемент footer формирует соответствующую часть интерфейса. -->
@@ -213,7 +213,7 @@
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span><span th:text="#{footer.privacy}">Privacy Policy</span> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
+<span><a th:href="@{/privacy-policy}" th:text="#{footer.privacy}">Privacy Policy</a> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
 <span class="socials">
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
@@ -257,6 +257,7 @@
 <label><span th:text="#{common.message}">Message</span><textarea th:field="*{message}" required minlength="5" rows="4">
 </textarea>
 </label>
+<label class="privacy-consent"><input type="checkbox" name="privacyConsent" value="true" required><span><span th:text="#{privacy.consent.prefix}">I agree to the</span> <a th:href="@{/privacy-policy}" target="_blank" th:text="#{footer.privacy}">Privacy Policy</a>.</span></label>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="primary-button" type="submit" th:text="#{common.submit_message}">Submit Message</button>
 </form>

@@ -356,7 +356,8 @@ width:100%;
 /* Настраивает CSS-свойство height для текущего элемента. */
 height:100%;
 /* Настраивает CSS-свойство object-fit для текущего элемента. */
-object-fit:cover
+object-fit:cover;
+object-position:var(--focus-x, 50%) var(--focus-y, 50%)
 }
 .image-fallback{
 /* Настраивает CSS-свойство height для текущего элемента. */
@@ -1605,4 +1606,108 @@ transition:none;
 .investor-page .deliver .heading-branch-right,
 .investor-page .how .heading-branch-right {
     transform: translateX(-15%);
+}
+
+/* Separates and softens the watercolor backplates without blurring their SVG icons. */
+.investor-page .deliver-grid article,
+.investor-page .how .steps article {
+    position: relative;
+    isolation: isolate;
+    background-image: none !important;
+}
+
+.investor-page .deliver-grid article::before,
+.investor-page .how .steps article::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 8px;
+    left: 50%;
+    width: 82px;
+    height: 82px;
+    transform: translateX(-50%) scale(1.04);
+    background: var(--icon-wash) center / contain no-repeat;
+    -webkit-mask-image: radial-gradient(circle, #000 0 72%, rgba(0, 0, 0, .82) 80%, transparent 100%);
+    mask-image: radial-gradient(circle, #000 0 72%, rgba(0, 0, 0, .82) 80%, transparent 100%);
+    pointer-events: none;
+}
+
+.investor-page .deliver-grid article > *,
+.investor-page .how .steps article > * {
+    position: relative;
+    z-index: 1;
+}
+
+.investor-page .how .steps article::before {
+    top: 1px;
+}
+
+.investor-page .deliver-grid article:nth-child(1) { --icon-wash: url("/images/investors/circle_1.png"); }
+.investor-page .deliver-grid article:nth-child(2) { --icon-wash: url("/images/investors/circle_2.png"); }
+.investor-page .deliver-grid article:nth-child(3) { --icon-wash: url("/images/investors/circle_3.png"); }
+.investor-page .deliver-grid article:nth-child(4) { --icon-wash: url("/images/investors/circle_4.png"); }
+.investor-page .deliver-grid article:nth-child(5) { --icon-wash: url("/images/investors/circle_5.png"); }
+.investor-page .deliver-grid article:nth-child(6) { --icon-wash: url("/images/investors/circle_6.png"); }
+.investor-page .how .steps article:nth-child(1) { --icon-wash: url("/images/investors/circle_4.png"); }
+.investor-page .how .steps article:nth-child(2) { --icon-wash: url("/images/investors/circle_1.png"); }
+.investor-page .how .steps article:nth-child(3) { --icon-wash: url("/images/investors/circle_6.png"); }
+.investor-page .how .steps article:nth-child(4) { --icon-wash: url("/images/investors/circle_2.png"); }
+.investor-page .how .steps article:nth-child(5) { --icon-wash: url("/images/investors/circle_5.png"); }
+.investor-page .how .steps article:nth-child(6) { --icon-wash: url("/images/investors/circle_3.png"); }
+
+
+/* Keeps project photographs taller while retaining focal-point cropping. */
+.investor-page .project-image {
+    height: auto;
+    aspect-ratio: 4 / 3;
+}
+
+
+.investor-page .project-thumbnails {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.investor-page .project-thumbnail {
+    min-width: 0;
+    aspect-ratio: 4 / 3;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid rgba(139, 107, 160, .32);
+    border-radius: 5px;
+    background: #dae1ca;
+    cursor: pointer;
+}
+
+.investor-page .project-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--focus-x, 50%) var(--focus-y, 50%);
+    transition: transform .2s ease;
+}
+
+.investor-page .project-thumbnail:hover img,
+.investor-page .project-thumbnail:focus-visible img {
+    transform: scale(1.04);
+}
+
+.investor-page .project-thumbnail:focus-visible {
+    outline: 2px solid #8b6ba0;
+    outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+    .investor-page .project-thumbnails {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .investor-page .project-thumbnail:nth-child(n + 3) {
+        display: none;
+    }
 }

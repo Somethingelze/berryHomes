@@ -51,8 +51,9 @@ public class TenantsViewController {
     @PostMapping("/message")
     public ModelAndView handleTenantMessage(@ModelAttribute("contactDto") @Valid ContactDto dto,
                                            BindingResult bindingResult,
+                                           @org.springframework.web.bind.annotation.RequestParam(name = "privacyConsent", defaultValue = "false") boolean privacyConsent,
                                            RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !privacyConsent) {
             ModelAndView mav = new ModelAndView("tenants");
             mav.addObject("portalUrl", PORTAL_URL_VAL);
             addTenantDocuments(mav);

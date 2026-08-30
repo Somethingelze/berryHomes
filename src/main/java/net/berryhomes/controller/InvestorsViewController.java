@@ -54,10 +54,11 @@ public class InvestorsViewController {
     @PostMapping("/message")
     public ModelAndView handleInvestorMessage(@ModelAttribute("contactDto") @Valid ContactDto dto,
                                               BindingResult bindingResult,
+                                              @org.springframework.web.bind.annotation.RequestParam(name = "privacyConsent", defaultValue = "false") boolean privacyConsent,
                                               RedirectAttributes redirectAttributes) {
         Pageable pageable = PageRequest.of(0, 24, Sort.by("createdAt").descending());
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !privacyConsent) {
             ModelAndView mav = new ModelAndView("investors");
             mav.addObject("projects", projectService.getAllActiveProjects(pageable).getContent());
             return mav;
