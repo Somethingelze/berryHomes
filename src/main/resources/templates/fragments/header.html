@@ -60,7 +60,7 @@
     </div>
 
     <!-- Provides the shared Contact Us experience without leaving the current page. -->
-    <dialog class="global-contact-modal" data-global-contact-modal th:attr="aria-label=#{nav.contact}">
+    <dialog class="global-contact-modal" data-global-contact-modal th:attr="aria-label=#{nav.contact},data-auto-open=${openContactModal}">
         <div class="global-contact-modal__layout">
             <button class="global-contact-modal__close" type="button" data-contact-close th:attr="aria-label=#{common.close}">×</button>
             <section class="global-contact-modal__form-panel">
@@ -119,6 +119,29 @@
         });
     }
 
+    const header = document.querySelector('.global-header');
+    const headerRow = header?.querySelector('.global-header__row');
+    const brand = header?.querySelector('.global-brand');
+
+    const updateHeaderNavigation = () => {
+        if (!header || !headerRow || !brand || !navigation || !menuButton) return;
+
+        header.classList.remove('global-header--collapsed');
+        if (window.matchMedia('(max-width: 1120px)').matches) return;
+
+        const rowGap = parseFloat(getComputedStyle(headerRow).columnGap) || 0;
+        const requiredWidth = brand.getBoundingClientRect().width + navigation.scrollWidth + rowGap;
+        if (requiredWidth > headerRow.clientWidth) {
+            header.classList.add('global-header--collapsed');
+            navigation.classList.remove('global-nav--open');
+            menuButton.setAttribute('aria-expanded', 'false');
+        }
+    };
+
+    updateHeaderNavigation();
+    window.addEventListener('resize', updateHeaderNavigation, { passive: true });
+    document.fonts?.ready.then(updateHeaderNavigation);
+
 
     const flashMessages = document.querySelectorAll('.toast, .success-toast, .success, [data-flash-message]');
 
@@ -166,10 +189,14 @@
         });
 
         const currentUrl = new URL(window.location.href);
-        if (currentUrl.searchParams.get("contact") === "open") {
+        if (currentUrl.searchParams.get("contact") === "open" ||
+            currentUrl.pathname === "/contact" ||
+            contactModal?.dataset.autoOpen === "true") {
             openContactModal();
-            currentUrl.searchParams.delete("contact");
-            window.history.replaceState({}, "", currentUrl);
+            if (currentUrl.searchParams.has("contact")) {
+                currentUrl.searchParams.delete("contact");
+                window.history.replaceState({}, "", currentUrl);
+            }
         }
 
         contactForm?.addEventListener("submit", async (event) => {

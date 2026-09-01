@@ -1534,6 +1534,53 @@ body {
     }
 }
 
+/* Consistent content imagery and readable single-column mobile navigation. */
+.home-page .main-card,
+.home-page .card-content-area,
+.home-page .quick-button,
+.home-page .quick-content {
+    min-width: 0;
+}
+
+.home-page .image-mask-container {
+    aspect-ratio: 4 / 3;
+    height: auto;
+}
+
+.home-page .image-mask-container .card-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+@media (max-width: 620px) {
+    .home-page .quick-nav-row,
+    .home-page .main-cards-row,
+    .home-page .features-row {
+        grid-template-columns: 1fr;
+    }
+
+    .home-page .quick-button {
+        min-height: 64px;
+        padding-inline: 14px;
+    }
+
+    .home-page .quick-text h3 {
+        font-size: 17px !important;
+    }
+
+    .home-page .quick-text p {
+        font-size: 14px;
+    }
+
+    .home-page .main-card {
+        width: 100%;
+        height: auto;
+    }
+}
+
 
 /* Paints every replacement Main icon with its existing section color. */
 .main-masked-icon {
@@ -1746,6 +1793,49 @@ body {
     padding-block: 12px;
 }
 
+/* Final narrow-screen layout wins over legacy mobile typography below. */
+@media (max-width: 620px) {
+    .home-page .quick-nav-row,
+    .home-page .main-cards-row,
+    .home-page .features-row {
+        grid-template-columns: 1fr;
+    }
+
+    .home-page .quick-button { min-height: 64px; }
+    .home-page .quick-text h3 { font-size: 17px !important; }
+    .home-page .quick-text p { font-size: 14px !important; }
+    .home-page .main-card { width: 100%; height: auto; }
+}
+
+/* Gives the three primary cards more visual artwork while preserving the
+   existing watercolor fade at the bottom of each image. */
+.home-page .image-mask-container {
+    aspect-ratio: 6 / 5;
+}
+
+/* Pulls the complete card interface into the faded part of the artwork. */
+.home-page .card-content-area {
+    margin-top: -42px;
+}
+
+.home-page .floating-badge-circle {
+    margin-top: -78px;
+}
+
+@media (max-width: 620px) {
+    .home-page .image-mask-container {
+        aspect-ratio: 1 / 1;
+    }
+
+    .home-page .card-content-area {
+        margin-top: -48px;
+    }
+
+    .home-page .floating-badge-circle {
+        margin-top: -82px;
+    }
+}
+
 @media (max-width: 620px) {
     .home-page .quick-text h3 {
         font-size: clamp(11px, 3.3vw, 14px) !important;
@@ -1782,4 +1872,14 @@ body {
     .home-page .feature-info-text p {
         font-size: 15px;
     }
+}
+
+@media (max-width: 620px) {
+    .home-page .quick-nav-row,
+    .home-page .main-cards-row,
+    .home-page .features-row { grid-template-columns: 1fr; }
+    .home-page .quick-button { min-height: 64px; }
+    .home-page .quick-text h3 { font-size: 17px !important; }
+    .home-page .quick-text p { font-size: 14px !important; }
+    .home-page .main-card { width: 100%; height: auto; }
 }

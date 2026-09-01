@@ -17,4 +17,8 @@ public record ProjectDocumentDto (
 ) implements java.io.Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public String url() {
+        return MediaUrl.publicUrl(filePath);
+    }
 }

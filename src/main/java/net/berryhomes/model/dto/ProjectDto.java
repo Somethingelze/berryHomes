@@ -38,7 +38,7 @@ public record ProjectDto(
 
     public String getFirstImageUrl() {
         if (projectImages != null && !projectImages.isEmpty()) {
-            return projectImages.getFirst().filePath();
+            return projectImages.getFirst().url();
         }
         return "";
     }
@@ -48,5 +48,22 @@ public record ProjectDto(
             return projectImages.getFirst();
         }
         return null;
+    }
+
+    public ProjectDto withProjectImages(List<ProjectImageDto> images) {
+        return ProjectDto.builder()
+                .id(id)
+                .address(address)
+                .cityZip(cityZip)
+                .purchasePrice(purchasePrice)
+                .monthlyRent(monthlyRent)
+                .renovationBudget(renovationBudget)
+                .estNoiAnnual(estNoiAnnual)
+                .totalInvestment(totalInvestment)
+                .cashOnCashReturn(cashOnCashReturn)
+                .estPayback(estPayback)
+                .projectImages(images)
+                .projectDocument(projectDocument)
+                .build();
     }
 }

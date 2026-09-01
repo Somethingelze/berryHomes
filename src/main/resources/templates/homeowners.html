@@ -10,10 +10,10 @@
 <!-- Элемент title формирует соответствующую часть интерфейса. -->
 <title>Owner Center — Berry Homes</title>
 <!-- Элемент link формирует соответствующую часть интерфейса. -->
-<link rel="stylesheet" th:href="@{/css/audience-pages.css}">
+<link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260830g)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="owner-page">
@@ -204,32 +204,7 @@
 <p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><b>Office Phone Number: <a href="tel:+17242007309">724-200-7309</a></b></p>
 </section>
 </main>
-<!-- Элемент footer формирует соответствующую часть интерфейса. -->
-<footer class="site-footer compact">
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="footer-bar">
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="site-shell">
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span><a th:href="@{/privacy-policy}" th:text="#{footer.privacy}">Privacy Policy</a> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span class="socials">
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-facebook.svg}" alt="Facebook">
-</a>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-instagram.svg}" alt="Instagram">
-</a>
-</span>
-</div>
-</div>
-</footer>
+<div th:replace="~{fragments/header :: public-footer}"></div>
 <!-- Элемент dialog формирует соответствующую часть интерфейса. -->
 <dialog class="contact-modal">
 <!-- Элемент button формирует соответствующую часть интерфейса. -->

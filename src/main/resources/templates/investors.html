@@ -10,10 +10,10 @@
 <!-- Элемент title формирует соответствующую часть интерфейса. -->
 <title>For Investors | Berry Homes</title>
 <!-- Элемент link формирует соответствующую часть интерфейса. -->
-<link rel="stylesheet" th:href="@{/css/investors.css(v=20260830d)}">
+<link rel="stylesheet" th:href="@{/css/investors.css(v=20260830g)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260830g)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="investor-page">
@@ -156,17 +156,19 @@
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div hidden>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:each="image : ${project.projectImages}" class="project-gallery-source" th:src="|/${image.filePath()}|" th:alt="|${project.address} photo|">
+<img th:each="image : ${project.projectImages}" class="project-gallery-source" th:src="${image.url()}" th:alt="|${project.address} photo|">
 </div>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <img th:if="${project.getFirstImage() != null}"
-     th:src="|/${project.getFirstImage().filePath()}|"
+     th:src="${project.getFirstImage().url()}"
      th:alt="${project.address}"
+     data-project-main-image
      th:style="|--focus-x:${project.getFirstImage().focusX()}%; --focus-y:${project.getFirstImage().focusY()}%|">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div th:if="${project.getFirstImage() == null}" class="image-fallback">Berry Homes</div>
+<div th:if="${project.getFirstImage() != null}" class="image-fallback project-image-fallback" hidden>Berry Homes</div>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button data-open-gallery>⌗ <span th:text="#{investor.view_photos}">View photos</span></button>
+<button th:if="${project.getFirstImage() != null}" data-open-gallery>⌗ <span th:text="#{investor.view_photos}">View photos</span></button>
 </div>
 <div class="project-thumbnails"
      th:if="${project.projectImages != null and #lists.size(project.projectImages) > 1}">
@@ -177,8 +179,9 @@
         data-open-gallery
         th:data-gallery-index="${status.index}"
         th:aria-label="|Open photo ${status.count} of ${project.address}|">
-<img th:src="|/${thumbnail.filePath()}|"
+<img th:src="${thumbnail.url()}"
      th:alt="|${project.address} photo ${status.count}|"
+     data-project-thumbnail-image
      th:style="|--focus-x:${thumbnail.focusX()}%; --focus-y:${thumbnail.focusY()}%|">
 </button>
 </div>
@@ -262,7 +265,7 @@
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button data-open-gallery>◉ <span th:text="#{investor.view_project}">View Project</span></button>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:if="${project.projectDocument != null}" th:href="|/${project.projectDocument.filePath()}|" target="_blank">⌑ <span th:text="#{investor.download_report}">Download Report</span></a>
+<a th:if="${project.projectDocument != null and !#strings.isEmpty(project.projectDocument.url())}" th:href="${project.projectDocument.url()}" target="_blank">⌑ <span th:text="#{investor.download_report}">Download Report</span></a>
 </footer>
 </div>
 </article>
@@ -363,42 +366,7 @@
 </div>
 </section>
 </main>
-<!-- Элемент footer формирует соответствующую часть интерфейса. -->
-<footer class="site-footer">
-<!-- Элемент div формирует основное содержимое футера. -->
-<div class="site-shell footer-main">
-<!-- Элемент img отображает логотип компании. -->
-<img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
-<!-- Элемент p отображает настраиваемый слоган. -->
-<p th:text="${settings[&apos;footer_tagline&apos;]} ?: #{footer.tagline}">Professional Management. Better Living.</p>
-<!-- Элемент address объединяет контактные данные. -->
-<address>
-<!-- Элемент a позволяет позвонить. -->
-<a th:href="|tel:${settings?.get(&apos;site_phone&apos;)}|" th:text="${settings?.get(&apos;site_phone&apos;)} ?: &apos;(412) 555-0123&apos;">(412) 555-0123</a>
-<!-- Элемент a позволяет написать на почту. -->
-<a th:href="|mailto:${settings?.get(&apos;site_email&apos;)}|" th:text="${settings?.get(&apos;site_email&apos;)} ?: &apos;info@berryhomespm.com&apos;">info@berryhomespm.com</a>
-<!-- Элемент a открывает офис на карте Google. -->
-<a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings[&apos;site_office&apos;]} ?: #{common.location}">Pittsburgh, PA 15222</a>
-</address>
-<!-- Элемент div объединяет ссылки на социальные сети. -->
-<div class="socials">
-<!-- Элемент a открывает Facebook. -->
-<a href="#" aria-label="Facebook"><img th:src="@{/images/investors/icon-facebook.svg}" alt=""></a>
-<!-- Элемент a открывает Instagram. -->
-<a href="#" aria-label="Instagram"><img th:src="@{/images/investors/icon-instagram.svg}" alt=""></a>
-</div>
-</div>
-<!-- Элемент div формирует нижнюю полосу футера. -->
-<div class="footer-bar">
-<!-- Элемент div ограничивает ширину нижней строки. -->
-<div class="site-shell">
-<!-- Элемент span отображает авторские права. -->
-<span>© <span th:text="${settings[&apos;copyright_year&apos;]} ?: &apos;2026&apos;">2026</span> <span th:text="${settings[&apos;company_legal_name&apos;]} ?: &apos;Berry Homes Property Management, LLC&apos;">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
-<!-- Элемент span отображает юридические ссылки. -->
-<span><a th:href="@{/privacy-policy}" th:text="#{footer.privacy}">Privacy Policy</a> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
-</div>
-</div>
-</footer>
+<div th:replace="~{fragments/header :: public-footer}"></div>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="modal" id="contactModal">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
@@ -593,8 +561,50 @@
             button.dataset.galleryIndex
         ));
     });
+    const syncProjectGalleryState = card => {
+        const hasPhotos = Boolean(card?.querySelector(".project-gallery-source"));
+        card?.querySelectorAll("[data-open-gallery]").forEach(button => {
+            button.hidden = !hasPhotos;
+        });
+        if (!hasPhotos) {
+            card?.removeAttribute("role");
+            card?.removeAttribute("tabindex");
+        }
+        return hasPhotos;
+    };
+    document.querySelectorAll(".project-gallery-source").forEach(source => {
+        const removeBrokenSource = () => {
+            const card = source.closest(".project-card");
+            source.remove();
+            syncProjectGalleryState(card);
+        };
+        source.addEventListener("error", removeBrokenSource, { once: true });
+        if (source.complete && source.naturalWidth === 0) removeBrokenSource();
+    });
+    document.querySelectorAll("[data-project-main-image]").forEach(projectImage => {
+        const showFallback = () => {
+            projectImage.hidden = true;
+            projectImage.parentElement.querySelector(".project-image-fallback")?.removeAttribute("hidden");
+        };
+        const preservePortraitComposition = () => {
+            if (projectImage.naturalHeight > projectImage.naturalWidth * 1.08) {
+                projectImage.classList.add("is-portrait");
+            }
+        };
+        projectImage.addEventListener("error", showFallback, { once: true });
+        projectImage.addEventListener("load", preservePortraitComposition);
+        if (projectImage.complete) {
+            if (projectImage.naturalWidth === 0) showFallback();
+            else preservePortraitComposition();
+        }
+    });
+    document.querySelectorAll("[data-project-thumbnail-image]").forEach(thumbnail => {
+        const removeBrokenThumbnail = () => thumbnail.closest(".project-thumbnail")?.remove();
+        thumbnail.addEventListener("error", removeBrokenThumbnail, { once: true });
+        if (thumbnail.complete && thumbnail.naturalWidth === 0) removeBrokenThumbnail();
+    });
     document.querySelectorAll(".project-card").forEach(card => {
-        if (!card.querySelector(".project-gallery-source")) return;
+        if (!syncProjectGalleryState(card)) return;
         card.tabIndex = 0;
         card.setAttribute("role", "button");
         card.addEventListener("click", event => {

@@ -458,7 +458,7 @@ font-weight:400
     left: 50%;
     bottom: calc(100% + 9px);
     z-index: 8;
-    width: min(240px, 70vw);
+    width: min(210px, 70vw);
     padding: 10px 12px;
     border: 1px solid var(--line);
     border-radius: 7px;
@@ -1002,6 +1002,100 @@ width:150px
     .shell {
         /* Оставляет минимальные безопасные поля. */
         width: 94vw;
+    }
+}
+
+/* Resilient project cards and media across the full viewport range. */
+.investor-page .project-carousel,
+.investor-page .project-viewport,
+.investor-page .project-track,
+.investor-page .project-card,
+.investor-page .project-body,
+.investor-page .project-body dl,
+.investor-page .project-body dl > div,
+.investor-page .metric-with-help {
+    min-width: 0;
+}
+
+.investor-page .project-card {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.investor-page .project-body {
+    overflow-wrap: anywhere;
+}
+
+.investor-page .project-body dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.investor-page .project-body dl > div {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+}
+
+.investor-page .project-body dt,
+.investor-page .project-body dd,
+.investor-page .metric-with-help > span {
+    min-width: 0;
+}
+
+.investor-page .metric-help {
+    flex: 0 0 16px;
+}
+
+.investor-page .project-body footer {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+}
+
+.investor-page .carousel-arrow {
+    top: clamp(90px, 14vw, 150px);
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+}
+
+.investor-page .carousel-arrow.prev { left: 8px; }
+.investor-page .carousel-arrow.next { right: 8px; }
+
+.investor-page .project-image-fallback[hidden] { display: none; }
+
+@media (max-width: 620px) {
+    .investor-page .hero {
+        min-height: 0;
+        aspect-ratio: 4 / 5;
+        background-position: 64% center;
+    }
+
+    .investor-page .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(255, 250, 240, .94) 0 38%, rgba(255, 250, 240, .45) 62%, transparent 82%);
+        pointer-events: none;
+    }
+
+    .investor-page .hero .hero-content {
+        min-height: 0;
+        padding-bottom: 100px;
+    }
+
+    .investor-page .project-track { padding-inline: 0; }
+    .investor-page .project-card { flex-basis: 100%; min-width: 100%; }
+}
+
+@media (max-width: 420px) {
+    .investor-page .project-body dl {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .investor-page .project-body dl > div {
+        gap: 12px;
+        font-size: 12px;
     }
 }
 
@@ -1710,4 +1804,12 @@ transition:none;
     .investor-page .project-thumbnail:nth-child(n + 3) {
         display: none;
     }
+}
+
+/* Portrait project photos keep the complete building instead of being cropped to landscape. */
+.investor-page .project-image > img.is-portrait {
+    object-fit: contain;
+    object-position: center;
+    background: #e8e3d8;
+    transform: none;
 }

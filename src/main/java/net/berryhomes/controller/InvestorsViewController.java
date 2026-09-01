@@ -7,6 +7,7 @@ import net.berryhomes.model.ContactType;
 import net.berryhomes.model.dto.ContactDto;
 import net.berryhomes.model.dto.ProjectDto;
 import net.berryhomes.service.ContactService;
+import net.berryhomes.service.FileStorageService;
 import net.berryhomes.service.ProjectService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.nio.file.Files;
 
 @Controller
 @RequestMapping("/investors")
@@ -30,6 +32,7 @@ public class InvestorsViewController {
 
     private final ContactService contactService;
     private final ProjectService projectService;
+    private final FileStorageService fileStorageService;
 
     @GetMapping
     public ModelAndView showInvestorCenter() {
@@ -39,7 +42,9 @@ public class InvestorsViewController {
 
         Page<ProjectDto> projectPage = projectService.getAllActiveProjects(pageable);
 
-        List<ProjectDto> recentProjects = projectPage.getContent();
+        List<ProjectDto> recentProjects = projectPage.getContent().stream()
+                .map(this::withoutMissingImages)
+                .toList();
         mav.addObject("projects", recentProjects);
 
         ContactDto emptyForm = ContactDto.builder()
@@ -51,6 +56,29 @@ public class InvestorsViewController {
         return mav;
     }
 
+    private ProjectDto withoutMissingImages(ProjectDto project) {
+        if (project.projectImages() == null || project.projectImages().isEmpty()) {
+            return project;
+        }
+
+        var availableImages = project.projectImages().stream()
+                .filter(image -> image.filePath() != null && !image.filePath().isBlank())
+                .filter(image -> {
+                    try {
+                        String storedPath = image.filePath().replace('\\', '/').replaceFirst("^/+", "");
+                        if (storedPath.startsWith("uploads/")) {
+                            storedPath = storedPath.substring("uploads/".length());
+                        }
+                        return Files.isRegularFile(fileStorageService.resolveFile(storedPath));
+                    } catch (IllegalArgumentException ignored) {
+                        return false;
+                    }
+                })
+                .toList();
+
+        return project.withProjectImages(availableImages);
+    }
+
     @PostMapping("/message")
     public ModelAndView handleInvestorMessage(@ModelAttribute("contactDto") @Valid ContactDto dto,
                                               BindingResult bindingResult,
@@ -60,7 +88,9 @@ public class InvestorsViewController {
 
         if (bindingResult.hasErrors() || !privacyConsent) {
             ModelAndView mav = new ModelAndView("investors");
-            mav.addObject("projects", projectService.getAllActiveProjects(pageable).getContent());
+            mav.addObject("projects", projectService.getAllActiveProjects(pageable).getContent().stream()
+                    .map(this::withoutMissingImages)
+                    .toList());
             return mav;
         }
 

@@ -10,10 +10,10 @@
     <!-- Элемент title формирует соответствующую часть интерфейса. -->
     <title>Tenant Center — Berry Homes</title>
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/audience-pages.css}">
+<link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260830g)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="tenant-page">
@@ -239,7 +239,7 @@
     <!-- Элемент section формирует соответствующую часть интерфейса. -->
     <section class="thanks-banner site-shell">
         <!-- Элемент img формирует соответствующую часть интерфейса. -->
-        <img th:src="@{/images/tenants/share_your_exp_bg.png}" alt="A basket of berries and flowers">
+        <img th:src="@{/images/tenants/share_your_exp_bg_wide.png}" alt="A basket of berries and flowers">
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div>
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
@@ -254,47 +254,7 @@
 </section>
 </main>
 
-<!-- Элемент footer формирует соответствующую часть интерфейса. -->
-<footer class="site-footer">
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="site-shell footer-main">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/logo-etc/berryhomes_logo_wide.png}" alt="Berry Homes">
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="${settings[&apos;footer_tagline&apos;]} ?: #{footer.tagline}">Professional Management. Better Living.</p>
-<address>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="|tel:${settings?.get('site_phone')}|" th:text="${settings?.get('site_phone')} ?: '(412) 555-0123'">(412) 555-0123</a>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="|mailto:${settings?.get('site_email')}|" th:text="${settings?.get('site_email')} ?: 'info@berryhomespm.com'">info@berryhomespm.com</a>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings['site_office']} ?: #{common.location}">Pittsburgh, PA 15222</a>
-</address>
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="socials">
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#" aria-label="Facebook">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-facebook.svg}" alt="">
-</a>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a href="#" aria-label="Instagram">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-instagram.svg}" alt="">
-</a>
-</div>
-</div>
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="footer-bar">
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="site-shell">
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span>© <span th:text="${settings['copyright_year']} ?: '2026'">2026</span> <span th:text="${settings['company_legal_name']} ?: 'Berry Homes Property Management, LLC'">Berry Homes Property Management, LLC</span>. <span th:text="#{footer.rights}">All rights reserved.</span></span>
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span><a th:href="@{/privacy-policy}" th:text="#{footer.privacy}">Privacy Policy</a> &nbsp; | &nbsp; <span th:text="#{footer.terms}">Terms of Use</span> &nbsp; | &nbsp; <span th:text="#{footer.housing}">Fair Housing</span></span>
-</div>
-</div>
-</footer>
+<div th:replace="~{fragments/header :: public-footer}"></div>
 
 <!-- Элемент dialog формирует соответствующую часть интерфейса. -->
 <dialog class="contact-modal">

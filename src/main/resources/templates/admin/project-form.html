@@ -194,7 +194,7 @@
                             <div class="image-focus-editor"
                                  th:style="|--focus-x:${img.focusX()}%; --focus-y:${img.focusY()}%|"
                                  title="Click the most important point in the image">
-                                <img th:src="@{/{path}(path=${img.filePath()})}" class="gallery-card-img" alt="Project image" draggable="false">
+                                <img th:src="${img.url()}" class="gallery-card-img" alt="Project image" draggable="false">
                                 <span class="image-focus-marker" aria-hidden="true"></span>
                             </div>
                             <div class="gallery-card-actions">
@@ -209,7 +209,7 @@
                         <h4 class="input-label-text">Current Financial Attachment</h4>
                         <p id="emptyDocumentMessage" th:hidden="${projectDto.projectDocument != null}" class="empty-media-message">No document attached yet.</p>
                         <div id="currentDocument" class="doc-item-row" th:if="${projectDto.projectDocument != null}" th:data-document-id="${projectDto.projectDocument.id()}">
-                            <a th:href="@{/{path}(path=${projectDto.projectDocument.filePath()})}" target="_blank">📄 Project report</a>
+                            <a th:href="${projectDto.projectDocument.url()}" target="_blank">📄 Project report</a>
                             <button th:if="${isAdmin}" id="deleteDocument" type="button" class="media-danger-button">Remove document</button>
                         </div>
                     </div>

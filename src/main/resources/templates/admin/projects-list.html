@@ -145,7 +145,7 @@
                     <td>
                         <!-- Элемент img формирует соответствующую часть интерфейса. -->
                         <img th:if="${project.getFirstImageUrl() != ''}"
-                             th:src="@{'/' + ${project.getFirstImageUrl()}}"
+                             th:src="${project.getFirstImageUrl()}"
                              class="table-project-preview"
                              alt="Preview" />
 
