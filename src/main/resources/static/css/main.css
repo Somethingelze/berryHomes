@@ -717,7 +717,7 @@ body {
 
         /* Задает легкий бежевый фоновый оттенок с прозрачностью */
         /* Настраивает CSS-свойство background-color для текущего элемента. */
-        background-color: rgba(247, 244, 235, 0.3);
+        background-color: rgba(247, 244, 235, 1);
 
         /* Добавляет отступ 20 пикселей снизу внутри карточки */
         /* Настраивает CSS-свойство padding-bottom для текущего элемента. */
@@ -725,7 +725,7 @@ body {
 
         /* Задает плавный переход анимации для масштаба и тени */
         /* Настраивает CSS-свойство transition для текущего элемента. */
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 1s ease, box-shadow 1s ease;
 
 
 }
@@ -895,7 +895,7 @@ body {
 
         /* Задает плавность анимации при изменении масштаба круга */
         /* Настраивает CSS-свойство transition для текущего элемента. */
-        transition: transform 0.3s ease;
+        transition: transform 1s ease;
 
 
 }

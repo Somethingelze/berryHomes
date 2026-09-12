@@ -1,295 +1,222 @@
 <!DOCTYPE html>
-<!-- Элемент html формирует соответствующую часть интерфейса. -->
 <html xmlns:th="http://www.thymeleaf.org" th:lang="${currentLanguage}">
-<!-- Элемент head формирует соответствующую часть интерфейса. -->
-<head>
-    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
-    <meta charset="UTF-8">
-    <!-- Элемент meta формирует соответствующую часть интерфейса. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Элемент title формирует соответствующую часть интерфейса. -->
-    <title>Tenant Center — Berry Homes</title>
-    <!-- Элемент link формирует соответствующую часть интерфейса. -->
-<link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
-    <!-- Подключает общие стили публичного интерфейса. -->
-    <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260830g)}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tenant Center — Berry Homes</title>
+        <link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
+        <!-- Подключает общие стили публичного интерфейса. -->
+        <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
+        <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260909e)}">
+        <link rel="stylesheet" th:href="@{/css/tenants-layered.css(v=20260911g)}">
 </head>
-<!-- Элемент body формирует соответствующую часть интерфейса. -->
-<body class="tenant-page">
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="toast" th:if="${successMessage}" th:text="${successMessage}">Your message was sent.</div>
-<!-- Подключает единую шапку публичного сайта. -->
-<!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div th:replace="~{fragments/header :: public-header}">
-</div>
-<!-- Элемент main формирует соответствующую часть интерфейса. -->
-<main>
-    <!-- Элемент nav формирует соответствующую часть интерфейса. -->
-    <nav class="audience-nav site-shell" aria-label="Audience navigation">
-        <!-- Элемент a формирует соответствующую часть интерфейса. -->
-        <a class="tenant active" href="/tenants">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
-        <!-- Элемент a формирует соответствующую часть интерфейса. -->
-        <a class="owner" href="/homeowners">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-house-small.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
-        <!-- Элемент a формирует соответствующую часть интерфейса. -->
-        <a class="investor" href="/investors">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
-    </nav>
+    <body class="tenant-page">
+        <div class="toast" th:if="${successMessage}" th:text="${successMessage}">Your message was sent.</div>
+        <!-- Подключает единую шапку публичного сайта. -->
+        <div th:replace="~{fragments/header :: public-header}"></div>
+        <main>
+            <nav class="audience-nav site-shell" aria-label="Audience navigation">
+                <a class="tenant active" href="/tenants">
+                    <img th:src="@{/images/tenants/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+                <a class="owner" href="/homeowners">
+                    <img th:src="@{/images/tenants/icon-house-small.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
+                <a class="investor" href="/investors">
+                    <img th:src="@{/images/tenants/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+            </nav>
+            <section class="hero site-shell tenant-hero art-hero">
+                <picture class="art-hero__picture" aria-hidden="true">
+    <source media="(max-width: 700px)" th:srcset="@{/images/tenants/elements/hero/hero-narrow-v2.png}">
+    <source media="(min-width: 1700px)" th:srcset="@{/images/tenants/elements/hero/hero-wide-v2.png}">
+    <img th:src="@{/images/tenants/elements/hero/hero-medium-v2.png}" alt="" fetchpriority="high">
+</picture>
+                <div class="hero-copy art-hero__copy">
+                    <h1 th:text="#{tenant.title}">Tenant Center</h1>
+                    <p th:text="#{tenant.subtitle}">Everything you need as a Berry Homes tenant, all in one place.</p>
+                    <i></i>
+                </div>
+            </section>
+            <section class="service-grid tenant-services site-shell" aria-label="Tenant services">
+                <article class="feature-card portal-card scene-service-card tenant-layered-panel watercolor-panel">
+                    <div class="card-content">
+                        <div class="service-heading">
+                            <span class="round-icon">
+                                <img class="round-icon-bg" th:src="@{/images/tenants/circle_tenant_portal.png}" alt="" width="1254" height="1254">
+                                <img class="round-icon-symbol" th:src="@{/images/tenants/icon-tenants.svg}" alt="">
+                            </span>
+                            <h2 th:text="#{tenant.portal}">Tenant Portal</h2>
+                            <i></i>
+                        </div>
+                        <div class="service-stage">
+                            <span class="tenant-scene service-art" aria-hidden="true">
+                                <img th:src="@{/images/tenants/elements/tenant_portal/neighborhood.png}" alt="" width="1365" height="1211" loading="lazy">
+                            </span>
+                            <div class="service-copy">
+                                <p th:text="#{tenant.portal.text}">Pay rent, submit maintenance requests, view your lease and documents, and message your property manager.</p>
+                            </div>
+                        </div>
+                        <a class="outline-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener">
+                            <img th:src="@{/images/tenants/icon-lock.svg}" alt=""><span th:text="#{tenant.portal.open}">Open Tenant Portal</span> <span>→</span>
+                        </a>
+                        <small class="service-card-footer portal-security">
+                            <img th:src="@{/images/tenants/icon-lock.svg}" alt="">
+                            <span th:utext="#{common.portal.secure}">Secure &nbsp; • &nbsp; Powered by TenantCloud</span>
+                        </small>
+                    </div>
+                </article>
+                <article class="feature-card emergency-card tenant-layered-panel watercolor-panel">
+                    <div class="card-content">
+                        <span class="round-icon">
+                            <img class="round-icon-bg" th:src="@{/images/tenants/circle_emergency.png}" alt="" width="1254" height="1254">
+                            <img class="round-icon-symbol" th:src="@{/images/tenants/icon-warning.svg}" alt="">
+                        </span>
+                        <h2 th:utext="#{tenant.emergency.html}">Emergency<br>Maintenance</h2>
+                        <i></i>
+                        <p th:text="#{tenant.emergency.text}">For urgent issues that require immediate attention.</p>
+                        <ul>
+                            <li>
+                                <img th:src="@{/images/tenants/icon-water-drop.svg}" alt=""><span th:text="#{tenant.emergency.water}">Water Leak</span></li>
+                            <li>
+                                <img th:src="@{/images/tenants/icon-flame.svg}" alt=""><span th:text="#{tenant.emergency.gas}">Gas Leak / Smell</span></li>
+                            <li>
+                                <img th:src="@{/images/tenants/icon-thermometer.svg}" alt=""><span th:text="#{tenant.emergency.heat}">No Heat (in winter)</span></li>
+                        </ul>
+                        <a class="primary-button emergency" th:href="|tel:${settings['emergency_phone']}|">
+                            <img th:src="@{/images/tenants/icon-phone.svg}" alt=""><span><span th:text="#{common.call}">Call</span> <span th:text="${settings[&apos;emergency_phone&apos;]}">(412) 555-0199</span></span></a>
+                        <small th:text="#{tenant.emergency.available}">Available 24/7</small>
+                    </div>
+                    </div>
+                </article>
+                <article class="feature-card contact-card scene-service-card tenant-layered-panel watercolor-panel">
+                    <div class="card-content">
+                        <div class="service-heading">
+                            <span class="round-icon">
+                                <img class="round-icon-bg" th:src="@{/images/tenants/circle_contact_us.png}" alt="" width="1254" height="1254">
+                                <img class="round-icon-symbol" th:src="@{/images/tenants/icon-phone.svg}" alt="">
+                            </span>
+                            <h2 th:text="#{tenant.contact}">Contact Us</h2>
+                            <i></i>
+                        </div>
+                        <div class="service-stage">
+                            <div class="service-copy">
+                                <p th:text="#{tenant.contact.text}">We're here to help during business hours.</p>
+                                <address>
+                                    <span>
+                                        <img th:src="@{/images/tenants/icon-phone.svg}" alt="">
+                                        <a th:href="|tel:${settings?.get('site_phone')}|" th:text="${settings?.get('site_phone')} ?: '(412) 555-0123'">(412) 555-0123</a>
+                                    </span>
+                                    <span>
+                                        <img th:src="@{/images/tenants/icon-envelope.svg}" alt="">
+                                        <a th:href="|mailto:${settings?.get('site_email')}|" th:text="${settings?.get('site_email')} ?: 'info@berryhomespm.com'">info@berryhomespm.com</a>
+                                    </span>
+                                    <span>
+                                        <img th:src="@{/images/tenants/icon-clock.svg}" alt="">
+                                        <b th:text="${settings?.get('site_hours')} ?: 'Mon – Fri: 9:00 AM – 5:00 PM'">Mon – Fri: 9:00 AM – 5:00 PM</b>
+                                    </span>
+                                    <span>
+                                        <img th:src="@{/images/tenants/icon-location.svg}" alt="">
+                                        <a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings['site_office']} ?: #{common.location}">Pittsburgh, PA 15222</a>
+                                    </span>
+                                </address>
+                            </div>
+                            <span class="tenant-scene service-art" aria-hidden="true">
+                                <img th:src="@{/images/tenants/elements/contact_us/park-lamp.png}" alt="" width="1072" height="1583" loading="lazy">
+                            </span>
+                        </div>
+                        <button class="outline-button modal-open" type="button">
+                            <img th:src="@{/images/tenants/icon-envelope.svg}" alt=""><span th:text="#{common.send}">Send a Message</span></button>
+                        <span class="service-card-footer" aria-hidden="true"></span>
+                    </div>
+                </article>
+            </section>
+            <section class="documents site-shell">
+                <header>
+                    <h2>
+                        <img th:src="@{/images/tenants/icon-document.svg}" alt=""><span th:text="#{tenant.documents}">Tenant Documents</span></h2>
+                    <p th:text="#{tenant.documents.text}">Helpful guides and important information for our tenants.</p>
+                </header>
+                <div class="document-grid">
+                    <article class="document-card--active tenant-layered-panel watercolor-panel document-card--move-in">
 
-    <!-- Элемент section формирует соответствующую часть интерфейса. -->
-    <section class="hero site-shell tenant-hero">
-        <!-- Элемент img формирует соответствующую часть интерфейса. -->
-        <img th:src="@{/images/tenants/for_tenants.png}" alt="A bright Berry Homes living room">
-        <!-- Элемент div формирует соответствующую часть интерфейса. -->
-        <div class="hero-copy">
-<!-- Элемент h1 формирует соответствующую часть интерфейса. -->
-<h1 th:text="#{tenant.title}">Tenant Center</h1>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.subtitle}">Everything you need as a Berry Homes tenant, all in one place.</p>
-<i>
-</i>
-</div>
-    </section>
+                        <span class="tenant-scene document-art" aria-hidden="true">
+                            <img class="document-art__left" th:src="@{/images/tenants/elements/move_in_guide/house.png}" alt="" loading="lazy" width="879" height="1233">
+                            <img class="document-art__right" th:src="@{/images/tenants/elements/move_in_guide/tree-garden.png}" alt="" loading="lazy" width="1495" height="1072">
+                        </span>
+                        <div class="document-copy">
+                            <img th:src="@{/images/tenants/icon-house-small.svg}" alt="">
+                            <h3 th:text="#{tenant.movein}">Move-In Guide</h3>
+                            <p th:text="#{tenant.movein.text}">Everything you need to know before moving into your new home.</p>
+                            <a th:if="${moveInGuide != null}" th:href="@{/tenants/documents/move-in-guide}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+                            <span class="document-unavailable" th:unless="${moveInGuide != null}">PDF coming soon</span>
+                        </div>
+                    </article>
+                    <article class="document-card--active tenant-layered-panel watercolor-panel document-card--move-out">
 
-    <!-- Элемент section формирует соответствующую часть интерфейса. -->
-    <section class="service-grid tenant-services site-shell" aria-label="Tenant services">
-        <!-- Элемент article формирует соответствующую часть интерфейса. -->
-        <article class="feature-card portal-card">
-            <!-- Элемент img формирует соответствующую часть интерфейса. -->
-            <img class="card-bg" th:src="@{/images/tenants/tenant_portal.png}" alt="">
-            <!-- Элемент div формирует соответствующую часть интерфейса. -->
-            <div class="card-content">
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span class="round-icon">
-<!-- Элемент img отображает новую акварельную подложку иконки. -->
-<img class="round-icon-bg" th:src="@{/images/tenants/circle_tenant_portal.png}" alt="">
-<!-- Элемент img отображает иконку портала поверх подложки. -->
-<img class="round-icon-symbol" th:src="@{/images/tenants/icon-tenants.svg}" alt="">
-</span>
-<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2 th:text="#{tenant.portal}">Tenant Portal</h2>
-<i>
-</i>
-                <!-- Элемент p формирует соответствующую часть интерфейса. -->
-                <p th:text="#{tenant.portal.text}">Pay rent, submit maintenance requests, view your lease and documents, and message your property manager.</p>
-                <!-- Элемент a формирует соответствующую часть интерфейса. -->
-                <a class="outline-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-lock.svg}" alt=""><span th:text="#{tenant.portal.open}">Open Tenant Portal</span> <span>→</span>
-</a>
-                <!-- Элемент small формирует соответствующую часть интерфейса. -->
-                <small th:utext="#{common.portal.secure}">♢ Secure &nbsp; • &nbsp; Powered by TenantCloud</small>
-            </div>
-        </article>
-        <!-- Элемент article формирует соответствующую часть интерфейса. -->
-        <article class="feature-card emergency-card">
-            <!-- Элемент img формирует соответствующую часть интерфейса. -->
-            <img class="card-bg" th:src="@{/images/tenants/emergency.png}" alt="">
-            <!-- Элемент div формирует соответствующую часть интерфейса. -->
-            <div class="card-content">
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span class="round-icon">
-<!-- Элемент img отображает новую акварельную подложку иконки. -->
-<img class="round-icon-bg" th:src="@{/images/tenants/circle_emergency.png}" alt="">
-<!-- Элемент img отображает предупреждающую иконку поверх подложки. -->
-<img class="round-icon-symbol" th:src="@{/images/tenants/icon-warning.svg}" alt="">
-</span>
-<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2 th:utext="#{tenant.emergency.html}">Emergency<br>Maintenance</h2>
-<i>
-</i>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.emergency.text}">For urgent issues that require immediate attention.</p>
-                <!-- Элемент ul формирует соответствующую часть интерфейса. -->
-                <ul>
-<!-- Элемент li формирует соответствующую часть интерфейса. -->
-<li>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-water-drop.svg}" alt=""><span th:text="#{tenant.emergency.water}">Water Leak</span></li>
-<!-- Элемент li формирует соответствующую часть интерфейса. -->
-<li>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-flame.svg}" alt=""><span th:text="#{tenant.emergency.gas}">Gas Leak / Smell</span></li>
-<!-- Элемент li формирует соответствующую часть интерфейса. -->
-<li>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-thermometer.svg}" alt=""><span th:text="#{tenant.emergency.heat}">No Heat (in winter)</span></li>
-</ul>
-                <!-- Элемент a формирует соответствующую часть интерфейса. -->
-                <a class="primary-button emergency" th:href="|tel:${settings['emergency_phone']}|">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-phone.svg}" alt=""><span><span th:text="#{common.call}">Call</span> <span th:text="${settings[&apos;emergency_phone&apos;]}">(412) 555-0199</span></span></a>
-<!-- Элемент small формирует соответствующую часть интерфейса. -->
-<small th:text="#{tenant.emergency.available}">Available 24/7</small>
-            </div>
-        </article>
-        <!-- Элемент article формирует соответствующую часть интерфейса. -->
-        <article class="feature-card contact-card">
-            <!-- Элемент img формирует соответствующую часть интерфейса. -->
-            <img class="card-bg" th:src="@{/images/tenants/contact_us.png}" alt="">
-            <!-- Элемент div формирует соответствующую часть интерфейса. -->
-            <div class="card-content">
-<!-- Элемент span формирует соответствующую часть интерфейса. -->
-<span class="round-icon">
-<!-- Элемент img отображает новую акварельную подложку иконки. -->
-<img class="round-icon-bg" th:src="@{/images/tenants/circle_contact_us.png}" alt="">
-<!-- Элемент img отображает телефонную иконку поверх подложки. -->
-<img class="round-icon-symbol" th:src="@{/images/tenants/icon-phone.svg}" alt="">
-</span>
-<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2 th:text="#{tenant.contact}">Contact Us</h2>
-<i>
-</i>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.contact.text}">We're here to help during business hours.</p>
-                <address>
-                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-phone.svg}" alt="">
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="|tel:${settings?.get('site_phone')}|" th:text="${settings?.get('site_phone')} ?: '(412) 555-0123'">(412) 555-0123</a>
-</span>
-                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-envelope.svg}" alt="">
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="|mailto:${settings?.get('site_email')}|" th:text="${settings?.get('site_email')} ?: 'info@berryhomespm.com'">info@berryhomespm.com</a>
-</span>
-                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-clock.svg}" alt="">
-<b th:text="${settings?.get('site_hours')} ?: 'Mon – Fri: 9:00 AM – 5:00 PM'">Mon – Fri: 9:00 AM – 5:00 PM</b>
-</span>
-                    <!-- Элемент span формирует соответствующую часть интерфейса. -->
-                    <span>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-location.svg}" alt="">
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:href="${googleMapsUrl}" target="_blank" rel="noopener" th:text="${settings['site_office']} ?: #{common.location}">Pittsburgh, PA 15222</a>
-</span>
-                </address>
-                <!-- Элемент button формирует соответствующую часть интерфейса. -->
-                <button class="outline-button modal-open" type="button">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-envelope.svg}" alt=""><span th:text="#{common.send}">Send a Message</span></button>
-            </div>
-        </article>
-    </section>
+                        <span class="tenant-scene document-art" aria-hidden="true">
+                            <img class="document-art__left" th:src="@{/images/tenants/elements/move_out_checklist/mailbox.png}" alt="" loading="lazy" width="1181" height="1387">
+                            <img class="document-art__right" th:src="@{/images/tenants/elements/move_out_checklist/flower-garden.png}" alt="" loading="lazy" width="1397" height="1200">
+                        </span>
+                        <div class="document-copy">
+                            <img th:src="@{/images/tenants/icon-clipboard-check.svg}" alt="">
+                            <h3 th:text="#{tenant.moveout}">Move-Out Checklist</h3>
+                            <p th:text="#{tenant.moveout.text}">A step-by-step checklist to help you prepare for a smooth move-out.</p>
+                            <a th:if="${moveOutChecklist != null}" th:href="@{/tenants/documents/move-out-checklist}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+                            <span class="document-unavailable" th:unless="${moveOutChecklist != null}">PDF coming soon</span>
+                        </div>
+                    </article>
+                    <article class="document-card--active tenant-layered-panel watercolor-panel document-card--handbook">
 
-    <!-- Элемент section формирует соответствующую часть интерфейса. -->
-    <section class="documents site-shell">
-        <!-- Элемент header формирует соответствующую часть интерфейса. -->
-        <header>
-<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2>
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-document.svg}" alt=""><span th:text="#{tenant.documents}">Tenant Documents</span></h2>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.documents.text}">Helpful guides and important information for our tenants.</p>
-</header>
-        <!-- Элемент div формирует соответствующую часть интерфейса. -->
-        <div class="document-grid">
-            <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article class="document-card--active" style="--doc-bg:url('../images/tenants/move_in_guide.png')">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-house-small.svg}" alt="">
-<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3 th:text="#{tenant.movein}">Move-In Guide</h3>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.movein.text}">Everything you need to know before moving into your new home.</p>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:if="${moveInGuide != null}" th:href="@{/tenants/documents/move-in-guide}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
-<span class="document-unavailable" th:unless="${moveInGuide != null}">PDF coming soon</span>
-</article>
-            <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article class="document-card--active" style="--doc-bg:url('../images/tenants/move_out_checklist.png')">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-clipboard-check.svg}" alt="">
-<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3 th:text="#{tenant.moveout}">Move-Out Checklist</h3>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.moveout.text}">A step-by-step checklist to help you prepare for a smooth move-out.</p>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:if="${moveOutChecklist != null}" th:href="@{/tenants/documents/move-out-checklist}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
-<span class="document-unavailable" th:unless="${moveOutChecklist != null}">PDF coming soon</span>
-</article>
-            <!-- Элемент article формирует соответствующую часть интерфейса. -->
-            <article class="document-card--active" style="--doc-bg:url('../images/tenants/resident_handbook.png')">
-<!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/tenants/icon-book-open.svg}" alt="">
-<!-- Элемент h3 формирует соответствующую часть интерфейса. -->
-<h3 th:text="#{tenant.handbook}">Resident Handbook</h3>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.handbook.text}">Your complete guide to policies, procedures, and important resident information.</p>
-<!-- Элемент a формирует соответствующую часть интерфейса. -->
-<a th:if="${residentHandbook != null}" th:href="@{/tenants/documents/resident-handbook}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
-<span class="document-unavailable" th:unless="${residentHandbook != null}">PDF coming soon</span>
-</article>
-        </div>
-    </section>
-
-    <!-- Элемент section формирует соответствующую часть интерфейса. -->
-    <section class="thanks-banner site-shell">
-        <!-- Элемент img формирует соответствующую часть интерфейса. -->
-        <img th:src="@{/images/tenants/share_your_exp_bg_wide.png}" alt="A basket of berries and flowers">
-        <!-- Элемент div формирует соответствующую часть интерфейса. -->
-        <div>
-<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2 th:text="#{tenant.thanks}">Thank You for Choosing Berry Homes!</h2>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{tenant.thanks.text}">It is our privilege to help make your home comfortable, cared for, and truly yours.</p>
-</div>
-    </section>
-<section class="partnership site-shell tenant-partnership">
-<div><img th:src="@{/images/logo-etc/berryhomes_logo.png}" alt="Berry Homes"><i></i><a th:href="@{/max-business-group}" aria-label="Max Business Group"><img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group"></a></div>
-<p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><b>Office Phone Number: <a href="tel:+17242007309">724-200-7309</a></b></p>
-</section>
-</main>
-
-<div th:replace="~{fragments/header :: public-footer}"></div>
-
-<!-- Элемент dialog формирует соответствующую часть интерфейса. -->
-<dialog class="contact-modal">
-<!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button class="modal-close" type="button" aria-label="Close">×</button>
-<!-- Элемент h2 формирует соответствующую часть интерфейса. -->
-<h2 th:text="#{contact.form}">Send a Message</h2>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{contact.reply}">Our property manager will get back to you shortly.</p>
-<!-- Элемент form формирует соответствующую часть интерфейса. -->
-<form th:action="@{/tenants/message}" th:object="${contactDto}" method="post">
-<!-- Элемент input формирует соответствующую часть интерфейса. -->
-<input type="hidden" th:field="*{type}">
-<!-- Элемент input формирует соответствующую часть интерфейса. -->
-<input type="hidden" th:field="*{status}">
-<!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label><span th:text="#{common.name}">Name</span><input th:field="*{name}" required minlength="3" maxlength="100">
-</label>
-<!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label><span th:text="#{common.email}">Email</span><input type="email" th:field="*{email}" required maxlength="100">
-</label>
-<!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label><span th:text="#{common.phone}">Phone</span><input type="tel" th:field="*{phone}" required minlength="3" maxlength="30">
-</label>
-<!-- Элемент label формирует соответствующую часть интерфейса. -->
-<label><span th:text="#{common.message}">Message</span><textarea th:field="*{message}" required minlength="5" rows="4">
-</textarea>
-</label>
-<label class="privacy-consent"><input type="checkbox" name="privacyConsent" value="true" required><span><span th:text="#{privacy.consent.prefix}">I agree to the</span> <a th:href="@{/privacy-policy}" target="_blank" th:text="#{footer.privacy}">Privacy Policy</a>.</span></label>
-<!-- Элемент button формирует соответствующую часть интерфейса. -->
-<button class="primary-button" type="submit" th:text="#{common.submit_message}">Submit Message</button>
-</form>
-</dialog>
-<!-- Элемент script формирует соответствующую часть интерфейса. -->
-<script>
+                        <span class="tenant-scene document-art" aria-hidden="true">
+                            <img class="document-art__left" th:src="@{/images/tenants/elements/resident_handbook/reading-corner.png}" alt="" loading="lazy" width="1251" height="1341">
+                            <img class="document-art__right" th:src="@{/images/tenants/elements/resident_handbook/flower-garden.png}" alt="" loading="lazy" width="948" height="1089">
+                        </span>
+                        <div class="document-copy">
+                            <img th:src="@{/images/tenants/icon-book-open.svg}" alt="">
+                            <h3 th:text="#{tenant.handbook}">Resident Handbook</h3>
+                            <p th:text="#{tenant.handbook.text}">Your complete guide to policies, procedures, and important resident information.</p>
+                            <a th:if="${residentHandbook != null}" th:href="@{/tenants/documents/resident-handbook}">⇩ &nbsp; <span th:text="#{common.download}">Download PDF</span></a>
+                            <span class="document-unavailable" th:unless="${residentHandbook != null}">PDF coming soon</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <section class="thanks-banner site-shell tenant-layered-panel watercolor-panel">
+                <span class="tenant-scene thanks-art" aria-hidden="true">
+                    <img class="thanks-art__basket-bg" th:src="@{/images/tenants/elements/share_your_experience/watercolor-brush-strokes-transparent.png}" alt="" width="1254" height="1254" loading="lazy">
+                    <img class="thanks-art__basket" th:src="@{/images/tenants/elements/share_your_experience/berry-basket.png}" alt="" width="1584" height="1060" loading="lazy">
+                    <img class="thanks-art__keys" th:src="@{/images/tenants/elements/share_your_experience/house-keys.png}" alt="" width="1526" height="1000" loading="lazy">
+                </span>
+                <div>
+                    <h2 th:text="#{tenant.thanks}">Thank You for Choosing Berry Homes!</h2>
+                    <p th:text="#{tenant.thanks.text}">It is our privilege to help make your home comfortable, cared for, and truly yours.</p>
+                </div>
+            </section>
+            <section class="partnership site-shell tenant-partnership">
+                <div><img th:src="@{/images/logo-etc/berryhomes_logo.png}" alt="Berry Homes" width="907" height="659"><i></i><a th:href="@{/max-business-group}" aria-label="Max Business Group"><img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group" width="1219" height="683"></a></div>
+                <p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><b>Office Phone Number: <a href="tel:+17242007309">724-200-7309</a></b></p>
+            </section>
+        </main>
+        <div th:replace="~{fragments/header :: public-footer}"></div>
+        <dialog class="contact-modal">
+            <button class="modal-close" type="button" aria-label="Close">×</button>
+            <h2 th:text="#{contact.form}">Send a Message</h2>
+            <p th:text="#{contact.reply}">Our property manager will get back to you shortly.</p>
+            <form th:action="@{/tenants/message}" th:object="${contactDto}" method="post">
+                <input type="hidden" th:field="*{type}">
+                <input type="hidden" th:field="*{status}">
+                <label><span th:text="#{common.name}">Name</span><input th:field="*{name}" required minlength="3" maxlength="100">
+                </label>
+                <label><span th:text="#{common.email}">Email</span><input type="email" th:field="*{email}" required maxlength="100">
+                </label>
+                <label><span th:text="#{common.phone}">Phone</span><input type="tel" th:field="*{phone}" required minlength="3" maxlength="30">
+                </label>
+                <label><span th:text="#{common.message}">Message</span><textarea th:field="*{message}" required minlength="5" rows="4">
+                    </textarea>
+                </label>
+                <label class="privacy-consent"><input type="checkbox" name="privacyConsent" value="true" required><span><span th:text="#{privacy.consent.prefix}">I agree to the</span> <a th:href="@{/privacy-policy}" target="_blank" th:text="#{footer.privacy}">Privacy Policy</a>.</span></label>
+                <button class="primary-button" type="submit" th:text="#{common.submit_message}">Submit Message</button>
+            </form>
+        </dialog>
+        <script>
 document.querySelectorAll('.document-card--active').forEach(card => {
     const download = card.querySelector('a[href]');
     if (!download) return;
@@ -308,8 +235,7 @@ document.querySelectorAll('.document-card--active').forEach(card => {
 
 const modal=document.querySelector('.contact-modal');document.querySelector('.modal-open').addEventListener('click',()=>modal.showModal());document.querySelector('.modal-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});document.querySelectorAll('[aria-disabled="true"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));</script>
 <!-- Подключает поведение общей мобильной навигации. -->
-<!-- Элемент script формирует соответствующую часть интерфейса. -->
 <script th:replace="~{fragments/header :: public-navigation-script}">
-</script>
-</body>
+        </script>
+    </body>
 </html>

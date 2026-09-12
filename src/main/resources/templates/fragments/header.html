@@ -77,8 +77,8 @@
                     <p class="global-contact-form__status" role="status" aria-live="polite" th:attr="data-success=#{contact.success},data-error=#{contact.modal.error}"></p>
                 </form>
             </section>
-            <aside class="global-contact-modal__details">
-                <img th:src="@{/images/contact-us/contact_us_bg.png}" alt="">
+            <aside class="global-contact-modal__details watercolor-panel">
+                <img th:src="@{/images/contact-us/elements/contact-scene.png}" alt="">
                 <h3 th:text="#{contact.modal.other_ways}">Other Ways to Reach Us</h3>
                 <div class="global-contact-modal__contact-list">
                     <span><img th:src="@{/images/contact-us/icon-phone.svg}" alt=""><span><b th:text="#{contact.modal.call}">Call Us</b><a th:href="|tel:${settings?.get(&apos;site_phone&apos;)}|" th:text="${settings?.get(&apos;site_phone&apos;)} ?: &apos;(412) 555-0123&apos;">(412) 555-0123</a></span></span>

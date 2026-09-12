@@ -18,7 +18,8 @@
     <link href="https://googleapis.com" rel="stylesheet">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260831a)}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260906e)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="home-page">
@@ -103,17 +104,17 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="main-card item-tenants">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
-            <div class="image-mask-container">
+            <div class="image-mask-container watercolor-panel">
                 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                <img th:src="@{/images/main/tenants_bg.png}" alt="For Tenants" class="card-image">
+                <img th:src="@{/images/main/elements/tenants-expanded.png}" data-focus-box="0.30,0.26,0.50,0.42" alt="For Tenants" class="card-image">
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                <div class="floating-badge-circle">
+                <a th:href="@{/tenants}" class="floating-badge-circle" th:aria-label="#{home.tenants.title}">
                     <!-- Показывает новую иконку карточки с текущим цветом раздела. -->
                     <span class="badge-svg main-masked-icon icon-tenants" aria-hidden="true"></span>
-                </div>
+                </a>
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.tenants.title}">For Tenants</h2>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
@@ -132,17 +133,17 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="main-card item-homeowners">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
-            <div class="image-mask-container">
+            <div class="image-mask-container watercolor-panel">
                 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                <img th:src="@{/images/main/homeowners_bg.png}" alt="For Homeowners" class="card-image">
+                <img th:src="@{/images/main/elements/homeowners-expanded.png}" data-focus-box="0.24,0.30,0.47,0.39" alt="For Homeowners" class="card-image">
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                <div class="floating-badge-circle">
+                <a th:href="@{/homeowners}" class="floating-badge-circle" th:aria-label="#{home.owners.title}">
                     <!-- Показывает новую иконку карточки с текущим цветом раздела. -->
                     <span class="badge-svg main-masked-icon icon-homeowners" aria-hidden="true"></span>
-                </div>
+                </a>
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.owners.title}">For Homeowners</h2>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
@@ -161,17 +162,17 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="main-card item-investors">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
-            <div class="image-mask-container">
+            <div class="image-mask-container watercolor-panel">
                 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-                <img th:src="@{/images/main/investors_bg.png}" alt="For Investors" class="card-image">
+                <img th:src="@{/images/main/elements/investors-expanded.png}" data-focus-box="0.24,0.30,0.54,0.39" alt="For Investors" class="card-image">
             </div>
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="card-content-area">
                 <!-- Элемент div формирует соответствующую часть интерфейса. -->
-                <div class="floating-badge-circle">
+                <a th:href="@{/investors}" class="floating-badge-circle" th:aria-label="#{home.investors.title}">
                     <!-- Показывает новую иконку карточки с текущим цветом раздела. -->
                     <span class="badge-svg main-masked-icon icon-investors" aria-hidden="true"></span>
-                </div>
+                </a>
                 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
                 <h2 th:text="#{home.investors.title}">For Investors</h2>
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
@@ -195,6 +196,7 @@
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="feature-card item-tenants">
             <!-- Размещает левую ягодную композицию у внешнего края преимущества. -->
+            <img class="feature-berry feature-berry-left" src="/images/main/elements/berries-left.png" alt="" aria-hidden="true">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
                 <!-- Показывает новую иконку преимущества с текущим цветом раздела. -->
@@ -242,6 +244,7 @@
                 <p th:text="#{home.reporting.text}">Clear financial reports and updates so you always stay informed.</p>
             </div>
             <!-- Размещает правую ягодную композицию у внешнего края преимущества. -->
+            <img class="feature-berry feature-berry-right" src="/images/main/elements/berries-right.png" alt="" aria-hidden="true">
         </div>
 
     </section>
@@ -253,7 +256,7 @@
 <script th:replace="~{fragments/header :: public-navigation-script}">
 </script>
 <!-- Подключает единый подвал публичного сайта. -->
-<div class="home-footer-berries" aria-hidden="true"><img src="/images/main/berries_left.png" alt=""><img src="/images/main/berries_right.png" alt=""></div>
 <div th:replace="~{fragments/header :: public-footer}"></div>
+<script th:src="@{/js/main-card-focus.js}"></script>
 </body>
 </html>

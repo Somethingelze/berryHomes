@@ -13,7 +13,8 @@
 <link rel="stylesheet" th:href="@{/css/investors.css(v=20260830g)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260830g)}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260909e)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="investor-page">
@@ -35,9 +36,14 @@
 <a class="investor active" href="/investors"><img th:src="@{/images/investors/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
 </nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
-<section class="hero">
+<section class="hero art-hero">
+<picture class="art-hero__picture" aria-hidden="true">
+    <source media="(max-width: 700px)" th:srcset="@{/images/investors/elements/hero/hero-narrow-v2.png}">
+    <source media="(min-width: 1700px)" th:srcset="@{/images/investors/elements/hero/hero-wide-v2.png}">
+    <img th:src="@{/images/investors/elements/hero/hero-medium-v2.png}" alt="" fetchpriority="high">
+</picture>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="shell hero-content">
+<div class="shell hero-content art-hero__copy">
 <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
 <h1 th:text="#{investor.title}">Investor Center</h1>
 <strong th:text="#{investor.subtitle}">Make informed decisions. Protect your investment.</strong>
@@ -349,7 +355,8 @@
 </div>
 </section>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
-<section class="call">
+<section class="call watercolor-panel">
+<img class="call-scene" th:src="@{/images/investors/elements/call-city.png}" alt="" aria-hidden="true" loading="lazy">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="shell">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->

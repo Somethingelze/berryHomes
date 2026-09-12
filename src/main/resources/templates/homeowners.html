@@ -13,7 +13,8 @@
 <link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260830g)}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260911j)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="owner-page">
@@ -41,11 +42,15 @@
 <img th:src="@{/images/homeowners/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
 </nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
-<section class="hero site-shell owner-hero">
+<section class="hero site-shell owner-hero art-hero">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/owner_center.png}" alt="A bright Berry Homes living room">
+<picture class="art-hero__picture" aria-hidden="true">
+    <source media="(max-width: 700px)" th:srcset="@{/images/homeowners/elements/hero/hero-narrow-v2.png}">
+    <source media="(min-width: 1700px)" th:srcset="@{/images/homeowners/elements/hero/hero-wide-v2.png}">
+    <img th:src="@{/images/homeowners/elements/hero/hero-medium-v2.png}" alt="" fetchpriority="high">
+</picture>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
-<div class="hero-copy">
+<div class="hero-copy art-hero__copy">
 <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
 <h1 th:text="#{owner.title}">Owner Center</h1>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
@@ -57,9 +62,9 @@
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="service-grid owner-services site-shell">
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
-<article class="feature-card owner-portal">
+<article class="feature-card owner-portal watercolor-panel">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img class="card-bg" th:src="@{/images/homeowners/owner_portal.png}" alt="">
+<img class="owner-scene scene-object" th:src="@{/images/homeowners/elements/portal-house.png}" alt="" aria-hidden="true" loading="lazy">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
@@ -83,9 +88,9 @@
 </div>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
-<article class="feature-card owner-contact">
+<article class="feature-card owner-contact watercolor-panel">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img class="card-bg" th:src="@{/images/homeowners/contact.png}" alt="">
+<img class="owner-scene scene-object" th:src="@{/images/homeowners/elements/contact-city.png}" alt="" aria-hidden="true" loading="lazy">
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="card-content">
 <!-- Элемент span формирует соответствующую часть интерфейса. -->
@@ -138,9 +143,10 @@
 </article>
 </section>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
-<section class="how-it-works site-shell">
+<section class="how-it-works site-shell watercolor-panel">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img class="how-bg" th:src="@{/images/homeowners/how_it_works.png}" alt="">
+<img class="steps-scene steps-scene--left" th:src="@{/images/homeowners/elements/tree-left.png}" alt="" aria-hidden="true" loading="lazy">
+<img class="steps-scene steps-scene--right" th:src="@{/images/homeowners/elements/tree-right.png}" alt="" aria-hidden="true" loading="lazy">
 <!-- Элемент h2 формирует соответствующую часть интерфейса. -->
 <h2 class="section-heading-with-branches">
 <!-- Элемент img отображает левую декоративную ветвь. -->
@@ -167,7 +173,7 @@
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-trend-line.svg}" alt="">
+<img th:src="@{/images/homeowners/icon-investors.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
 <h3 th:text="#{owner.step2}">Track Your Investment</h3>
 <i>

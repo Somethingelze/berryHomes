@@ -88,6 +88,23 @@ server:
     max-part-count: 50
 
 app:
+  social:
+    initial-delay-ms: ${SOCIAL_SYNC_INITIAL_DELAY_MS:5000}
+    sync-delay-ms: ${SOCIAL_SYNC_DELAY_MS:1800000}
+    youtube:
+      url: https://www.youtube.com/channel/UC9bej2RFgOhIHCJyYy0dmlg
+      channel-id: UC9bej2RFgOhIHCJyYy0dmlg
+    tiktok:
+      url: https://www.tiktok.com/@berry1homes
+      access-token: ${TIKTOK_ACCESS_TOKEN:}
+    instagram:
+      url: https://www.instagram.com/berryhomes1/
+      user-id: ${INSTAGRAM_USER_ID:}
+      access-token: ${INSTAGRAM_ACCESS_TOKEN:${META_ACCESS_TOKEN:}}
+    facebook:
+      url: https://www.facebook.com/profile.php?id=61593763484922
+      page-id: ${FACEBOOK_PAGE_ID:61593763484922}
+      access-token: ${FACEBOOK_ACCESS_TOKEN:${META_ACCESS_TOKEN:}}
   upload:
     dir: uploads/
   management:
