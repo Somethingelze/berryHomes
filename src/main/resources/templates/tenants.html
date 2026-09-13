@@ -6,9 +6,9 @@
         <title>Tenant Center — Berry Homes</title>
         <link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
         <!-- Подключает общие стили публичного интерфейса. -->
-        <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
+        <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260913c)}">
         <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260909e)}">
-        <link rel="stylesheet" th:href="@{/css/tenants-layered.css(v=20260911g)}">
+        <link rel="stylesheet" th:href="@{/css/tenants-layered.css(v=20260913b)}">
 </head>
     <body class="tenant-page">
         <div class="toast" th:if="${successMessage}" th:text="${successMessage}">Your message was sent.</div>
@@ -17,11 +17,11 @@
         <main>
             <nav class="audience-nav site-shell" aria-label="Audience navigation">
                 <a class="tenant active" href="/tenants">
-                    <img th:src="@{/images/tenants/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+                    <img th:src="@{/images/tenants/icon-tenants.svg}" alt=""><span class="audience-label--full" th:text="#{nav.tenants}">For Tenants</span><span class="audience-label--short" th:text="#{nav.tenants.short}">Tenants</span></a>
                 <a class="owner" href="/homeowners">
-                    <img th:src="@{/images/tenants/icon-house-small.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
+                    <img th:src="@{/images/tenants/icon-house-small.svg}" alt=""><span class="audience-label--full" th:text="#{nav.homeowners}">For Homeowners</span><span class="audience-label--short" th:text="#{nav.homeowners.short}">Homeowners</span></a>
                 <a class="investor" href="/investors">
-                    <img th:src="@{/images/tenants/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+                    <img th:src="@{/images/tenants/icon-investors.svg}" alt=""><span class="audience-label--full" th:text="#{nav.investors}">For Investors</span><span class="audience-label--short" th:text="#{nav.investors.short}">Investors</span></a>
             </nav>
             <section class="hero site-shell tenant-hero art-hero">
                 <picture class="art-hero__picture" aria-hidden="true">
@@ -192,7 +192,7 @@
             </section>
             <section class="partnership site-shell tenant-partnership">
                 <div><img th:src="@{/images/logo-etc/berryhomes_logo.png}" alt="Berry Homes" width="907" height="659"><i></i><a th:href="@{/max-business-group}" aria-label="Max Business Group"><img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group" width="1219" height="683"></a></div>
-                <p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><b>Office Phone Number: <a href="tel:+17242007309">724-200-7309</a></b></p>
+                <p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><small class="partnership-office"><span th:text="#{owner.partnership.phone}">Max Business Group Office Number</span>: <a th:href="|tel:${settings['mbg_office_phone'] ?: '724-200-7309'}|" th:text="${settings['mbg_office_phone']} ?: '724-200-7309'">724-200-7309</a></small></p>
             </section>
         </main>
         <div th:replace="~{fragments/header :: public-footer}"></div>

@@ -8,6 +8,7 @@ import net.berryhomes.repository.ProjectDocumentRepository;
 import net.berryhomes.repository.ProjectImageRepository;
 import net.berryhomes.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,7 @@ public class OrphanFileCleanUpService {
     private String uploadDir;
 
     @Scheduled(cron = "0 0 3 * * SUN")
+    @Async
     @Transactional(readOnly = true)
     public void cleanUpOrphanFiles() {
         log.info("=== СТАРТ: Фоновая очистка диска от сиротских файлов ===");

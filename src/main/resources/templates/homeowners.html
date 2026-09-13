@@ -13,8 +13,8 @@
 <link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
-    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260911j)}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260913c)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260912g)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="owner-page">
@@ -31,15 +31,15 @@
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="tenant" href="/tenants">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+<img th:src="@{/images/homeowners/icon-tenants.svg}" alt=""><span class="audience-label--full" th:text="#{nav.tenants}">For Tenants</span><span class="audience-label--short" th:text="#{nav.tenants.short}">Tenants</span></a>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="owner active" href="/homeowners">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-house.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
+<img th:src="@{/images/homeowners/icon-house.svg}" alt=""><span class="audience-label--full" th:text="#{nav.homeowners}">For Homeowners</span><span class="audience-label--short" th:text="#{nav.homeowners.short}">Homeowners</span></a>
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="investor" href="/investors">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/homeowners/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+<img th:src="@{/images/homeowners/icon-investors.svg}" alt=""><span class="audience-label--full" th:text="#{nav.investors}">For Investors</span><span class="audience-label--short" th:text="#{nav.investors.short}">Investors</span></a>
 </nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="hero site-shell owner-hero art-hero">
@@ -84,7 +84,7 @@
 <a class="outline-button" href="https://www.tenantcloud.com/" target="_blank" rel="noopener"><span th:text="#{owner.portal.open}">Access Owner Portal</span> <img th:src="@{/images/homeowners/icon-external-link.svg}" alt="">
 </a>
 <!-- Элемент small формирует соответствующую часть интерфейса. -->
-<small th:utext="#{common.portal.powered}">♢ &nbsp; Powered by TenantCloud</small>
+<small><img th:src="@{/images/homeowners/icon-lock.svg}" alt=""><span th:text="#{common.portal.powered}">Powered by TenantCloud</span></small>
 </div>
 </article>
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
@@ -207,7 +207,7 @@
 <a th:href="@{/max-business-group}" aria-label="Max Business Group"><img th:src="@{/images/logo-etc/Max business group logo.png}" alt="Max Business Group"></a>
 </div>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><b>Office Phone Number: <a href="tel:+17242007309">724-200-7309</a></b></p>
+<p><span th:text="#{owner.partnership}">Berry Homes Property Management operates in partnership with Max Business Group, a licensed Pennsylvania real estate brokerage.</span><br><small class="partnership-office"><span th:text="#{owner.partnership.phone}">Max Business Group Office Number</span>: <a th:href="|tel:${settings['mbg_office_phone'] ?: '724-200-7309'}|" th:text="${settings['mbg_office_phone']} ?: '724-200-7309'">724-200-7309</a></small></p>
 </section>
 </main>
 <div th:replace="~{fragments/header :: public-footer}"></div>

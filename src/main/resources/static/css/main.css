@@ -1542,11 +1542,6 @@ body {
     min-width: 0;
 }
 
-.home-page .image-mask-container {
-    aspect-ratio: 4 / 3;
-    height: auto;
-}
-
 .home-page .image-mask-container .card-image {
     display: block;
     width: 100%;
@@ -1745,6 +1740,11 @@ body {
 }
 
 .home-page .floating-badge-circle .badge-svg {
+    position: relative;
+    z-index: 1;
+    display: block;
+    opacity: 1;
+    visibility: visible;
     width: clamp(62px, 4.2vw, 74px);
     height: clamp(62px, 4.2vw, 74px);
 }
@@ -1793,26 +1793,6 @@ body {
     padding-block: 12px;
 }
 
-/* Final narrow-screen layout wins over legacy mobile typography below. */
-@media (max-width: 620px) {
-    .home-page .quick-nav-row,
-    .home-page .main-cards-row,
-    .home-page .features-row {
-        grid-template-columns: 1fr;
-    }
-
-    .home-page .quick-button { min-height: 64px; }
-    .home-page .quick-text h3 { font-size: 17px !important; }
-    .home-page .quick-text p { font-size: 14px !important; }
-    .home-page .main-card { width: 100%; height: auto; }
-}
-
-/* Gives the three primary cards more visual artwork while preserving the
-   existing watercolor fade at the bottom of each image. */
-.home-page .image-mask-container {
-    aspect-ratio: 6 / 5;
-}
-
 /* Pulls the complete card interface into the faded part of the artwork. */
 .home-page .card-content-area {
     margin-top: -42px;
@@ -1837,10 +1817,6 @@ body {
 }
 
 @media (max-width: 620px) {
-    .home-page .quick-text h3 {
-        font-size: clamp(11px, 3.3vw, 14px) !important;
-    }
-
     .home-page .quick-button .icon-svg {
         width: clamp(30px, 9vw, 42px);
         height: clamp(30px, 9vw, 42px);
@@ -1872,14 +1848,4 @@ body {
     .home-page .feature-info-text p {
         font-size: 15px;
     }
-}
-
-@media (max-width: 620px) {
-    .home-page .quick-nav-row,
-    .home-page .main-cards-row,
-    .home-page .features-row { grid-template-columns: 1fr; }
-    .home-page .quick-button { min-height: 64px; }
-    .home-page .quick-text h3 { font-size: 17px !important; }
-    .home-page .quick-text p { font-size: 14px !important; }
-    .home-page .main-card { width: 100%; height: auto; }
 }

@@ -1736,18 +1736,18 @@ transition:none;
     top: 1px;
 }
 
-.investor-page .deliver-grid article:nth-child(1) { --icon-wash: url("/images/investors/circle_1.png"); }
-.investor-page .deliver-grid article:nth-child(2) { --icon-wash: url("/images/investors/circle_2.png"); }
-.investor-page .deliver-grid article:nth-child(3) { --icon-wash: url("/images/investors/circle_3.png"); }
-.investor-page .deliver-grid article:nth-child(4) { --icon-wash: url("/images/investors/circle_4.png"); }
-.investor-page .deliver-grid article:nth-child(5) { --icon-wash: url("/images/investors/circle_5.png"); }
-.investor-page .deliver-grid article:nth-child(6) { --icon-wash: url("/images/investors/circle_6.png"); }
-.investor-page .how .steps article:nth-child(1) { --icon-wash: url("/images/investors/circle_4.png"); }
-.investor-page .how .steps article:nth-child(2) { --icon-wash: url("/images/investors/circle_1.png"); }
-.investor-page .how .steps article:nth-child(3) { --icon-wash: url("/images/investors/circle_6.png"); }
-.investor-page .how .steps article:nth-child(4) { --icon-wash: url("/images/investors/circle_2.png"); }
-.investor-page .how .steps article:nth-child(5) { --icon-wash: url("/images/investors/circle_5.png"); }
-.investor-page .how .steps article:nth-child(6) { --icon-wash: url("/images/investors/circle_3.png"); }
+.investor-page .deliver-grid article:nth-child(1) { --icon-wash: url("/images/investors/icons-back/icon-back-01.png"); }
+.investor-page .deliver-grid article:nth-child(2) { --icon-wash: url("/images/investors/icons-back/icon-back-02.png"); }
+.investor-page .deliver-grid article:nth-child(3) { --icon-wash: url("/images/investors/icons-back/icon-back-03.png"); }
+.investor-page .deliver-grid article:nth-child(4) { --icon-wash: url("/images/investors/icons-back/icon-back-04.png"); }
+.investor-page .deliver-grid article:nth-child(5) { --icon-wash: url("/images/investors/icons-back/icon-back-05.png"); }
+.investor-page .deliver-grid article:nth-child(6) { --icon-wash: url("/images/investors/icons-back/icon-back-06.png"); }
+.investor-page .how .steps article:nth-child(1) { --icon-wash: url("/images/investors/icons-back/icon-back-07.png"); }
+.investor-page .how .steps article:nth-child(2) { --icon-wash: url("/images/investors/icons-back/icon-back-08.png"); }
+.investor-page .how .steps article:nth-child(3) { --icon-wash: url("/images/investors/icons-back/icon-back-09.png"); }
+.investor-page .how .steps article:nth-child(4) { --icon-wash: url("/images/investors/icons-back/icon-back-10.png"); }
+.investor-page .how .steps article:nth-child(5) { --icon-wash: url("/images/investors/icons-back/icon-back-11.png"); }
+.investor-page .how .steps article:nth-child(6) { --icon-wash: url("/images/investors/icons-back/icon-back-12.png"); }
 
 
 /* Keeps project photographs taller while retaining focal-point cropping. */
@@ -1803,6 +1803,36 @@ transition:none;
 
     .investor-page .project-thumbnail:nth-child(n + 3) {
         display: none;
+    }
+}
+
+/* Gives the six service and process cards enough room on tablet screens. */
+@media (min-width: 601px) and (max-width: 1120px) {
+    .investor-page .deliver-grid,
+    .investor-page .how .steps {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .investor-page .deliver-grid {
+        position: relative;
+        grid-auto-rows: 1fr;
+        row-gap: 40px;
+    }
+
+    .investor-page .deliver-grid::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        height: 1px;
+        background: rgba(139, 107, 160, .38);
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .investor-page .deliver-grid article:nth-child(3) {
+        border-right: 0;
     }
 }
 

@@ -18,7 +18,6 @@ import java.util.UUID;
 
 @Service
 @Slf4j
-@Loggable
 public class FileStorageServiceImpl implements FileStorageService {
 
     private final Path rootLocation;
@@ -27,6 +26,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         this.rootLocation = Paths.get(uploadDir).toAbsolutePath().normalize();
         try {
             Files.createDirectories(this.rootLocation);
+            log.debug("Created root directory: {}", this.rootLocation);
         } catch (IOException e) {
             throw new RuntimeException("Не удалось создать корневую директорию для загрузок", e);
         }
@@ -59,6 +59,7 @@ public class FileStorageServiceImpl implements FileStorageService {
 
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
+            log.debug("Save file to path: {}", targetLocation);
             return Paths.get(subDirectory).resolve(uniqueFilename).toString().replace("\\", "/");
 
         } catch (IOException e) {
@@ -72,6 +73,7 @@ public class FileStorageServiceImpl implements FileStorageService {
         if (!resolved.startsWith(this.rootLocation)) {
             throw new IllegalArgumentException("Недопустимый путь к файлу");
         }
+        log.debug("Resolving file by path: {}", resolved);
         return resolved;
     }
 
@@ -83,6 +85,7 @@ public class FileStorageServiceImpl implements FileStorageService {
                 throw new IllegalArgumentException("Недопустимый путь к файлу");
             }
             Files.deleteIfExists(fileToDestroy);
+            log.debug("Deleting file by path: {}", fileToDestroy);
         } catch (IOException e) {
             throw new RuntimeException("Не удалось удалить файл с диска: " + filePath, e);
         }

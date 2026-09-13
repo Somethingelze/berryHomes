@@ -13,8 +13,8 @@
 <link rel="stylesheet" th:href="@{/css/investors.css(v=20260830g)}">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260911c)}">
-    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260909e)}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260913c)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260912i)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="investor-page">
@@ -29,11 +29,11 @@
 <!-- Provides the same audience navigation used on tenant and owner pages. -->
 <nav class="audience-nav site-shell investor-audience-nav" aria-label="Audience navigation">
 <!-- Links to the tenant center. -->
-<a class="tenant" href="/tenants"><img th:src="@{/images/investors/icon-tenants.svg}" alt=""><span th:text="#{nav.tenants}">For Tenants</span></a>
+<a class="tenant" href="/tenants"><img th:src="@{/images/investors/icon-tenants.svg}" alt=""><span class="audience-label--full" th:text="#{nav.tenants}">For Tenants</span><span class="audience-label--short" th:text="#{nav.tenants.short}">Tenants</span></a>
 <!-- Links to the owner center. -->
-<a class="owner" href="/homeowners"><img th:src="@{/images/investors/icon-house.svg}" alt=""><span th:text="#{nav.homeowners}">For Homeowners</span></a>
+<a class="owner" href="/homeowners"><img th:src="@{/images/investors/icon-house.svg}" alt=""><span class="audience-label--full" th:text="#{nav.homeowners}">For Homeowners</span><span class="audience-label--short" th:text="#{nav.homeowners.short}">Homeowners</span></a>
 <!-- Marks the current investor section. -->
-<a class="investor active" href="/investors"><img th:src="@{/images/investors/icon-investors.svg}" alt=""><span th:text="#{nav.investors}">For Investors</span></a>
+<a class="investor active" href="/investors"><img th:src="@{/images/investors/icon-investors.svg}" alt=""><span class="audience-label--full" th:text="#{nav.investors}">For Investors</span><span class="audience-label--short" th:text="#{nav.investors.short}">Investors</span></a>
 </nav>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
 <section class="hero art-hero">
@@ -54,7 +54,7 @@
 <!-- Элемент a формирует соответствующую часть интерфейса. -->
 <a class="button" href="#projects">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-trend-line.svg}" alt=""><span th:text="#{investor.projects}">View Investment Projects</span></a>
+<img th:src="@{/images/investors/icon-investors.svg}" alt=""><span th:text="#{investor.projects}">View Investment Projects</span></a>
 <!-- Элемент button формирует соответствующую часть интерфейса. -->
 <button class="button button-outline calendar-button" type="button" data-open-contact>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
@@ -98,7 +98,7 @@
 <!-- Элемент article формирует соответствующую часть интерфейса. -->
 <article>
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
-<img th:src="@{/images/investors/icon-trend-line.svg}" alt="">
+<img th:src="@{/images/investors/icon-investors.svg}" alt="">
 <!-- Элемент h3 формирует соответствующую часть интерфейса. -->
 <h3 th:text="#{investor.service3.title}">Rental Market Analysis</h3>
 <!-- Элемент p формирует соответствующую часть интерфейса. -->

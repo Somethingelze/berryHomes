@@ -117,6 +117,14 @@
             const isOpen = navigation.classList.toggle('global-nav--open');
             menuButton.setAttribute('aria-expanded', String(isOpen));
         });
+
+        document.addEventListener('pointerdown', (event) => {
+            if (!navigation.classList.contains('global-nav--open')) return;
+            if (navigation.contains(event.target) || menuButton.contains(event.target)) return;
+
+            navigation.classList.remove('global-nav--open');
+            menuButton.setAttribute('aria-expanded', 'false');
+        });
     }
 
     const header = document.querySelector('.global-header');
