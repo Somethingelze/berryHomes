@@ -91,33 +91,6 @@ body {
 }
 
 
-/* Главный фиксированный контейнер сетки сайта */
-.page-container {
-
-    /* Растягивает ширину контейнера на 100% от размера экрана */
-    /* Настраивает CSS-свойство width для текущего элемента. */
-    width: 100%;
-
-    /* Снимает жесткие ограничения по пикселям для адаптивности сетки */
-    /* Настраивает CSS-свойство max-width для текущего элемента. */
-    max-width: 100%;
-
-    /* Центрирует контейнер по горизонтали на широких мониторах */
-    /* Настраивает CSS-свойство margin для текущего элемента. */
-    margin: 0 auto;
-
-    /* Задает резиновые боковые отступы в 4% от общей ширины экрана */
-    /* Настраивает CSS-свойство padding для текущего элемента. */
-    padding: 0 4%;
-
-    /* Устанавливает точку отсчета координат для позиционирования внутренних элементов */
-    /* Настраивает CSS-свойство position для текущего элемента. */
-    position: relative;
-
-
-}
-
-
 /* Общие стили для нативных векторных inline SVG элементов */
 .icon-svg, .arrow-svg, .badge-svg, .feature-svg, .btn-arrow-svg, .nav-svg-icon {
 
@@ -1510,10 +1483,14 @@ body {
 .page-container {
     /* Ограничивает контент восемьюдесятью семью процентами широкого экрана. */
     width: 87vw;
+    /* Не допускает превышения ширины окна. */
+    max-width: 100%;
     /* Центрирует основной контент. */
     margin-inline: auto;
     /* Сохраняет безопасные вертикальные поля. */
     padding-inline: 0;
+    /* Сохраняет контекст позиционирования дочерних элементов. */
+    position: relative;
 }
 
 /* Расширяет главную страницу на планшетах. */
@@ -1737,6 +1714,7 @@ body {
 .home-page .floating-badge-circle {
     width: clamp(88px, 6vw, 104px);
     height: clamp(88px, 6vw, 104px);
+    margin-top: -78px;
 }
 
 .home-page .floating-badge-circle .badge-svg {
@@ -1796,10 +1774,6 @@ body {
 /* Pulls the complete card interface into the faded part of the artwork. */
 .home-page .card-content-area {
     margin-top: -42px;
-}
-
-.home-page .floating-badge-circle {
-    margin-top: -78px;
 }
 
 @media (max-width: 620px) {

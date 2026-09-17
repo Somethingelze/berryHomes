@@ -1355,7 +1355,7 @@ transform:translate(-50%,-50%);
 color:var(--green);
 }
 
-@media(max-width:900px) {
+@media(max-width:1280px) {
 .how .steps {
 grid-template-columns:repeat(3,minmax(0,1fr));
 }
@@ -1423,6 +1423,11 @@ display:none;
 scroll-snap-type:none;
 cursor:grabbing;
 user-select:none;
+}
+
+.project-viewport {
+cursor:grab;
+touch-action:pan-y;
 }
 
 .project-track {
@@ -1525,18 +1530,25 @@ background:#fff;
 transform:scale(1.25);
 }
 
-@media(max-width:760px) {
-.project-card {
+@media(max-width:1280px) {
+.investor-page .project-card {
 flex-basis:100%;
 min-width:100%;
 }
 
-.project-image {
-height:240px;
+.investor-page .project-image {
+height:clamp(260px,42vw,440px);
 }
 
-.projects-heading {
+.investor-page .projects-heading {
 align-items:flex-start;
+flex-wrap:wrap;
+}
+}
+
+@media(max-width:620px) {
+.investor-page .project-image {
+height:240px;
 }
 }
 
@@ -1614,12 +1626,7 @@ transition:none;
     display: none;
 }
 
-.investor-page .how .steps article {
-    background-position: center 8px;
-}
-
 .investor-page .how .steps article:not(:last-child)::after {
-    top: 29px;
     color: #8b6ba0;
 }
 
@@ -1635,7 +1642,6 @@ transition:none;
 /* Keeps each complete watercolor circle visible while preserving the raised content position. */
 .investor-page .how .steps article {
     padding-top: 13px;
-    background-position: center top;
     transform: translateY(-13px);
 }
 
@@ -1700,6 +1706,25 @@ transition:none;
 .investor-page .deliver .heading-branch-right,
 .investor-page .how .heading-branch-right {
     transform: translateX(-15%);
+}
+
+/* Matches the visible How It Works title-to-branch gap to We Deliver. */
+.investor-page .how .heading-branch-left {
+    margin-right: calc(clamp(-120px, -8vw, -50px) - 4px);
+}
+
+.investor-page .how .heading-branch-right {
+    margin-left: calc(clamp(-120px, -8vw, -50px) - 4px);
+}
+
+@media (max-width: 620px) {
+    .investor-page .how .heading-branch-left {
+        margin-right: -14px;
+    }
+
+    .investor-page .how .heading-branch-right {
+        margin-left: -14px;
+    }
 }
 
 /* Separates and softens the watercolor backplates without blurring their SVG icons. */
@@ -1804,6 +1829,46 @@ transition:none;
     .investor-page .project-thumbnail:nth-child(n + 3) {
         display: none;
     }
+}
+
+/* Enlarges all copy in the Investors CTA by one and a half times. */
+body.investor-page .call h2 {
+    font-size: 40.5px;
+}
+
+body.investor-page .call p {
+    font-size: 18px;
+    line-height: 1.45;
+}
+
+body.investor-page .call .button {
+    font-size: 20px;
+    align-self: center;
+}
+
+body.investor-page .call > .shell {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+body.investor-page .call > .shell > div {
+    flex: 0 1 auto;
+    text-align: center;
+}
+
+body.investor-page .call-scene-right {
+    right: 0;
+    left: auto;
+    max-width: 23%;
+    object-fit: contain;
+    object-position: right bottom;
+}
+
+/* Matches the visible watercolor-to-title gap in How It Works to We Deliver. */
+body.investor-page .how .steps article > img {
+    margin-bottom: 34px;
 }
 
 /* Gives the six service and process cards enough room on tablet screens. */

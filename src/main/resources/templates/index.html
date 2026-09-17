@@ -12,14 +12,14 @@
     <title>Berry Homes - Property Management</title>
     <!-- Основной файл стилей главной страницы -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/main.css(v=20260913c)}">
+    <link rel="stylesheet" th:href="@{/css/main.css(v=20260913d)}">
     <!-- Шрифтовые наборы Poppins и Playfair Display -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link href="https://googleapis.com" rel="stylesheet">
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
-    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260913a)}">
-    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260913g)}">
+    <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260915g)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260913k)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="home-page">
@@ -195,8 +195,6 @@
         <!-- Преимущество: Лицензирование -->
         <!-- Элемент div формирует соответствующую часть интерфейса. -->
         <div class="feature-card item-tenants">
-            <!-- Размещает левую ягодную композицию у внешнего края преимущества. -->
-            <img class="feature-berry feature-berry-left" src="/images/main/elements/berries-left.png" alt="" aria-hidden="true">
             <!-- Элемент div формирует соответствующую часть интерфейса. -->
             <div class="feature-icon-box">
                 <!-- Показывает новую иконку преимущества с текущим цветом раздела. -->
@@ -243,13 +241,17 @@
                 <!-- Элемент p формирует соответствующую часть интерфейса. -->
                 <p th:text="#{home.reporting.text}">Clear financial reports and updates so you always stay informed.</p>
             </div>
-            <!-- Размещает правую ягодную композицию у внешнего края преимущества. -->
-            <img class="feature-berry feature-berry-right" src="/images/main/elements/berries-right.png" alt="" aria-hidden="true">
         </div>
 
     </section>
 
 </main>
+
+<!-- Независимые ягодные композиции на верхней границе футера планшета. -->
+<div class="home-footer-berries" aria-hidden="true">
+    <img src="/images/main/elements/berries-left.png" alt="">
+    <img src="/images/main/elements/berries-right.png" alt="">
+</div>
 
 <!-- Подключает поведение общей мобильной навигации. -->
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
