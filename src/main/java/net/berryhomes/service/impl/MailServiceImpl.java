@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;
 import net.berryhomes.config.EmailConfig;
 import net.berryhomes.model.dto.ContactDto;
+import net.berryhomes.service.MailService;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Loggable
 @RequiredArgsConstructor
-public class MailService {
+public class MailServiceImpl implements MailService {
 
     private final JavaMailSender mailSender;
     private final EmailConfig emailConfig;

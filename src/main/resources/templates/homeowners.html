@@ -14,7 +14,7 @@
     <!-- Подключает общие стили публичного интерфейса. -->
     <!-- Элемент link формирует соответствующую часть интерфейса. -->
     <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260915g)}">
-    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260915i)}">
+    <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260918g)}">
 </head>
 <!-- Элемент body формирует соответствующую часть интерфейса. -->
 <body class="owner-page">
@@ -45,18 +45,21 @@
 <section class="hero site-shell owner-hero art-hero">
 <!-- Элемент img формирует соответствующую часть интерфейса. -->
 <picture class="art-hero__picture" aria-hidden="true">
-    <source media="(max-width: 700px)" th:srcset="@{/images/homeowners/elements/hero/hero-narrow-v2.png}">
-    <source media="(min-width: 1700px)" th:srcset="@{/images/homeowners/elements/hero/hero-wide-v2.png}">
-    <img th:src="@{/images/homeowners/elements/hero/hero-medium-v2.png}" alt="" fetchpriority="high">
+    <source media="(max-width: 700px)" th:srcset="@{/images/homeowners/elements/hero/hero-narrow.png}">
+    <source media="(min-width: 1700px)" th:srcset="@{/images/homeowners/elements/hero/hero-wide.png}">
+    <img th:src="@{/images/homeowners/elements/hero/hero-medium.png}" alt="" fetchpriority="high"
+         data-hero-focus-wide=".55,.16,.42,.72"
+         data-hero-focus-medium=".48,.20,.48,.66"
+         data-hero-focus-narrow=".07,.10,.86,.80">
 </picture>
 <!-- Элемент div формирует соответствующую часть интерфейса. -->
 <div class="hero-copy art-hero__copy">
 <!-- Элемент h1 формирует соответствующую часть интерфейса. -->
 <h1 th:text="#{owner.title}">Owner Center</h1>
-<!-- Элемент p формирует соответствующую часть интерфейса. -->
-<p th:text="#{owner.subtitle}">Everything you need as a Berry Homes owner, all in one place.</p>
 <i>
 </i>
+<!-- Элемент p формирует соответствующую часть интерфейса. -->
+<p th:text="#{owner.subtitle}">Everything you need as a Berry Homes owner, all in one place.</p>
 </div>
 </section>
 <!-- Элемент section формирует соответствующую часть интерфейса. -->
@@ -259,6 +262,7 @@ if (homeownerProcess && !window.matchMedia('(prefers-reduced-motion: reduce)').m
     homeownerProcess?.classList.add('is-visible');
 }
 </script>
+<script th:src="@{/js/hero-focus.js(v=20260918c)}"></script>
 <!-- Подключает поведение общей мобильной навигации. -->
 <!-- Элемент script формирует соответствующую часть интерфейса. -->
 <script th:replace="~{fragments/header :: public-navigation-script}">

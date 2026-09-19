@@ -1,4 +1,4 @@
-package net.berryhomes.service.impl.Project;
+package net.berryhomes.service.impl.project;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +11,8 @@ import net.berryhomes.exception.business.ProjectNotFoundException;
 import net.berryhomes.mapper.ProjectMapper;
 import net.berryhomes.repository.ProjectDocumentRepository;
 import net.berryhomes.repository.ProjectRepository;
-import net.berryhomes.service.ProjectDocumentService;
-import net.berryhomes.service.impl.File.FileStorageServiceImpl;
+import net.berryhomes.service.project.ProjectDocumentService;
+import net.berryhomes.service.impl.file.FileStorageServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +38,7 @@ public class ProjectDocumentServiceImpl implements ProjectDocumentService {
 
     @Override
     @Transactional
+    @CacheEvict(value = "projects", allEntries = true)
     public ProjectDocumentDto uploadDocument(UUID projectId, MultipartFile file) {
         Project project = projectRepository.findById(projectId).orElseThrow(() -> {
             log.info("Try to find project with id {} not found", projectId);

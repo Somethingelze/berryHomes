@@ -7,8 +7,8 @@
         <link rel="stylesheet" th:href="@{/css/audience-pages.css(v=20260830f)}">
         <!-- Подключает общие стили публичного интерфейса. -->
         <link rel="stylesheet" th:href="@{/css/public-foundation.css(v=20260915g)}">
-        <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260915a)}">
-        <link rel="stylesheet" th:href="@{/css/tenants-layered.css(v=20260915b)}">
+        <link rel="stylesheet" th:href="@{/css/watercolor-layout.css(v=20260918g)}">
+        <link rel="stylesheet" th:href="@{/css/tenants-layered.css(v=20260918e)}">
 </head>
     <body class="tenant-page">
         <div class="toast" th:if="${successMessage}" th:text="${successMessage}">Your message was sent.</div>
@@ -25,14 +25,17 @@
             </nav>
             <section class="hero site-shell tenant-hero art-hero">
                 <picture class="art-hero__picture" aria-hidden="true">
-    <source media="(max-width: 700px)" th:srcset="@{/images/tenants/elements/hero/hero-narrow-v2.png}">
-    <source media="(min-width: 1700px)" th:srcset="@{/images/tenants/elements/hero/hero-wide-v2.png}">
-    <img th:src="@{/images/tenants/elements/hero/hero-medium-v2.png}" alt="" fetchpriority="high">
+    <source media="(max-width: 700px)" th:srcset="@{/images/tenants/elements/hero/hero-narrow.png}">
+    <source media="(min-width: 1700px)" th:srcset="@{/images/tenants/elements/hero/hero-wide.png}">
+    <img th:src="@{/images/tenants/elements/hero/hero-medium.png}" alt="" fetchpriority="high"
+         data-hero-focus-wide=".60,.42,.36,.42"
+         data-hero-focus-medium=".58,.42,.39,.43"
+         data-hero-focus-narrow=".47,.46,.47,.39">
 </picture>
                 <div class="hero-copy art-hero__copy">
                     <h1 th:text="#{tenant.title}">Tenant Center</h1>
-                    <p th:text="#{tenant.subtitle}">Everything you need as a Berry Homes tenant, all in one place.</p>
                     <i></i>
+                    <p th:text="#{tenant.subtitle}">Everything you need as a Berry Homes tenant, all in one place.</p>
                 </div>
             </section>
             <section class="service-grid tenant-services site-shell" aria-label="Tenant services">
@@ -234,6 +237,7 @@ document.querySelectorAll('.document-card--active').forEach(card => {
 });
 
 const modal=document.querySelector('.contact-modal');document.querySelector('.modal-open').addEventListener('click',()=>modal.showModal());document.querySelector('.modal-close').addEventListener('click',()=>modal.close());modal.addEventListener('click',e=>{if(e.target===modal)modal.close()});document.querySelectorAll('[aria-disabled="true"]').forEach(a=>a.addEventListener('click',e=>e.preventDefault()));</script>
+<script th:src="@{/js/hero-focus.js(v=20260918c)}"></script>
 <!-- Подключает поведение общей мобильной навигации. -->
 <script th:replace="~{fragments/header :: public-navigation-script}">
         </script>

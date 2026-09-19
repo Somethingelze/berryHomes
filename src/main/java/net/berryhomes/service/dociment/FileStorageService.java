@@ -1,7 +1,6 @@
-package net.berryhomes.service;
+package net.berryhomes.service.dociment;
 
 import org.springframework.web.multipart.MultipartFile;
-import java.nio.file.Path;
 
 public interface FileStorageService {
     String saveFile(MultipartFile file, String subDirectory);

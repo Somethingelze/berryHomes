@@ -22,6 +22,9 @@ public class Setting {
     @Column(name = "setting_value", nullable = false, columnDefinition = "TEXT")
     private String value;
 
+    @Column(name = "updated_by")
+    private String updatedBy;
+
     @Column(name = "updated_at")
     @UpdateTimestamp
     private ZonedDateTime updatedAt;

@@ -1,9 +1,8 @@
-package net.berryhomes.service;
+package net.berryhomes.service.project;
 
 import net.berryhomes.model.dto.ProjectDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

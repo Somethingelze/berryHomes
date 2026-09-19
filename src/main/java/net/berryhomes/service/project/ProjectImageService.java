@@ -1,4 +1,4 @@
-package net.berryhomes.service;
+package net.berryhomes.service.project;
 
 import net.berryhomes.model.dto.ProjectImageDto;
 import org.springframework.web.multipart.MultipartFile;

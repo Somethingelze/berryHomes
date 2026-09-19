@@ -1,12 +1,7 @@
 package net.berryhomes.controller;
 
 import lombok.RequiredArgsConstructor;
-import net.berryhomes.model.dto.ProjectDto;
-import net.berryhomes.service.ProjectService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
+import net.berryhomes.service.project.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

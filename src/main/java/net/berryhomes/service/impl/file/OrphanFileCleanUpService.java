@@ -1,7 +1,8 @@
-package net.berryhomes.service.impl.File;
+package net.berryhomes.service.impl.file;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.berryhomes.aop.Loggable;
 import net.berryhomes.model.entity.ProjectDocument;
 import net.berryhomes.model.entity.ProjectImage;
 import net.berryhomes.repository.ProjectDocumentRepository;
@@ -24,6 +25,7 @@ import java.util.stream.Stream;
 
 @Service
 @Slf4j
+@Loggable
 @RequiredArgsConstructor
 public class OrphanFileCleanUpService {
 

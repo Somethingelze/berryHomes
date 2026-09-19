@@ -20,11 +20,16 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
+      repositories:
+        enabled: false
 
   cache:
+    type: redis
+    cache-names: projects
     redis:
       time-to-live: 60m
       cache-null-values: false
+      key-prefix: "berryhomes:"
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect

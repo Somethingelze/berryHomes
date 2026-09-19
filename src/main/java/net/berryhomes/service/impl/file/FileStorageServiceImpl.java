@@ -1,8 +1,8 @@
-package net.berryhomes.service.impl.File;
+package net.berryhomes.service.impl.file;
 
 import lombok.extern.slf4j.Slf4j;
 import net.berryhomes.aop.Loggable;
-import net.berryhomes.service.FileStorageService;
+import net.berryhomes.service.dociment.FileStorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,6 +18,7 @@ import java.util.UUID;
 
 @Service
 @Slf4j
+@Loggable
 public class FileStorageServiceImpl implements FileStorageService {
 
     private final Path rootLocation;

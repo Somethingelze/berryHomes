@@ -23,7 +23,6 @@ public class LoggingAspect {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
 
-        // Безопасное логирование аргументов без вызова тяжелых toString() у файлов
         String safeArgs = "[]";
         if (args != null) {
             safeArgs = Stream.of(args)
@@ -43,7 +42,7 @@ public class LoggingAspect {
                     .collect(Collectors.joining(", ", "[", "]"));
         }
 
-        log.info(">>> Entering [{}]. Arguments: {}", methodName, safeArgs);
+        log.debug(">>> Entering [{}]. Arguments: {}", methodName, safeArgs);
 
         Object result;
         try {
@@ -53,7 +52,7 @@ public class LoggingAspect {
             throw e;
         }
 
-        log.info("<<< Exiting [{}]. Result: {}", methodName, result);
+        log.debug("<<< Exiting [{}]. Result: {}", methodName, result);
         return result;
     }
 }

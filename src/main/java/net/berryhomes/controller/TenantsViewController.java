@@ -8,7 +8,7 @@ import net.berryhomes.model.TenantWebsiteDocument;
 import net.berryhomes.model.TenantWebsiteDocumentSlot;
 import net.berryhomes.model.dto.ContactDto;
 import net.berryhomes.service.ContactService;
-import net.berryhomes.service.TenantWebsiteDocumentService;
+import net.berryhomes.service.dociment.TenantWebsiteDocumentService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

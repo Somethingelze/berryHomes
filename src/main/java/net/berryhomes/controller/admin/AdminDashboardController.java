@@ -5,7 +5,8 @@ import net.berryhomes.model.ContactStatus;
 import net.berryhomes.model.ContactType;
 import net.berryhomes.model.dto.DashboardStatsDto;
 import net.berryhomes.service.ContactService;
-import net.berryhomes.service.ProjectService;
+import net.berryhomes.service.dociment.ManagedDocumentService;
+import net.berryhomes.service.project.ProjectService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,7 +22,7 @@ public class AdminDashboardController {
 
     private final ContactService contactService;
     private final ProjectService projectService;
-    private final net.berryhomes.service.ManagedDocumentService managedDocumentService;
+    private final ManagedDocumentService managedDocumentService;
 
     @GetMapping
     public ModelAndView showDashboard() {

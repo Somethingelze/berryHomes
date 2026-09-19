@@ -11,6 +11,7 @@ import net.berryhomes.model.dto.ContactDto;
 import net.berryhomes.model.entity.Contact;
 import net.berryhomes.repository.ContactRepository;
 import net.berryhomes.service.ContactService;
+import net.berryhomes.service.MailService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
